@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ Thống Học Liệu Số & AI - GV Hồ Tấn Khải (THPT Mang Thít)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    /* Hệ thống nút bấm 3D đổi màu rực rỡ */
+    .btn-3d {
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      top: 0;
+      user-select: none;
+    }
+    .btn-3d:active { top: 4px; }
+    .btn-3d-emerald {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 5px 0 #047857, 0 8px 15px rgba(16, 185, 129, 0.35);
+    }
+    .btn-3d-emerald:hover { background: linear-gradient(135deg, #34d399, #10b981); }
+    .btn-3d-emerald:active { box-shadow: 0 1px 0 #047857; }
+
+    .btn-3d-purple {
+      background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+      box-shadow: 0 5px 0 #4c1d95, 0 8px 15px rgba(139, 92, 246, 0.35);
+    }
+    .btn-3d-purple:hover { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+    .btn-3d-purple:active { box-shadow: 0 1px 0 #4c1d95; }
+
+    .btn-3d-blue {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      box-shadow: 0 5px 0 #1e3a8a, 0 8px 15px rgba(59, 130, 246, 0.35);
+    }
+    .btn-3d-blue:hover { background: linear-gradient(135deg, #60a5fa, #2563eb); }
+    .btn-3d-blue:active { box-shadow: 0 1px 0 #1e3a8a; }
+
+    .btn-3d-amber {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      box-shadow: 0 5px 0 #92400e, 0 8px 15px rgba(245, 158, 11, 0.35);
+    }
+    .btn-3d-amber:hover { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+    .btn-3d-amber:active { box-shadow: 0 1px 0 #92400e; }
+
+    .btn-3d-rose {
+      background: linear-gradient(135deg, #f43f5e, #e11d48);
+      box-shadow: 0 5px 0 #9f1239, 0 8px 15px rgba(244, 63, 94, 0.35);
+    }
+    .btn-3d-rose:hover { background: linear-gradient(135deg, #fb7185, #f43f5e); }
+    .btn-3d-rose:active { box-shadow: 0 1px 0 #9f1239; }
+
+    .btn-3d-cyan {
+      background: linear-gradient(135deg, #06b6d4, #0284c7);
+      box-shadow: 0 5px 0 #075985, 0 8px 15px rgba(6, 182, 212, 0.35);
+    }
+    .btn-3d-cyan:hover { background: linear-gradient(135deg, #22d3ee, #06b6d4); }
+    .btn-3d-cyan:active { box-shadow: 0 1px 0 #075985; }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 h-screen flex flex-col overflow-hidden font-sans">
+
+  <!-- ================= HEADER: LOGO + THÔNG TIN TÁC GIẢ CẠNH LOGO ================= -->
+  <header class="bg-gradient-to-r from-indigo-950 via-indigo-900 to-purple-950 text-white shadow-xl z-30 px-4 py-2.5 border-b border-indigo-700/50">
+    <div class="max-w-[1920px] mx-auto flex flex-wrap justify-between items-center gap-3">
+      
+      <!-- Cụm Logo & Thông tin Giáo viên Hồ Tấn Khải đặt sát cạnh nhau -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 via-orange-500 to-rose-500 flex items-center justify-center shadow-lg border-2 border-white/40 transform hover:scale-105 transition">
+          <i class="fa-solid fa-dna text-2xl text-white"></i>
+        </div>
+        <div class="border-r border-indigo-500/40 pr-4">
+          <div class="flex items-center gap-2">
+            <span class="font-extrabold text-lg tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-300 to-emerald-300">
+              HỌC LIỆU SỐ & AI KNTT
+            </span>
+            <span class="text-[10px] bg-emerald-500 text-white px-2 py-0.5 rounded-full font-extrabold uppercase shadow">GDPT 2018</span>
+          </div>
+          <p class="text-[11px] text-indigo-200 font-medium">Giáo án CV 5512 • Slide Trình chiếu • Ma trận đề thi</p>
+        </div>
+
+        <!-- Thông tin tác giả đặt ngay cạnh Logo -->
+        <div class="bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-amber-400/30 flex items-center gap-2.5 shadow-inner">
+          <div class="w-8 h-8 rounded-lg bg-amber-400/20 flex items-center justify-center text-amber-300">
+            <i class="fa-solid fa-user-tie text-base"></i>
+          </div>
+          <div>
+            <div class="text-xs font-extrabold text-white tracking-wide">GV: HỒ TẤN KHẢI</div>
+            <div class="text-[11px] text-amber-300 font-semibold">Trường THPT Mang Thít - Tỉnh Vĩnh Long</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cụm nút Quản trị 3D & Đèn báo Robot tự động -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <div id="robotHeaderBadge" onclick="runDriveFolderRobot(false)" class="cursor-pointer bg-emerald-900/60 border border-emerald-400/40 px-3 py-1.5 rounded-xl text-[11px] font-bold text-emerald-200 flex items-center gap-1.5 hover:bg-emerald-800/70 transition" title="Bấm để làm mới dữ liệu từ Google Drive ngay lập tức">
+          <i class="fa-solid fa-rotate fa-spin text-emerald-400"></i>
+          <span>Đang đồng bộ Drive...</span>
+        </div>
+
+        <button onclick="openModal('modalDriveRobot')" class="btn-3d btn-3d-emerald text-white px-3.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5">
+          <i class="fa-solid fa-robot text-amber-200"></i> Cấu Hình Robot Drive
+        </button>
+        <button onclick="openModal('modalSubjectGrade')" class="btn-3d btn-3d-amber text-white px-3.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5">
+          <i class="fa-solid fa-layer-group"></i> + Thêm Môn & Lớp
+        </button>
+        <button onclick="openModal('modalAddLesson')" class="btn-3d btn-3d-blue text-white px-3.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5">
+          <i class="fa-solid fa-link"></i> + Gán Link Lẻ
+        </button>
+        <button onclick="openModal('modalUpdatePlugin')" class="btn-3d btn-3d-cyan text-white px-3.5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-1.5">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Nâng Cấp Nhanh
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= KHÔNG GIAN LÀM VIỆC CHÍNH (2 CỘT) ================= -->
+  <main class="flex-1 max-w-[1920px] w-full mx-auto grid grid-cols-12 gap-4 p-4 overflow-hidden">
+
+    <!-- CỘT TRÁI (4 CỘT): DANH MỤC 154 BÀI HỌC & BỘ CHỌN HÀNG LOẠT -->
+    <aside class="col-span-12 lg:col-span-4 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col overflow-hidden">
+      
+      <div class="p-3.5 bg-slate-50 border-b border-slate-200 space-y-2.5">
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="block text-[11px] font-extrabold text-slate-600 uppercase mb-1">Môn học:</label>
+            <select id="filterSubject" onchange="renderLessonList()" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs font-extrabold text-indigo-950 bg-white focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm cursor-pointer">
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-extrabold text-slate-600 uppercase mb-1">Khối lớp:</label>
+            <select id="filterGrade" onchange="renderLessonList()" class="w-full border border-slate-300 rounded-xl px-3 py-2 text-xs font-extrabold text-indigo-950 bg-white focus:ring-2 focus:ring-indigo-500 outline-none shadow-sm cursor-pointer">
+            </select>
+          </div>
+        </div>
+
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+          <input type="text" id="searchInput" oninput="renderLessonList()" placeholder="Tìm nhanh bài học (Sách Kết nối tri thức)..." class="w-full pl-8 pr-3 py-1.5 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none">
+        </div>
+
+        <!-- Thanh công cụ Chọn từng bài / Chọn hàng loạt / Bỏ chọn -->
+        <div class="flex items-center justify-between pt-1">
+          <div class="flex items-center gap-2">
+            <button onclick="toggleSelectAll(true)" class="btn-3d btn-3d-blue text-white px-3 py-1 rounded-lg text-[11px] font-extrabold">
+              <i class="fa-solid fa-check-double mr-1"></i> Chọn hàng loạt
+            </button>
+            <button onclick="toggleSelectAll(false)" class="btn-3d btn-3d-rose text-white px-3 py-1 rounded-lg text-[11px] font-extrabold">
+              <i class="fa-solid fa-xmark mr-1"></i> Bỏ chọn
+            </button>
+          </div>
+          <span id="selectedCounter" class="text-xs font-extrabold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200">
+            Đã chọn: 0 bài
+          </span>
+        </div>
+      </div>
+
+      <!-- Danh sách bài học -->
+      <div id="lessonListContainer" class="flex-1 overflow-y-auto p-2.5 space-y-1.5 divide-y divide-slate-100">
+      </div>
+    </aside>
+
+    <!-- CỘT PHẢI (8 CỘT): KHUNG HIỂN THỊ DUY NHẤT (CHUYỂN GIỮA CÓ SẴN & AI) -->
+    <section class="col-span-12 lg:col-span-8 bg-white rounded-2xl shadow-lg border border-slate-200 flex flex-col overflow-hidden">
+
+      <!-- THANH CHUYỂN ĐỔI 2 CHẾ ĐỘ: TÀI LIỆU CÓ SẴN <---> SOẠN MỚI BẰNG AI -->
+      <div class="p-3 bg-gradient-to-r from-slate-100 via-indigo-50/60 to-purple-50/60 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        
+        <div class="flex items-center gap-3">
+          <button id="btnModeAvailable" onclick="switchWorkspaceMode('available')" class="btn-3d btn-3d-emerald text-white px-5 py-2.5 rounded-xl text-xs font-extrabold flex items-center gap-2">
+            <i class="fa-solid fa-book-open-reader text-sm"></i> TÀI LIỆU CÓ SẴN
+          </button>
+          <button id="btnModeAI" onclick="switchWorkspaceMode('ai')" class="btn-3d btn-3d-purple text-white px-5 py-2.5 rounded-xl text-xs font-extrabold flex items-center gap-2 opacity-75">
+            <i class="fa-solid fa-wand-magic-sparkles text-sm text-amber-300"></i> SOẠN MỚI BẰNG AI (GEMINI 3.8+)
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2 bg-white px-3.5 py-1.5 rounded-xl border border-indigo-200 shadow-sm max-w-md truncate">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="activeLessonTitle" class="text-xs font-extrabold text-indigo-950 truncate">Đang tải bài học...</span>
+        </div>
+      </div>
+
+      <!-- ================= CHẾ ĐỘ 1: XEM TRỰC TIẾP & TẢI TÀI LIỆU CÓ SẴN ================= -->
+      <div id="viewAvailable" class="flex-1 flex flex-col overflow-hidden">
+        
+        <div class="px-4 py-2.5 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5">
+            <button onclick="selectDocType('giaoan')" id="btnDocGiaoAn" class="btn-3d btn-3d-blue text-white px-4 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5">
+              <i class="fa-solid fa-file-word"></i> 1. Giáo án CV 5512
+            </button>
+            <button onclick="selectDocType('slide')" id="btnDocSlide" class="btn-3d btn-3d-amber text-white px-4 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 opacity-75">
+              <i class="fa-solid fa-file-powerpoint"></i> 2. Slide Bài Giảng
+            </button>
+            <button onclick="selectDocType('matran')" id="btnDocMaTran" class="btn-3d btn-3d-emerald text-white px-4 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 opacity-75">
+              <i class="fa-solid fa-table-list"></i> 3. Ma Trận Đề Thi
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button onclick="downloadOriginalFile()" class="btn-3d btn-3d-cyan text-white px-4 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5">
+              <i class="fa-solid fa-download"></i> Tải Về Giữ Nguyên Định Dạng Gốc
+            </button>
+            <a id="openDriveNewTab" href="#" target="_blank" class="btn-3d bg-slate-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 hover:bg-slate-600">
+              <i class="fa-solid fa-up-right-from-square"></i> Mở Drive
+            </a>
+          </div>
+        </div>
+
+        <div class="flex-1 bg-slate-200 relative overflow-hidden flex items-center justify-center">
+          <iframe id="docPreviewIframe" src="about:blank" class="w-full h-full border-0 hidden" allow="autoplay"></iframe>
+          
+          <div id="emptyPreviewState" class="text-center p-8 max-w-lg bg-white rounded-2xl shadow-md border border-slate-200 m-4">
+            <div class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-3 text-3xl shadow-inner">
+              <i class="fa-solid fa-folder-open"></i>
+            </div>
+            <h3 id="previewStatusTitle" class="text-base font-extrabold text-slate-800 mb-1">Chưa tìm thấy file cho mục này trên Drive</h3>
+            <p id="previewStatusDesc" class="text-xs text-slate-500 mb-5 leading-relaxed">
+              Nếu bài này chưa có trên Google Drive, Thầy có thể bấm nút <b>"Soạn Bài Này Bằng AI"</b> hoặc bấm <b>"Gán Link Lẻ"</b> để bổ sung!
+            </p>
+            <div class="flex flex-wrap justify-center gap-2.5">
+              <button onclick="switchWorkspaceMode('ai')" class="btn-3d btn-3d-purple text-white px-4 py-2 rounded-xl text-xs font-extrabold inline-flex items-center gap-1.5">
+                <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i> Soạn Ngay Bài Này Bằng AI
+              </button>
+              <button onclick="openUpdateLinkForActive()" class="btn-3d btn-3d-blue text-white px-4 py-2 rounded-xl text-xs font-extrabold inline-flex items-center gap-1.5">
+                <i class="fa-solid fa-link"></i> Gán Link Thủ Công Cho Bài Này
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= CHẾ ĐỘ 2: SOẠN MỚI BẰNG AI (GEMINI 3.8+) ================= -->
+      <div id="viewAI" class="flex-1 hidden flex-col overflow-hidden">
+        
+        <div class="p-3.5 bg-slate-50 border-b border-slate-200 space-y-2.5">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-end">
+            
+            <div class="md:col-span-3">
+              <label class="block text-[11px] font-extrabold text-slate-600 uppercase mb-1">Mô hình AI (Gemini 3.8+):</label>
+              <select id="aiModelSelect" onchange="toggleCustomModelInput()" class="w-full border border-slate-300 rounded-xl px-2.5 py-2 text-xs font-extrabold text-purple-950 bg-white outline-none">
+                <option value="gemini-3.8-flash">gemini-3.8-flash (Mặc định)</option>
+                <option value="gemini-3.8-pro">gemini-3.8-pro (Chuyên sâu)</option>
+                <option value="gemini-4.0-ultra">gemini-4.0-ultra (Thế hệ mới)</option>
+                <option value="gemini-2.5-flash">gemini-2.5-flash (Tương thích)</option>
+                <option value="custom">-- Tự gõ mã Model mới --</option>
+              </select>
+            </div>
+
+            <div id="customModelWrapper" class="md:col-span-3 hidden">
+              <label class="block text-[11px] font-extrabold text-slate-600 uppercase mb-1">Mã Model mới:</label>
+              <input type="text" id="customModelInput" placeholder="VD: gemini-3.9-pro" class="w-full border border-purple-400 rounded-xl px-2.5 py-2 text-xs font-bold">
+            </div>
+
+            <div class="md:col-span-3">
+              <label class="block text-[11px] font-extrabold text-slate-600 uppercase mb-1">Loại tài liệu cần AI soạn:</label>
+              <select id="aiTaskType" class="w-full border border-slate-300 rounded-xl px-2.5 py-2 text-xs font-extrabold text-indigo-950 bg-white outline-none">
+                <option value="giaoan">1. Giáo án CV 5512 (Tích hợp năng lực số)</option>
+                <option value="slide">2. Kịch bản Slide PowerPoint</option>
+                <option value="matran">3. Ma trận & Đề kiểm tra (CV 7991)</option>
+              </select>
+            </div>
+
+            <div class="md:col-span-3">
+              <label class="block text-[11px] font-extrabold text-slate-600 uppercase mb-1">Gemini API Key:</label>
+              <input type="password" id="geminiApiKey" oninput="saveApiKey()" placeholder="Dán API Key vào đây (Lưu tự động)..." class="w-full border border-slate-300 rounded-xl px-2.5 py-2 text-xs outline-none">
+            </div>
+
+            <div class="md:col-span-3">
+              <button onclick="generateWithGemini()" id="btnRunAI" class="w-full btn-3d btn-3d-purple text-white py-2 px-4 rounded-xl text-xs font-extrabold flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-bolt-lightning text-amber-300"></i> BẮT ĐẦU SOẠN AI
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <input type="text" id="aiExtraPrompt" placeholder="Ghi chú thêm cho AI (VD: Soạn cho 2 tiết, tập trung thảo luận nhóm, hoặc tạo 15 câu trắc nghiệm...)" class="w-full border border-slate-300 rounded-xl px-3 py-1.5 text-xs outline-none">
+          </div>
+        </div>
+
+        <div id="aiResultOutput" class="flex-1 overflow-y-auto p-6 bg-white prose prose-sm max-w-none text-slate-800">
+          <div class="text-center text-slate-400 py-16">
+            <i class="fa-solid fa-robot text-4xl text-purple-300 mb-2"></i>
+            <p class="text-xs font-semibold">Đã chọn sẵn bài học. Thầy chỉ cần bấm <b>"BẮT ĐẦU SOẠN AI"</b> để khởi tạo nội dung.</p>
+          </div>
+        </div>
+
+        <div class="px-5 py-3 bg-slate-100 border-t border-slate-200 flex flex-wrap items-center justify-between gap-2">
+          <span id="aiStatusText" class="text-xs font-bold text-slate-600">
+            <i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i> Chuẩn SGK Kết nối tri thức với cuộc sống
+          </span>
+          <div class="flex items-center gap-3">
+            <button onclick="saveAiResultToWord()" class="btn-3d btn-3d-emerald text-white px-5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2">
+              <i class="fa-solid fa-floppy-disk"></i> LƯU KẾT QUẢ (.DOC)
+            </button>
+            <button onclick="clearAiResult()" class="btn-3d btn-3d-rose text-white px-5 py-2 rounded-xl text-xs font-extrabold flex items-center gap-2">
+              <i class="fa-solid fa-trash-can"></i> XÓA KẾT QUẢ
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ================= MODAL 1: ROBOT QUÉT 1 LINK THƯ MỤC TỔNG GOOGLE DRIVE ================= -->
+  <div id="modalDriveRobot" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3 border-b">
+        <h3 class="text-base font-extrabold text-indigo-950 flex items-center gap-2">
+          <i class="fa-solid fa-robot text-emerald-600"></i> Robot Tự Động Quét Thư Mục Tổng Google Drive
+        </h3>
+        <button onclick="closeModal('modalDriveRobot')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <div class="mt-4 space-y-4 text-xs">
+        <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl space-y-3">
+          <div class="font-extrabold text-emerald-950 text-sm flex items-center justify-between">
+            <span>Đã kết nối sẵn Robot Google Apps Script của Thầy!</span>
+            <span class="bg-emerald-600 text-white px-2 py-0.5 rounded-full text-[10px]">Tự động 100%</span>
+          </div>
+          <p class="text-slate-600 leading-relaxed">
+            Hệ thống đã gắn sẵn đường link Robot của Thầy. Nếu Thầy muốn đổi sang một Thư mục Google Drive khác, chỉ cần dán link Thư mục đó vào ô số 2 bên dưới rồi bấm Quét!
+          </p>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">1. Link Web App Robot (Đã tích hợp sẵn):</label>
+            <input type="url" id="robotScriptUrl" value="https://script.google.com/macros/s/AKfycbxOLv5c0XXkLVbaefefhP0_uQCjKSWbihVa7RXb9EDMWT21JPTGDegfaZz3WUzqAB5xUg/exec" class="w-full border border-emerald-400 rounded-xl px-3 py-2 outline-none bg-white font-semibold text-emerald-900">
+          </div>
+
+          <div>
+            <label class="block font-bold text-slate-700 mb-1">2. Link Thư Mục Tổng Google Drive (Để trống nếu đã gắn trong Script, hoặc dán link thư mục vào đây):</label>
+            <input type="url" id="masterFolderUrl" placeholder="https://drive.google.com/drive/folders/..." class="w-full border border-slate-300 rounded-xl px-3 py-2 outline-none bg-white">
+          </div>
+
+          <button onclick="runDriveFolderRobot(false)" id="btnScanDrive" class="w-full btn-3d btn-3d-emerald text-white py-3 rounded-xl font-extrabold text-sm flex items-center justify-center gap-2">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> QUÉT LẠI THƯ MỤC TỔNG & CẬP NHẬT LINK NGAY
+          </button>
+
+          <div id="robotScanReport" class="hidden p-3 bg-white rounded-xl border border-emerald-300 text-emerald-900 font-semibold"></div>
+        </div>
+
+        <!-- Danh sách toàn bộ file quét được từ Drive để tìm/xem trực tiếp kể cả khi tên file đặt tự do -->
+        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+          <div class="font-extrabold text-slate-800 text-sm flex items-center justify-between">
+            <span>Danh sách toàn bộ file Robot tìm thấy trên Drive của Thầy:</span>
+            <span id="totalScannedBadge" class="text-xs font-bold text-indigo-600">0 file</span>
+          </div>
+          <p class="text-[11px] text-slate-500">Bấm vào bất kỳ file nào dưới đây để đọc trực tiếp ngay trên màn hình chính:</p>
+          <div id="allDriveFilesList" class="max-h-48 overflow-y-auto divide-y divide-slate-200 bg-white rounded-xl border border-slate-200 p-2">
+            <div class="text-center text-slate-400 py-4 italic">Đang tải danh sách file từ Robot...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 2: THÊM MÔN HỌC & KHỐI LỚP MỚI ================= -->
+  <div id="modalSubjectGrade" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
+      <div class="flex justify-between items-center pb-3 border-b">
+        <h3 class="text-base font-extrabold text-indigo-950"><i class="fa-solid fa-layer-group mr-1.5"></i> Thêm Môn Học & Khối Lớp Mới</h3>
+        <button onclick="closeModal('modalSubjectGrade')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div class="mt-4 space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Tên Môn học mới (Tự động đồng bộ toàn hệ thống):</label>
+          <div class="flex gap-2">
+            <input type="text" id="inputNewSubject" placeholder="VD: Vật lý, Hóa học, Tin học..." class="flex-1 border rounded-xl px-3 py-2 text-xs outline-none">
+            <button onclick="addNewSubject()" class="btn-3d btn-3d-blue text-white px-4 py-2 rounded-xl text-xs font-extrabold">Thêm Môn</button>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Tên Khối lớp mới:</label>
+          <div class="flex gap-2">
+            <input type="text" id="inputNewGrade" placeholder="VD: Ôn Thi Tốt Nghiệp, Khối 9..." class="flex-1 border rounded-xl px-3 py-2 text-xs outline-none">
+            <button onclick="addNewGrade()" class="btn-3d btn-3d-emerald text-white px-4 py-2 rounded-xl text-xs font-extrabold">Thêm Khối</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 3: GÁN LINK LẺ TỪNG BÀI ================= -->
+  <div id="modalAddLesson" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200">
+      <div class="flex justify-between items-center pb-3 border-b">
+        <h3 class="text-base font-extrabold text-indigo-950"><i class="fa-solid fa-link mr-1.5"></i> Gán / Cập Nhật Link Google Drive</h3>
+        <button onclick="closeModal('modalAddLesson')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div class="mt-4 space-y-3">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Môn học:</label>
+            <select id="modalLessonSubject" class="w-full border rounded-xl px-3 py-2 text-xs font-bold"></select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Khối lớp:</label>
+            <select id="modalLessonGrade" class="w-full border rounded-xl px-3 py-2 text-xs font-bold"></select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Tên bài học:</label>
+          <input type="text" id="modalLessonName" class="w-full border rounded-xl px-3 py-2 text-xs font-bold">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-blue-700 mb-1"><i class="fa-solid fa-file-word mr-1"></i> Link Google Drive Giáo án (CV 5512):</label>
+          <input type="url" id="modalLinkGiaoAn" placeholder="https://drive.google.com/file/d/..." class="w-full border rounded-xl px-3 py-2 text-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-amber-700 mb-1"><i class="fa-solid fa-file-powerpoint mr-1"></i> Link Google Drive Slide bài giảng:</label>
+          <input type="url" id="modalLinkSlide" placeholder="https://drive.google.com/file/d/..." class="w-full border rounded-xl px-3 py-2 text-xs">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-emerald-700 mb-1"><i class="fa-solid fa-table-list mr-1"></i> Link Google Drive Ma trận đề thi:</label>
+          <input type="url" id="modalLinkMaTran" placeholder="https://drive.google.com/file/d/..." class="w-full border rounded-xl px-3 py-2 text-xs">
+        </div>
+      </div>
+      <div class="mt-5 flex justify-end gap-2">
+        <button onclick="closeModal('modalAddLesson')" class="px-4 py-2 border rounded-xl text-xs font-bold text-slate-600">Đóng</button>
+        <button onclick="saveLessonItem()" class="btn-3d btn-3d-emerald text-white px-5 py-2 rounded-xl text-xs font-extrabold">Lưu & Đồng Bộ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 4: NÂNG CẤP NHANH BẰNG ĐOẠN CODE NHỎ ================= -->
+  <div id="modalUpdatePlugin" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200">
+      <div class="flex justify-between items-center pb-3 border-b">
+        <h3 class="text-base font-extrabold text-indigo-950"><i class="fa-solid fa-cloud-arrow-up mr-1.5"></i> Nâng Cấp Nhanh & Sao Lưu Dữ Liệu</h3>
+        <button onclick="closeModal('modalUpdatePlugin')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div class="mt-4 space-y-4 text-xs">
+        <div class="flex gap-2">
+          <button onclick="exportDatabaseJSON()" class="btn-3d btn-3d-blue text-white px-4 py-2.5 rounded-xl font-extrabold flex-1 flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-file-export"></i> Tải Về Bản Sao Lưu (.json)
+          </button>
+          <label class="btn-3d btn-3d-emerald text-white px-4 py-2.5 rounded-xl font-extrabold flex-1 flex items-center justify-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-file-import"></i> Nạp File Cập Nhật (.json)
+            <input type="file" accept=".json" onchange="importDatabaseJSON(event)" class="hidden">
+          </label>
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Dán đoạn mã nâng cấp nhỏ (JSON / JS Plugin) vào đây:</label>
+          <textarea id="quickPatchInput" rows="4" placeholder="Dán đoạn code cập nhật nhỏ vào đây..." class="w-full border rounded-xl p-2.5 font-mono text-[11px]"></textarea>
+          <button onclick="applyQuickPatch()" class="mt-2 w-full btn-3d btn-3d-purple text-white py-2.5 rounded-xl font-extrabold">Thực Thi Bản Cập Nhật Ngay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TOÀN BỘ DỮ LIỆU 154 BÀI & THUẬT TOÁN ROBOT TỰ GHÉP FILE ================= -->
+  <script>
+    // ĐÃ GẮN CỨNG LINK ROBOT GOOGLE APPS SCRIPT CỦA THẦY HỒ TẤN KHẢI:
+    const DEFAULT_ROBOT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxOLv5c0XXkLVbaefefhP0_uQCjKSWbihVa7RXb9EDMWT21JPTGDegfaZz3WUzqAB5xUg/exec";
+    const DEFAULT_MASTER_DRIVE_FOLDER_URL = "";
+
+    const RAW_154_LESSONS = [
+      // SINH HỌC 10 (25 Bài)
+      ["Sinh học", "Khối 10", "Bài 1: Giới thiệu khái quát môn Sinh học"],
+      ["Sinh học", "Khối 10", "Bài 2: Phương pháp nghiên cứu và học tập môn Sinh học"],
+      ["Sinh học", "Khối 10", "Bài 3: Các cấp độ tổ chức của thế giới sống"],
+      ["Sinh học", "Khối 10", "Bài 4: Các nguyên tố hóa học và nước"],
+      ["Sinh học", "Khối 10", "Bài 5: Các phân tử sinh học"],
+      ["Sinh học", "Khối 10", "Bài 6: Thực hành: Nhận biết một số phân tử sinh học"],
+      ["Sinh học", "Khối 10", "Bài 7: Tế bào nhân sơ"],
+      ["Sinh học", "Khối 10", "Bài 8: Tế bào nhân thực"],
+      ["Sinh học", "Khối 10", "Bài 9: Thực hành: Quan sát tế bào"],
+      ["Sinh học", "Khối 10", "Bài 10: Trao đổi chất qua màng tế bào"],
+      ["Sinh học", "Khối 10", "Bài 11: Thực hành: Thí nghiệm co và phản co nguyên sinh"],
+      ["Sinh học", "Khối 10", "Bài 12: Truyền tin tế bào"],
+      ["Sinh học", "Khối 10", "Bài 13: Khái quát về chuyển hóa vật chất và năng lượng"],
+      ["Sinh học", "Khối 10", "Bài 14: Phân giải và tổng hợp các chất trong tế bào"],
+      ["Sinh học", "Khối 10", "Bài 15: Thực hành: Một số thí nghiệm về enzyme"],
+      ["Sinh học", "Khối 10", "Bài 16: Chu kì tế bào và nguyên phân"],
+      ["Sinh học", "Khối 10", "Bài 17: Giảm phân"],
+      ["Sinh học", "Khối 10", "Bài 18: Thực hành: Làm và quan sát tiêu bản quá trình nguyên phân và giảm phân"],
+      ["Sinh học", "Khối 10", "Bài 19: Công nghệ tế bào"],
+      ["Sinh học", "Khối 10", "Bài 20: Sự đa dạng và phương pháp nghiên cứu vi sinh vật"],
+      ["Sinh học", "Khối 10", "Bài 21: Trao đổi chất, sinh trưởng và sinh sản ở vi sinh vật"],
+      ["Sinh học", "Khối 10", "Bài 22: Vai trò và ứng dụng của vi sinh vật"],
+      ["Sinh học", "Khối 10", "Bài 23: Thực hành: Một số phương pháp nghiên cứu vi sinh vật"],
+      ["Sinh học", "Khối 10", "Bài 24: Khái quát về virus"],
+      ["Sinh học", "Khối 10", "Bài 25: Một số bệnh do virus và các thành tựu nghiên cứu ứng dụng virus"],
+
+      // SINH HỌC 11 (29 Bài)
+      ["Sinh học", "Khối 11", "Bài 1: Khái quát về trao đổi chất và chuyển hóa năng lượng"],
+      ["Sinh học", "Khối 11", "Bài 2: Trao đổi nước và khoáng ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 3: Thực hành: Trao đổi nước và khoáng ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 4: Quang hợp ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 5: Thực hành: Quang hợp ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 6: Hô hấp ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 7: Thực hành: Hô hấp ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 8: Dinh dưỡng và tiêu hóa ở động vật"],
+      ["Sinh học", "Khối 11", "Bài 9: Hô hấp ở động vật"],
+      ["Sinh học", "Khối 11", "Bài 10: Tuần hoàn ở động vật"],
+      ["Sinh học", "Khối 11", "Bài 11: Thực hành: Một số thí nghiệm về tuần hoàn"],
+      ["Sinh học", "Khối 11", "Bài 12: Miễn dịch ở người và động vật"],
+      ["Sinh học", "Khối 11", "Bài 13: Bài tiết và cân bằng nội môi"],
+      ["Sinh học", "Khối 11", "Bài 14: Khái quát về cảm ứng ở sinh vật"],
+      ["Sinh học", "Khối 11", "Bài 15: Cảm ứng ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 16: Thực hành: Cảm ứng ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 17: Cảm ứng ở động vật"],
+      ["Sinh học", "Khối 11", "Bài 18: Tập tính ở động vật"],
+      ["Sinh học", "Khối 11", "Bài 19: Khái quát về sinh trưởng và phát triển ở sinh vật"],
+      ["Sinh học", "Khối 11", "Bài 20: Sinh trưởng và phát triển ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 21: Thực hành: Sinh trưởng và phát triển ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 22: Sinh trưởng và phát triển ở động vật"],
+      ["Sinh học", "Khối 11", "Bài 23: Thực hành: Quan sát biến thái ở động vật"],
+      ["Sinh học", "Khối 11", "Bài 24: Khái quát về sinh sản ở sinh vật"],
+      ["Sinh học", "Khối 11", "Bài 25: Sinh sản ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 26: Thực hành: Nhân giống vô tính và thụ phấn ở thực vật"],
+      ["Sinh học", "Khối 11", "Bài 27: Sinh sản ở động vật"],
+      ["Sinh học", "Khối 11", "Bài 28: Mối quan hệ giữa các quá trình sinh lí trong cơ thể sinh vật"],
+      ["Sinh học", "Khối 11", "Bài 29: Một số ngành nghề liên quan đến sinh học cơ thể"],
+
+      // SINH HỌC 12 (30 Bài)
+      ["Sinh học", "Khối 12", "Bài 1: DNA và cơ chế tái bản DNA"],
+      ["Sinh học", "Khối 12", "Bài 2: Gene, quá trình truyền đạt thông tin di truyền và hệ gene"],
+      ["Sinh học", "Khối 12", "Bài 3: Điều hòa biểu hiện gene"],
+      ["Sinh học", "Khối 12", "Bài 4: Đột biến gene"],
+      ["Sinh học", "Khối 12", "Bài 5: Công nghệ gene"],
+      ["Sinh học", "Khối 12", "Bài 6: Thực hành: Tách chiết DNA"],
+      ["Sinh học", "Khối 12", "Bài 7: Cấu trúc và chức năng của nhiễm sắc thể"],
+      ["Sinh học", "Khối 12", "Bài 8: Học thuyết di truyền của Mendel"],
+      ["Sinh học", "Khối 12", "Bài 9: Mở rộng học thuyết Mendel"],
+      ["Sinh học", "Khối 12", "Bài 10: Di truyền giới tính và di truyền liên kết với giới tính"],
+      ["Sinh học", "Khối 12", "Bài 11: Liên kết gene và hoán vị gene"],
+      ["Sinh học", "Khối 12", "Bài 12: Đột biến nhiễm sắc thể"],
+      ["Sinh học", "Khối 12", "Bài 13: Di truyền học người và di truyền y học"],
+      ["Sinh học", "Khối 12", "Bài 14: Thực hành: Quan sát một số dạng đột biến nhiễm sắc thể"],
+      ["Sinh học", "Khối 12", "Bài 15: Di truyền gene ngoài nhân"],
+      ["Sinh học", "Khối 12", "Bài 16: Tương tác giữa kiểu gene với môi trường và thành tựu chọn giống"],
+      ["Sinh học", "Khối 12", "Bài 17: Thực hành: Thí nghiệm về thường biến ở thực vật"],
+      ["Sinh học", "Khối 12", "Bài 18: Di truyền quần thể"],
+      ["Sinh học", "Khối 12", "Bài 19: Các bằng chứng tiến hóa"],
+      ["Sinh học", "Khối 12", "Bài 20: Quan niệm của Darwin về chọn lọc tự nhiên và hình thành loài"],
+      ["Sinh học", "Khối 12", "Bài 21: Học thuyết tiến hóa tổng hợp hiện đại"],
+      ["Sinh học", "Khối 12", "Bài 22: Tiến hóa lớn và quá trình phát sinh chủng loại"],
+      ["Sinh học", "Khối 12", "Bài 23: Môi trường và các nhân tố sinh thái"],
+      ["Sinh học", "Khối 12", "Bài 24: Sinh thái học quần thể"],
+      ["Sinh học", "Khối 12", "Bài 25: Sinh thái học quần xã"],
+      ["Sinh học", "Khối 12", "Bài 26: Thực hành: Tìm hiểu một số đặc trưng cơ bản của quần xã"],
+      ["Sinh học", "Khối 12", "Bài 27: Hệ sinh thái"],
+      ["Sinh học", "Khối 12", "Bài 28: Trao đổi chất và chuyển hóa năng lượng trong hệ sinh thái"],
+      ["Sinh học", "Khối 12", "Bài 29: Sinh quyển"],
+      ["Sinh học", "Khối 12", "Bài 30: Sinh thái học phục hồi, bảo tồn và phát triển bền vững"],
+
+      // CÔNG NGHỆ NÔNG NGHIỆP 10 (25 Bài)
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 1: Giới thiệu về trồng trọt"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 2: Cây trồng và các yếu tố chính trong trồng trọt"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 3: Giới thiệu về đất trồng"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 4: Sử dụng, cải tạo và bảo vệ đất trồng"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 5: Giá thể trồng cây"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 6: Thực hành: Xác định độ chua và độ mặn của đất"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 7: Giới thiệu về phân bón"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 8: Sử dụng và bảo quản phân bón"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 9: Ứng dụng công nghệ vi sinh trong sản xuất phân bón"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 10: Thực hành: Nhận biết một số loại phân bón hóa học"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 11: Khái niệm và vai trò của giống cây trồng"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 12: Một số phương pháp chọn, tạo giống cây trồng"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 13: Nhân giống cây trồng"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 14: Thực hành: Nhân giống cây ăn quả bằng phương pháp ghép"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 15: Sâu, bệnh hại cây trồng và ý nghĩa của việc phòng trừ"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 16: Một số sâu hại cây trồng thường gặp và biện pháp phòng trừ"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 17: Một số bệnh hại cây trồng thường gặp và biện pháp phòng trừ"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 18: Ứng dụng công nghệ vi sinh trong phòng trừ sâu, bệnh hại cây trồng"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 19: Quy trình trồng trọt và cơ giới hóa trong trồng trọt"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 20: Công nghệ cao trong thu hoạch và bảo quản sản phẩm trồng trọt"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 21: Chế biến sản phẩm trồng trọt"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 22: Dự án trồng hoa trong chậu"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 23: Giới thiệu về trồng trọt công nghệ cao"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 24: Một số công nghệ cao trong trồng trọt"],
+      ["Công nghệ Nông nghiệp", "Khối 10", "Bài 25: Công nghệ trồng cây không dùng đất"],
+
+      // CÔNG NGHỆ NÔNG NGHIỆP 11 (21 Bài)
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 1: Vai trò và triển vọng của chăn nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 2: Vật nuôi và phương thức chăn nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 3: Khái niệm, vai trò của giống trong chăn nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 4: Chọn giống vật nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 5: Nhân giống vật nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 6: Ứng dụng công nghệ sinh học trong chọn và nhân giống vật nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 7: Dinh dưỡng và thức ăn chăn nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 8: Sản xuất và chế biến thức ăn chăn nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 9: Bảo quản thức ăn chăn nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 10: Vai trò của phòng, trị bệnh trong chăn nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 11: Một số bệnh phổ biến ở lợn và biện pháp phòng, trị"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 12: Một số bệnh phổ biến ở gia cầm và biện pháp phòng, trị"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 13: Một số bệnh phổ biến ở trâu, bò và biện pháp phòng, trị"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 14: Ứng dụng công nghệ sinh học trong phòng, trị bệnh vật nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 15: Chuồng nuôi và biện pháp vệ sinh trong chăn nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 16: Nuôi dưỡng và chăm sóc vật nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 17: Chăn nuôi theo tiêu chuẩn VietGAP"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 18: Chăn nuôi công nghệ cao"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 19: Bảo quản và chế biến sản phẩm chăn nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 20: Sự cần thiết phải bảo vệ môi trường trong chăn nuôi"],
+      ["Công nghệ Nông nghiệp", "Khối 11", "Bài 21: Xử lí chất thải chăn nuôi"],
+
+      // CÔNG NGHỆ NÔNG NGHIỆP 12 (24 Bài)
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 1: Vai trò và triển vọng của lâm nghiệp"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 2: Đặc trưng cơ bản của sản xuất lâm nghiệp"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 3: Nguyên nhân suy thoái tài nguyên rừng và giải pháp khắc phục"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 4: Quy luật sinh trưởng và phát triển của cây rừng"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 5: Hoạt động trồng và chăm sóc rừng"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 6: Ý nghĩa, nhiệm vụ của việc bảo vệ và khai thác tài nguyên rừng bền vững"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 7: Vai trò và triển vọng của thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 8: Các nhóm thủy sản và phương thức nuôi phổ biến"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 9: Môi trường nuôi thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 10: Quản lí môi trường nuôi thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 11: Vai trò của giống trong nuôi thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 12: Ứng dụng công nghệ sinh học trong chọn và nhân giống thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 13: Thức ăn thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 14: Bảo quản và chế biến thức ăn thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 15: Ứng dụng công nghệ sinh học trong chế biến thức ăn thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 16: Công nghệ nuôi một số loài thủy sản phổ biến"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 17: Nuôi thủy sản theo tiêu chuẩn VietGAP"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 18: Ứng dụng công nghệ cao trong nuôi thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 19: Bảo quản và chế biến sản phẩm thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 20: Vai trò của phòng, trị bệnh thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 21: Một số bệnh thủy sản phổ biến và biện pháp phòng, trị"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 22: Ứng dụng công nghệ sinh học trong phòng, trị bệnh thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 23: Bảo vệ nguồn lợi thủy sản"],
+      ["Công nghệ Nông nghiệp", "Khối 12", "Bài 24: Khai thác tài nguyên thủy sản hợp lí"]
+    ];
+
+    function buildDefaultDatabase() {
+      return {
+        subjects: ["Sinh học", "Công nghệ Nông nghiệp"],
+        grades: ["Khối 10", "Khối 11", "Khối 12"],
+        lessons: RAW_154_LESSONS.map((r, i) => ({
+          id: "kntt_" + (i + 1),
+          subject: r[0],
+          grade: r[1],
+          name: r[2],
+          giaoan: "",
+          slide: "",
+          matran: "",
+          selected: false
+        }))
+      };
+    }
+
+    let appData = buildDefaultDatabase();
+    let activeLessonId = null;
+    let currentDocType = "giaoan";
+    let rawMarkdownAI = "";
+    let scannedDriveFiles = [];
+
+    function initSystem() {
+      const savedKey = localStorage.getItem("htk_gemini_api_key");
+      if (savedKey) document.getElementById("geminiApiKey").value = savedKey;
+
+      const savedData = localStorage.getItem("htk_edu_allinone_v4");
+      if (savedData) {
+        try {
+          const parsed = JSON.parse(savedData);
+          if (parsed && parsed.lessons && parsed.lessons.length > 0) appData = parsed;
+        } catch (e) {}
+      }
+
+      syncDropdowns();
+      renderLessonList();
+
+      if (appData.lessons.length > 0) activateLesson(appData.lessons[0].id);
+
+      // Tự động gọi Robot Google Apps Script của Thầy ngay khi mở trang
+      const savedRobotUrl = localStorage.getItem("htk_robot_script_url") || DEFAULT_ROBOT_WEBAPP_URL;
+      const savedFolderUrl = localStorage.getItem("htk_master_folder_url") || DEFAULT_MASTER_DRIVE_FOLDER_URL;
+      document.getElementById("robotScriptUrl").value = savedRobotUrl;
+      if (savedFolderUrl) document.getElementById("masterFolderUrl").value = savedFolderUrl;
+
+      runDriveFolderRobot(true);
+    }
+
+    function saveToLocal() {
+      localStorage.setItem("htk_edu_allinone_v4", JSON.stringify(appData));
+    }
+
+    // ================= THUẬT TOÁN THÔNG MINH: QUÉT THƯ MỤC TỔNG & TỰ KHỚP BÀI HỌC =================
+    function removeVietnameseTones(str) {
+      return (str || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d").replace(/Đ/g, "D").toLowerCase();
+    }
+
+    async function runDriveFolderRobot(isSilent = false) {
+      const scriptUrl = document.getElementById("robotScriptUrl").value.trim() || DEFAULT_ROBOT_WEBAPP_URL;
+      const folderUrl = document.getElementById("masterFolderUrl").value.trim() || DEFAULT_MASTER_DRIVE_FOLDER_URL;
+      const btn = document.getElementById("btnScanDrive");
+      const reportBox = document.getElementById("robotScanReport");
+      const headerBadge = document.getElementById("robotHeaderBadge");
+
+      localStorage.setItem("htk_robot_script_url", scriptUrl);
+      if (folderUrl) localStorage.setItem("htk_master_folder_url", folderUrl);
+
+      if (headerBadge) {
+        headerBadge.innerHTML = `<i class="fa-solid fa-rotate fa-spin text-amber-300"></i> <span>Đang đồng bộ Drive...</span>`;
+      }
+
+      if (!isSilent) {
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ROBOT ĐANG QUÉT TOÀN BỘ THƯ MỤC DRIVE...`;
+      }
+
+      try {
+        const queryUrl = folderUrl ? `${scriptUrl}?folder=${encodeURIComponent(folderUrl)}` : scriptUrl;
+        const res = await fetch(queryUrl);
+        const data = await res.json();
+
+        if (!data.files || !Array.isArray(data.files)) {
+          throw new Error(data.error || "Chưa đọc được danh sách file. Hãy kiểm tra lại LINK_THU_MUC_TONG trong Script hoặc dán Link Thư mục vào ô số 2.");
+        }
+
+        scannedDriveFiles = data.files;
+        renderScannedFilesList();
+
+        let matchedCount = 0;
+
+        data.files.forEach(file => {
+          const fullInfo = removeVietnameseTones((file.path || "") + " " + (file.name || ""));
+          const fileNameClean = removeVietnameseTones(file.name || "");
+
+          // 1. Nhận diện Môn học
+          let detectedSubject = null;
+          if (fullInfo.includes("cong nghe") || fullInfo.includes("cn ") || fullInfo.includes("cn10") || fullInfo.includes("cn11") || fullInfo.includes("cn12") || fullInfo.includes("trong trot") || fullInfo.includes("chan nuoi") || fullInfo.includes("lam nghiep") || fullInfo.includes("thuy san")) {
+            detectedSubject = "Công nghệ Nông nghiệp";
+          } else if (fullInfo.includes("sinh") || fullInfo.includes("sh ") || fullInfo.includes("sh10") || fullInfo.includes("sh11") || fullInfo.includes("sh12")) {
+            detectedSubject = "Sinh học";
+          }
+
+          // 2. Nhận diện Khối lớp (10, 11, 12)
+          let detectedGrade = null;
+          if (/(?:khoi|lop|sh|cn|sinh|nghe|_|-|\s)10(?:\b|_|-)/.test(fullInfo)) detectedGrade = "Khối 10";
+          if (/(?:khoi|lop|sh|cn|sinh|nghe|_|-|\s)11(?:\b|_|-)/.test(fullInfo)) detectedGrade = "Khối 11";
+          if (/(?:khoi|lop|sh|cn|sinh|nghe|_|-|\s)12(?:\b|_|-)/.test(fullInfo)) detectedGrade = "Khối 12";
+
+          // 3. Nhận diện Loại tài liệu (Giáo án, Slide hay Ma trận)
+          let docCategory = "giaoan";
+          const mime = (file.mime || "").toLowerCase();
+          if (mime.includes("presentation") || mime.includes("powerpoint") || fileNameClean.includes(".ppt") || fullInfo.includes("slide") || fullInfo.includes("bai giang") || fullInfo.includes("trinh chieu")) {
+            docCategory = "slide";
+          } else if (mime.includes("spreadsheet") || mime.includes("excel") || fileNameClean.includes(".xls") || fullInfo.includes("ma tran") || fullInfo.includes("dac ta") || fullInfo.includes("de thi") || fullInfo.includes("de kiem tra")) {
+            docCategory = "matran";
+          }
+
+          // 4. Nhận diện Số thứ tự Bài học (Bài 1, Bai 01, B1, Tiết 1...)
+          const baiMatch = fileNameClean.match(/(?:bai|b|chuyen de|tiet)\s*0*(\d{1,2})\b/);
+          const lessonNum = baiMatch ? parseInt(baiMatch[1], 10) : null;
+
+          if (lessonNum) {
+            appData.lessons.forEach(lesson => {
+              const lessonNumMatch = lesson.name.match(/Bài\s+(\d+):/i);
+              const thisNum = lessonNumMatch ? parseInt(lessonNumMatch[1], 10) : null;
+
+              const subjectOk = !detectedSubject || lesson.subject === detectedSubject;
+              const gradeOk = !detectedGrade || lesson.grade === detectedGrade;
+
+              if (thisNum === lessonNum && subjectOk && gradeOk) {
+                lesson[docCategory] = file.url;
+                matchedCount++;
+              }
+            });
+          } else if (docCategory === "matran") {
+            appData.lessons.forEach(lesson => {
+              const subjectOk = !detectedSubject || lesson.subject === detectedSubject;
+              const gradeOk = !detectedGrade || lesson.grade === detectedGrade;
+              if (subjectOk && gradeOk && !lesson.matran) {
+                lesson.matran = file.url;
+                matchedCount++;
+              }
+            });
+          }
+        });
+
+        saveToLocal();
+        renderLessonList();
+        loadDocumentPreview();
+
+        if (headerBadge) {
+          headerBadge.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i> <span>Đã đồng bộ: ${data.files.length} file Drive</span>`;
+        }
+
+        if (!isSilent) {
+          reportBox.classList.remove("hidden");
+          reportBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1"></i> Quét thành công <b>${data.files.length} file</b> trên Google Drive và tự động gắn khớp vào các bài học!`;
+        }
+      } catch (err) {
+        if (headerBadge) {
+          headerBadge.innerHTML = `<i class="fa-solid fa-circle-info text-amber-300"></i> <span>Cấu hình Thư mục Drive</span>`;
+        }
+        if (!isSilent) {
+          reportBox.classList.remove("hidden");
+          reportBox.innerHTML = `<span class="text-rose-600"><i class="fa-solid fa-triangle-exclamation mr-1"></i> ${err.message}</span>`;
+        }
+      } finally {
+        if (!isSilent) {
+          btn.disabled = false;
+          btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> QUÉT LẠI THƯ MỤC TỔNG & CẬP NHẬT LINK NGAY`;
+        }
+      }
+    }
+
+    function renderScannedFilesList() {
+      const box = document.getElementById("allDriveFilesList");
+      const badge = document.getElementById("totalScannedBadge");
+      if (badge) badge.textContent = `${scannedDriveFiles.length} file`;
+
+      if (!scannedDriveFiles.length) {
+        box.innerHTML = `<div class="text-center text-slate-400 py-4 italic">Chưa có file nào. Hãy dán Link Thư Mục Tổng Google Drive vào ô số 2 ở trên rồi bấm Quét!</div>`;
+        return;
+      }
+
+      box.innerHTML = scannedDriveFiles.map(f => `
+        <div onclick="previewDirectFile('${f.id}', '${f.name.replace(/'/g, "\\'")}', '${f.url}')" class="p-2 hover:bg-indigo-50 cursor-pointer flex items-center justify-between gap-2 rounded-lg transition">
+          <div class="truncate">
+            <span class="font-bold text-slate-800">${f.name}</span>
+            <span class="text-[10px] text-slate-400 block truncate">${f.path || ""}</span>
+          </div>
+          <span class="text-[10px] bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded font-bold shrink-0">Xem ngay</span>
+        </div>
+      `).join("");
+    }
+
+    function previewDirectFile(fileId, fileName, fileUrl) {
+      closeModal("modalDriveRobot");
+      switchWorkspaceMode("available");
+      document.getElementById("activeLessonTitle").textContent = fileName;
+      document.getElementById("openDriveNewTab").href = fileUrl || `https://drive.google.com/file/d/${fileId}/view`;
+      const iframe = document.getElementById("docPreviewIframe");
+      const emptyState = document.getElementById("emptyPreviewState");
+      iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
+      iframe.classList.remove("hidden");
+      emptyState.classList.add("hidden");
+    }
+
+    // ================= CÁC HÀM GIAO DIỆN CHÍNH =================
+    function syncDropdowns() {
+      const subSelects = [document.getElementById("filterSubject"), document.getElementById("modalLessonSubject")];
+      const grdSelects = [document.getElementById("filterGrade"), document.getElementById("modalLessonGrade")];
+
+      subSelects.forEach(sel => {
+        const cur = sel.value;
+        sel.innerHTML = appData.subjects.map(s => `<option value="${s}">${s}</option>`).join("");
+        if (appData.subjects.includes(cur)) sel.value = cur;
+      });
+
+      grdSelects.forEach(sel => {
+        const cur = sel.value;
+        sel.innerHTML = appData.grades.map(g => `<option value="${g}">${g}</option>`).join("");
+        if (appData.grades.includes(cur)) sel.value = cur;
+      });
+    }
+
+    function renderLessonList() {
+      const subject = document.getElementById("filterSubject").value;
+      const grade = document.getElementById("filterGrade").value;
+      const keyword = document.getElementById("searchInput").value.toLowerCase().trim();
+      const container = document.getElementById("lessonListContainer");
+
+      const filtered = appData.lessons.filter(item => {
+        return item.subject === subject &&
+               item.grade === grade &&
+               (!keyword || item.name.toLowerCase().includes(keyword));
+      });
+
+      updateSelectedCounter();
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="p-8 text-center text-slate-400 text-xs">Chưa có bài học nào trong mục này.</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const isActive = item.id === activeLessonId;
+        return `
+          <div class="p-2.5 rounded-xl transition flex items-start gap-2.5 cursor-pointer ${isActive ? 'bg-indigo-50 border-2 border-indigo-400 shadow-sm' : 'hover:bg-slate-50'}"
+               onclick="activateLesson('${item.id}')">
+            <input type="checkbox" ${item.selected ? 'checked' : ''}
+                   onclick="event.stopPropagation(); toggleLessonCheck('${item.id}')"
+                   class="mt-1 w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500 cursor-pointer">
+            <div class="flex-1 min-w-0">
+              <div class="text-xs font-bold text-slate-800 leading-snug">${item.name}</div>
+              <div class="flex items-center gap-1.5 mt-1.5">
+                <span class="text-[10px] px-2 py-0.5 rounded-md font-bold ${item.giaoan ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-400'}">Giáo án</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-md font-bold ${item.slide ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-400'}">Slide</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-md font-bold ${item.matran ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-400'}">Ma trận</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function toggleLessonCheck(id) {
+      const lesson = appData.lessons.find(l => l.id === id);
+      if (lesson) lesson.selected = !lesson.selected;
+      updateSelectedCounter();
+    }
+
+    function toggleSelectAll(state) {
+      const subject = document.getElementById("filterSubject").value;
+      const grade = document.getElementById("filterGrade").value;
+      appData.lessons.forEach(l => {
+        if (l.subject === subject && l.grade === grade) l.selected = state;
+      });
+      renderLessonList();
+    }
+
+    function updateSelectedCounter() {
+      const count = appData.lessons.filter(l => l.selected).length;
+      document.getElementById("selectedCounter").textContent = `Đã chọn: ${count} bài`;
+    }
+
+    function activateLesson(id) {
+      activeLessonId = id;
+      const lesson = appData.lessons.find(l => l.id === id);
+      if (!lesson) return;
+      document.getElementById("activeLessonTitle").textContent = `${lesson.subject} (${lesson.grade}) - ${lesson.name}`;
+      renderLessonList();
+      loadDocumentPreview();
+    }
+
+    function switchWorkspaceMode(mode) {
+      const viewAvailable = document.getElementById("viewAvailable");
+      const viewAI = document.getElementById("viewAI");
+      const btnAvail = document.getElementById("btnModeAvailable");
+      const btnAI = document.getElementById("btnModeAI");
+
+      if (mode === "available") {
+        viewAvailable.classList.remove("hidden");
+        viewAvailable.classList.add("flex");
+        viewAI.classList.add("hidden");
+        viewAI.classList.remove("flex");
+        btnAvail.classList.remove("opacity-75");
+        btnAI.classList.add("opacity-75");
+      } else {
+        viewAvailable.classList.add("hidden");
+        viewAvailable.classList.remove("flex");
+        viewAI.classList.remove("hidden");
+        viewAI.classList.add("flex");
+        btnAI.classList.remove("opacity-75");
+        btnAvail.classList.add("opacity-75");
+      }
+    }
+
+    function selectDocType(type) {
+      currentDocType = type;
+      document.getElementById("btnDocGiaoAn").classList.toggle("opacity-75", type !== "giaoan");
+      document.getElementById("btnDocSlide").classList.toggle("opacity-75", type !== "slide");
+      document.getElementById("btnDocMaTran").classList.toggle("opacity-75", type !== "matran");
+      loadDocumentPreview();
+    }
+
+    function extractDriveFileId(url) {
+      if (!url) return null;
+      const match = url.match(/[-\w]{25,}/);
+      return match ? match[0] : null;
+    }
+
+    function loadDocumentPreview() {
+      const iframe = document.getElementById("docPreviewIframe");
+      const emptyState = document.getElementById("emptyPreviewState");
+      const openDriveBtn = document.getElementById("openDriveNewTab");
+
+      const lesson = appData.lessons.find(l => l.id === activeLessonId);
+      if (!lesson) return;
+
+      const rawUrl = lesson[currentDocType] || "";
+      openDriveBtn.href = rawUrl || "#";
+
+      const fileId = extractDriveFileId(rawUrl);
+      if (fileId) {
+        iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
+        iframe.classList.remove("hidden");
+        emptyState.classList.add("hidden");
+      } else {
+        iframe.src = "about:blank";
+        iframe.classList.add("hidden");
+        emptyState.classList.remove("hidden");
+        const labelMap = { giaoan: "Giáo án CV 5512", slide: "Slide Bài Giảng", matran: "Ma Trận Đề Thi" };
+        document.getElementById("previewStatusTitle").textContent = `Chưa gắn link ${labelMap[currentDocType]} cho "${lesson.name}"`;
+      }
+    }
+
+    function downloadOriginalFile() {
+      const lesson = appData.lessons.find(l => l.id === activeLessonId);
+      if (!lesson) return alert("Vui lòng chọn bài học bên trái!");
+      const rawUrl = lesson[currentDocType];
+      if (!rawUrl) return alert("Mục này chưa có link Google Drive!");
+
+      const fileId = extractDriveFileId(rawUrl);
+      if (!fileId) return window.open(rawUrl, "_blank");
+
+      let downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+      if (rawUrl.includes("docs.google.com/document")) {
+        downloadUrl = `https://docs.google.com/document/d/${fileId}/export?format=docx`;
+      } else if (rawUrl.includes("docs.google.com/presentation")) {
+        downloadUrl = `https://docs.google.com/presentation/d/${fileId}/export/pptx`;
+      } else if (rawUrl.includes("docs.google.com/spreadsheets")) {
+        downloadUrl = `https://docs.google.com/spreadsheets/d/${fileId}/export?format=xlsx`;
+      }
+      window.open(downloadUrl, "_blank");
+    }
+
+    // ================= AI GEMINI 3.8+ SOẠN MỚI =================
+    function toggleCustomModelInput() {
+      const val = document.getElementById("aiModelSelect").value;
+      document.getElementById("customModelWrapper").classList.toggle("hidden", val !== "custom");
+    }
+
+    function saveApiKey() {
+      localStorage.setItem("htk_gemini_api_key", document.getElementById("geminiApiKey").value.trim());
+    }
+
+    async function generateWithGemini() {
+      const apiKey = document.getElementById("geminiApiKey").value.trim();
+      const selectedLessons = appData.lessons.filter(l => l.selected);
+      const currentActive = appData.lessons.find(l => l.id === activeLessonId);
+      const targetList = selectedLessons.length > 0 ? selectedLessons : (currentActive ? [currentActive] : []);
+
+      if (targetList.length === 0) return alert("Vui lòng chọn ít nhất 1 bài học bên trái!");
+
+      let modelName = document.getElementById("aiModelSelect").value;
+      if (modelName === "custom") {
+        modelName = document.getElementById("customModelInput").value.trim() || "gemini-3.8-flash";
+      }
+
+      const taskType = document.getElementById("aiTaskType").value;
+      const extraPrompt = document.getElementById("aiExtraPrompt").value.trim();
+      const lessonNames = targetList.map(l => `${l.name} (${l.subject} - ${l.grade})`).join("; ");
+
+      let roleInstruction = "";
+      if (taskType === "giaoan") {
+        roleInstruction = `Soạn Kế hoạch bài dạy (Giáo án) chuẩn Công văn 5512/BGDĐT-GDTrH bộ sách Kết nối tri thức với cuộc sống.
+- Bắt buộc có mục riêng ghi rõ nhãn: "Tích hợp năng lực số".
+- Đủ 4 hoạt động: Hoạt động 1: Mở đầu; Hoạt động 2: Hình thành kiến thức mới; Hoạt động 3: Luyện tập; Hoạt động 4: Vận dụng.
+- Mỗi hoạt động gồm: a) Mục tiêu, b) Nội dung, c) Sản phẩm, d) Tổ chức thực hiện (4 bước: Chuyển giao nhiệm vụ, Thực hiện nhiệm vụ, Báo cáo thảo luận, Kết luận nhận định).
+- Dùng dấu gạch ngang "-" ở đầu các dòng liệt kê (không dùng dấu chấm đầu dòng).`;
+      } else if (taskType === "slide") {
+        roleInstruction = `Thiết kế kịch bản chi tiết từng Slide trình chiếu PowerPoint bộ sách Kết nối tri thức với cuộc sống.
+- Mỗi Slide nêu rõ: Tiêu đề, Nội dung cốt lõi, Hình ảnh/Sơ đồ trực quan, Hoạt động học sinh và Lời dẫn của Giáo viên.`;
+      } else {
+        roleInstruction = `Xây dựng Ma trận, Bản đặc tả và Đề kiểm tra chuẩn Công văn 7991/BGDĐT-GDTrH theo định dạng đề thi mới nhất:
+- Phần I: Trắc nghiệm nhiều lựa chọn.
+- Phần II: Trắc nghiệm Đúng/Sai (mỗi câu 4 ý a, b, c, d).
+- Phần III: Trắc nghiệm trả lời ngắn.
+- Kèm đáp án và bảng hướng dẫn chấm chi tiết.`;
+      }
+
+      const fullPrompt = `Bạn là Trợ lý Sư phạm AI chuyên sâu của Thầy Hồ Tấn Khải (Trường THPT Mang Thít, Tỉnh Vĩnh Long).
+Hãy biên soạn tài liệu chuẩn SGK Kết nối tri thức với cuộc sống:
+- Bài học: ${lessonNames}
+- Yêu cầu: ${roleInstruction}
+- Ghi chú bổ sung: ${extraPrompt || "Trình bày chi tiết, chuẩn mực, khoa học, áp dụng ngay trên lớp."}`;
+
+      const outputEl = document.getElementById("aiResultOutput");
+      const statusEl = document.getElementById("aiStatusText");
+      const btnRun = document.getElementById("btnRunAI");
+
+      btnRun.disabled = true;
+      btnRun.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ĐANG SOẠN VỚI ${modelName.toUpperCase()}...`;
+      statusEl.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin text-purple-600 mr-1"></i> Đang khởi tạo nội dung...`;
+
+      try {
+        if (!apiKey) throw new Error("Thầy vui lòng dán Gemini API Key vào ô 'Gemini API Key' ở trên để bắt đầu soạn!");
+
+        let response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ contents: [{ parts: [{ text: fullPrompt }] }] })
+        });
+
+        if (!response.ok) {
+          response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contents: [{ parts: [{ text: fullPrompt }] }] })
+          });
+        }
+
+        const data = await response.json();
+        if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+          rawMarkdownAI = data.candidates[0].content.parts[0].text;
+          outputEl.innerHTML = marked.parse(rawMarkdownAI);
+          statusEl.innerHTML = `<i class="fa-solid fa-check-circle text-emerald-600 mr-1"></i> Hoàn tất biên soạn: <b>${lessonNames}</b>`;
+        } else {
+          throw new Error(data.error?.message || "Không thể kết nối API. Vui lòng kiểm tra lại API Key.");
+        }
+      } catch (err) {
+        outputEl.innerHTML = `<div class="p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs font-bold">${err.message}</div>`;
+        statusEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-rose-600 mr-1"></i> Chưa thể hoàn tất`;
+      } finally {
+        btnRun.disabled = false;
+        btnRun.innerHTML = `<i class="fa-solid fa-bolt-lightning text-amber-300"></i> BẮT ĐẦU SOẠN AI`;
+      }
+    }
+
+    function saveAiResultToWord() {
+      if (!rawMarkdownAI) return alert("Chưa có nội dung AI để lưu!");
+      const htmlContent = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+        <head><meta charset='utf-8'><title>Ho_So_Bai_Day_Ho_Tan_Khai</title></head>
+        <body style="font-family: 'Times New Roman', serif; font-size: 13pt; line-height: 1.5;">
+          <p><b>Giáo viên: Hồ Tấn Khải - Trường THPT Mang Thít, Tỉnh Vĩnh Long</b></p>
+          <hr/>
+          ${marked.parse(rawMarkdownAI)}
+        </body>
+        </html>`;
+      const blob = new Blob(['\ufeff', htmlContent], { type: 'application/msword' });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `Tai_Lieu_AI_Ho_Tan_Khai_${Date.now()}.doc`;
+      a.click();
+    }
+
+    function clearAiResult() {
+      if (!rawMarkdownAI) return;
+      if (confirm("Thầy muốn xóa kết quả hiện tại để soạn bài mới?")) {
+        rawMarkdownAI = "";
+        document.getElementById("aiResultOutput").innerHTML = `<div class="text-center text-slate-400 py-16"><p class="text-xs font-semibold">Đã xóa kết quả.</p></div>`;
+      }
+    }
+
+    // ================= QUẢN LÝ MODAL & ĐỒNG BỘ MÔN / LỚP =================
+    function openModal(id) {
+      document.getElementById(id).classList.remove("hidden");
+      document.getElementById(id).classList.add("flex");
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.add("hidden");
+      document.getElementById(id).classList.remove("flex");
+    }
+
+    function addNewSubject() {
+      const val = document.getElementById("inputNewSubject").value.trim();
+      if (!val) return;
+      if (!appData.subjects.includes(val)) {
+        appData.subjects.push(val);
+        saveToLocal();
+        syncDropdowns();
+        alert(`Đã thêm môn "${val}" và tự động đồng bộ!`);
+      }
+      document.getElementById("inputNewSubject").value = "";
+    }
+
+    function addNewGrade() {
+      const val = document.getElementById("inputNewGrade").value.trim();
+      if (!val) return;
+      if (!appData.grades.includes(val)) {
+        appData.grades.push(val);
+        saveToLocal();
+        syncDropdowns();
+        alert(`Đã thêm "${val}" và tự động đồng bộ!`);
+      }
+      document.getElementById("inputNewGrade").value = "";
+    }
+
+    function openUpdateLinkForActive() {
+      const lesson = appData.lessons.find(l => l.id === activeLessonId);
+      openModal("modalAddLesson");
+      if (lesson) {
+        document.getElementById("modalLessonSubject").value = lesson.subject;
+        document.getElementById("modalLessonGrade").value = lesson.grade;
+        document.getElementById("modalLessonName").value = lesson.name;
+        document.getElementById("modalLinkGiaoAn").value = lesson.giaoan || "";
+        document.getElementById("modalLinkSlide").value = lesson.slide || "";
+        document.getElementById("modalLinkMaTran").value = lesson.matran || "";
+      }
+    }
+
+    function saveLessonItem() {
+      const subject = document.getElementById("modalLessonSubject").value;
+      const grade = document.getElementById("modalLessonGrade").value;
+      const name = document.getElementById("modalLessonName").value.trim();
+      const giaoan = document.getElementById("modalLinkGiaoAn").value.trim();
+      const slide = document.getElementById("modalLinkSlide").value.trim();
+      const matran = document.getElementById("modalLinkMaTran").value.trim();
+
+      if (!name) return alert("Vui lòng nhập tên bài học!");
+
+      let existing = appData.lessons.find(l => l.subject === subject && l.grade === grade && l.name === name);
+      if (existing) {
+        existing.giaoan = giaoan;
+        existing.slide = slide;
+        existing.matran = matran;
+        activeLessonId = existing.id;
+      } else {
+        const newId = "custom_" + Date.now();
+        appData.lessons.push({ id: newId, subject, grade, name, giaoan, slide, matran, selected: false });
+        activeLessonId = newId;
+      }
+
+      saveToLocal();
+      renderLessonList();
+      loadDocumentPreview();
+      closeModal("modalAddLesson");
+    }
+
+    function exportDatabaseJSON() {
+      const blob = new Blob([JSON.stringify(appData, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "database_backup.json";
+      a.click();
+    }
+
+    function importDatabaseJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (imported.lessons) {
+            appData = imported;
+            saveToLocal();
+            syncDropdowns();
+            renderLessonList();
+            alert("Đã nạp dữ liệu cập nhật thành công!");
+            closeModal("modalUpdatePlugin");
+          }
+        } catch (err) { alert("File không hợp lệ!"); }
+      };
+      reader.readAsText(file);
+    }
+
+    function applyQuickPatch() {
+      const raw = document.getElementById("quickPatchInput").value.trim();
+      if (!raw) return;
+      try {
+        if (raw.startsWith("[") || raw.startsWith("{")) {
+          const patchItems = Array.isArray(JSON.parse(raw)) ? JSON.parse(raw) : [JSON.parse(raw)];
+          patchItems.forEach(item => {
+            if (item.subject && !appData.subjects.includes(item.subject)) appData.subjects.push(item.subject);
+            if (item.grade && !appData.grades.includes(item.grade)) appData.grades.push(item.grade);
+            if (item.name) {
+              appData.lessons.push({
+                id: "patch_" + Date.now() + Math.random().toString(36).slice(2, 5),
+                subject: item.subject || "Sinh học",
+                grade: item.grade || "Khối 10",
+                name: item.name,
+                giaoan: item.giaoan || "",
+                slide: item.slide || "",
+                matran: item.matran || "",
+                selected: false
+              });
+            }
+          });
+          saveToLocal();
+          syncDropdowns();
+          renderLessonList();
+          alert("Đã nâng cấp dữ liệu thành công!");
+        } else {
+          eval(raw);
+          alert("Đã kích hoạt đoạn mã tính năng mới!");
+        }
+        document.getElementById("quickPatchInput").value = "";
+        closeModal("modalUpdatePlugin");
+      } catch (e) {
+        alert("Lỗi cú pháp đoạn mã: " + e.message);
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", initSystem);
+  </script>
+</body>
+</html>
