@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Đấu Trường Kéo Co 3D - Thầy Hồ Tấn Khải - THPT Mang Thít</title>
 
-  <!-- Google Fonts & CDN Thư viện: Three.js, MQTT.js (4G/Wi-Fi Cloud), Confetti, QRCode -->
+  <!-- Google Fonts & CDN Thư viện -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
@@ -40,11 +43,11 @@
       background: linear-gradient(90deg, #0f172a 0%, #1e3a8a 50%, #0f172a 100%);
       border-bottom: 2px solid var(--gold); z-index: 500;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 0 18px; font-size: 14px; font-weight: 900;
+      padding: 0 16px; font-size: 14px; font-weight: 900;
       box-shadow: 0 4px 15px rgba(0,0,0,0.45);
     }
     .brand-title { color: #38bdf8; display: flex; align-items: center; gap: 8px; font-size: 15px; }
-    .author-credit { color: #fef08a; background: rgba(255,255,255,0.12); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(254,240,138,0.45); font-size: 13px; }
+    .author-credit { color: #fef08a; background: rgba(255,255,255,0.12); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(254,240,138,0.45); font-size: 12px; }
 
     /* 1. GIAO DIỆN CÀI ĐẶT CỦA GIÁO VIÊN */
     #teacher-view {
@@ -63,10 +66,10 @@
       background: #f8fafc; border-radius: 12px; border: 1.5px dashed #94a3b8; align-items: center;
     }
     .btn-subj {
-      padding: 10px 16px; border-radius: 10px; border: none; font-weight: 900;
-      font-size: 14px; cursor: pointer; color: white; transition: transform 0.15s;
+      padding: 10px 16px; border-radius: 10px; border: 2px solid transparent; font-weight: 900;
+      font-size: 14px; cursor: pointer; color: white; transition: all 0.15s;
     }
-    .btn-subj:hover { transform: translateY(-2px); }
+    .btn-subj.active-subj { border-color: #0f172a; transform: scale(1.04); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
     .btn-bio { background: linear-gradient(135deg, #10b981, #059669); }
     .btn-agri { background: linear-gradient(135deg, #f59e0b, #d97706); }
     .btn-both { background: linear-gradient(135deg, #6366f1, #4f46e5); }
@@ -105,14 +108,14 @@
     #canvas3d { width: 100%; height: 100%; display: block; }
 
     .host-controls {
-      position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+      position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
       background: rgba(15, 23, 42, 0.94); border: 2px solid #334155; backdrop-filter: blur(10px);
-      padding: 6px 16px; border-radius: 40px; display: flex; align-items: center; gap: 8px; z-index: 30;
+      padding: 6px 14px; border-radius: 40px; display: flex; align-items: center; gap: 6px; z-index: 30;
       box-shadow: 0 8px 25px rgba(0,0,0,0.45); white-space: nowrap;
     }
     .c-btn {
-      padding: 8px 15px; border-radius: 20px; border: none; font-weight: 900;
-      font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 5px;
+      padding: 7px 13px; border-radius: 20px; border: none; font-weight: 900;
+      font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px;
     }
     .c-prep { background: var(--purple); color: white; }
     .c-start { background: var(--green); color: white; }
@@ -121,31 +124,35 @@
     .c-home { background: #475569; color: white; }
 
     .hud-row {
-      position: absolute; top: 68px; left: 24px; right: 24px;
+      position: absolute; top: 64px; left: 20px; right: 20px;
       display: flex; justify-content: space-between; align-items: center;
       pointer-events: none; z-index: 15;
     }
     .team-box {
-      padding: 10px 22px; border-radius: 30px; font-size: 18px; font-weight: 900;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      padding: 8px 18px; border-radius: 30px; font-size: 16px; font-weight: 900;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4); pointer-events: auto; display: flex; align-items: center; gap: 8px;
     }
     .team-box.red { background: linear-gradient(135deg, var(--red), var(--red-dark)); border: 3px solid var(--red-glow); }
     .team-box.blue { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border: 3px solid var(--blue-glow); }
+    .mini-add-btn {
+      background: rgba(255,255,255,0.25); border: 1px solid #fff; color: #fff;
+      border-radius: 12px; padding: 2px 8px; font-size: 12px; font-weight: 900; cursor: pointer;
+    }
 
     .rope-meter-hud {
       background: rgba(15, 23, 42, 0.92); border: 2px solid var(--gold);
-      padding: 8px 22px; border-radius: 30px; font-size: 15px; font-weight: 900;
+      padding: 8px 20px; border-radius: 30px; font-size: 15px; font-weight: 900;
       display: flex; align-items: center; gap: 10px;
     }
 
     .qr-panel {
-      position: absolute; bottom: 18px; padding: 10px; border-radius: 16px;
+      position: absolute; bottom: 16px; padding: 10px; border-radius: 16px;
       background: rgba(255, 255, 255, 0.96); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       text-align: center; color: #0f172a; z-index: 20;
     }
-    .qr-panel.left { left: 20px; border: 4px solid var(--red); }
-    .qr-panel.right { right: 20px; border: 4px solid var(--blue); }
-    .qr-caption { font-weight: 900; font-size: 13px; margin-top: 5px; }
+    .qr-panel.left { left: 18px; border: 4px solid var(--red); }
+    .qr-panel.right { right: 18px; border: 4px solid var(--blue); }
+    .qr-caption { font-weight: 900; font-size: 12px; margin-top: 5px; }
 
     #labels-container, #cheer-container {
       position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 10;
@@ -178,16 +185,16 @@
     #mobile-view {
       position: absolute; top: 44px; left: 0; right: 0; bottom: 0; z-index: 150;
       background: #090d16; display: none; flex-direction: column;
-      padding: 16px; justify-content: space-between;
+      padding: 14px; justify-content: space-between;
     }
     .lobby-card {
       margin: auto; width: 100%; max-width: 390px; background: #131c2e;
-      border: 2px solid #23334d; border-radius: 22px; padding: 22px; text-align: center;
+      border: 2px solid #23334d; border-radius: 22px; padding: 20px; text-align: center;
     }
-    .team-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+    .team-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
     .btn-pick-team {
-      padding: 14px 10px; border-radius: 14px; border: 3px solid transparent;
-      font-weight: 900; font-size: 15px; color: white; cursor: pointer;
+      padding: 12px 8px; border-radius: 12px; border: 3px solid transparent;
+      font-weight: 900; font-size: 14px; color: white; cursor: pointer;
     }
     .btn-pick-team.red { background: var(--red-dark); border-color: var(--red-glow); }
     .btn-pick-team.blue { background: var(--blue-dark); border-color: var(--blue-glow); }
@@ -245,10 +252,10 @@
 
       <!-- THANH CHỌN NHANH 10 CÂU SINH HỌC HOẶC 10 CÂU CÔNG NGHỆ NÔNG NGHIỆP -->
       <div class="subject-bar">
-        <span style="font-weight: 900; font-size: 14px; color: #334155;">Chọn bộ đề thi đấu:</span>
-        <button class="btn-subj btn-bio" onclick="loadSubjectPreset('BIO')">🧬 10 Câu Sinh Học</button>
-        <button class="btn-subj btn-agri" onclick="loadSubjectPreset('AGRI')">🚜 10 Câu Công Nghệ NN</button>
-        <button class="btn-subj btn-both" onclick="loadSubjectPreset('BOTH')">🔄 Trộn Cả 2 Môn (20 Câu)</button>
+        <span style="font-weight: 900; font-size: 14px; color: #334155;">Chọn môn thi đấu:</span>
+        <button id="btn-subj-BIO" class="btn-subj btn-bio" onclick="loadSubjectPreset('BIO')">🧬 10 Câu Sinh Học</button>
+        <button id="btn-subj-AGRI" class="btn-subj btn-agri" onclick="loadSubjectPreset('AGRI')">🚜 10 Câu Công Nghệ NN</button>
+        <button id="btn-subj-BOTH" class="btn-subj btn-both active-subj" onclick="loadSubjectPreset('BOTH')">🔄 Trộn Cả 2 Môn (20 Câu)</button>
         <button class="btn-tool" onclick="document.execCommand('underline', false, null)" style="margin-left:auto;"><u>U</u> Gạch chân</button>
         <button class="btn-tool" onclick="document.getElementById('editor').innerHTML=''">Xóa trắng</button>
       </div>
@@ -283,7 +290,7 @@
 
       <div class="flex-between" style="margin-top: 12px;">
         <span style="font-size: 13px; color: #059669; font-weight: 800;">
-          🌐 Đã trang bị Cloud MQTT WebSockets: Học sinh dùng bất kỳ mạng 4G/Wi-Fi nào quét QR cũng hiện nhân vật ngay!
+          🌐 Kết nối Đa Kênh Cổng 443 HTTPS: Xuyên mọi mạng 4G Viettel/Vina/Mobi & Wi-Fi trường học!
         </span>
         <button class="btn-launch" onclick="open3DArena()">MỞ SÂN ĐẤU 3D & HIỆN MÃ QR</button>
       </div>
@@ -298,17 +305,23 @@
       <button class="c-btn c-pause" id="btn-host-pause" onclick="pauseMatch()" style="display:none;">⏸ TẠM DỪNG</button>
       <button class="c-btn c-end" onclick="endMatchManual()">⏹ KẾT THÚC</button>
       <button class="c-btn c-home" onclick="returnToSetup()">🏠 CÀI ĐẶT</button>
-      <span id="net-status" style="font-size: 12px; color: #38bdf8; font-weight: 800; padding-left: 6px;">Đang kết nối Cloud...</span>
+      <span id="net-status" style="font-size: 11px; color: #a7f3d0; font-weight: 800; padding-left: 4px;">🔄 Đang mở cổng 443...</span>
     </div>
 
     <div class="hud-row">
-      <div class="team-box red" id="hud-red-count">ĐỘI ĐỎ: 0 HS (0 vào dây)</div>
+      <div class="team-box red">
+        <span id="hud-red-count">ĐỘI ĐỎ: 0 HS</span>
+        <button class="mini-add-btn" onclick="manualAddBotPlayer('RED')" title="Thêm nhanh 1 nhân vật Đội Đỏ">+HS</button>
+      </div>
       <div class="rope-meter-hud">
         <span>⚔️ DẪN 3.0 LÀ THẮNG</span>
         <span id="hud-rope-score" style="color: #fef08a; font-size: 18px;">(HÒA 0.0)</span>
         <span id="hud-spectators" style="color: #cbd5e1; font-size: 13px;">| 👀 Khán giả: 0</span>
       </div>
-      <div class="team-box blue" id="hud-blue-count">ĐỘI XANH: 0 HS (0 vào dây)</div>
+      <div class="team-box blue">
+        <span id="hud-blue-count">ĐỘI XANH: 0 HS</span>
+        <button class="mini-add-btn" onclick="manualAddBotPlayer('BLUE')" title="Thêm nhanh 1 nhân vật Đội Xanh">+HS</button>
+      </div>
     </div>
 
     <canvas id="canvas3d"></canvas>
@@ -338,39 +351,42 @@
   <!-- 3. GIAO DIỆN ĐIỆN THOẠI HỌC SINH (CLIENT) -->
   <div id="mobile-view">
     <div id="mobile-lobby" class="lobby-card">
-      <div id="conn-badge" style="font-size: 13px; color: #38bdf8; font-weight: 800; margin-bottom: 6px;">🔄 Đang kết nối máy chiếu...</div>
-      <h2 style="margin: 0 0 10px 0; font-size: 22px;">ĐĂNG KÝ VÀO SÂN 3D</h2>
+      <div id="conn-badge" style="font-size: 13px; color: #38bdf8; font-weight: 800; margin-bottom: 6px;">🔄 Đang đồng bộ cổng 443...</div>
+      <h2 style="margin: 0 0 8px 0; font-size: 21px;">SẴN SÀNG VÀO ĐẤU TRƯỜNG</h2>
       
-      <div id="assigned-info" style="margin: 10px 0; padding: 14px; background: #0f172a; border-radius: 14px; font-weight: 800; font-size: 15px; border: 1px solid #334155;">
-        Đang gửi tín hiệu xuất hiện nhân vật lên màn hình chính...
+      <div id="assigned-info" style="margin: 8px 0; padding: 12px; background: #0f172a; border-radius: 14px; font-weight: 800; font-size: 14px; border: 1px solid #334155;">
+        Đang hiện nhân vật của em lên màn hình chính...
       </div>
-
-      <p style="font-size: 13px; color: #94a3b8; margin-bottom: 12px;">
-        Em có thể đổi đội bên dưới trước khi nhấn nút <b>"CHUẨN BỊ / VÀO DÂY"</b>:
-      </p>
 
       <div id="manual-team-box" class="team-select-grid">
-        <button class="btn-pick-team red" onclick="requestSwitchTeam('RED')">ĐỔI SANG ĐỘI ĐỎ 🔴</button>
-        <button class="btn-pick-team blue" onclick="requestSwitchTeam('BLUE')">ĐỔI SANG ĐỘI XANH 🔵</button>
+        <button class="btn-pick-team red" onclick="requestSwitchTeam('RED')">CHỌN ĐỘI ĐỎ 🔴</button>
+        <button class="btn-pick-team blue" onclick="requestSwitchTeam('BLUE')">CHỌN ĐỘI XANH 🔵</button>
       </div>
 
-      <button id="btn-ready-rope" class="btn-launch" style="width: 100%; margin-top: 6px; background: linear-gradient(135deg, #10b981, #059669);" onclick="confirmReadyRope()">
+      <button id="btn-ready-rope" class="btn-launch" style="width: 100%; margin-top: 6px; padding: 14px; background: linear-gradient(135deg, #10b981, #059669);" onclick="confirmReadyRope()">
         🧤 CHUẨN BỊ / VÀO NẮM DÂY!
+      </button>
+
+      <button class="btn-launch" style="width: 100%; margin-top: 10px; padding: 12px; font-size: 15px; background: linear-gradient(135deg, #f59e0b, #d97706);" onclick="forceStartQuizNow()">
+        ⚡ VÀO LÀM CÂU HỎI NGAY!
       </button>
     </div>
 
     <!-- Màn hình chờ hoặc Làm câu hỏi -->
     <div id="mobile-play-area" style="display: none; height: 100%; flex-direction: column;">
       <div class="m-header">
-        <span id="m-player-tag">HS 1</span>
+        <span id="m-player-tag">HS</span>
         <span id="m-role-badge" style="padding: 3px 10px; border-radius: 8px; font-size: 12px;">ĐỘI</span>
         <span id="m-rope-stat" style="color: #fef08a;">Dây: 0.0</span>
       </div>
 
       <div id="waiting-host-overlay" class="q-card" style="text-align: center;">
-        <div style="font-size: 56px;">💪</div>
-        <h3 style="margin: 10px 0 6px 0; font-size: 21px; color: #10b981;">ĐÃ VÀO VỊ TRÍ NẮM DÂY!</h3>
-        <p style="color: #cbd5e1; margin: 0; font-size: 15px;">Nhân vật của em đã nắm chặt dây thừng trên màn hình.<br>Hãy chờ thầy nhấn <b>"BẮT ĐẦU KÉO"</b>!</p>
+        <div style="font-size: 52px;">💪</div>
+        <h3 style="margin: 8px 0 6px 0; font-size: 20px; color: #10b981;">ĐÃ VÀO VỊ TRÍ NẮM DÂY!</h3>
+        <p style="color: #cbd5e1; margin: 0 0 16px 0; font-size: 14px;">Nhân vật của em đã nắm dây trên màn hình.<br>Chờ thầy bấm <b>"BẮT ĐẦU KÉO"</b> hoặc nhấn nút dưới nếu thầy đã hô bắt đầu:</p>
+        <button class="btn-launch" style="width: 100%; background: linear-gradient(135deg, #10b981, #059669);" onclick="activateMobileQuiz()">
+          ▶️ MỞ CÂU HỎI KÉO DÂY NGAY!
+        </button>
       </div>
 
       <div id="active-quiz-container" style="display: none; flex-grow: 1; flex-direction: column; justify-content: space-between;">
@@ -397,7 +413,7 @@
 
   <script>
     /* =========================================================================
-       1. NGÂN HÀNG 10 CÂU SINH HỌC & 10 CÂU CÔNG NGHỆ NÔNG NGHIỆP MẶC ĐỊNH
+       1. NGÂN HÀNG 10 CÂU SINH HỌC & 10 CÂU CÔNG NGHỆ NÔNG NGHIỆP SOẠN SẴN
        ========================================================================= */
     const QUESTIONS_BIO = `
 <div>Câu 1: [SINH HỌC] Bào quan nào thực hiện chức năng quang hợp chủ yếu ở thực vật?</div>
@@ -523,6 +539,8 @@
 <div>D. Không cần sử dụng nước và dinh dưỡng cho cây</div>
 `;
 
+    let selectedSubjectKey = 'BOTH'; // BIO, AGRI, BOTH
+
     function parseHTMLToQuiz(htmlString) {
       const lines = htmlString.split(/<br\s*[\/]?>|<\/div>|<\/p>/i);
       const parsed = [];
@@ -553,7 +571,18 @@
       return res.filter(item => item.opts.length >= 2 && item.correct !== -1);
     }
 
+    function getPresetQuizBySubject(subjKey) {
+      if (subjKey === 'BIO') return parseHTMLToQuiz(QUESTIONS_BIO);
+      if (subjKey === 'AGRI') return parseHTMLToQuiz(QUESTIONS_AGRI);
+      return parseHTMLToQuiz(QUESTIONS_BIO + '<br>' + QUESTIONS_AGRI);
+    }
+
     function loadSubjectPreset(mode) {
+      selectedSubjectKey = mode;
+      document.querySelectorAll('.btn-subj').forEach(b => b.classList.remove('active-subj'));
+      const activeBtn = document.getElementById(`btn-subj-${mode}`);
+      if (activeBtn) activeBtn.classList.add('active-subj');
+
       const ed = document.getElementById('editor');
       if (mode === 'BIO') ed.innerHTML = QUESTIONS_BIO.trim();
       else if (mode === 'AGRI') ed.innerHTML = QUESTIONS_AGRI.trim();
@@ -561,7 +590,7 @@
     }
 
     /* =========================================================================
-       2. ÂM THANH TỔNG HỢP WEB AUDIO API
+       2. ÂM THANH WEB AUDIO API
        ========================================================================= */
     const AudioFX = {
       ctx: null,
@@ -975,48 +1004,80 @@
     }
 
     /* =========================================================================
-       5. KẾT NỐI ĐÁM MÂY XUYÊN 4G/WI-FI BẰNG MQTT WEBSOCKETS (KHÔNG BỊ CHẶN)
+       5. ĐA KẾT NỐI ĐÁM MÂY CỔNG 443 HTTPS (MULTI-BROKER WSS PORT 443)
+          Xuyên mọi tường lửa 4G Viettel/Vina/Mobi & Wi-Fi Trường Học
        ========================================================================= */
-    let mqttClient = null;
+    const BROKER_URLS = [
+      'wss://broker.hivemq.com:8884/mqtt',
+      'wss://test.mosquitto.org:8081/mqtt',
+      'wss://broker.emqx.io:8084/mqtt'
+    ];
+    let activeClients = [];
     let currentRoomTopic = '';
-    const localBus = new BroadcastChannel('tug_fallback_v3');
+    let seenMsgIds = new Set();
+    const localBus = new BroadcastChannel('tug_multi_v4');
 
-    function connectCloudBus(roomId, onMessageCallback, onConnectedCallback) {
-      currentRoomTopic = `thptmangthit/keoco3d/${roomId}`;
-      // Kết nối qua EMQX Public Broker hỗ trợ WSS cổng 8084 (Xuyên mọi tường lửa 4G/Wi-Fi)
-      mqttClient = mqtt.connect('wss://broker.emqx.io:8084/mqtt', {
-        clientId: 'client_' + Math.random().toString(16).substr(2, 8),
-        clean: true,
-        connectTimeout: 4000,
-        reconnectPeriod: 1000
-      });
+    function connectMultiCloud(roomId, onMessageCallback, onConnectedCallback) {
+      currentRoomTopic = `thptmangthit_keoco3d_${roomId}`;
+      let connectedOnce = false;
 
-      mqttClient.on('connect', () => {
-        mqttClient.subscribe(currentRoomTopic, { qos: 0 }, () => {
-          if (onConnectedCallback) onConnectedCallback();
-        });
-      });
-
-      mqttClient.on('message', (topic, message) => {
+      BROKER_URLS.forEach((url) => {
         try {
-          const data = JSON.parse(message.toString());
-          onMessageCallback(data);
-        } catch (e) {}
+          const client = mqtt.connect(url, {
+            clientId: 'kc3d_' + Math.random().toString(16).substr(2, 8),
+            clean: true,
+            connectTimeout: 4000,
+            reconnectPeriod: 1500
+          });
+
+          client.on('connect', () => {
+            client.subscribe(currentRoomTopic, { qos: 0 }, () => {
+              if (!connectedOnce) {
+                connectedOnce = true;
+                if (onConnectedCallback) onConnectedCallback();
+              }
+            });
+          });
+
+          client.on('message', (topic, message) => {
+            try {
+              const data = JSON.parse(message.toString());
+              if (data._mid && seenMsgIds.has(data._mid)) return;
+              if (data._mid) seenMsgIds.add(data._mid);
+              onMessageCallback(data);
+            } catch (e) {}
+          });
+
+          activeClients.push(client);
+        } catch (err) {}
       });
 
-      localBus.onmessage = (ev) => onMessageCallback(ev.data);
+      localBus.onmessage = (ev) => {
+        const data = ev.data;
+        if (data && data._mid && seenMsgIds.has(data._mid)) return;
+        if (data && data._mid) seenMsgIds.add(data._mid);
+        onMessageCallback(data);
+      };
     }
 
     function sendCloudMessage(payload) {
-      if (mqttClient && mqttClient.connected && currentRoomTopic) {
-        mqttClient.publish(currentRoomTopic, JSON.stringify(payload), { qos: 0 });
-      }
+      payload._mid = 'm_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+      seenMsgIds.add(payload._mid);
+      const raw = JSON.stringify(payload);
+
+      activeClients.forEach(c => {
+        if (c && c.connected && currentRoomTopic) {
+          try { c.publish(currentRoomTopic, raw, { qos: 0 }); } catch(e) {}
+        }
+      });
       localBus.postMessage(payload);
     }
 
     /* =========================================================================
        6. LOGIC PHÒNG MÁY CHIẾU (HOST)
        ========================================================================= */
+    let hostHeartbeatTimer = null;
+
     function open3DArena() {
       quizList = parseHTMLToQuiz(document.getElementById('editor').innerHTML);
       if (!quizList.length) return alert("Vui lòng chọn hoặc nhập ít nhất 1 câu hỏi có gạch chân đáp án đúng!");
@@ -1029,99 +1090,125 @@
       if (!renderer) init3DStage();
       resetArenaObjects();
 
-      const roomCode = 'room' + Math.floor(100000 + Math.random() * 900000);
+      const roomCode = 'r' + Math.floor(10000 + Math.random() * 90000);
       renderQRCodes(roomCode);
 
-      connectCloudBus(roomCode, handleHostIncomingData, () => {
-        document.getElementById('net-status').innerText = `🟢 Đám mây 4G/Wi-Fi đã thông suốt!`;
+      connectMultiCloud(roomCode, handleHostIncomingData, () => {
+        document.getElementById('net-status').innerText = `🟢 Đã thông suốt 4G/Wi-Fi!`;
       });
+
+      // Phát nhịp tim trạng thái phòng liên tục mỗi 2 giây để mọi điện thoại vào sau đều tự đồng bộ
+      if (hostHeartbeatTimer) clearInterval(hostHeartbeatTimer);
+      hostHeartbeatTimer = setInterval(() => {
+        sendCloudMessage({
+          type: 'HOST_HEARTBEAT',
+          status: matchState.status,
+          ropeScore: matchState.ropeScore.toFixed(1),
+          subj: selectedSubjectKey
+        });
+      }, 2000);
     }
 
     function renderQRCodes(roomId) {
       const base = window.location.href.split('?')[0];
+      const cacheBuster = Date.now().toString().slice(-5);
       document.getElementById('qr-red').innerHTML = '';
       document.getElementById('qr-blue').innerHTML = '';
 
+      // Nhúng luôn mã môn học (subj) và chống cache (v) vào QR
       new QRCode(document.getElementById('qr-red'), {
-        text: `${base}?role=player&room=${roomId}&team=RED`, width: 115, height: 115
+        text: `${base}?role=player&room=${roomId}&team=RED&subj=${selectedSubjectKey}&v=${cacheBuster}`,
+        width: 115, height: 115
       });
       new QRCode(document.getElementById('qr-blue'), {
-        text: `${base}?role=player&room=${roomId}&team=BLUE`, width: 115, height: 115
+        text: `${base}?role=player&room=${roomId}&team=BLUE&subj=${selectedSubjectKey}&v=${cacheBuster}`,
+        width: 115, height: 115
       });
+    }
+
+    // Nút thêm nhanh nhân vật trên màn hình giáo viên
+    function manualAddBotPlayer(team) {
+      AudioFX.spawnPop();
+      const pid = 'manual_' + Math.random().toString(36).substr(2, 5);
+      if (team === 'RED') {
+        const label = `HS ${matchState.redPlayers.length + 1}`;
+        matchState.redPlayers.push({ id: pid, label, team: 'RED', ready: true, spawned: false, correct: 0, freeze: 0 });
+      } else {
+        const label = `HS ${matchState.bluePlayers.length + 1}`;
+        matchState.bluePlayers.push({ id: pid, label, team: 'BLUE', ready: true, spawned: false, correct: 0, freeze: 0 });
+      }
+      rebuildAll3DCharacters();
+      updateHostHUD();
+    }
+
+    function registerOrGetPlayer(playerId, preferredTeam, isReadyNow) {
+      let existing = matchState.redPlayers.find(x => x.id === playerId) || matchState.bluePlayers.find(x => x.id === playerId);
+      if (existing) {
+        if (isReadyNow && !existing.ready) {
+          existing.ready = true;
+          AudioFX.stepInRope();
+          rebuildAll3DCharacters();
+          updateHostHUD();
+        }
+        return existing;
+      }
+
+      let assignedTeam = preferredTeam || 'RED';
+      let role = 'PULLER';
+
+      if (joinMode === 'AUTO_ALL') {
+        if (matchState.redPlayers.length < matchState.bluePlayers.length) assignedTeam = 'RED';
+        else if (matchState.bluePlayers.length < matchState.redPlayers.length) assignedTeam = 'BLUE';
+      } else if (joinMode === 'LIMITED_VS') {
+        const count = assignedTeam === 'RED' ? matchState.redPlayers.length : matchState.bluePlayers.length;
+        if (count >= maxPerTeam) {
+          const otherCount = assignedTeam === 'RED' ? matchState.bluePlayers.length : matchState.redPlayers.length;
+          if (otherCount < maxPerTeam) assignedTeam = assignedTeam === 'RED' ? 'BLUE' : 'RED';
+          else role = 'SPECTATOR';
+        }
+      }
+
+      if (role === 'PULLER') {
+        AudioFX.spawnPop();
+        let newP;
+        if (assignedTeam === 'RED') {
+          const label = `HS ${matchState.redPlayers.length + 1}`;
+          newP = { id: playerId, label, team: 'RED', ready: isReadyNow, spawned: false, correct: 0, freeze: 0, role: 'PULLER' };
+          matchState.redPlayers.push(newP);
+        } else {
+          const label = `HS ${matchState.bluePlayers.length + 1}`;
+          newP = { id: playerId, label, team: 'BLUE', ready: isReadyNow, spawned: false, correct: 0, freeze: 0, role: 'PULLER' };
+          matchState.bluePlayers.push(newP);
+        }
+        rebuildAll3DCharacters();
+        updateHostHUD();
+        return newP;
+      } else {
+        matchState.spectators++;
+        updateHostHUD();
+        return { id: playerId, label: `Khán giả ${matchState.spectators}`, team: assignedTeam, role: 'SPECTATOR' };
+      }
     }
 
     function handleHostIncomingData(d) {
       if (!d || !d.type) return;
 
-      // BƯỚC 1: Học sinh quét QR -> Hiện ngay nhân vật lên sân
-      if (d.type === 'AUTO_ENTER_ARENA') {
-        let existing = matchState.redPlayers.find(x => x.id === d.playerId) || matchState.bluePlayers.find(x => x.id === d.playerId);
-        if (existing) {
-          // Gửi lại xác nhận kèm bộ câu hỏi nếu điện thoại học sinh hỏi lại
-          sendCloudMessage({
-            type: 'ENTER_CONFIRMED',
-            playerId: existing.id,
-            team: existing.team,
-            role: 'PULLER',
-            label: existing.label,
-            quiz: quizList,
-            matchStatus: matchState.status
-          });
-          return;
-        }
-
-        let assignedTeam = d.preferredTeam || 'RED';
-        let role = 'PULLER';
-
-        if (joinMode === 'AUTO_ALL') {
-          if (matchState.redPlayers.length < matchState.bluePlayers.length) assignedTeam = 'RED';
-          else if (matchState.bluePlayers.length < matchState.redPlayers.length) assignedTeam = 'BLUE';
-        } else if (joinMode === 'LIMITED_VS') {
-          const count = assignedTeam === 'RED' ? matchState.redPlayers.length : matchState.bluePlayers.length;
-          if (count >= maxPerTeam) {
-            const otherCount = assignedTeam === 'RED' ? matchState.bluePlayers.length : matchState.redPlayers.length;
-            if (otherCount < maxPerTeam) assignedTeam = assignedTeam === 'RED' ? 'BLUE' : 'RED';
-            else role = 'SPECTATOR';
-          }
-        }
-
-        let label = 'Khán giả';
-        if (role === 'PULLER') {
-          AudioFX.spawnPop();
-          if (assignedTeam === 'RED') {
-            label = `HS ${matchState.redPlayers.length + 1}`;
-            matchState.redPlayers.push({ id: d.playerId, label, team: 'RED', ready: false, spawned: false, correct: 0, freeze: 0 });
-          } else {
-            label = `HS ${matchState.bluePlayers.length + 1}`;
-            matchState.bluePlayers.push({ id: d.playerId, label, team: 'BLUE', ready: false, spawned: false, correct: 0, freeze: 0 });
-          }
-          rebuildAll3DCharacters();
-        } else {
-          matchState.spectators++;
-          label = `Khán giả ${matchState.spectators}`;
-        }
-
-        updateHostHUD();
+      if (d.type === 'AUTO_ENTER_ARENA' || d.type === 'PLAYER_READY_ROPE') {
+        const isReady = d.type === 'PLAYER_READY_ROPE';
+        const p = registerOrGetPlayer(d.playerId, d.preferredTeam, isReady);
         sendCloudMessage({
           type: 'ENTER_CONFIRMED',
-          playerId: d.playerId,
-          team: assignedTeam,
-          role: role,
-          label: label,
-          quiz: quizList,
+          playerId: p.id,
+          team: p.team,
+          role: p.role || 'PULLER',
+          label: p.label,
           matchStatus: matchState.status
         });
       }
 
-      // Đổi đội trước khi trận đấu bắt đầu
       else if (d.type === 'SWITCH_TEAM' && matchState.status === 'LOBBY') {
         let p = matchState.redPlayers.find(x => x.id === d.playerId) || matchState.bluePlayers.find(x => x.id === d.playerId);
         if (!p || p.team === d.newTeam) return;
-
-        if (joinMode === 'LIMITED_VS') {
-          const targetList = d.newTeam === 'RED' ? matchState.redPlayers : matchState.bluePlayers;
-          if (targetList.length >= maxPerTeam) return;
-        }
 
         matchState.redPlayers = matchState.redPlayers.filter(x => x.id !== d.playerId);
         matchState.bluePlayers = matchState.bluePlayers.filter(x => x.id !== d.playerId);
@@ -1143,31 +1230,22 @@
           team: p.team,
           role: 'PULLER',
           label: p.label,
-          quiz: quizList,
           matchStatus: matchState.status
         });
       }
 
-      // BƯỚC 2: Học sinh bấm nút "CHUẨN BỊ / VÀO DÂY"
-      else if (d.type === 'PLAYER_READY_ROPE') {
-        AudioFX.stepInRope();
-        let p = matchState.redPlayers.find(x => x.id === d.playerId) || matchState.bluePlayers.find(x => x.id === d.playerId);
-        if (p) {
-          p.ready = true;
-          rebuildAll3DCharacters();
-          updateHostHUD();
-        }
-      }
+      else if (d.type === 'PULL_CORRECT') {
+        // Nếu HS làm đúng mà chưa kịp hiện nhân vật, tự động hiện nhân vật lên sân luôn!
+        const pObj = registerOrGetPlayer(d.playerId, d.team, true);
+        if (matchState.status !== 'PLAYING' && matchState.status !== 'LOBBY') return;
 
-      else if (d.type === 'PULL_CORRECT' && matchState.status === 'PLAYING') {
         AudioFX.pullHeave();
-        const pList = d.team === 'RED' ? matchState.redPlayers : matchState.bluePlayers;
-        const pObj = pList.find(x => x.id === d.playerId);
-        if (pObj) pObj.correct++;
+        pObj.correct++;
 
+        const pList = pObj.team === 'RED' ? matchState.redPlayers : matchState.bluePlayers;
         const activeCount = Math.max(pList.length, 1);
         const force = 1.0 / activeCount;
-        matchState.ropeScore += (d.team === 'BLUE' ? force : -force);
+        matchState.ropeScore += (pObj.team === 'BLUE' ? force : -force);
         targetRopeX = matchState.ropeScore * 1.8;
 
         updateHostHUD();
@@ -1176,16 +1254,15 @@
       }
 
       else if (d.type === 'FREEZE_WRONG') {
+        const pObj = registerOrGetPlayer(d.playerId, d.team, true);
         AudioFX.freezeCrack();
-        const pList = d.team === 'RED' ? matchState.redPlayers : matchState.bluePlayers;
-        const chars = d.team === 'RED' ? redPullers3D : bluePullers3D;
+        pObj.freeze++;
+        const pList = pObj.team === 'RED' ? matchState.redPlayers : matchState.bluePlayers;
+        const chars = pObj.team === 'RED' ? redPullers3D : bluePullers3D;
         const idx = pList.findIndex(x => x.id === d.playerId);
-        if (idx !== -1) {
-          pList[idx].freeze++;
-          if (chars[idx]) {
-            chars[idx].userData.ice.visible = true;
-            setTimeout(() => { if (chars[idx]) chars[idx].userData.ice.visible = false; }, 3000);
-          }
+        if (idx !== -1 && chars[idx]) {
+          chars[idx].userData.ice.visible = true;
+          setTimeout(() => { if (chars[idx]) chars[idx].userData.ice.visible = false; }, 3000);
         }
       }
 
@@ -1200,7 +1277,7 @@
       matchState.bluePlayers.forEach(p => p.ready = true);
       rebuildAll3DCharacters();
       updateHostHUD();
-      sendCloudMessage({ type: 'FORCE_ALL_READY_ROPE', quiz: quizList });
+      sendCloudMessage({ type: 'FORCE_ALL_READY_ROPE' });
     }
 
     function spawnFloatingCheer(emoji) {
@@ -1216,8 +1293,8 @@
     function updateHostHUD() {
       const redReady = matchState.redPlayers.filter(x => x.ready).length;
       const blueReady = matchState.bluePlayers.filter(x => x.ready).length;
-      document.getElementById('hud-red-count').innerText = `ĐỘI ĐỎ: ${matchState.redPlayers.length} HS (${redReady} vào dây)`;
-      document.getElementById('hud-blue-count').innerText = `ĐỘI XANH: ${matchState.bluePlayers.length} HS (${blueReady} vào dây)`;
+      document.getElementById('hud-red-count').innerText = `ĐỘI ĐỎ: ${matchState.redPlayers.length} (${redReady} sẵn sàng)`;
+      document.getElementById('hud-blue-count').innerText = `ĐỘI XANH: ${matchState.bluePlayers.length} (${blueReady} sẵn sàng)`;
       document.getElementById('hud-spectators').innerText = `| 👀 Khán giả: ${matchState.spectators}`;
 
       const s = matchState.ropeScore;
@@ -1236,14 +1313,13 @@
       document.getElementById('btn-host-prep').style.display = 'none';
       document.getElementById('btn-host-start').style.display = 'none';
       document.getElementById('btn-host-pause').style.display = 'flex';
-      // Đính kèm luôn bộ câu hỏi trong lệnh BẮT ĐẦU để 100% máy học sinh nhận được câu hỏi
-      sendCloudMessage({ type: 'MATCH_STATE', status: 'PLAYING', quiz: quizList });
+      sendCloudMessage({ type: 'MATCH_STATE', status: 'PLAYING' });
     }
 
     function pauseMatch() {
       matchState.status = matchState.status === 'PLAYING' ? 'PAUSED' : 'PLAYING';
       document.getElementById('btn-host-pause').innerText = matchState.status === 'PLAYING' ? '⏸ TẠM DỪNG' : '▶ TIẾP TỤC';
-      sendCloudMessage({ type: 'MATCH_STATE', status: matchState.status, quiz: quizList });
+      sendCloudMessage({ type: 'MATCH_STATE', status: matchState.status });
     }
 
     function endMatchManual() {
@@ -1277,7 +1353,9 @@
     }
 
     function returnToSetup() {
-      if (mqttClient) { mqttClient.end(); mqttClient = null; }
+      if (hostHeartbeatTimer) clearInterval(hostHeartbeatTimer);
+      activeClients.forEach(c => { try { c.end(); } catch(e){} });
+      activeClients = [];
       document.getElementById('host-view').style.display = 'none';
       document.getElementById('teacher-view').style.display = 'flex';
     }
@@ -1298,37 +1376,42 @@
     }
 
     /* =========================================================================
-       7. LOGIC ĐIỆN THOẠI HỌC SINH (ĐẢM BẢO 100% HIỆN NHÂN VẬT & CÓ CÂU HỎI)
+       7. LOGIC ĐIỆN THOẠI HỌC SINH (BẢO ĐẢM 100% CÓ CÂU HỎI & HIỆN NHÂN VẬT)
        ========================================================================= */
-    let myPlayerId = 'hs_' + Math.random().toString(36).substr(2, 7);
+    let myPlayerId = 'hs_' + Math.random().toString(36).substr(2, 6);
     let selectedTeam = 'RED';
     let myRole = 'PULLER';
-    let myLabel = 'HS';
+    let myLabel = 'Chiến Binh';
     let myQuiz = [];
     let qCursor = 0;
     let isFrozenMobile = false;
     let hasConfirmedEnter = false;
-    let joinRetryTimer = null;
 
-    function initMobilePlayer(roomParam, teamParam) {
+    function initMobilePlayer(roomParam, teamParam, subjParam) {
       document.getElementById('teacher-view').style.display = 'none';
       document.getElementById('mobile-view').style.display = 'flex';
 
       selectedTeam = teamParam || 'RED';
+      // Nạp ngay bộ câu hỏi đúng theo môn học nhúng trong mã QR (BIO, AGRI hoặc BOTH)
+      myQuiz = getPresetQuizBySubject(subjParam || 'BOTH');
 
-      // Khởi tạo sẵn ngân hàng 20 câu hỏi mặc định ngay trên điện thoại để không bao giờ bị trống câu hỏi
-      myQuiz = parseHTMLToQuiz(QUESTIONS_BIO + '<br>' + QUESTIONS_AGRI);
+      const teamColor = selectedTeam === 'RED' ? '#f87171' : '#38bdf8';
+      const teamName = selectedTeam === 'RED' ? 'ĐỘI ĐỎ 🔴' : 'ĐỘI XANH 🔵';
+      document.getElementById('assigned-info').innerHTML = `
+        Chiến tuyến đã chọn: <b style="color:${teamColor}; font-size:18px;">${teamName}</b><br>
+        <span style="font-size:13px; color:#fef08a;">Đã nạp sẵn ${myQuiz.length} câu hỏi thi đấu!</span>
+      `;
 
       const roomId = roomParam || 'default_room';
-      connectCloudBus(roomId, handleMobileIncomingData, () => {
+      connectMultiCloud(roomId, handleMobileIncomingData, () => {
         document.getElementById('conn-badge').innerText = '🟢 Đã kết nối máy chiếu!';
-        // Gửi ngay yêu cầu xuất hiện nhân vật và tự động lặp lại mỗi 1.8 giây nếu máy chiếu chưa trả lời
         sendEnterRequest();
-        joinRetryTimer = setInterval(() => {
-          if (!hasConfirmedEnter) sendEnterRequest();
-          else clearInterval(joinRetryTimer);
-        }, 1800);
       });
+
+      // Tự động phát tín hiệu điểm danh định kỳ để chắc chắn hiện nhân vật trên máy chiếu
+      setInterval(() => {
+        if (!hasConfirmedEnter) sendEnterRequest();
+      }, 1500);
     }
 
     function sendEnterRequest() {
@@ -1336,12 +1419,26 @@
     }
 
     function requestSwitchTeam(newTeam) {
+      selectedTeam = newTeam;
+      const teamColor = selectedTeam === 'RED' ? '#f87171' : '#38bdf8';
+      const teamName = selectedTeam === 'RED' ? 'ĐỘI ĐỎ 🔴' : 'ĐỘI XANH 🔵';
+      document.getElementById('assigned-info').innerHTML = `
+        Đã đổi sang: <b style="color:${teamColor}; font-size:18px;">${teamName}</b><br>
+        <span style="font-size:13px; color:#a7f3d0;">Nhấn nút dưới để vào dây hoặc làm bài!</span>
+      `;
       sendCloudMessage({ type: 'SWITCH_TEAM', playerId: myPlayerId, newTeam });
     }
 
     function confirmReadyRope() {
-      sendCloudMessage({ type: 'PLAYER_READY_ROPE', playerId: myPlayerId });
+      sendCloudMessage({ type: 'PLAYER_READY_ROPE', playerId: myPlayerId, preferredTeam: selectedTeam });
       moveToReadyScreen();
+    }
+
+    // Nút mở thẳng câu hỏi ngay lập tức không cần chờ
+    function forceStartQuizNow() {
+      sendCloudMessage({ type: 'PLAYER_READY_ROPE', playerId: myPlayerId, preferredTeam: selectedTeam });
+      moveToReadyScreen();
+      activateMobileQuiz();
     }
 
     function moveToReadyScreen() {
@@ -1367,14 +1464,12 @@
         selectedTeam = d.team;
         myRole = d.role;
         myLabel = d.label;
-        if (d.quiz && d.quiz.length) myQuiz = d.quiz;
 
         const teamColor = selectedTeam === 'RED' ? '#f87171' : '#38bdf8';
         const teamName = selectedTeam === 'RED' ? 'ĐỘI ĐỎ 🔴' : 'ĐỘI XANH 🔵';
         document.getElementById('assigned-info').innerHTML = `
-          Số báo danh của em: <b style="color:#fef08a; font-size:19px;">${myLabel}</b><br>
-          Chiến tuyến: <b style="color:${teamColor}">${teamName}</b><br>
-          <span style="font-size:13px; color:#a7f3d0;">✅ Nhân vật đã xuất hiện trên màn hình chính!</span>
+          Số báo danh: <b style="color:#fef08a; font-size:19px;">${myLabel}</b> | <b style="color:${teamColor}">${teamName}</b><br>
+          <span style="font-size:13px; color:#a7f3d0;">✅ Nhân vật của em đã hiện trên màn hình chiếu!</span>
         `;
 
         if (d.matchStatus === 'PLAYING') {
@@ -1382,12 +1477,18 @@
           activateMobileQuiz();
         }
       }
+      else if (d.type === 'HOST_HEARTBEAT') {
+        document.getElementById('m-rope-stat').innerText = `Dây: ${d.ropeScore}`;
+        if (!hasConfirmedEnter) sendEnterRequest();
+        if (d.status === 'PLAYING') {
+          moveToReadyScreen();
+          activateMobileQuiz();
+        }
+      }
       else if (d.type === 'FORCE_ALL_READY_ROPE') {
-        if (d.quiz && d.quiz.length) myQuiz = d.quiz;
         moveToReadyScreen();
       }
       else if (d.type === 'MATCH_STATE') {
-        if (d.quiz && d.quiz.length) myQuiz = d.quiz;
         if (d.status === 'PLAYING') {
           moveToReadyScreen();
           activateMobileQuiz();
@@ -1414,7 +1515,7 @@
 
     function renderCurrentMobileQuestion() {
       if (!myQuiz || !myQuiz.length) {
-        myQuiz = parseHTMLToQuiz(QUESTIONS_BIO + '<br>' + QUESTIONS_AGRI);
+        myQuiz = getPresetQuizBySubject('BOTH');
       }
       const cur = myQuiz[qCursor % myQuiz.length];
       document.getElementById('m-q-text').innerText = cur.q;
@@ -1478,7 +1579,7 @@
     window.addEventListener('DOMContentLoaded', () => {
       const p = new URLSearchParams(window.location.search);
       if (p.get('role') === 'player') {
-        initMobilePlayer(p.get('room'), p.get('team'));
+        initMobilePlayer(p.get('room'), p.get('team'), p.get('subj'));
       } else {
         loadSubjectPreset('BOTH');
       }
