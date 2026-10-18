@@ -2129,3 +2129,109 @@
     }
   });
 })();
+/* =========================================================================
+   BẢN FIX TRIỆT ĐỂ: NHẬN DIỆN ĐÚNG/SAI 4 Ý, TRẢ LỜI NGẮN & CHỐNG TRÀN CHỮ
+   ========================================================================= */
+(function fixAdvancedQuestionTypesAndLayout() {
+  // 1. Tối ưu CSS triệt để chống tràn chữ, xuống dòng chuẩn, đưa thanh thời gian xuống đáy
+  const styleFixAll = document.createElement('style');
+  styleFixAll.innerHTML = `
+    #host-question-board {
+      height: auto !important;
+      min-height: 290px !important;
+      max-height: 58vh !important;
+      overflow-y: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      padding-bottom: 12px !important;
+    }
+    .hq-title {
+      font-size: clamp(15px, 1.7vw, 22px) !important;
+      line-height: 1.38 !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      white-space: normal !important;
+      max-height: none !important;
+      overflow-y: visible !important;
+      padding: 8px 14px !important;
+      margin-bottom: 6px !important;
+      flex: 0 1 auto !important;
+    }
+    .hq-opts {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 8px !important;
+      flex: 1 1 auto !important;
+    }
+    .hq-opt-item {
+      font-size: clamp(13.5px, 1.4vw, 18px) !important;
+      line-height: 1.3 !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      white-space: normal !important;
+      height: auto !important;
+      min-height: 48px !important;
+      padding: 8px 12px !important;
+    }
+    /* Đưa thanh thời gian 30s xuống dưới cùng chân khung câu hỏi */
+    #uni-timer-bar-wrap {
+      order: 100 !important;
+      margin-top: 6px !important;
+      margin-bottom: 0 !important;
+      flex-shrink: 0 !important;
+    }
+  `;
+  document.head.appendChild(styleFixAll);
+
+  // Đưa thanh thời gian xuống đáy Host Board nếu tồn tại
+  const qBoard = document.getElementById('host-question-board');
+  const timerWrap = document.getElementById('uni-timer-bar-wrap');
+  if (qBoard && timerWrap) {
+    qBoard.appendChild(timerWrap);
+  }
+
+  // 2. Mở rộng bộ phân tích cú pháp để nhận diện câu hỏi Đúng/Sai 4 ý và Trả lời ngắn
+  window.parseHTMLToQuiz = function(htmlString) {
+    const lines = htmlString.split(/<br\s*[\/]?>|<\/div>|<\/p>/i);
+    const parsed = [];
+    lines.forEach(l => {
+      const clean = l.replace(/<div>|<p>/gi, '').trim();
+      if (clean) {
+        const w = document.createElement('div');
+        w.innerHTML = clean;
+        const isU = w.querySelector('u') !== null || /text-decoration:\s*underline/i.test(clean);
+        parsed.push({ text: w.textContent.trim(), isU });
+      }
+    });
+
+    const res = [];
+    let cur = null;
+    parsed.forEach((p) => {
+      const qM = p.text.match(/^(?:Câu\s*\d+[:.]?|\d+[.:])\s*(.*)/i);
+      const optM = p.text.match(/^([A-Da-d])[.:\)]\s*(.*)/);
+      const trueFalseM = p.text.match(/^([a-d])[.:\)]\s*(.*)/i); // Nhận diện ý a, b, c, d cho Đúng/Sai
+
+      if (qM && !optM && !trueFalseM) {
+        if (cur) res.push(cur);
+        cur = { qid: res.length, q: p.text, opts: [], correct: -1, rightCount: 0, wrongCount: 0 };
+      } else if ((optM || trueFalseM) && cur) {
+        const matchItem = optM || trueFalseM;
+        const oIdx = cur.opts.length;
+        const cleanOpt = matchItem[2].replace(/\s*\(đúng\)\s*|\s*✓\s*|\s*✔\s*/gi, '').trim();
+        cur.opts.push(cleanOpt);
+        if ((p.isU || /(\(đúng\)|✓|✔)/i.test(matchItem[2])) && cur.correct === -1) {
+          cur.correct = oIdx;
+        }
+      }
+    });
+    if (cur) res.push(cur);
+
+    return res.filter(item => item.opts.length >= 2).map(item => {
+      if (item.correct === -1) {
+        item.correct = 0; // Mặc định nếu không gạch chân
+      }
+      return item;
+    });
+  };
+})();
