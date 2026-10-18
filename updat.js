@@ -1741,3 +1741,169 @@
     injectRescueButtonsUI();
   }
 })();
+/* =========================================================================
+   BỘ ĐẾM NGƯỢC 30 GIÂY TỰ ĐỘNG (AUTO-SKIP TIMER) CHO TẤT CẢ THỂ LOẠI
+   ========================================================================= */
+(function initUniversal30sTimer() {
+  const UNIVERSAL_Q_DURATION_SEC = 30.0;
+  window.universalHostTimer = null;
+  window.universalQuestionStartMs = 0;
+  window.universalRemainingSec = UNIVERSAL_Q_DURATION_SEC;
+  window.universalTransitioning = false;
+
+  // 1. Tiêm giao diện thanh đếm ngược vào khung câu hỏi giáo viên nếu chưa có
+  const qBoard = document.getElementById('host-question-board');
+  if (qBoard && !document.getElementById('uni-timer-bar-wrap')) {
+    const timerWrap = document.createElement('div');
+    timerWrap.id = 'uni-timer-bar-wrap';
+    timerWrap.style.cssText = 'order:0; width:100%; height:26px; background:#090d16; border:2px solid #475569; border-radius:13px; margin-bottom:6px; position:relative; overflow:hidden; box-shadow:inset 0 2px 6px rgba(0,0,0,0.8); flex-shrink:0;';
+    timerWrap.innerHTML = `
+      <div id="uni-timer-fill" style="height:100%; width:100%; background:linear-gradient(90deg, #10b981, #34d399); transition:width 0.1s linear, background 0.3s ease;"></div>
+      <div id="uni-timer-text" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:900; color:#ffffff; text-shadow:0 1px 3px #000000;">⏱️ THỜI GIAN TRẢ LỜI: 30.0 GIÂY</div>
+    `;
+    qBoard.insertBefore(timerWrap, qBoard.firstChild);
+  }
+
+  // 2. Tiêm thanh đếm ngược vào màn hình điện thoại học sinh
+  const mobileQuizBox = document.getElementById('active-quiz-container');
+  if (mobileQuizBox && !document.getElementById('uni-mobile-timer-wrap')) {
+    const mTimer = document.createElement('div');
+    mTimer.id = 'uni-mobile-timer-wrap';
+    mTimer.style.cssText = 'width:100%; height:22px; background:#0f172a; border:1.5px solid #475569; border-radius:11px; margin:4px 0; position:relative; overflow:hidden; flex-shrink:0;';
+    mTimer.innerHTML = `
+      <div id="uni-mobile-timer-fill" style="height:100%; width:100%; background:linear-gradient(90deg, #10b981, #34d399); transition:width 0.1s linear;"></div>
+      <div id="uni-mobile-timer-txt" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:900; color:#fff; text-shadow:0 1px 2px #000;">⏱️ 30.0s</div>
+    `;
+    mobileQuizBox.insertBefore(mTimer, mobileQuizBox.firstChild);
+  }
+
+  // 3. Hàm bắt đầu đếm ngược cho Host
+  window.startUniversalQuestionTimer = function() {
+    if (window.universalHostTimer) {
+      clearInterval(window.universalHostTimer);
+      window.universalHostTimer = null;
+    }
+    const barWrap = document.getElementById('uni-timer-bar-wrap');
+    if (typeof matchState === 'undefined' || matchState.status !== 'PLAYING') {
+      if (barWrap) barWrap.style.display = 'none';
+      return;
+    }
+
+    if (barWrap) barWrap.style.display = 'block';
+    window.universalQuestionStartMs = Date.now();
+    window.universalRemainingSec = UNIVERSAL_Q_DURATION_SEC;
+    window.universalTransitioning = false;
+
+    // Gửi thông báo bắt đầu câu hỏi kèm thời gian 30s xuống tất cả thiết bị học sinh
+    if (typeof sendCloudMessage === 'function') {
+      sendCloudMessage({
+        type: 'UNIV_QUESTION_START',
+        globalQIndex: matchState.globalQIndex,
+        durationSec: UNIVERSAL_Q_DURATION_SEC,
+        serverStartTime: window.universalQuestionStartMs
+      });
+    }
+
+    const fillEl = document.getElementById('uni-timer-fill');
+    const txtEl = document.getElementById('uni-timer-text');
+
+    window.universalHostTimer = setInterval(() => {
+      if (matchState.status !== 'PLAYING') return;
+
+      const elapsed = (Date.now() - window.universalQuestionStartMs) / 1000;
+      const rem = Math.max(0, UNIVERSAL_Q_DURATION_SEC - elapsed);
+      window.universalRemainingSec = rem;
+      const pct = (rem / UNIVERSAL_Q_DURATION_SEC) * 100;
+
+      if (fillEl) {
+        fillEl.style.width = `${pct}%`;
+        fillEl.style.background = rem > 10 ? 'linear-gradient(90deg, #10b981, #34d399)' : (rem > 5 ? 'linear-gradient(90deg, #f59e0b, #fbbf24)' : 'linear-gradient(90deg, #ef4444, #f87171)');
+      }
+
+      if (txtEl) {
+        txtEl.innerText = rem > 0
+          ? `⏱️ THỜI GIAN CÒN LẠI: ${rem.toFixed(1)} GIÂY • Hết giờ tự động chuyển câu!`
+          : `⌛ HẾT 30 GIÂY! Tự động tính sai cho các bạn chưa trả lời và chuyển câu...`;
+      }
+
+      // Khi hết 30s: Tự động xử lý những học sinh chưa trả lời là sai và chuyển câu
+      if (rem <= 0 && !window.universalTransitioning) {
+        window.universalTransitioning = true;
+        clearInterval(window.universalHostTimer);
+        handleUniversalTimeoutAutoAdvance();
+      }
+    }, 100);
+  };
+
+  function handleUniversalTimeoutAutoAdvance() {
+    if (typeof matchState === 'undefined' || matchState.status !== 'PLAYING') return;
+
+    // Đánh dấu các học sinh chưa trả lời trong câu này là bỏ lỡ / tính sai
+    const allP = [...matchState.redPlayers, ...matchState.bluePlayers];
+    allP.forEach(p => {
+      const answered = matchState.redAnsweredIds.includes(p.id) || matchState.blueAnsweredIds.includes(p.id);
+      if (!answered && !p.eliminated) {
+        if (p.team === 'RED') matchState.redAnsweredIds.push(p.id);
+        else matchState.blueAnsweredIds.push(p.id);
+
+        if (matchState.gameType === 'BELL') {
+          p.wrongTotal = (p.wrongTotal || 0) + 1;
+          p.streak = 0;
+          p.lives = Math.max(0, (p.lives || 3) - 1);
+          if (p.lives <= 0) p.eliminated = true;
+        }
+      }
+    });
+
+    // Chuyển sang câu hỏi tiếp theo
+    if (matchState.globalQIndex + 1 >= (typeof quizList !== 'undefined' ? quizList.length : 1)) {
+      setTimeout(() => {
+        if (matchState.status === 'PLAYING' && typeof window.endMatchManual === 'function') {
+          window.endMatchManual();
+        }
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        if (matchState.status === 'PLAYING') {
+          matchState.globalQIndex++;
+          matchState.redAnsweredIds = [];
+          matchState.blueAnsweredIds = [];
+          if (typeof update3DLabelsStatusOnly === 'function') update3DLabelsStatusOnly();
+          if (typeof updateHostHUD === 'function') updateHostHUD();
+          if (typeof renderHostQuestionShowcase === 'function') renderHostQuestionShowcase();
+          if (typeof broadcastTeamSyncState === 'function') broadcastTeamSyncState();
+          window.startUniversalQuestionTimer();
+        }
+      }, 1200);
+    }
+  }
+
+  // Móc nối vào các sự kiện bắt đầu trận đấu hoặc chuyển câu gốc
+  const origStartMatchUni = window.startMatch;
+  if (typeof origStartMatchUni === 'function') {
+    window.startMatch = function() {
+      origStartMatchUni();
+      window.startUniversalQuestionTimer();
+    };
+  }
+
+  const origForceAdvanceUni = window.forceAdvanceGlobalQuestion;
+  if (typeof origForceAdvanceUni === 'function') {
+    window.forceAdvanceGlobalQuestion = function() {
+      origForceAdvanceUni();
+      if (matchState.status === 'PLAYING') {
+        window.startUniversalQuestionTimer();
+      }
+    };
+  }
+
+  const origStepHostQUni = window.stepHostQuestion;
+  if (typeof origStepHostQUni === 'function') {
+    window.stepHostQuestion = function(delta) {
+      origStepHostQUni(delta);
+      if (!window.isReviewAnswersMode && matchState.status === 'PLAYING') {
+        window.startUniversalQuestionTimer();
+      }
+    };
+  }
+})();
