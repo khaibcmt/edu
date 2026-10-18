@@ -24,200 +24,263 @@
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; font-family: 'Nunito', system-ui, sans-serif; }
     body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: var(--bg-dark); color: #fff; touch-action: manipulation; }
 
-    /* THANH THƯƠNG HIỆU, LOGO & TÁC GIẢ */
+    /* ========================================================
+       THANH THƯƠNG HIỆU, LOGO & TÁC GIẢ TRÊN CÙNG
+       ======================================================== */
     #top-author-banner {
-      position: fixed; top: 0; left: 0; right: 0; min-height: 48px;
+      position: fixed; top: 0; left: 0; right: 0; height: 44px;
       background: linear-gradient(90deg, #090d16 0%, #1e1b4b 50%, #090d16 100%);
-      border-bottom: 2.5px solid var(--gold); z-index: 500;
+      border-bottom: 2px solid var(--gold); z-index: 500;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 4px 14px; box-shadow: 0 4px 18px rgba(0,0,0,0.55); flex-wrap: wrap; gap: 6px;
+      padding: 0 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     }
     .brand-left { display: flex; align-items: center; gap: 8px; }
-    .game-logo-svg { width: 34px; height: 34px; flex-shrink: 0; filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.6)); }
-    .brand-title { color: #ffffff; font-size: 15.5px; font-weight: 900; letter-spacing: 0.4px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
-    .author-right { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .game-logo-svg { width: 30px; height: 30px; flex-shrink: 0; filter: drop-shadow(0 2px 5px rgba(245, 158, 11, 0.6)); }
+    .brand-title { color: #ffffff; font-size: 15px; font-weight: 900; letter-spacing: 0.3px; white-space: nowrap; }
+    .author-right { display: flex; align-items: center; gap: 6px; }
     .author-badge {
-      background: linear-gradient(135deg, #fef08a, #f59e0b); color: #0f172a; padding: 3px 11px;
-      border-radius: 20px; font-size: 12.5px; font-weight: 900; box-shadow: 0 2px 8px rgba(245,158,11,0.4); white-space: nowrap;
+      background: linear-gradient(135deg, #fef08a, #f59e0b); color: #0f172a; padding: 3px 10px;
+      border-radius: 16px; font-size: 12px; font-weight: 900; white-space: nowrap;
     }
     .school-badge {
-      background: linear-gradient(135deg, #10b981, #047857); color: #ffffff; padding: 3px 11px;
-      border-radius: 20px; font-size: 12.5px; font-weight: 900; border: 1px solid #6ee7b7; box-shadow: 0 2px 8px rgba(16,185,129,0.4); white-space: nowrap;
+      background: linear-gradient(135deg, #10b981, #047857); color: #ffffff; padding: 3px 10px;
+      border-radius: 16px; font-size: 12px; font-weight: 900; border: 1px solid #6ee7b7; white-space: nowrap;
     }
+    .btn-fullscreen-top {
+      background: #334155; color: #fef08a; border: 1.5px solid #94a3b8;
+      padding: 4px 10px; border-radius: 14px; font-size: 12px; font-weight: 900; cursor: pointer; white-space: nowrap;
+    }
+    .btn-fullscreen-top:hover { background: #475569; border-color: #fff; }
+
     @media (max-width: 640px) {
-      #top-author-banner { justify-content: center; padding: 4px 8px; min-height: 56px; }
-      .brand-title { font-size: 13.5px; }
-      .game-logo-svg { width: 26px; height: 26px; }
-      .author-badge, .school-badge { font-size: 11px; padding: 2px 8px; }
+      #top-author-banner { height: 50px; padding: 2px 6px; flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .brand-title { font-size: 12.5px; }
+      .game-logo-svg { width: 22px; height: 22px; }
+      .author-badge, .school-badge { font-size: 10.5px; padding: 2px 7px; }
+      .btn-fullscreen-top { font-size: 10.5px; padding: 2px 7px; }
     }
 
-    /* 1. GIAO DIỆN QUẢN LÝ CỦA GIÁO VIÊN */
+    /* ========================================================
+       1. GIAO DIỆN QUẢN LÝ CỦA GIÁO VIÊN
+       ======================================================== */
     #teacher-view {
-      position: absolute; top: 48px; left: 0; right: 0; bottom: 0; z-index: 50;
-      background: #f1f5f9; color: #0f172a; overflow-y: auto; padding: 16px;
+      position: absolute; top: 44px; left: 0; right: 0; bottom: 0; z-index: 50;
+      background: #f1f5f9; color: #0f172a; overflow-y: auto; padding: 14px;
       display: flex; flex-direction: column; align-items: center;
     }
-    .setup-box { width: 100%; max-width: 1060px; background: white; padding: 20px 24px; border-radius: 20px; box-shadow: 0 12px 35px rgba(0,0,0,0.08); border: 1px solid #cbd5e1; }
+    .setup-box { width: 100%; max-width: 1060px; background: white; padding: 18px 22px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #cbd5e1; }
     .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-    .subject-manager { margin: 10px 0; padding: 12px; background: #f8fafc; border-radius: 14px; border: 2px solid #e2e8f0; }
-    .subject-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; align-items: center; }
-    .btn-subj { padding: 8px 14px; border-radius: 10px; border: 2px solid transparent; font-weight: 900; font-size: 13px; cursor: pointer; color: white; transition: all 0.15s; display: flex; align-items: center; gap: 6px; }
-    .btn-subj.active-subj { border-color: #0f172a; transform: scale(1.04); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    .btn-action-sm { padding: 7px 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 12.5px; color: #1e293b; transition: 0.15s; }
-    .btn-action-sm:hover { background: #e2e8f0; transform: translateY(-1px); }
-    #editor { min-height: 155px; max-height: 215px; overflow-y: auto; border: 2px solid #cbd5e1; border-radius: 12px; padding: 14px; font-size: 15px; line-height: 1.55; outline: none; background: #fff; margin: 8px 0; }
+    .subject-manager { margin: 8px 0; padding: 10px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0; }
+    .subject-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; align-items: center; }
+    .btn-subj { padding: 7px 13px; border-radius: 9px; border: 2px solid transparent; font-weight: 900; font-size: 12.5px; cursor: pointer; color: white; transition: all 0.15s; }
+    .btn-subj.active-subj { border-color: #0f172a; transform: scale(1.03); box-shadow: 0 4px 10px rgba(0,0,0,0.18); }
+    .btn-action-sm { padding: 6px 11px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 12px; color: #1e293b; }
+    .btn-action-sm:hover { background: #e2e8f0; }
+    #editor { min-height: 150px; max-height: 210px; overflow-y: auto; border: 2px solid #cbd5e1; border-radius: 10px; padding: 12px; font-size: 14.5px; line-height: 1.5; outline: none; background: #fff; margin: 6px 0; }
     #editor u { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; font-weight: 900; color: var(--red); }
-    .config-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 14px; margin: 10px 0; }
-    .cfg-card { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 14px; padding: 12px 16px; }
-    .mode-option { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-weight: 800; cursor: pointer; font-size: 13.5px; }
+    .config-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 12px; margin: 8px 0; }
+    .cfg-card { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px; padding: 10px 14px; }
+    .mode-option { display: flex; align-items: center; gap: 8px; margin: 5px 0; font-weight: 800; cursor: pointer; font-size: 13px; }
     .qty-control { display: flex; align-items: center; justify-content: space-around; margin-top: 6px; }
-    .step-btn { width: 34px; height: 34px; border-radius: 8px; border: none; font-size: 18px; font-weight: 900; color: white; cursor: pointer; background: var(--blue); }
-    .btn-launch { background: linear-gradient(135deg, #0284c7, #1d4ed8); color: white; border: none; padding: 13px 30px; font-size: 16px; font-weight: 900; border-radius: 14px; cursor: pointer; box-shadow: 0 6px 20px rgba(2,132,199,0.35); }
+    .step-btn { width: 32px; height: 32px; border-radius: 8px; border: none; font-size: 18px; font-weight: 900; color: white; cursor: pointer; background: var(--blue); }
+    .btn-launch { background: linear-gradient(135deg, #0284c7, #1d4ed8); color: white; border: none; padding: 12px 26px; font-size: 15.5px; font-weight: 900; border-radius: 12px; cursor: pointer; box-shadow: 0 5px 16px rgba(2,132,199,0.35); }
 
-    /* 2. MÀN HÌNH SÂN ĐẤU 3D (HOST) */
-    #host-view { position: absolute; top: 48px; left: 0; right: 0; bottom: 0; display: none; }
-    #canvas3d { width: 100%; height: 100%; display: block; }
-    .host-controls {
-      position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.95); border: 2px solid #334155; backdrop-filter: blur(10px);
-      padding: 5px 12px; border-radius: 40px; display: flex; align-items: center; gap: 5px; z-index: 35;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.45); white-space: nowrap; flex-wrap: wrap; justify-content: center; width: 96%; max-width: 1200px;
+    /* ========================================================
+       2. MÀN HÌNH SÂN ĐẤU 3D CHIA TẦNG RÕ RÀNG (KHÔNG BAO GIỜ CHE LẤP)
+       ======================================================== */
+    #host-view {
+      position: absolute; top: 44px; left: 0; right: 0; bottom: 0;
+      display: none; flex-direction: column; justify-content: space-between; overflow: hidden;
     }
-    .c-btn { padding: 6px 11px; border-radius: 20px; border: none; font-weight: 900; font-size: 11.5px; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+
+    /* TẦNG 1: Thanh công cụ + Tỉ số 2 đội (Không đè lên sân 3D) */
+    #host-top-header {
+      background: rgba(11, 17, 32, 0.98); border-bottom: 2px solid #334155;
+      padding: 6px 14px; z-index: 40; display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;
+    }
+    .host-controls-row {
+      display: flex; justify-content: center; align-items: center; gap: 6px; flex-wrap: wrap;
+    }
+    .c-btn {
+      padding: 5px 12px; border-radius: 16px; border: none; font-weight: 900;
+      font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: 0.15s;
+    }
+    .c-btn:hover { transform: scale(1.04); }
     .c-prep { background: var(--purple); color: white; }
     .c-start { background: var(--green); color: white; }
     .c-pause { background: var(--gold); color: #000; }
     .c-end { background: var(--red); color: white; }
     .c-home { background: #475569; color: white; }
-    .voice-select-box {
-      background: #1e293b; color: #fef08a; border: 1.5px solid #ec4899; border-radius: 16px;
-      padding: 4px 8px; font-size: 11.5px; font-weight: 800; outline: none; cursor: pointer; max-width: 170px;
+
+    /* Dải hiển thị Tên Đội Đỏ - Tỉ số Hiệp - Tên Đội Xanh độc lập 100% */
+    .hud-teams-row {
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
     }
+    .team-box {
+      padding: 6px 16px; border-radius: 14px; font-size: 15px; font-weight: 900;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .team-box.red { background: linear-gradient(135deg, var(--red), var(--red-dark)); border: 2.5px solid var(--red-glow); }
+    .team-box.blue { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border: 2.5px solid var(--blue-glow); }
+    .round-stars { background: rgba(0,0,0,0.35); padding: 2px 10px; border-radius: 10px; font-size: 13px; color: #fef08a; }
 
-    .hud-row { position: absolute; top: 52px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: center; pointer-events: none; z-index: 25; }
-    .team-box { padding: 8px 16px; border-radius: 24px; font-size: 14px; font-weight: 900; box-shadow: 0 8px 20px rgba(0,0,0,0.45); pointer-events: auto; display: flex; align-items: center; gap: 8px; }
-    .team-box.red { background: linear-gradient(135deg, var(--red), var(--red-dark)); border: 3px solid var(--red-glow); }
-    .team-box.blue { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border: 3px solid var(--blue-glow); }
-    .round-stars { background: rgba(0,0,0,0.35); padding: 3px 10px; border-radius: 14px; font-size: 13px; color: #fef08a; }
-    .center-round-hud { background: rgba(15, 23, 42, 0.94); border: 2.5px solid var(--gold); padding: 6px 20px; border-radius: 26px; font-size: 14px; font-weight: 900; display: flex; flex-direction: column; align-items: center; pointer-events: auto; box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
-    .round-badge-top { color: #38bdf8; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .tug-score-live { color: #fef08a; font-size: 16px; margin-top: 2px; }
+    .center-round-hud {
+      background: #0f172a; border: 2px solid var(--gold);
+      padding: 4px 18px; border-radius: 16px; text-align: center;
+    }
+    .round-badge-top { color: #38bdf8; font-size: 12px; font-weight: 900; text-transform: uppercase; }
+    .tug-score-live { color: #fef08a; font-size: 14.5px; font-weight: 900; }
 
-    /* HỘP MÃ QR SIÊU NÉT, CÓ VIỀN TRẮNG CHUẨN & BẤM ĐỂ PHÓNG TO */
+    /* TẦNG 2: VÙNG SÂN ĐẤU KÉO CO 3D Ở GIỮA (HIỂN THỊ TRỌN VẸN KHÔNG BỊ CHE) */
+    #arena-3d-viewport {
+      position: relative; width: 100%; flex: 1 1 auto; min-height: 210px; overflow: hidden;
+    }
+    #canvas3d { width: 100%; height: 100%; display: block; }
+    #labels-container, #cheer-container { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 10; }
+    .tag-3d {
+      position: absolute; transform: translate(-50%, -100%);
+      background: rgba(15, 23, 42, 0.92); color: #fff; padding: 2px 8px;
+      border-radius: 9px; font-size: 11.5px; font-weight: 900; border: 2px solid;
+      white-space: nowrap; box-shadow: 0 3px 8px rgba(0,0,0,0.45);
+    }
+    .tag-3d.ready { background: rgba(16, 185, 129, 0.95); border-color: #fef08a !important; }
+    .tag-3d.done-q { background: rgba(245, 158, 11, 0.95); border-color: #ffffff !important; color: #000; }
+    .floating-cheer { position: absolute; bottom: 20px; font-size: 32px; animation: floatUp 2s ease-out forwards; }
+    @keyframes floatUp { 0% { transform: translateY(0) scale(0.8); opacity: 1; } 100% { transform: translateY(-240px) scale(1.4); opacity: 0; } }
+
+    /* Hộp Mã QR ở 2 bên sân (Tự động ẩn đi khi bấm Chuẩn bị / Bắt đầu thi đấu) */
     .qr-panel {
-      position: absolute; top: 106px; padding: 12px; border-radius: 18px;
-      background: #ffffff; box-shadow: 0 12px 35px rgba(0,0,0,0.65);
+      position: absolute; top: 10px; padding: 8px; border-radius: 14px;
+      background: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.65);
       text-align: center; color: #0f172a; z-index: 25; cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, opacity 0.25s;
     }
-    .qr-panel:hover { transform: scale(1.06); box-shadow: 0 15px 45px rgba(255,255,255,0.35); }
-    .qr-panel.left { left: 16px; border: 4px solid var(--red); }
-    .qr-panel.right { right: 16px; border: 4px solid var(--blue); }
-    .qr-box-inner {
-      background: #ffffff; padding: 6px; border-radius: 8px; display: inline-block;
-    }
+    .qr-panel:hover { transform: scale(1.05); }
+    .qr-panel.left { left: 14px; border: 3.5px solid var(--red); }
+    .qr-panel.right { right: 14px; border: 3.5px solid var(--blue); }
+    .qr-box-inner { background: #ffffff; padding: 4px; border-radius: 6px; display: inline-block; }
     .qr-box-inner img, .qr-box-inner canvas { display: block !important; margin: 0 auto !important; image-rendering: pixelated; }
-    .qr-caption { font-weight: 900; font-size: 12px; margin-top: 6px; letter-spacing: 0.3px; }
-    .qr-zoom-hint { font-size: 10.5px; color: #475569; font-weight: 800; margin-top: 2px; }
+    .qr-caption { font-weight: 900; font-size: 11px; margin-top: 4px; }
+    .qr-zoom-hint { font-size: 10px; color: #475569; font-weight: 800; }
 
-    /* MODAL PHÓNG TO MÃ QR KHỔNG LỒ GIỮA MÀN HÌNH ĐỂ HS CUỐI LỚP QUÉT DỄ DÀNG */
-    #qr-zoom-modal {
-      position: fixed; inset: 0; background: rgba(7, 11, 20, 0.92); backdrop-filter: blur(12px);
-      z-index: 600; display: none; align-items: center; justify-content: center; padding: 20px;
-    }
-    .qr-zoom-card {
-      background: #ffffff; color: #0f172a; padding: 28px 36px; border-radius: 28px;
-      text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.8); max-width: 94%;
-      border: 6px solid var(--gold);
-    }
-    #qr-zoom-render {
-      background: #ffffff; padding: 14px; display: inline-block; border-radius: 16px;
-      border: 2px dashed #cbd5e1; margin: 12px 0;
-    }
-    #qr-zoom-render img, #qr-zoom-render canvas { display: block !important; margin: 0 auto !important; image-rendering: pixelated; }
-
-    /* BẢNG CÂU HỎI CHUNG PHÓNG TO Ở DƯỚI MÀN HÌNH */
+    /* TẦNG 3: KHUNG CÂU HỎI DÀN ĐẦY Ở DƯỚI CÙNG (GỌN GÀNG, KHÔNG CHIẾM SÂN 3D) */
     #host-question-board {
-      position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
-      width: 96%; max-width: 1120px; background: rgba(10, 15, 29, 0.96);
-      border: 3.5px solid #38bdf8; border-radius: 22px; padding: 14px 22px;
-      z-index: 30; box-shadow: 0 -10px 40px rgba(0,0,0,0.75); backdrop-filter: blur(12px); display: none; transition: all 0.25s;
+      width: 100%; background: #0b1120; border-top: 3px solid #38bdf8;
+      padding: 8px 16px 10px 16px; z-index: 35; flex-shrink: 0;
+      display: flex; flex-direction: column; gap: 6px;
+      box-shadow: 0 -8px 25px rgba(0,0,0,0.6);
     }
-    #host-question-board.review-active { border-color: var(--gold); background: rgba(9, 14, 23, 0.98); bottom: 14px; }
-    .hq-header { display: flex; justify-content: space-between; align-items: center; font-size: 13.5px; font-weight: 900; color: #38bdf8; margin-bottom: 8px; flex-wrap: wrap; gap: 6px; }
-    .hq-title {
-      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border: 2.5px solid #818cf8; border-radius: 16px;
-      padding: 14px 20px; font-size: 23px; font-weight: 900; color: #fef08a; margin-bottom: 12px; line-height: 1.38;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.6); box-shadow: inset 0 2px 10px rgba(255,255,255,0.1);
+    #host-question-board.review-active {
+      border-top-color: var(--gold); background: #090d16;
     }
-    .hq-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .hq-opt-item {
-      padding: 12px 18px; border-radius: 14px; font-size: 19px; font-weight: 900; color: #ffffff;
+    .hq-header {
       display: flex; justify-content: space-between; align-items: center;
-      border: 2.5px solid rgba(255,255,255,0.35); text-shadow: 0 1px 3px rgba(0,0,0,0.5); box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+      font-size: 12.5px; font-weight: 900; color: #38bdf8; flex-wrap: wrap; gap: 6px;
+    }
+    /* Câu hỏi và 4 đáp án dàn đầy chiều ngang màn hình */
+    .hq-title {
+      width: 100%; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      border: 2px solid #818cf8; border-radius: 12px;
+      padding: 8px 16px; font-size: 20px; font-weight: 900; color: #fef08a;
+      line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    }
+    .hq-opts {
+      width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+    }
+    @media (max-width: 960px) {
+      .hq-opts { grid-template-columns: repeat(2, 1fr); }
+    }
+    .hq-opt-item {
+      padding: 10px 14px; border-radius: 12px; font-size: 17px; font-weight: 900; color: #ffffff;
+      display: flex; justify-content: space-between; align-items: center;
+      border: 2px solid rgba(255,255,255,0.35); text-shadow: 0 1px 3px rgba(0,0,0,0.5);
     }
     .opt-color-0 { background: linear-gradient(135deg, #e11d48, #be123c); border-color: #fda4af; }
     .opt-color-1 { background: linear-gradient(135deg, #0284c7, #0369a1); border-color: #7dd3fc; }
     .opt-color-2 { background: linear-gradient(135deg, #d97706, #b45309); border-color: #fde047; }
     .opt-color-3 { background: linear-gradient(135deg, #7c3aed, #5b21b6); border-color: #c4b5fd; }
 
-    #host-question-board.review-active .hq-opt-item:not(.correct-reveal) { opacity: 0.35; filter: grayscale(50%); }
+    #host-question-board.review-active .hq-opt-item:not(.correct-reveal) { opacity: 0.32; filter: grayscale(55%); }
     .hq-opt-item.correct-reveal {
-      background: linear-gradient(135deg, #059669, #10b981) !important; border-color: #fef08a !important; border-width: 3.5px !important;
-      color: #ffffff !important; transform: scale(1.02); box-shadow: 0 0 25px rgba(16, 185, 129, 0.85) !important;
+      background: linear-gradient(135deg, #059669, #10b981) !important;
+      border: 3px solid #fef08a !important; box-shadow: 0 0 20px rgba(16, 185, 129, 0.85) !important;
     }
-    .hq-nav-btn { background: #1e293b; border: 1.5px solid #64748b; color: #fff; border-radius: 8px; padding: 5px 11px; font-size: 12px; font-weight: 800; cursor: pointer; }
+    .hq-nav-btn {
+      background: #1e293b; border: 1.5px solid #64748b; color: #fff;
+      border-radius: 7px; padding: 3px 10px; font-size: 11.5px; font-weight: 800; cursor: pointer;
+    }
     .hq-nav-btn:hover { background: #334155; }
-    .hq-stats-bar { margin-top: 10px; padding-top: 8px; border-top: 1px dashed #334155; display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 800; color: #cbd5e1; flex-wrap: wrap; gap: 6px; }
 
-    @keyframes pulseVoice {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(236, 72, 153, 0); }
-      50% { transform: scale(1.06); box-shadow: 0 0 16px rgba(236, 72, 153, 0.8); }
+    /* MODAL PHÓNG TO MÃ QR */
+    #qr-zoom-modal {
+      position: fixed; inset: 0; background: rgba(7, 11, 20, 0.92); backdrop-filter: blur(10px);
+      z-index: 600; display: none; align-items: center; justify-content: center; padding: 20px;
     }
-    .speaking-active { animation: pulseVoice 1s infinite; background: linear-gradient(135deg, #ec4899, #be185d) !important; border-color: #fbcfe8 !important; }
+    .qr-zoom-card {
+      background: #ffffff; color: #0f172a; padding: 24px 32px; border-radius: 26px;
+      text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.8); max-width: 94%; border: 5px solid var(--gold);
+    }
+    #qr-zoom-render {
+      background: #ffffff; padding: 12px; display: inline-block; border-radius: 14px;
+      border: 2px dashed #cbd5e1; margin: 10px 0;
+    }
+    #qr-zoom-render img, #qr-zoom-render canvas { display: block !important; margin: 0 auto !important; image-rendering: pixelated; }
 
-    #labels-container, #cheer-container { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 10; }
-    .tag-3d { position: absolute; transform: translate(-50%, -100%); background: rgba(15, 23, 42, 0.92); color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 11.5px; font-weight: 900; border: 2px solid; white-space: nowrap; box-shadow: 0 3px 8px rgba(0,0,0,0.4); }
-    .tag-3d.ready { background: rgba(16, 185, 129, 0.95); border-color: #fef08a !important; }
-    .tag-3d.done-q { background: rgba(245, 158, 11, 0.95); border-color: #ffffff !important; color: #000; }
-    .floating-cheer { position: absolute; bottom: 200px; font-size: 32px; animation: floatUp 2.2s ease-out forwards; }
-    @keyframes floatUp { 0% { transform: translateY(0) scale(0.8); opacity: 1; } 100% { transform: translateY(-320px) scale(1.4); opacity: 0; } }
-
+    /* Modal Chuyển Hiệp & Vinh danh */
     #round-modal, #victory-modal {
-      position: absolute; top: 34%; left: 50%; transform: translate(-50%, -50%);
+      position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);
       background: rgba(15, 23, 42, 0.96); border: 4px solid var(--gold);
-      padding: 22px 34px; border-radius: 26px; text-align: center;
-      display: none; z-index: 120; box-shadow: 0 0 60px rgba(245, 158, 11, 0.65); max-width: 620px; width: 94%;
+      padding: 20px 30px; border-radius: 24px; text-align: center;
+      display: none; z-index: 120; box-shadow: 0 0 60px rgba(245, 158, 11, 0.65); max-width: 600px; width: 92%;
     }
 
-    /* 3. GIAO DIỆN ĐIỆN THOẠI HỌC SINH (CLIENT) */
+    /* ========================================================
+       3. GIAO DIỆN ĐIỆN THOẠI HỌC SINH (CLIENT - DÀN ĐẦY GỌN GÀNG)
+       ======================================================== */
     #mobile-view {
-      position: absolute; top: 56px; left: 0; right: 0; bottom: 0; z-index: 150;
-      background: #090d16; display: none; flex-direction: column; padding: 12px 14px; justify-content: space-between; overflow-y: auto;
+      position: absolute; top: 50px; left: 0; right: 0; bottom: 0; z-index: 150;
+      background: #090d16; display: none; flex-direction: column; padding: 10px 12px; justify-content: space-between; overflow-y: auto;
     }
-    .lobby-card { margin: auto; width: 100%; max-width: 390px; background: #131c2e; border: 2px solid #23334d; border-radius: 22px; padding: 18px; text-align: center; }
-    .name-input-box { width: 100%; padding: 12px 14px; border-radius: 12px; border: 2px solid #38bdf8; background: #090d16; color: #fff; font-size: 16px; font-weight: 800; text-align: center; outline: none; margin: 6px 0; }
-    .team-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
-    .btn-pick-team { padding: 12px 8px; border-radius: 12px; border: 3px solid transparent; font-weight: 900; font-size: 14px; color: white; cursor: pointer; }
+    .lobby-card { margin: auto; width: 100%; max-width: 390px; background: #131c2e; border: 2px solid #23334d; border-radius: 20px; padding: 16px; text-align: center; }
+    .name-input-box { width: 100%; padding: 11px 14px; border-radius: 12px; border: 2px solid #38bdf8; background: #090d16; color: #fff; font-size: 15.5px; font-weight: 800; text-align: center; outline: none; margin: 6px 0; }
+    .team-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 8px 0; }
+    .btn-pick-team { padding: 11px 8px; border-radius: 12px; border: 3px solid transparent; font-weight: 900; font-size: 13.5px; color: white; cursor: pointer; }
     .btn-pick-team.red { background: var(--red-dark); border-color: var(--red-glow); }
     .btn-pick-team.blue { background: var(--blue-dark); border-color: var(--blue-glow); }
-    .m-header { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 12px; background: #162032; font-weight: 900; font-size: 13px; }
-    .q-card { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border: 2.5px solid #818cf8; border-radius: 18px; padding: 16px; margin: 8px 0; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
-    .q-text { font-size: 18px; font-weight: 900; line-height: 1.42; color: #fef08a; }
-    #preview-lock-banner { display: none; background: rgba(245, 158, 11, 0.18); border: 2px dashed var(--gold); color: #fef08a; padding: 10px 12px; border-radius: 12px; margin-bottom: 8px; font-size: 13.5px; font-weight: 900; text-align: center; line-height: 1.35; }
-    .choices-list { display: flex; flex-direction: column; gap: 9px; flex-grow: 1; justify-content: center; }
-    .btn-ans { width: 100%; min-height: 54px; padding: 12px 16px; border-radius: 14px; border: 2.5px solid rgba(255,255,255,0.4); color: #fff; font-size: 16.5px; font-weight: 900; text-align: left; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.35); transition: transform 0.1s, opacity 0.2s; display: flex; justify-content: space-between; align-items: center; }
+    .m-header { display: flex; justify-content: space-between; align-items: center; padding: 7px 12px; border-radius: 10px; background: #162032; font-weight: 900; font-size: 12.5px; flex-shrink: 0; }
+    .q-card {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border: 2px solid #818cf8; border-radius: 14px;
+      padding: 12px 14px; margin: 6px 0; display: flex; flex-direction: column; justify-content: center; flex-shrink: 0;
+    }
+    .q-text { font-size: 17px; font-weight: 900; line-height: 1.38; color: #fef08a; }
+    #preview-lock-banner {
+      display: none; background: rgba(245, 158, 11, 0.18); border: 2px dashed var(--gold);
+      color: #fef08a; padding: 7px 10px; border-radius: 10px; margin-bottom: 6px;
+      font-size: 12.5px; font-weight: 900; text-align: center; line-height: 1.3; flex-shrink: 0;
+    }
+    /* Các đáp án trên điện thoại dàn lưới 2x2 hoặc full-height gọn gàng */
+    .choices-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex-grow: 1; align-content: stretch; }
+    @media (max-width: 420px) {
+      .choices-list { grid-template-columns: 1fr; }
+    }
+    .btn-ans {
+      width: 100%; padding: 12px 14px; border-radius: 12px;
+      border: 2px solid rgba(255,255,255,0.4); color: #fff;
+      font-size: 16px; font-weight: 900; text-align: left; cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.3); display: flex; justify-content: space-between; align-items: center;
+    }
     .btn-ans:active:not(:disabled) { transform: scale(0.97); }
-    .btn-ans.locked-choice { opacity: 0.55; cursor: not-allowed; filter: saturate(65%); }
-    .cheer-bar { display: flex; gap: 8px; margin-top: 8px; justify-content: center; }
-    .btn-cheer { flex: 1; padding: 8px; border-radius: 12px; border: 1px solid #334155; background: #1e293b; color: #fff; font-size: 12.5px; font-weight: 800; cursor: pointer; }
+    .btn-ans.locked-choice { opacity: 0.52; cursor: not-allowed; filter: saturate(60%); }
+    .cheer-bar { display: flex; gap: 8px; margin-top: 6px; justify-content: center; flex-shrink: 0; }
+    .btn-cheer { flex: 1; padding: 7px; border-radius: 10px; border: 1px solid #334155; background: #1e293b; color: #fff; font-size: 12px; font-weight: 800; cursor: pointer; }
     #freeze-layer { position: absolute; inset: 0; z-index: 300; background: rgba(14, 165, 233, 0.94); backdrop-filter: blur(12px); display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-    .freeze-num { font-size: 92px; font-weight: 900; color: #fff; line-height: 1; margin-top: 8px; }
+    .freeze-num { font-size: 88px; font-weight: 900; color: #fff; line-height: 1; margin-top: 8px; }
   </style>
 </head>
 <body>
 
-  <!-- THANH THƯƠNG HIỆU, LOGO KHIÊN VÀNG & TÁC GIẢ -->
+  <!-- THANH THƯƠNG HIỆU, LOGO KHIÊN VÀNG, TÁC GIẢ & NÚT PHÓNG TOÀN MÀN HÌNH -->
   <div id="top-author-banner">
     <div class="brand-left">
       <svg class="game-logo-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -238,30 +301,33 @@
     <div class="author-right">
       <span class="author-badge">👨‍🏫 Tác giả: Hồ Tấn Khải</span>
       <span class="school-badge">🏫 Trường THPT Mang Thít</span>
+      <button class="btn-fullscreen-top" onclick="toggleFullScreenApp()" title="Phóng toàn màn hình">🔲 Toàn màn hình</button>
     </div>
   </div>
 
   <!-- MODAL PHÓNG TO MÃ QR KHỔNG LỒ GIỮA MÀN HÌNH -->
   <div id="qr-zoom-modal" onclick="closeQRZoomModal()">
     <div class="qr-zoom-card" onclick="event.stopPropagation()">
-      <h2 id="qr-zoom-title" style="margin: 0; font-size: 28px; font-weight: 900;">QUÉT MÃ QR ĐỂ VÀO ĐỘI</h2>
-      <p id="qr-zoom-room" style="margin: 6px 0 0 0; font-size: 16px; font-weight: 800; color: #334155;"></p>
+      <h2 id="qr-zoom-title" style="margin: 0; font-size: 26px; font-weight: 900;">QUÉT MÃ QR ĐỂ VÀO ĐỘI</h2>
+      <p id="qr-zoom-room" style="margin: 4px 0 0 0; font-size: 15px; font-weight: 800; color: #334155;"></p>
       <div id="qr-zoom-render"></div>
-      <div id="qr-zoom-url" style="font-size: 13px; color: #64748b; word-break: break-all; max-width: 420px; margin: 6px auto 16px auto; font-weight: 700;"></div>
+      <div id="qr-zoom-url" style="font-size: 12.5px; color: #64748b; word-break: break-all; max-width: 400px; margin: 4px auto 14px auto; font-weight: 700;"></div>
       <div style="display: flex; gap: 10px; justify-content: center;">
-        <button class="btn-launch" style="background: #10b981; padding: 10px 22px; font-size: 15px;" onclick="copyZoomedQRLink()">📋 Sao chép Link gửi Zalo</button>
-        <button class="btn-launch" style="background: #ef4444; padding: 10px 22px; font-size: 15px;" onclick="closeQRZoomModal()">✖ Đóng lại</button>
+        <button class="btn-launch" style="background: #10b981; padding: 9px 20px; font-size: 14px;" onclick="copyZoomedQRLink()">📋 Sao chép Link gửi Zalo</button>
+        <button class="btn-launch" style="background: #ef4444; padding: 9px 20px; font-size: 14px;" onclick="closeQRZoomModal()">✖ Đóng lại</button>
       </div>
     </div>
   </div>
 
-  <!-- 1. MÀN HÌNH QUẢN LÝ MÔN HỌC & CÀI ĐẶT CỦA GIÁO VIÊN -->
+  <!-- ========================================================
+       1. MÀN HÌNH QUẢN LÝ MÔN HỌC & CÀI ĐẶT CỦA GIÁO VIÊN
+       ======================================================== -->
   <div id="teacher-view">
     <div class="setup-box">
       <div class="flex-between">
-        <h2 style="margin: 0; font-size: 21px;">🌾 Quản Lý Môn Học, Bài Dạy & Xuất Học Liệu Minh Chứng</h2>
+        <h2 style="margin: 0; font-size: 20px;">🌾 Quản Lý Môn Học, Bài Dạy & Xuất Học Liệu Minh Chứng</h2>
         <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-          <button class="btn-action-sm" style="background:#dcfce7; border-color:#10b981; color:#065f46;" onclick="switchToStudentOnSameDevice()">📱 Vào Chế Độ Học Sinh (Nhập Mã Phòng)</button>
+          <button class="btn-action-sm" style="background:#dcfce7; border-color:#10b981; color:#065f46;" onclick="switchToStudentOnSameDevice()">📱 Chế Độ HS (Nhập Mã Phòng)</button>
           <button class="btn-action-sm" style="background:#fef3c7; border-color:#f59e0b; color:#92400e;" onclick="exportColorfulPresentationHTML()">🎨 Xuất Slide Học Liệu Màu (.html)</button>
           <button class="btn-action-sm" style="background:#e0e7ff; border-color:#6366f1; color:#1e1b4b;" onclick="printEvidenceColorfulPDF()">🖨️ In / Lưu PDF Minh Chứng</button>
           <button class="btn-action-sm" onclick="exportQuizJSON()">💾 Xuất Đề (.json)</button>
@@ -279,7 +345,6 @@
             <button class="btn-action-sm" id="btn-del-subj" style="background:#fee2e2; border-color:#fca5a5; color:#991b1b; display:none;" onclick="deleteCurrentSubject()">🗑️ Xóa Môn Này</button>
           </div>
           <div style="display: flex; gap: 6px;">
-            <button class="btn-action-sm" onclick="testVietnameseVoiceSample()" style="background:#fce7f3; border-color:#f472b6; color:#9d174d;">🔊 Nghe thử Giọng Đọc Tiếng Việt</button>
             <button class="btn-action-sm" onclick="document.execCommand('underline', false, null)"><u>U</u> Gạch chân đáp án</button>
             <button class="btn-action-sm" onclick="document.getElementById('editor').innerHTML=''">Xóa trắng</button>
           </div>
@@ -290,7 +355,7 @@
 
       <div class="config-grid">
         <div class="cfg-card">
-          <div style="font-weight: 900; font-size: 14.5px; margin-bottom: 4px; color: #0f172a;">⚙️ Chế độ tham gia & Chia đội:</div>
+          <div style="font-weight: 900; font-size: 14px; margin-bottom: 4px; color: #0f172a;">⚙️ Chế độ tham gia & Chia đội:</div>
           <label class="mode-option">
             <input type="radio" name="joinMode" value="AUTO_ALL" checked onchange="toggleModeUI()">
             <span><b>Chế độ Toàn bộ lớp:</b> Tự động cân bằng sĩ số 2 đội (Tất cả HS đều vào kéo)</span>
@@ -302,127 +367,135 @@
         </div>
 
         <div class="cfg-card" id="limit-config-box" style="opacity: 0.5; pointer-events: none;">
-          <div style="font-weight: 900; font-size: 14.5px; text-align: center;">Số đấu thủ chính thức mỗi đội:</div>
+          <div style="font-weight: 900; font-size: 14px; text-align: center;">Số đấu thủ chính thức mỗi đội:</div>
           <div class="qty-control">
             <button class="step-btn" onclick="adjustLimit(-1)">−</button>
-            <span id="max-per-team-disp" style="font-size: 24px; font-weight: 900;">5</span>
+            <span id="max-per-team-disp" style="font-size: 22px; font-weight: 900;">5</span>
             <button class="step-btn" onclick="adjustLimit(1)">+</button>
           </div>
-          <div style="text-align: center; font-size: 11.5px; color: #64748b; margin-top: 2px;">
+          <div style="text-align: center; font-size: 11px; color: #64748b; margin-top: 2px;">
             (Vượt quá số này sẽ tự chuyển sang Khán giả cổ vũ)
           </div>
         </div>
       </div>
 
-      <div class="flex-between" style="margin-top: 10px;">
-        <span style="font-size: 13px; color: #059669; font-weight: 800;">
-          📱 Mã QR thế hệ mới siêu nhạy (Bấm vào QR để phóng to toàn màn hình cho cuối lớp quét!)
+      <div class="flex-between" style="margin-top: 8px;">
+        <span style="font-size: 12.5px; color: #059669; font-weight: 800;">
+          ✨ Tự động ẩn Mã QR khi bắt đầu thi đấu • Bố cục 3 tầng tách biệt không che khuất Sàn Kéo Co & Tên 2 Đội!
         </span>
         <button class="btn-launch" onclick="open3DArena()">MỞ SÂN ĐẤU 3D & HIỆN MÃ QR</button>
       </div>
     </div>
   </div>
 
-  <!-- 2. MÀN HÌNH SÂN KHẤU 3D: DÂY KÉO Ở TRÊN - CÂU HỎI TO Ở DƯỚI -->
+  <!-- ========================================================
+       2. MÀN HÌNH SÂN KHẤU 3D CHIA 3 TẦNG (KHÔNG BAO GIỜ BỊ CHE KHUẤT)
+       ======================================================== -->
   <div id="host-view">
-    <div class="host-controls">
-      <button class="c-btn c-prep" id="btn-host-prep" onclick="commandAllReadyRope()">🔔 CHUẨN BỊ (VÀO DÂY)</button>
-      <button class="c-btn c-start" id="btn-host-start" onclick="startMatch()">▶ BẮT ĐẦU KÉO</button>
-      <button class="c-btn c-pause" id="btn-host-pause" onclick="pauseMatch()" style="display:none;">⏸ TẠM DỪNG</button>
-      <button class="c-btn" style="background:#0284c7; color:#fff;" onclick="forceAdvanceGlobalQuestion()">⏭️ QUA CÂU MỚI</button>
-      <button class="c-btn" id="btn-auto-tts" style="background:#ec4899; color:#fff;" onclick="toggleAutoVoiceTTS()">🔊 TỰ ĐỌC: BẬT</button>
-      <select id="voice-engine-select" class="voice-select-box" onchange="onVoiceEngineChange()" title="Chọn nguồn giọng đọc Tiếng Việt rõ nhất"></select>
-      <button class="c-btn" style="background:#d97706; color:#fff;" onclick="cycleSkyThemeManual()">🌤️ ĐỔI TRỜI</button>
-      <button class="c-btn" id="btn-toggle-review" style="background:#059669; color:#fff;" onclick="toggleReviewAnswersMode()">✅ CHỮA BÀI</button>
-      <button class="c-btn" style="background:#6366f1; color:#fff;" onclick="exportColorfulPresentationHTML()" title="Tải bộ câu hỏi hoàn chỉnh màu sắc về máy">📥 TẢI BỘ ĐỀ MÀU</button>
-      <button class="c-btn c-end" onclick="endMatchManual()">⏹ KẾT THÚC</button>
-      <button class="c-btn c-home" onclick="returnToSetup()">🏠 CÀI ĐẶT</button>
-      <span id="net-status" style="font-size: 11px; color: #a7f3d0; font-weight: 800;">🔄 Đang mở...</span>
-    </div>
-
-    <div class="hud-row">
-      <div class="team-box red">
-        <span id="hud-red-count">ĐỘI ĐỎ: 0 HS</span>
-        <span class="round-stars" id="hud-red-rounds">🏆 Hiệp: 0/2</span>
+    <!-- TẦNG TRÊN: THANH ĐIỀU KHIỂN & TÊN 2 ĐỘI ĐỘC LẬP -->
+    <div id="host-top-header">
+      <div class="host-controls-row">
+        <button class="c-btn c-prep" id="btn-host-prep" onclick="commandAllReadyRope()">🔔 CHUẨN BỊ (VÀO DÂY & ẨN QR)</button>
+        <button class="c-btn c-start" id="btn-host-start" onclick="startMatch()">▶ BẮT ĐẦU KÉO</button>
+        <button class="c-btn c-pause" id="btn-host-pause" onclick="pauseMatch()" style="display:none;">⏸ TẠM DỪNG</button>
+        <button class="c-btn" style="background:#0284c7; color:#fff;" onclick="forceAdvanceGlobalQuestion()">⏭️ QUA CÂU MỚI</button>
+        <button class="c-btn" id="btn-toggle-qr" style="background:#475569; color:#fff;" onclick="toggleQRCodesVisibility()">📱 ẨN/HIỆN QR</button>
+        <button class="c-btn" style="background:#d97706; color:#fff;" onclick="cycleSkyThemeManual()">🌤️ ĐỔI TRỜI</button>
+        <button class="c-btn" id="btn-toggle-review" style="background:#059669; color:#fff;" onclick="toggleReviewAnswersMode()">✅ CHỮA BÀI</button>
+        <button class="c-btn" style="background:#6366f1; color:#fff;" onclick="exportColorfulPresentationHTML()">📥 TẢI SLIDE MÀU</button>
+        <button class="c-btn" style="background:#0f766e; color:#fff;" onclick="toggleFullScreenApp()">🔲 TOÀN MÀN HÌNH</button>
+        <button class="c-btn c-end" onclick="endMatchManual()">⏹ KẾT THÚC</button>
+        <button class="c-btn c-home" onclick="returnToSetup()">🏠 CÀI ĐẶT</button>
+        <span id="net-status" style="font-size: 11px; color: #a7f3d0; font-weight: 900;">🔄 Đang mở...</span>
       </div>
 
-      <div class="center-round-hud">
-        <div class="round-badge-top" id="hud-round-title">🌤️ HIỆP 1 / 3 - TRỜI XANH (DẪN 3 CÂU THẮNG HIỆP)</div>
-        <div class="tug-score-live" id="hud-rope-score">Mã Phòng: ---- | Thế trận Hiệp 1: HÒA (0)</div>
+      <!-- Dải hiển thị Tên Đội Đỏ - Tỉ số Hiệp - Tên Đội Xanh rõ ràng, không bao giờ bị che -->
+      <div class="hud-teams-row">
+        <div class="team-box red">
+          <span id="hud-red-count">🔴 ĐỘI ĐỎ: 0 HS</span>
+          <span class="round-stars" id="hud-red-rounds">🏆 Hiệp thắng: 0/2</span>
+        </div>
+
+        <div class="center-round-hud">
+          <div class="round-badge-top" id="hud-round-title">🌤️ HIỆP 1/3 (TRỜI XANH) • TỈ SỐ HIỆP: ĐỎ 0 - 0 XANH</div>
+          <div class="tug-score-live" id="hud-rope-score">Mã Phòng: ---- | Điểm kéo: HÒA (0)</div>
+        </div>
+
+        <div class="team-box blue">
+          <span class="round-stars" id="hud-blue-rounds">🏆 Hiệp thắng: 0/2</span>
+          <span id="hud-blue-count">🔵 ĐỘI XANH: 0 HS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TẦNG GIỮA: SÀN ĐẤU KÉO CO 3D THOÁNG ĐÃNG -->
+    <div id="arena-3d-viewport">
+      <canvas id="canvas3d"></canvas>
+      <div id="labels-container"></div>
+      <div id="cheer-container"></div>
+
+      <!-- 2 Mã QR (Tự động ẩn ngay khi bấm Chuẩn bị hoặc Bắt đầu thi đấu) -->
+      <div class="qr-panel left" id="qr-panel-left" onclick="openQRZoomModal('RED')" title="Bấm để phóng to QR Đội Đỏ">
+        <div class="qr-box-inner" id="qr-red"></div>
+        <div class="qr-caption" style="color: var(--red);">QUÉT VÀO ĐỘI ĐỎ 🔴</div>
+        <div class="qr-zoom-hint">🔍 Bấm phóng to</div>
       </div>
 
-      <div class="team-box blue">
-        <span class="round-stars" id="hud-blue-rounds">🏆 Hiệp: 0/2</span>
-        <span id="hud-blue-count">ĐỘI XANH: 0 HS</span>
+      <div class="qr-panel right" id="qr-panel-right" onclick="openQRZoomModal('BLUE')" title="Bấm để phóng to QR Đội Xanh">
+        <div class="qr-box-inner" id="qr-blue"></div>
+        <div class="qr-caption" style="color: var(--blue);">QUÉT VÀO ĐỘI XANH 🔵</div>
+        <div class="qr-zoom-hint">🔍 Bấm phóng to</div>
+      </div>
+
+      <!-- Modal Chuyển Hiệp -->
+      <div id="round-modal">
+        <h2 id="round-modal-title" style="font-size: 28px; color: var(--gold); margin: 0;">KẾT THÚC HIỆP 1!</h2>
+        <p id="round-modal-sub" style="font-size: 16.5px; color: #f8fafc; margin: 8px 0 14px 0;">Đội Đỏ giành chiến thắng Hiệp 1!</p>
+        <button class="btn-launch" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="startNextRound()">
+          ▶️ BẮT ĐẦU HIỆP TIẾP THEO!
+        </button>
+      </div>
+
+      <!-- Modal Vinh Danh Vô Địch Chung Cuộc -->
+      <div id="victory-modal">
+        <h1 id="win-banner-txt" style="font-size: 28px; color: var(--gold); margin: 0;">🏆 NHÀ VÔ ĐỊCH CHUNG CUỘC!</h1>
+        <p id="win-sub-txt" style="font-size: 15px; color: #e2e8f0; margin-top: 6px;">Đã xuất sắc giành chiến thắng 2 hiệp đấu và nhận Cúp Vàng 3D!</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px;">
+          <button class="c-btn" style="background:#0284c7; color:#fff; padding:9px 14px; font-size:13px;" onclick="openPostGameReview()">📖 CHỮA BÀI TRÊN LỚP</button>
+          <button class="c-btn" style="background:#d97706; color:#fff; padding:9px 14px; font-size:13px;" onclick="exportColorfulPresentationHTML()">🎨 TẢI SLIDE MÀU (.HTML)</button>
+          <button class="c-btn" style="background:#6366f1; color:#fff; padding:9px 14px; font-size:13px;" onclick="printEvidenceColorfulPDF()">🖨️ IN / LƯU PDF MINH CHỨNG</button>
+          <button class="c-btn c-start" style="padding:9px 14px; font-size:13px;" onclick="downloadCSVReport()">📊 XUẤT BẢNG ĐIỂM (.CSV)</button>
+          <button class="c-btn c-home" style="padding:9px 14px; font-size:13px;" onclick="returnToSetup()">🔄 TRẬN MỚI</button>
+        </div>
       </div>
     </div>
 
-    <canvas id="canvas3d"></canvas>
-    <div id="labels-container"></div>
-    <div id="cheer-container"></div>
-
-    <!-- 2 Mã QR Siêu Nét (Click vào để Phóng To giữa màn hình) -->
-    <div class="qr-panel left" onclick="openQRZoomModal('RED')" title="Bấm vào đây để PHÓNG TO Mã QR Đội Đỏ">
-      <div class="qr-box-inner" id="qr-red"></div>
-      <div class="qr-caption" style="color: var(--red);">QUÉT VÀO ĐỘI ĐỎ 🔴</div>
-      <div class="qr-zoom-hint">🔍 Bấm để phóng to QR</div>
-    </div>
-
-    <div class="qr-panel right" onclick="openQRZoomModal('BLUE')" title="Bấm vào đây để PHÓNG TO Mã QR Đội Xanh">
-      <div class="qr-box-inner" id="qr-blue"></div>
-      <div class="qr-caption" style="color: var(--blue);">QUÉT VÀO ĐỘI XANH 🔵</div>
-      <div class="qr-zoom-hint">🔍 Bấm để phóng to QR</div>
-    </div>
-
-    <!-- BẢNG CÂU HỎI CHUNG PHÓNG TO Ở DƯỚI MÀN HÌNH -->
+    <!-- TẦNG DƯỚI CÙNG: BẢNG CÂU HỎI DÀN ĐẦY KHUNG (KHÔNG ĐÈ LÊN SÂN KÉO CO) -->
     <div id="host-question-board">
       <div class="hq-header">
-        <span id="hq-mode-badge">🔥 CÂU HỎI CHUNG CHO CẢ 2 ĐỘI (HIỂN THỊ ĐỒNG BỘ)</span>
-        <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
-          <button class="hq-nav-btn" id="hq-speak-btn" style="background:#db2777; border-color:#f472b6;" onclick="speakCurrentHostQuestion(true)">🔊 ĐỌC RÕ CÂU NÀY</button>
-          <button class="hq-nav-btn" onclick="stepHostQuestion(-1)">◀ Câu trước</button>
-          <span id="hq-counter" style="color:#fef08a; font-size:14px;">Câu 1/10</span>
-          <button class="hq-nav-btn" onclick="stepHostQuestion(1)">Câu tiếp ▶</button>
-          <button class="hq-nav-btn" id="hq-reveal-btn" style="background:#059669; border-color:#a7f3d0;" onclick="toggleReviewAnswersMode()">👁️ Hiện Đáp Án Đúng</button>
-          <button class="hq-nav-btn" style="background:#d97706; border-color:#fde047;" onclick="exportColorfulPresentationHTML()">🎨 Tải Slide Màu</button>
+        <span id="hq-mode-badge">🔥 CÂU HỎI CHUNG CỦA CẢ 2 ĐỘI</span>
+        <span id="hq-team-progress" style="color:#cbd5e1;">Đã trả lời: Đội Đỏ (0/0) • Đội Xanh (0/0)</span>
+        <span id="hq-answer-stats" style="color:#fef08a;">Thống kê: ✅ 0 Đúng • 🧊 0 Sai</span>
+        <div style="display:flex; gap:6px; align-items:center;">
+          <button class="hq-nav-btn" onclick="stepHostQuestion(-1)">◀ Trước</button>
+          <span id="hq-counter" style="color:#fef08a; font-size:13px;">Câu 1/10</span>
+          <button class="hq-nav-btn" onclick="stepHostQuestion(1)">Tiếp ▶</button>
+          <button class="hq-nav-btn" id="hq-reveal-btn" style="background:#059669; border-color:#a7f3d0;" onclick="toggleReviewAnswersMode()">👁️ Hiện Đáp Án</button>
         </div>
       </div>
       <div class="hq-title" id="hq-q-text">Đang tải câu hỏi chung...</div>
       <div class="hq-opts" id="hq-q-opts"></div>
-      <div class="hq-stats-bar">
-        <span id="hq-team-progress">Đã trả lời câu này: Đội Đỏ (0/0) • Đội Xanh (0/0)</span>
-        <span id="hq-answer-stats" style="color:#fef08a;">Thống kê câu này: ✅ 0 Đúng • 🧊 0 Sai (Đóng băng)</span>
-      </div>
-    </div>
-
-    <div id="round-modal">
-      <h2 id="round-modal-title" style="font-size: 32px; color: var(--gold); margin: 0;">KẾT THÚC HIỆP 1!</h2>
-      <p id="round-modal-sub" style="font-size: 18px; color: #f8fafc; margin: 10px 0 18px 0;">Đội Đỏ giành chiến thắng Hiệp 1!</p>
-      <button class="btn-launch" style="background: linear-gradient(135deg, #10b981, #059669);" onclick="startNextRound()">
-        ▶️ BẮT ĐẦU HIỆP TIẾP THEO!
-      </button>
-    </div>
-
-    <div id="victory-modal">
-      <h1 id="win-banner-txt" style="font-size: 32px; color: var(--gold); margin: 0;">🏆 NHÀ VÔ ĐỊCH CHUNG CUỘC!</h1>
-      <p id="win-sub-txt" style="font-size: 15.5px; color: #e2e8f0; margin-top: 8px;">Đã xuất sắc giành chiến thắng 2 hiệp đấu và nhận Cúp Vàng 3D!</p>
-      <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px;">
-        <button class="c-btn" style="background:#0284c7; color:#fff; padding:10px 15px; font-size:13.5px;" onclick="openPostGameReview()">📖 CHỮA BÀI TRÊN LỚP</button>
-        <button class="c-btn" style="background:#d97706; color:#fff; padding:10px 15px; font-size:13.5px;" onclick="exportColorfulPresentationHTML()">🎨 TẢI SLIDE HỌC LIỆU MÀU (.HTML)</button>
-        <button class="c-btn" style="background:#6366f1; color:#fff; padding:10px 15px; font-size:13.5px;" onclick="printEvidenceColorfulPDF()">🖨️ IN / LƯU PDF MINH CHỨNG</button>
-        <button class="c-btn c-start" style="padding:10px 15px; font-size:13.5px;" onclick="downloadCSVReport()">📊 XUẤT BẢNG ĐIỂM (.CSV)</button>
-        <button class="c-btn c-home" style="padding:10px 15px; font-size:13.5px;" onclick="returnToSetup()">🔄 TRẬN MỚI</button>
-      </div>
     </div>
   </div>
 
-  <!-- 3. GIAO DIỆN ĐIỆN THOẠI HỌC SINH (CLIENT) -->
+  <!-- ========================================================
+       3. GIAO DIỆN ĐIỆN THOẠI HỌC SINH (CLIENT)
+       ======================================================== -->
   <div id="mobile-view">
     <div id="mobile-lobby" class="lobby-card">
       <div id="conn-badge" style="font-size: 12.5px; color: #38bdf8; font-weight: 800; margin-bottom: 4px;">🔄 Đang kết nối sân đấu 3D...</div>
-      <h2 style="margin: 0 0 6px 0; font-size: 20px;">ĐĂNG KÝ TÊN & VÀO ĐỘI</h2>
+      <h2 style="margin: 0 0 6px 0; font-size: 19px;">ĐĂNG KÝ TÊN & VÀO ĐỘI</h2>
 
-      <!-- Ô Mã Phòng (Tự động điền khi quét QR hoặc HS có thể tự nhập nếu vào thẳng link web) -->
       <div style="display:flex; gap:6px; align-items:center; margin-bottom:6px;">
         <span style="font-size:13px; font-weight:800; color:#94a3b8; white-space:nowrap;">Mã Phòng:</span>
         <input type="text" id="student-room-input" class="name-input-box" style="margin:0; padding:8px 12px; font-size:15px; border-color:#f59e0b; color:#fef08a;" placeholder="Nhập mã phòng (VD: 12345)" onchange="onManualRoomChange()">
@@ -430,7 +503,7 @@
 
       <input type="text" id="student-name-input" class="name-input-box" placeholder="Nhập họ tên của em (VD: Minh Khôi)..." maxlength="22" oninput="onStudentNameTyping()">
       
-      <div id="assigned-info" style="margin: 6px 0; padding: 10px; background: #0f172a; border-radius: 12px; font-weight: 800; font-size: 13.5px; border: 1px solid #334155;">
+      <div id="assigned-info" style="margin: 6px 0; padding: 10px; background: #0f172a; border-radius: 12px; font-weight: 800; font-size: 13px; border: 1px solid #334155;">
         Hãy nhập tên và chọn đội bên dưới!
       </div>
 
@@ -439,11 +512,11 @@
         <button class="btn-pick-team blue" onclick="requestSwitchTeam('BLUE')">ĐỘI XANH (ÁO XANH) 🔵</button>
       </div>
 
-      <button id="btn-ready-rope" class="btn-launch" style="width: 100%; margin-top: 4px; padding: 13px; background: linear-gradient(135deg, #10b981, #059669);" onclick="confirmReadyRope()">
+      <button id="btn-ready-rope" class="btn-launch" style="width: 100%; margin-top: 4px; padding: 12px; background: linear-gradient(135deg, #10b981, #059669);" onclick="confirmReadyRope()">
         🧤 CHUẨN BỊ / VÀO NẮM DÂY!
       </button>
 
-      <button class="btn-launch" style="width: 100%; margin-top: 8px; padding: 11px; font-size: 14.5px; background: linear-gradient(135deg, #f59e0b, #d97706);" onclick="forceStartQuizNow()">
+      <button class="btn-launch" style="width: 100%; margin-top: 8px; padding: 10px; font-size: 14px; background: linear-gradient(135deg, #f59e0b, #d97706);" onclick="forceStartQuizNow()">
         ⚡ VÀO LÀM BÀI KÉO CO NGAY!
       </button>
     </div>
@@ -456,9 +529,9 @@
       </div>
 
       <div id="waiting-host-overlay" class="q-card" style="text-align: center; flex-grow: 1;">
-        <div style="font-size: 50px;">💪</div>
-        <h3 style="margin: 8px 0 6px 0; font-size: 20px; color: #10b981;">NHÂN VẬT ĐÃ NẮM DÂY!</h3>
-        <p style="color: #cbd5e1; margin: 0 0 14px 0; font-size: 14px;">Nhân vật Chibi mang tên em đã sẵn sàng ở nửa trên màn hình.<br>Chờ thầy bấm <b>"BẮT ĐẦU KÉO"</b> hoặc nhấn nút dưới để mở câu hỏi:</p>
+        <div style="font-size: 48px;">💪</div>
+        <h3 style="margin: 8px 0 6px 0; font-size: 19px; color: #10b981;">NHÂN VẬT ĐÃ NẮM DÂY!</h3>
+        <p style="color: #cbd5e1; margin: 0 0 14px 0; font-size: 13.5px;">Nhân vật Chibi mang tên em đã sẵn sàng trên sân đấu.<br>Chờ thầy bấm <b>"BẮT ĐẦU KÉO"</b> hoặc nhấn nút dưới để mở câu hỏi:</p>
         <button class="btn-launch" style="width: 100%; background: linear-gradient(135deg, #10b981, #059669);" onclick="activateMobileQuiz()">
           ▶️ MỞ CÂU HỎI KÉO DÂY NGAY!
         </button>
@@ -466,7 +539,7 @@
 
       <div id="active-quiz-container" style="display: none; flex-grow: 1; flex-direction: column; justify-content: space-between;">
         <div class="q-card">
-          <div style="font-size:12.5px; color:#38bdf8; font-weight:900; margin-bottom:4px;" id="m-q-progress">Hiệp 1 • Câu hỏi #1</div>
+          <div style="font-size:12px; color:#38bdf8; font-weight:900; margin-bottom:3px;" id="m-q-progress">Hiệp 1 • Câu hỏi #1</div>
           <div class="q-text" id="m-q-text">Câu hỏi đang tải...</div>
         </div>
 
@@ -486,14 +559,26 @@
     </div>
 
     <div id="freeze-layer">
-      <div style="font-size: 68px;">🧊</div>
-      <h2 style="font-size: 30px; margin: 6px 0; color: #fff;">BỊ ĐÓNG BĂNG 3 GIÂY!</h2>
-      <p style="margin: 0; font-size: 15px; color: #e0f2fe;">Trả lời sai! Hãy chờ hết đóng băng:</p>
+      <div style="font-size: 64px;">🧊</div>
+      <h2 style="font-size: 28px; margin: 6px 0; color: #fff;">BỊ ĐÓNG BĂNG 3 GIÂY!</h2>
+      <p style="margin: 0; font-size: 14.5px; color: #e0f2fe;">Trả lời sai! Hãy chờ hết đóng băng:</p>
       <div class="freeze-num" id="freeze-sec">3</div>
     </div>
   </div>
 
   <script>
+    /* =========================================================================
+       CHỨC NĂNG PHÓNG TOÀN MÀN HÌNH (FULLSCREEN TOGGLE)
+       ========================================================================= */
+    function toggleFullScreenApp() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+      }
+      setTimeout(resize3DViewport, 300);
+    }
+
     /* =========================================================================
        1. NGÂN HÀNG ĐỀ MẶC ĐỊNH
        ========================================================================= */
@@ -503,17 +588,17 @@
 <div>Câu 2: Cơ quan thoát hơi nước chủ yếu của cây xanh là cơ quan nào?</div>
 <div>A. Rễ cây</div><div>B. Thân cây</div><div><u>C</u>. Lá cây (qua khí khổng)</div><div>D. Hoa và quả</div><br>
 <div>Câu 3: Mạch gỗ ở thực vật có chức năng vận chuyển chủ yếu các chất nào?</div>
-<div><u>A</u>. Nước và các ion khoáng từ rễ lên lá</div><div>B. Các chất hữu cơ tổng hợp từ lá xuống rễ</div><div>C. Khí ô-xi và các-bô-níc</div><div>D. Các hoóc-môn thực vật từ chồi ngọn xuống</div><br>
+<div><u>A</u>. Nước và các ion khoáng từ rễ lên lá</div><div>B. Các chất hữu cơ tổng hợp từ lá xuống rễ</div><div>C. Khí oxygen và carbon dioxide</div><div>D. Các hormone thực vật từ chồi ngọn xuống</div><br>
 <div>Câu 4: Quá trình hô hấp tế bào ở thực vật diễn ra mạnh nhất ở bào quan nào?</div>
-<div>A. Ri-bô-xôm</div><div><u>B</u>. Ti thể</div><div>C. Lưới nội chất</div><div>D. Nhân tế bào</div><br>
-<div>Câu 5: Hoóc-môn thực vật nào sau đây có vai trò kích thích sự kéo dài tế bào và hướng sáng của thân?</div>
-<div><u>A</u>. Au-xin</div><div>B. Ê-ti-len</div><div>C. A-xít áp-xi-xích</div><div>D. Flo-ri-gen</div><br>
+<div>A. Ribosome</div><div><u>B</u>. Ti thể</div><div>C. Lưới nội chất</div><div>D. Nhân tế bào</div><br>
+<div>Câu 5: Hormone thực vật nào sau đây có vai trò kích thích sự kéo dài tế bào và hướng sáng của thân?</div>
+<div><u>A</u>. Auxin</div><div>B. Ethylene</div><div>C. Abscisic acid</div><div>D. Florigen</div><br>
 <div>Câu 6: Hình thức sinh sản vô tính nào ở thực vật giúp tạo ra hàng loạt cây con sạch bệnh trong ống nghiệm?</div>
 <div>A. Giâm cành</div><div>B. Chiết cành</div><div>C. Ghép mắt</div><div><u>D</u>. Nuôi cấy mô tế bào thực vật</div><br>
 <div>Câu 7: Ở thực vật có hoa, sau khi thụ tinh kép thì bộ phận nào sẽ phát triển thành hạt?</div>
 <div>A. Bầu nhụy</div><div><u>B</u>. Noãn đã thụ tinh</div><div>C. Đài hoa</div><div>D. Đầu nhụy</div><br>
-<div>Câu 8: Phân tử nào sau đây làm khuôn trực tiếp cho quá trình dịch mã tổng hợp chuỗi pô-li-pép-tít?</div>
-<div>A. Đê-en-a mạch gốc</div><div>B. A-rờ-en-a vận chuyển</div><div><u>C</u>. A-rờ-en-a thông tin (mRNA)</div><div>D. A-rờ-en-a ri-bô-xôm</div><br>
+<div>Câu 8: Phân tử nào sau đây làm khuôn trực tiếp cho quá trình dịch mã tổng hợp chuỗi polypeptide?</div>
+<div>A. DNA mạch gốc</div><div>B. tRNA</div><div><u>C</u>. mRNA (RNA thông tin)</div><div>D. rRNA</div><br>
 <div>Câu 9: Tập hợp các cá thể cùng loài, cùng sống trong một khoảng không gian xác định vào một thời điểm nhất định gọi là gì?</div>
 <div><u>A</u>. Quần thể sinh vật</div><div>B. Quần xã sinh vật</div><div>C. Hệ sinh thái</div><div>D. Sinh quyển</div><br>
 <div>Câu 10: Vi khuẩn cố định đạm sống trong nốt sần rễ cây họ Đậu là biểu hiện của mối quan hệ sinh thái nào?</div>
@@ -523,14 +608,14 @@
 <div>Câu 1: Hệ thống tưới nhỏ giọt kết hợp châm phân tự động mang lại lợi ích lớn nhất nào?</div>
 <div>A. Giúp tăng nhanh chiều cao thân cây gấp đôi</div><div>B. Tiêu diệt hoàn toàn sâu đục thân</div><div><u>C</u>. Tiết kiệm nước tưới và tối ưu hóa lượng phân bón hòa tan</div><div>D. Tăng độ mặn cho đất trồng</div><br>
 <div>Câu 2: Để cải tạo đất chua và đất phèn, biện pháp hóa học phổ biến nhất mà nông dân thường áp dụng là gì?</div>
-<div><u>A</u>. Bón vôi nông nghiệp kết hợp rửa mặn, xổ phèn</div><div>B. Bón thật nhiều phân đạm U-rê</div><div>C. Tưới nước muối loãng lên mặt ruộng</div><div>D. Phủ bạt ni-lông kín mặt đất quanh năm</div><br>
+<div><u>A</u>. Bón vôi nông nghiệp kết hợp rửa mặn, xổ phèn</div><div>B. Bón thật nhiều phân đạm Urea</div><div>C. Tưới nước muối loãng lên mặt ruộng</div><div>D. Phủ bạt nilon kín mặt đất quanh năm</div><br>
 <div>Câu 3: Nhóm phân bón nào sau đây cung cấp các nguyên tố dinh dưỡng đa lượng thiết yếu nhất cho cây trồng?</div>
-<div>A. Phân Sắt, Đồng, Kẽm</div><div><u>B</u>. Phân Đạm, Lân, Ka-li</div><div>C. Phân Bo, Mô-líp-đen, Clo</div><div>D. Nước vôi trong và tro bếp</div><br>
+<div>A. Phân Sắt, Đồng, Kẽm</div><div><u>B</u>. Phân Đạm (N), Lân (P), Kali (K)</div><div>C. Phân Bo, Molypden, Clo</div><div>D. Nước vôi trong và tro bếp</div><br>
 <div>Câu 4: Sử dụng ong mắt đỏ hoặc bọ rùa để tiêu diệt sâu hại cây trồng là ứng dụng của biện pháp bảo vệ thực vật nào?</div>
 <div>A. Biện pháp hóa học</div><div><u>B</u>. Biện pháp sinh học (sử dụng thiên địch)</div><div>C. Biện pháp cơ giới vật lý</div><div>D. Biện pháp kiểm dịch thực vật</div><br>
 <div>Câu 5: Giá thể xơ dừa trước khi đem trồng cây cần được xử lý ngâm xả nước nhằm mục đích chính là gì?</div>
-<div><u>A</u>. Loại bỏ chất chát ta-nanh gây nghẹt rễ cây</div><div>B. Làm xơ dừa nặng hơn để giữ cây</div><div>C. Tăng lượng muối khoáng trong xơ dừa</div><div>D. Tạo mùi thơm thu hút côn trùng</div><br>
-<div>Câu 6: Chế phẩm nấm đối kháng Tri-cô-đéc-ma thường được ủ chung với phân chuồng hoai mục có tác dụng gì?</div>
+<div><u>A</u>. Loại bỏ chất chát (tanin, lignin) gây nghẹt rễ cây</div><div>B. Làm xơ dừa nặng hơn để giữ cây</div><div>C. Tăng lượng muối khoáng trong xơ dừa</div><div>D. Tạo mùi thơm thu hút côn trùng</div><br>
+<div>Câu 6: Chế phẩm nấm đối kháng Trichoderma thường được ủ chung với phân chuồng hoai mục có tác dụng gì?</div>
 <div>A. Làm cỏ dại mọc nhanh hơn</div><div><u>B</u>. Phân hủy nhanh xác hữu cơ và tiêu diệt nấm bệnh hại rễ</div><div>C. Làm tăng độ chua của đất</div><div>D. Thay thế hoàn toàn ánh sáng mặt trời</div><br>
 <div>Câu 7: Trong kỹ thuật chiết cành cây ăn quả, vì sao phải cạo sạch lớp tượng tầng dưới vỏ cành chiết?</div>
 <div>A. Để cành chiết nhanh khô héo</div><div><u>B</u>. Ngăn mạch rây vận chuyển chất hữu cơ xuống dưới, kích thích ra rễ tại vết cắt</div><div>C. Ngăn nước từ rễ đi lên lá</div><div>D. Giúp bầu đất nhẹ hơn</div><br>
@@ -538,14 +623,14 @@
 <div><u>A</u>. Trồng cây trực tiếp vào dung dịch dinh dưỡng khoáng mà không cần đất tự nhiên</div><div>B. Trồng cây hoàn toàn trên cát khô sa mạc</div><div>C. Trồng cây dưới đáy ao hồ ngập nước hoàn toàn</div><div>D. Chỉ phun sương nước lã lên lá cây</div><br>
 <div>Câu 9: Biện pháp bảo quản nông sản rau quả tươi trong kho lạnh có cơ sở khoa học chính là gì?</div>
 <div>A. Làm tăng cường độ quang hợp của quả</div><div><u>B</u>. Ức chế quá trình hô hấp của nông sản và hạn chế vi sinh vật gây thối hỏng</div><div>C. Làm đóng băng cứng hoàn toàn tế bào rau tươi</div><div>D. Giúp rau quả tự tổng hợp thêm đường</div><br>
-<div>Câu 10: Ứng dụng cảm biến thông minh trong nông nghiệp công nghệ cao giúp người nông dân thực hiện điều gì tự động?</div>
+<div>Câu 10: Ứng dụng cảm biến thông minh IoT trong nông nghiệp công nghệ cao giúp người nông dân thực hiện điều gì tự động?</div>
 <div><u>A</u>. Giám sát độ ẩm đất, nhiệt độ, ánh sáng và tự động bật tắt hệ thống tưới từ xa qua điện thoại</div><div>B. Biến đổi gen cây trồng ngay ngoài đồng ruộng</div><div>C. Tự động thu hoạch toàn bộ gỗ rừng nguyên sinh</div><div>D. Không cần sử dụng nước và dinh dưỡng cho cây</div>`;
 
     let subjectsDB = {};
     let currentSubjectKey = 'BIO';
 
     function initSubjectBank() {
-      const saved = localStorage.getItem('thpt_mangthit_subjects_v6');
+      const saved = localStorage.getItem('thpt_mangthit_subjects_v7');
       if (saved) { try { subjectsDB = JSON.parse(saved); } catch(e) {} }
       if (!subjectsDB['BIO']) subjectsDB['BIO'] = { name: '🧬 Sinh Học (10 câu)', html: DEFAULT_BIO.trim(), color: '#10b981', fixed: true };
       if (!subjectsDB['AGRI']) subjectsDB['AGRI'] = { name: '🚜 Công Nghệ NN (10 câu)', html: DEFAULT_AGRI.trim(), color: '#f59e0b', fixed: true };
@@ -556,12 +641,12 @@
     }
 
     function saveSubjectsToStorage() {
-      localStorage.setItem('thpt_mangthit_subjects_v6', JSON.stringify(subjectsDB));
+      localStorage.setItem('thpt_mangthit_subjects_v7', JSON.stringify(subjectsDB));
     }
 
     function renderSubjectTabs() {
       const box = document.getElementById('subject-tabs-container');
-      box.innerHTML = `<span style="font-weight:900; font-size:13.5px; color:#334155;">Chọn môn/bài dạy:</span>`;
+      box.innerHTML = `<span style="font-weight:900; font-size:13px; color:#334155;">Chọn môn/bài dạy:</span>`;
       Object.keys(subjectsDB).forEach(key => {
         const item = subjectsDB[key];
         const btn = document.createElement('button');
@@ -690,244 +775,7 @@
     }
 
     /* =========================================================================
-       2. HỆ THỐNG GIỌNG ĐỌC TIẾNG VIỆT RÕ CHỮ, MẠCH LẠC 3 LỚP
-       ========================================================================= */
-    let autoVoiceEnabled = true;
-    let lastSpokenKey = '';
-    let availableViVoices = [];
-    let selectedVoiceMode = 'AUTO_BEST';
-    let currentCloudAudio = null;
-    let speechQueueTimer = null;
-
-    function normalizeVietnamesePhonetics(text) {
-      if (!text) return '';
-      return text
-        .replace(/\bmRNA\b/g, 'a rờ en a thông tin')
-        .replace(/\btRNA\b/g, 'a rờ en a vận chuyển')
-        .replace(/\brRNA\b/g, 'a rờ en a ri bô xôm')
-        .replace(/\bDNA\b/gi, 'đê en a')
-        .replace(/\bRNA\b/gi, 'a rờ en a')
-        .replace(/\bATP\b/gi, 'a tê pê')
-        .replace(/\bABA\b/g, 'a bê a')
-        .replace(/\bIoT\b/gi, 'ai ô ti')
-        .replace(/\bNPK\b/gi, 'en nờ pê ka')
-        .replace(/\bCO2\b/gi, 'cê ô hai')
-        .replace(/\bO2\b/gi, 'ô hai')
-        .replace(/\bH2O\b/gi, 'hát hai ô')
-        .replace(/\bpH\b/g, 'pê hát')
-        .replace(/\bxylem\b/gi, 'mạch gỗ')
-        .replace(/\bphloem\b/gi, 'mạch rây')
-        .replace(/\bGolgi\b/gi, 'Gôn-gi')
-        .replace(/\bRibosome\b/gi, 'Ri-bô-xôm')
-        .replace(/\bAuxin\b/gi, 'Au-xin')
-        .replace(/\bEthylene\b/gi, 'Ê-ti-len')
-        .replace(/\bFlorigen\b/gi, 'Flo-ri-gen')
-        .replace(/\bRhizobium\b/gi, 'Ri-zô-bi-um')
-        .replace(/\bTrichoderma\b/gi, 'Tri-cô-đéc-ma')
-        .replace(/\bHydroponics\b/gi, 'thủy canh')
-        .replace(/\bpolypeptide\b/gi, 'pô-li-pép-tít')
-        .replace(/\s*\/\s*/g, ' hoặc ')
-        .replace(/[()]/g, ', ');
-    }
-
-    function refreshVoiceDropdown() {
-      const sel = document.getElementById('voice-engine-select');
-      if (!sel) return;
-      const voices = ('speechSynthesis' in window) ? window.speechSynthesis.getVoices() : [];
-      availableViVoices = voices.filter(v =>
-        v.lang.toLowerCase().includes('vi') ||
-        v.name.toLowerCase().includes('viet') ||
-        v.name.toLowerCase().includes('hoaimy') ||
-        v.name.toLowerCase().includes('namminh') ||
-        v.name.toLowerCase().includes('an ')
-      );
-
-      sel.innerHTML = '';
-      const optAuto = document.createElement('option');
-      optAuto.value = 'AUTO_BEST';
-      optAuto.innerText = availableViVoices.length > 0
-        ? `🎙️ Tự động (${availableViVoices[0].name.slice(0, 18)})`
-        : `🌐 Giọng Google Tiếng Việt (Cloud)`;
-      sel.appendChild(optAuto);
-
-      availableViVoices.forEach((v, idx) => {
-        const o = document.createElement('option');
-        o.value = `LOCAL_${idx}`;
-        o.innerText = `🗣️ ${v.name}`;
-        sel.appendChild(o);
-      });
-
-      const optCloud = document.createElement('option');
-      optCloud.value = 'GOOGLE_STREAM';
-      optCloud.innerText = `🌐 Google Tiếng Việt Chuẩn (Online)`;
-      sel.appendChild(optCloud);
-
-      sel.value = selectedVoiceMode;
-    }
-
-    function onVoiceEngineChange() {
-      const sel = document.getElementById('voice-engine-select');
-      if (sel) selectedVoiceMode = sel.value;
-      speakCurrentHostQuestion(true);
-    }
-
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = refreshVoiceDropdown;
-      setTimeout(refreshVoiceDropdown, 500);
-    }
-
-    function stopAllSpeech() {
-      if (speechQueueTimer) { clearTimeout(speechQueueTimer); speechQueueTimer = null; }
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-      if (currentCloudAudio) {
-        try { currentCloudAudio.pause(); currentCloudAudio = null; } catch(e) {}
-      }
-      const speakBtn = document.getElementById('hq-speak-btn');
-      if (speakBtn) {
-        speakBtn.classList.remove('speaking-active');
-        speakBtn.innerText = '🔊 ĐỌC RÕ CÂU NÀY';
-      }
-    }
-
-    function speakSegmentedVietnamese(segmentsArray) {
-      stopAllSpeech();
-      if (!segmentsArray || !segmentsArray.length) return;
-
-      const cleanSegments = segmentsArray.map(s => normalizeVietnamesePhonetics(s)).filter(Boolean);
-      const speakBtn = document.getElementById('hq-speak-btn');
-      if (speakBtn) {
-        speakBtn.classList.add('speaking-active');
-        speakBtn.innerText = '🔊 ĐANG ĐỌC RÕ...';
-      }
-
-      let targetLocalVoice = null;
-      if (selectedVoiceMode === 'AUTO_BEST' && availableViVoices.length > 0) {
-        targetLocalVoice = availableViVoices.find(v => v.name.includes('Natural') || v.name.includes('Google')) || availableViVoices[0];
-      } else if (selectedVoiceMode.startsWith('LOCAL_')) {
-        const vIdx = parseInt(selectedVoiceMode.split('_')[1], 10);
-        targetLocalVoice = availableViVoices[vIdx] || availableViVoices[0];
-      }
-
-      if (targetLocalVoice && selectedVoiceMode !== 'GOOGLE_STREAM') {
-        let idx = 0;
-        function playNextLocalSegment() {
-          if (idx >= cleanSegments.length) {
-            if (speakBtn) {
-              speakBtn.classList.remove('speaking-active');
-              speakBtn.innerText = '🔊 ĐỌC RÕ CÂU NÀY';
-            }
-            return;
-          }
-          const u = new SpeechSynthesisUtterance(cleanSegments[idx]);
-          u.voice = targetLocalVoice;
-          u.lang = 'vi-VN';
-          u.rate = 0.96;
-          u.pitch = 1.0;
-          u.volume = 1.0;
-
-          u.onend = () => {
-            idx++;
-            speechQueueTimer = setTimeout(playNextLocalSegment, 220);
-          };
-          u.onerror = () => {
-            idx++;
-            speechQueueTimer = setTimeout(playNextLocalSegment, 150);
-          };
-          window.speechSynthesis.speak(u);
-        }
-        playNextLocalSegment();
-      } else {
-        let idx = 0;
-        function playNextCloudSegment() {
-          if (idx >= cleanSegments.length) {
-            if (speakBtn) {
-              speakBtn.classList.remove('speaking-active');
-              speakBtn.innerText = '🔊 ĐỌC RÕ CÂU NÀY';
-            }
-            return;
-          }
-          const chunk = cleanSegments[idx].slice(0, 180);
-          const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(chunk)}&tl=vi&client=tw-ob`;
-          const audio = new Audio(url);
-          currentCloudAudio = audio;
-          audio.playbackRate = 1.0;
-          audio.onended = () => {
-            idx++;
-            speechQueueTimer = setTimeout(playNextCloudSegment, 220);
-          };
-          audio.onerror = () => {
-            const u = new SpeechSynthesisUtterance(chunk);
-            u.lang = 'vi-VN';
-            u.rate = 0.95;
-            u.onend = () => {
-              idx++;
-              speechQueueTimer = setTimeout(playNextCloudSegment, 200);
-            };
-            window.speechSynthesis.speak(u);
-          };
-          audio.play().catch(() => {
-            const u = new SpeechSynthesisUtterance(chunk);
-            u.lang = 'vi-VN';
-            u.rate = 0.95;
-            window.speechSynthesis.speak(u);
-          });
-        }
-        playNextCloudSegment();
-      }
-    }
-
-    function testVietnameseVoiceSample() {
-      refreshVoiceDropdown();
-      speakSegmentedVietnamese([
-        "Xin chào thầy Hồ Tấn Khải và các em học sinh trường Trung học phổ thông Mang Thít.",
-        "Hệ thống giọng đọc Tiếng Việt đã sẵn sàng, phát âm rõ chữ và mạch lạc!"
-      ]);
-    }
-
-    function toggleAutoVoiceTTS() {
-      autoVoiceEnabled = !autoVoiceEnabled;
-      const btn = document.getElementById('btn-auto-tts');
-      if (autoVoiceEnabled) {
-        btn.innerText = '🔊 TỰ ĐỌC: BẬT';
-        btn.style.background = '#ec4899';
-        speakCurrentHostQuestion(true);
-      } else {
-        btn.innerText = '🔇 TỰ ĐỌC: TẮT';
-        btn.style.background = '#64748b';
-        stopAllSpeech();
-      }
-    }
-
-    function speakCurrentHostQuestion(forceManual = false) {
-      if (!forceManual && !autoVoiceEnabled) return;
-      if (!quizList || !quizList.length) return;
-
-      const activeIdx = isReviewAnswersMode ? reviewQIdx : matchState.globalQIndex;
-      const qObj = quizList[activeIdx % quizList.length];
-      const qNum = (activeIdx % quizList.length) + 1;
-      const cleanTitle = cleanQuestionTitleText(qObj.q);
-
-      const stateKey = `${activeIdx}_${isReviewAnswersMode}`;
-      if (!forceManual && lastSpokenKey === stateKey) return;
-      lastSpokenKey = stateKey;
-
-      const segments = [];
-      segments.push(`Câu hỏi số ${qNum}: ${cleanTitle}`);
-
-      if (isReviewAnswersMode) {
-        const correctLetter = String.fromCharCode(65 + qObj.correct);
-        segments.push(`Đáp án đúng là phương án ${correctLetter}: ${qObj.opts[qObj.correct]}.`);
-      } else {
-        qObj.opts.forEach((opt, idx) => {
-          const letter = String.fromCharCode(65 + idx);
-          segments.push(`Phương án ${letter}: ${opt}.`);
-        });
-      }
-      speakSegmentedVietnamese(segments);
-    }
-
-    /* =========================================================================
-       3. CHẾ ĐỘ XUẤT BỘ CÂU HỎI ĐẦY ĐỦ MÀU SẮC (SLIDE HTML & IN PDF MINH CHỨNG)
+       2. CHẾ ĐỘ XUẤT BỘ CÂU HỎI ĐẦY ĐỦ MÀU SẮC (SLIDE HTML & IN PDF MINH CHỨNG)
        ========================================================================= */
     function getActiveExportQuizList() {
       if (quizList && quizList.length > 0) return quizList;
@@ -1087,7 +935,7 @@
     }
 
     /* =========================================================================
-       4. HIỆU ỨNG ÂM THANH TRẬN ĐẤU (WEB AUDIO FX)
+       3. HIỆU ỨNG ÂM THANH TRẬN ĐẤU (WEB AUDIO FX)
        ========================================================================= */
     const AudioFX = {
       ctx: null,
@@ -1162,7 +1010,7 @@
     };
 
     /* =========================================================================
-       5. CÀI ĐẶT CHẾ ĐỘ & FILE ĐỀ THI (.JSON)
+       4. CÀI ĐẶT CHẾ ĐỘ & FILE ĐỀ THI (.JSON)
        ========================================================================= */
     let quizList = [];
     let joinMode = 'AUTO_ALL';
@@ -1214,7 +1062,7 @@
     }
 
     /* =========================================================================
-       6. SÂN ĐẤU 3D, BẦU TRỜI 3 HIỆP & CÚP VÀNG 3D KHỔNG LỒ
+       5. SÂN ĐẤU 3D NẰM TRONG KHUNG VIEWPORT ĐỘC LẬP (KHÔNG BAO GIỜ BỊ CHE)
        ========================================================================= */
     let scene, camera, renderer, ropeMesh, ribbonMesh;
     let ambientLight, sunLight, grassMesh, sandMesh, starsGroup, stadiumLightsGroup;
@@ -1231,25 +1079,40 @@
       redPlayers: [], bluePlayers: [], spectators: 0
     };
 
+    function resize3DViewport() {
+      if (!renderer || !camera) return;
+      const vp = document.getElementById('arena-3d-viewport');
+      const w = vp.clientWidth || window.innerWidth;
+      const h = vp.clientHeight || 360;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
     function init3DStage() {
       const canvas = document.getElementById('canvas3d');
+      const vp = document.getElementById('arena-3d-viewport');
+      const w = vp.clientWidth || window.innerWidth;
+      const h = vp.clientHeight || 360;
+
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0x38bdf8);
       scene.fog = new THREE.FogExp2(0x38bdf8, 0.012);
 
-      camera = new THREE.PerspectiveCamera(40, window.innerWidth / (window.innerHeight - 48), 0.1, 120);
-      camera.position.set(0, 6.4, 18.5);
-      camera.lookAt(0, -1.6, 0);
+      // Vì sân 3D có khung riêng (#arena-3d-viewport), camera đặt chính diện tâm sân giúp sàn kéo co hiển thị trọn vẹn 100%
+      camera = new THREE.PerspectiveCamera(38, w / h, 0.1, 120);
+      camera.position.set(0, 5.2, 16.5);
+      camera.lookAt(0, 1.0, 0);
 
       renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-      renderer.setSize(window.innerWidth, window.innerHeight - 48);
+      renderer.setSize(w, h);
       renderer.shadowMap.enabled = true;
       renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-      ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+      ambientLight = new THREE.AmbientLight(0xffffff, 0.82);
       scene.add(ambientLight);
 
-      sunLight = new THREE.DirectionalLight(0xfffbeb, 0.9);
+      sunLight = new THREE.DirectionalLight(0xfffbeb, 0.92);
       sunLight.position.set(12, 25, 16);
       sunLight.castShadow = true;
       sunLight.shadow.mapSize.width = 2048;
@@ -1277,12 +1140,7 @@
       buildGiantGoldenTrophy3D();
       applyRoundAtmosphere(1);
 
-      window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / (window.innerHeight - 48);
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight - 48);
-      });
-
+      window.addEventListener('resize', resize3DViewport);
       animate3DLoop();
     }
 
@@ -1523,6 +1381,9 @@
     function animate3DLoop() {
       requestAnimationFrame(animate3DLoop);
       const t = clock.getElapsedTime();
+      const vp = document.getElementById('arena-3d-viewport');
+      const vpW = vp.clientWidth || window.innerWidth;
+      const vpH = vp.clientHeight || 360;
 
       const tugOscillation = matchState.status === 'PLAYING' ? Math.sin(t * 7.5) * 0.14 : 0;
       const desiredX = targetRopeX + tugOscillation;
@@ -1562,8 +1423,8 @@
         const el = document.getElementById(`label-RED-${i}`);
         if (el) {
           c.getWorldPosition(tempV); tempV.y += 2.15; tempV.project(camera);
-          el.style.left = `${(tempV.x * 0.5 + 0.5) * window.innerWidth}px`;
-          el.style.top = `${(-(tempV.y * 0.5) + 0.5) * (window.innerHeight - 48)}px`;
+          el.style.left = `${(tempV.x * 0.5 + 0.5) * vpW}px`;
+          el.style.top = `${(-(tempV.y * 0.5) + 0.5) * vpH}px`;
         }
       });
 
@@ -1585,8 +1446,8 @@
         const el = document.getElementById(`label-BLUE-${i}`);
         if (el) {
           c.getWorldPosition(tempV); tempV.y += 2.15; tempV.project(camera);
-          el.style.left = `${(tempV.x * 0.5 + 0.5) * window.innerWidth}px`;
-          el.style.top = `${(-(tempV.y * 0.5) + 0.5) * (window.innerHeight - 48)}px`;
+          el.style.left = `${(tempV.x * 0.5 + 0.5) * vpW}px`;
+          el.style.top = `${(-(tempV.y * 0.5) + 0.5) * vpH}px`;
         }
       });
 
@@ -1594,7 +1455,7 @@
     }
 
     /* =========================================================================
-       7. ĐA KẾT NỐI ĐÁM MÂY CỔNG 443 HTTPS (XUYÊN 4G & WI-FI)
+       6. ĐA KẾT NỐI ĐÁM MÂY CỔNG 443 HTTPS (XUYÊN 4G & WI-FI)
        ========================================================================= */
     const BROKER_URLS = [
       'wss://broker.hivemq.com:8884/mqtt',
@@ -1604,7 +1465,7 @@
     let activeClients = [];
     let currentRoomTopic = '';
     let seenMsgIds = new Set();
-    const localBus = new BroadcastChannel('tug_multi_v12');
+    const localBus = new BroadcastChannel('tug_multi_v13');
 
     function connectMultiCloud(roomId, onMessageCallback, onConnectedCallback) {
       activeClients.forEach(c => { try { c.end(); } catch(e){} });
@@ -1656,24 +1517,36 @@
     }
 
     /* =========================================================================
-       8. TẠO MÃ QR SIÊU NÉT (CORRECT LEVEL L + URL NGẮN GỌN) & PHÓNG TO QR
+       7. MÃ QR SIÊU NÉT & TỰ ĐỘNG ẨN QR KHI VÀO SÀN THI ĐẤU
        ========================================================================= */
     let qrRedUrl = '';
     let qrBlueUrl = '';
     let currentZoomedUrl = '';
+    let qrVisibleState = true;
 
     function getCleanWebBaseURL() {
       let base = window.location.href.split('?')[0].split('#')[0];
-      // Nếu giáo viên vô tình mở từ ổ cứng file:/// thì tự động trỏ về link GitHub Pages chuẩn
       if (base.startsWith('file:')) {
         base = 'https://khaibcmt.github.io/edu/';
       }
       return base;
     }
 
+    function setQRCodesVisibility(visible) {
+      qrVisibleState = visible;
+      const leftP = document.getElementById('qr-panel-left');
+      const rightP = document.getElementById('qr-panel-right');
+      if (leftP) leftP.style.display = visible ? 'block' : 'none';
+      if (rightP) rightP.style.display = visible ? 'block' : 'none';
+      if (!visible) closeQRZoomModal();
+    }
+
+    function toggleQRCodesVisibility() {
+      setQRCodesVisibility(!qrVisibleState);
+    }
+
     function renderQRCodes(roomId) {
       const base = getCleanWebBaseURL();
-      // Rút gọn tham số tối đa để hạt QR cực to, dễ quét từ xa
       qrRedUrl = `${base}?r=${roomId}&t=R`;
       qrBlueUrl = `${base}?r=${roomId}&t=B`;
 
@@ -1684,26 +1557,18 @@
 
       try {
         new QRCode(redContainer, {
-          text: qrRedUrl,
-          width: 136,
-          height: 136,
-          colorDark: "#000000",
-          colorLight: "#ffffff",
-          correctLevel: QRCode.CorrectLevel.L
+          text: qrRedUrl, width: 120, height: 120,
+          colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L
         });
         new QRCode(blueContainer, {
-          text: qrBlueUrl,
-          width: 136,
-          height: 136,
-          colorDark: "#000000",
-          colorLight: "#ffffff",
-          correctLevel: QRCode.CorrectLevel.L
+          text: qrBlueUrl, width: 120, height: 120,
+          colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L
         });
       } catch (err) {
-        // Dự phòng API ảnh QR nếu thư viện bị chặn
-        redContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(qrRedUrl)}" width="136" height="136">`;
-        blueContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(qrBlueUrl)}" width="136" height="136">`;
+        redContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrRedUrl)}" width="120" height="120">`;
+        blueContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrBlueUrl)}" width="120" height="120">`;
       }
+      setQRCodesVisibility(true);
     }
 
     function openQRZoomModal(team) {
@@ -1722,15 +1587,11 @@
       renderBox.innerHTML = '';
       try {
         new QRCode(renderBox, {
-          text: currentZoomedUrl,
-          width: 310,
-          height: 310,
-          colorDark: "#000000",
-          colorLight: "#ffffff",
-          correctLevel: QRCode.CorrectLevel.L
+          text: currentZoomedUrl, width: 300, height: 300,
+          colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L
         });
       } catch (e) {
-        renderBox.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=310x310&data=${encodeURIComponent(currentZoomedUrl)}" width="310" height="310">`;
+        renderBox.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(currentZoomedUrl)}" width="300" height="300">`;
       }
 
       modal.style.display = 'flex';
@@ -1756,7 +1617,7 @@
     }
 
     /* =========================================================================
-       9. BẢNG CÂU HỎI CHUNG PHÓNG TO, 4 ĐÁP ÁN 4 MÀU & TỰ ĐỌC AI (HOST)
+       8. BẢNG CÂU HỎI DÀN ĐẦY Ở DƯỚI CÙNG & LOGIC 3 HIỆP (HOST)
        ========================================================================= */
     let hostHeartbeatTimer = null;
     let isReviewAnswersMode = false;
@@ -1768,7 +1629,7 @@
       return '🌌 HIỆP 3/3 (ĐÊM CHUNG KẾT)';
     }
 
-    function renderHostQuestionShowcase(shouldAutoSpeak = false) {
+    function renderHostQuestionShowcase() {
       if (!quizList || !quizList.length) return;
       const activeIdx = isReviewAnswersMode ? reviewQIdx : matchState.globalQIndex;
       const qObj = quizList[activeIdx % quizList.length];
@@ -1783,14 +1644,14 @@
 
       if (isReviewAnswersMode) {
         board.classList.add('review-active');
-        badge.innerHTML = `✨ CHẾ ĐỘ CHỮA BÀI TRÊN LỚP (ĐÁP ÁN ĐÚNG TÔ MÀU XANH LÁ)`;
+        badge.innerHTML = `✨ CHẾ ĐỘ CHỮA BÀI TRÊN LỚP`;
         badge.style.color = '#fef08a';
         revBtn.innerText = '🙈 Ẩn Đáp Án';
       } else {
         board.classList.remove('review-active');
-        badge.innerHTML = `${getRoundThemeLabel(matchState.currentRound)} • CÂU HỎI CHUNG CỦA CẢ 2 ĐỘI (#${matchState.globalQIndex + 1})`;
+        badge.innerHTML = `${getRoundThemeLabel(matchState.currentRound)} • CÂU HỎI CHUNG (#${matchState.globalQIndex + 1})`;
         badge.style.color = '#38bdf8';
-        revBtn.innerText = '👁️ Hiện Đáp Án Đúng';
+        revBtn.innerText = '👁️ Hiện Đáp Án';
       }
 
       const optsBox = document.getElementById('hq-q-opts');
@@ -1800,30 +1661,26 @@
         const d = document.createElement('div');
         d.className = `hq-opt-item opt-color-${idx % 4} ${(isReviewAnswersMode && isCorrectOpt) ? 'correct-reveal' : ''}`;
         const letter = String.fromCharCode(65 + idx);
-        d.innerHTML = `<span>${letter}. ${opt}</span>${(isReviewAnswersMode && isCorrectOpt) ? '<span>✓ ĐÁP ÁN ĐÚNG</span>' : ''}`;
+        d.innerHTML = `<span>${letter}. ${opt}</span>${(isReviewAnswersMode && isCorrectOpt) ? '<span>✓ ĐÚNG</span>' : ''}`;
         optsBox.appendChild(d);
       });
 
       document.getElementById('hq-team-progress').innerText =
-        `Tiến độ trả lời câu này: Đội Đỏ (${matchState.redAnsweredIds.length}/${matchState.redPlayers.length} bạn) • Đội Xanh (${matchState.blueAnsweredIds.length}/${matchState.bluePlayers.length} bạn)`;
+        `Tiến độ: Đội Đỏ (${matchState.redAnsweredIds.length}/${matchState.redPlayers.length} bạn) • Đội Xanh (${matchState.blueAnsweredIds.length}/${matchState.bluePlayers.length} bạn)`;
       document.getElementById('hq-answer-stats').innerText =
-        `Thống kê câu này: ✅ ${qObj.rightCount || 0} lượt Đúng • 🧊 ${qObj.wrongCount || 0} lượt Sai (Đóng băng)`;
-
-      if (shouldAutoSpeak && (matchState.status === 'PLAYING' || isReviewAnswersMode)) {
-        speakCurrentHostQuestion(false);
-      }
+        `Thống kê: ✅ ${qObj.rightCount || 0} Đúng • 🧊 ${qObj.wrongCount || 0} Sai`;
     }
 
     function stepHostQuestion(delta) {
       if (!quizList.length) return;
       if (isReviewAnswersMode) {
         reviewQIdx = (reviewQIdx + delta + quizList.length) % quizList.length;
-        renderHostQuestionShowcase(true);
+        renderHostQuestionShowcase();
       } else {
         matchState.globalQIndex = Math.max(0, matchState.globalQIndex + delta);
         matchState.redAnsweredIds = []; matchState.blueAnsweredIds = [];
         update3DLabelsStatusOnly();
-        renderHostQuestionShowcase(true);
+        renderHostQuestionShowcase();
         broadcastTeamSyncState();
       }
     }
@@ -1832,23 +1689,21 @@
       matchState.globalQIndex++;
       matchState.redAnsweredIds = []; matchState.blueAnsweredIds = [];
       update3DLabelsStatusOnly();
-      renderHostQuestionShowcase(true);
+      renderHostQuestionShowcase();
       broadcastTeamSyncState();
     }
 
     function toggleReviewAnswersMode() {
       isReviewAnswersMode = !isReviewAnswersMode;
       reviewQIdx = matchState.globalQIndex;
-      document.getElementById('host-question-board').style.display = 'block';
-      renderHostQuestionShowcase(true);
+      renderHostQuestionShowcase();
     }
 
     function openPostGameReview() {
       document.getElementById('victory-modal').style.display = 'none';
       isReviewAnswersMode = true;
       reviewQIdx = 0;
-      document.getElementById('host-question-board').style.display = 'block';
-      renderHostQuestionShowcase(true);
+      renderHostQuestionShowcase();
     }
 
     function open3DArena() {
@@ -1860,17 +1715,16 @@
 
       quizList = shuffleQuestionOrder(parsed);
       isReviewAnswersMode = false;
-      lastSpokenKey = '';
-      refreshVoiceDropdown();
 
       document.getElementById('teacher-view').style.display = 'none';
-      document.getElementById('host-view').style.display = 'block';
-      document.getElementById('host-question-board').style.display = 'block';
+      document.getElementById('host-view').style.display = 'flex';
 
       if (!renderer) init3DStage();
+      setTimeout(resize3DViewport, 80);
+
       activeRoomId = String(Math.floor(10000 + Math.random() * 90000));
       resetArenaObjects();
-      renderHostQuestionShowcase(false);
+      renderHostQuestionShowcase();
       renderQRCodes(activeRoomId);
 
       connectMultiCloud(activeRoomId, handleHostIncomingData, () => {
@@ -1963,17 +1817,15 @@
       const redAllDone = totalRed > 0 && matchState.redAnsweredIds.length >= totalRed;
       const blueAllDone = totalBlue > 0 && matchState.blueAnsweredIds.length >= totalBlue;
 
-      let advanced = false;
       if (redAllDone || blueAllDone) {
         matchState.globalQIndex++;
         matchState.redAnsweredIds = [];
         matchState.blueAnsweredIds = [];
-        advanced = true;
       }
 
       update3DLabelsStatusOnly();
       updateHostHUD();
-      renderHostQuestionShowcase(advanced);
+      renderHostQuestionShowcase();
       broadcastTeamSyncState();
     }
 
@@ -2040,7 +1892,7 @@
           chars[idx].userData.ice.visible = true;
           setTimeout(() => { if (chars[idx]) chars[idx].userData.ice.visible = false; }, 3000);
         }
-        renderHostQuestionShowcase(false);
+        renderHostQuestionShowcase();
       }
       else if (d.type === 'FREEZE_DONE_NEXT') {
         const pObj = registerOrGetPlayer(d.playerId, d.team, d.playerName, true);
@@ -2052,7 +1904,6 @@
     }
 
     function handleRoundWin(teamWinner) {
-      stopAllSpeech();
       AudioFX.winFanfare();
       if (teamWinner === 'RED') matchState.redRoundWins++;
       else matchState.blueRoundWins++;
@@ -2092,12 +1943,14 @@
       AudioFX.whistle();
       update3DLabelsStatusOnly();
       updateHostHUD();
-      renderHostQuestionShowcase(true);
+      renderHostQuestionShowcase();
       broadcastTeamSyncState();
     }
 
+    // Khi bấm CHUẨN BỊ (VÀO DÂY): Đưa tất cả HS vào dây và Tự động ẨN MÃ QR cho màn hình thoáng!
     function commandAllReadyRope() {
       AudioFX.stepInRope();
+      setQRCodesVisibility(false);
       matchState.redPlayers.forEach(p => p.ready = true);
       matchState.bluePlayers.forEach(p => p.ready = true);
       rebuildAll3DCharacters();
@@ -2112,26 +1965,27 @@
       el.innerText = emoji;
       el.style.left = `${15 + Math.random() * 70}%`;
       box.appendChild(el);
-      setTimeout(() => el.remove(), 2200);
+      setTimeout(() => el.remove(), 2000);
     }
 
     function updateHostHUD() {
-      document.getElementById('hud-red-count').innerText = `ĐỘI ĐỎ: ${matchState.redPlayers.length} HS`;
-      document.getElementById('hud-blue-count').innerText = `ĐỘI XANH: ${matchState.bluePlayers.length} HS`;
-      document.getElementById('hud-red-rounds').innerText = `🏆 Hiệp: ${matchState.redRoundWins}/2`;
-      document.getElementById('hud-blue-rounds').innerText = `🏆 Hiệp: ${matchState.blueRoundWins}/2`;
+      document.getElementById('hud-red-count').innerText = `🔴 ĐỘI ĐỎ: ${matchState.redPlayers.length} HS`;
+      document.getElementById('hud-blue-count').innerText = `🔵 ĐỘI XANH: ${matchState.bluePlayers.length} HS`;
+      document.getElementById('hud-red-rounds').innerText = `🏆 Hiệp thắng: ${matchState.redRoundWins}/2`;
+      document.getElementById('hud-blue-rounds').innerText = `🏆 Hiệp thắng: ${matchState.blueRoundWins}/2`;
       document.getElementById('hud-round-title').innerText =
         `${getRoundThemeLabel(matchState.currentRound)} • TỈ SỐ HIỆP: ĐỎ ${matchState.redRoundWins} - ${matchState.blueRoundWins} XANH`;
 
       const s = matchState.ropeScore;
-      let txt = `Mã Phòng: ${activeRoomId} | Điểm Hiệp ${matchState.currentRound}: HÒA (0)`;
+      let txt = `Mã Phòng: ${activeRoomId} | Điểm kéo Hiệp ${matchState.currentRound}: HÒA (0)`;
       if (s > 0) txt = `Mã Phòng: ${activeRoomId} | XANH DẪN +${s}/3 CÂU`;
       if (s < 0) txt = `Mã Phòng: ${activeRoomId} | ĐỎ DẪN +${Math.abs(s)}/3 CÂU`;
       document.getElementById('hud-rope-score').innerText = txt;
     }
 
+    // Khi bấm BẮT ĐẦU KÉO: Tự động Ẩn 2 Mã QR để sân kéo co thoáng đãng 100%
     function startMatch() {
-      closeQRZoomModal();
+      setQRCodesVisibility(false);
       commandAllReadyRope();
       matchState.status = 'PLAYING';
       applyRoundAtmosphere(matchState.currentRound);
@@ -2139,14 +1993,13 @@
       document.getElementById('btn-host-prep').style.display = 'none';
       document.getElementById('btn-host-start').style.display = 'none';
       document.getElementById('btn-host-pause').style.display = 'flex';
-      renderHostQuestionShowcase(true);
+      renderHostQuestionShowcase();
       broadcastTeamSyncState();
     }
 
     function pauseMatch() {
       matchState.status = matchState.status === 'PLAYING' ? 'PAUSED' : 'PLAYING';
       document.getElementById('btn-host-pause').innerText = matchState.status === 'PLAYING' ? '⏸ TẠM DỪNG' : '▶ TIẾP TỤC';
-      if (matchState.status === 'PAUSED') stopAllSpeech();
       broadcastTeamSyncState();
     }
 
@@ -2161,13 +2014,10 @@
 
     function finishMatch(winner) {
       matchState.status = 'ENDED';
+      setQRCodesVisibility(false);
       document.getElementById('round-modal').style.display = 'none';
       AudioFX.winFanfare();
       dropGiantTrophyNow();
-
-      if (autoVoiceEnabled) {
-        speakSegmentedVietnamese([`Chúc mừng ${winner} đã xuất sắc giành chiến thắng chung cuộc và nhận Cúp Vàng vô địch!`]);
-      }
 
       document.getElementById('win-banner-txt').innerText = `🏆 ${winner} VÔ ĐỊCH CHUNG CUỘC!`;
       document.getElementById('win-sub-txt').innerText =
@@ -2191,6 +2041,7 @@
       };
       targetRopeX = 0;
       applyRoundAtmosphere(1);
+      setQRCodesVisibility(true);
       document.getElementById('btn-host-prep').style.display = 'flex';
       document.getElementById('btn-host-start').style.display = 'flex';
       document.getElementById('btn-host-pause').style.display = 'none';
@@ -2201,7 +2052,6 @@
 
     function returnToSetup() {
       if (hostHeartbeatTimer) clearInterval(hostHeartbeatTimer);
-      stopAllSpeech();
       activeClients.forEach(c => { try { c.end(); } catch(e){} });
       activeClients = [];
       document.getElementById('host-view').style.display = 'none';
@@ -2224,7 +2074,7 @@
     }
 
     /* =========================================================================
-       10. LOGIC ĐIỆN THOẠI HỌC SINH (CLIENT)
+       9. LOGIC ĐIỆN THOẠI HỌC SINH (CLIENT)
        ========================================================================= */
     let myPlayerId = 'hs_' + Math.random().toString(36).substr(2, 6);
     let selectedTeam = 'RED';
@@ -2455,7 +2305,7 @@
         b.className = `btn-ans opt-color-${idx % 4} ${isLockedPreview ? 'locked-choice' : ''}`;
         b.disabled = isLockedPreview;
         const letter = String.fromCharCode(65 + idx);
-        b.innerHTML = `<span>${letter}. ${opt}</span><span class="lock-tag" style="font-size:12px; opacity:0.9;">${isLockedPreview ? '🔒 Chờ đội' : ''}</span>`;
+        b.innerHTML = `<span>${letter}. ${opt}</span><span class="lock-tag" style="font-size:11.5px; opacity:0.9;">${isLockedPreview ? '🔒 Chờ đội' : ''}</span>`;
         b.onclick = () => checkMobileAnswer(idx === cur.correct);
         box.appendChild(b);
       });
@@ -2514,10 +2364,8 @@
       sendCloudMessage({ type: 'CHEER_EMOJI', emoji });
     }
 
-    /* Tự động nhận diện cả tham số rút gọn (?r=...&t=...) lẫn tham số đầy đủ (?role=player&room=...) */
     window.addEventListener('DOMContentLoaded', () => {
       initSubjectBank();
-      refreshVoiceDropdown();
       const p = new URLSearchParams(window.location.search);
       if (p.get('role') === 'player' || p.get('r')) {
         const roomVal = p.get('r') || p.get('room');
