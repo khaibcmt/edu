@@ -81,7 +81,7 @@
       position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
       background: rgba(15, 23, 42, 0.95); border: 2px solid #334155; backdrop-filter: blur(10px);
       padding: 5px 12px; border-radius: 40px; display: flex; align-items: center; gap: 5px; z-index: 35;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.45); white-space: nowrap; flex-wrap: wrap; justify-content: center; width: 96%; max-width: 1180px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.45); white-space: nowrap; flex-wrap: wrap; justify-content: center; width: 96%; max-width: 1200px;
     }
     .c-btn { padding: 6px 11px; border-radius: 20px; border: none; font-weight: 900; font-size: 11.5px; cursor: pointer; display: flex; align-items: center; gap: 4px; }
     .c-prep { background: var(--purple); color: white; }
@@ -103,10 +103,38 @@
     .round-badge-top { color: #38bdf8; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
     .tug-score-live { color: #fef08a; font-size: 16px; margin-top: 2px; }
 
-    .qr-panel { position: absolute; top: 110px; padding: 7px; border-radius: 14px; background: rgba(255, 255, 255, 0.96); box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center; color: #0f172a; z-index: 20; transition: all 0.25s; }
-    .qr-panel.left { left: 14px; border: 3.5px solid var(--red); }
-    .qr-panel.right { right: 14px; border: 3.5px solid var(--blue); }
-    .qr-caption { font-weight: 900; font-size: 10.5px; margin-top: 3px; }
+    /* HỘP MÃ QR SIÊU NÉT, CÓ VIỀN TRẮNG CHUẨN & BẤM ĐỂ PHÓNG TO */
+    .qr-panel {
+      position: absolute; top: 106px; padding: 12px; border-radius: 18px;
+      background: #ffffff; box-shadow: 0 12px 35px rgba(0,0,0,0.65);
+      text-align: center; color: #0f172a; z-index: 25; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .qr-panel:hover { transform: scale(1.06); box-shadow: 0 15px 45px rgba(255,255,255,0.35); }
+    .qr-panel.left { left: 16px; border: 4px solid var(--red); }
+    .qr-panel.right { right: 16px; border: 4px solid var(--blue); }
+    .qr-box-inner {
+      background: #ffffff; padding: 6px; border-radius: 8px; display: inline-block;
+    }
+    .qr-box-inner img, .qr-box-inner canvas { display: block !important; margin: 0 auto !important; image-rendering: pixelated; }
+    .qr-caption { font-weight: 900; font-size: 12px; margin-top: 6px; letter-spacing: 0.3px; }
+    .qr-zoom-hint { font-size: 10.5px; color: #475569; font-weight: 800; margin-top: 2px; }
+
+    /* MODAL PHÓNG TO MÃ QR KHỔNG LỒ GIỮA MÀN HÌNH ĐỂ HS CUỐI LỚP QUÉT DỄ DÀNG */
+    #qr-zoom-modal {
+      position: fixed; inset: 0; background: rgba(7, 11, 20, 0.92); backdrop-filter: blur(12px);
+      z-index: 600; display: none; align-items: center; justify-content: center; padding: 20px;
+    }
+    .qr-zoom-card {
+      background: #ffffff; color: #0f172a; padding: 28px 36px; border-radius: 28px;
+      text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.8); max-width: 94%;
+      border: 6px solid var(--gold);
+    }
+    #qr-zoom-render {
+      background: #ffffff; padding: 14px; display: inline-block; border-radius: 16px;
+      border: 2px dashed #cbd5e1; margin: 12px 0;
+    }
+    #qr-zoom-render img, #qr-zoom-render canvas { display: block !important; margin: 0 auto !important; image-rendering: pixelated; }
 
     /* BẢNG CÂU HỎI CHUNG PHÓNG TO Ở DƯỚI MÀN HÌNH */
     #host-question-board {
@@ -168,7 +196,7 @@
       background: #090d16; display: none; flex-direction: column; padding: 12px 14px; justify-content: space-between; overflow-y: auto;
     }
     .lobby-card { margin: auto; width: 100%; max-width: 390px; background: #131c2e; border: 2px solid #23334d; border-radius: 22px; padding: 18px; text-align: center; }
-    .name-input-box { width: 100%; padding: 12px 14px; border-radius: 12px; border: 2px solid #38bdf8; background: #090d16; color: #fff; font-size: 16px; font-weight: 800; text-align: center; outline: none; margin: 8px 0; }
+    .name-input-box { width: 100%; padding: 12px 14px; border-radius: 12px; border: 2px solid #38bdf8; background: #090d16; color: #fff; font-size: 16px; font-weight: 800; text-align: center; outline: none; margin: 6px 0; }
     .team-select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0; }
     .btn-pick-team { padding: 12px 8px; border-radius: 12px; border: 3px solid transparent; font-weight: 900; font-size: 14px; color: white; cursor: pointer; }
     .btn-pick-team.red { background: var(--red-dark); border-color: var(--red-glow); }
@@ -213,12 +241,27 @@
     </div>
   </div>
 
+  <!-- MODAL PHÓNG TO MÃ QR KHỔNG LỒ GIỮA MÀN HÌNH -->
+  <div id="qr-zoom-modal" onclick="closeQRZoomModal()">
+    <div class="qr-zoom-card" onclick="event.stopPropagation()">
+      <h2 id="qr-zoom-title" style="margin: 0; font-size: 28px; font-weight: 900;">QUÉT MÃ QR ĐỂ VÀO ĐỘI</h2>
+      <p id="qr-zoom-room" style="margin: 6px 0 0 0; font-size: 16px; font-weight: 800; color: #334155;"></p>
+      <div id="qr-zoom-render"></div>
+      <div id="qr-zoom-url" style="font-size: 13px; color: #64748b; word-break: break-all; max-width: 420px; margin: 6px auto 16px auto; font-weight: 700;"></div>
+      <div style="display: flex; gap: 10px; justify-content: center;">
+        <button class="btn-launch" style="background: #10b981; padding: 10px 22px; font-size: 15px;" onclick="copyZoomedQRLink()">📋 Sao chép Link gửi Zalo</button>
+        <button class="btn-launch" style="background: #ef4444; padding: 10px 22px; font-size: 15px;" onclick="closeQRZoomModal()">✖ Đóng lại</button>
+      </div>
+    </div>
+  </div>
+
   <!-- 1. MÀN HÌNH QUẢN LÝ MÔN HỌC & CÀI ĐẶT CỦA GIÁO VIÊN -->
   <div id="teacher-view">
     <div class="setup-box">
       <div class="flex-between">
         <h2 style="margin: 0; font-size: 21px;">🌾 Quản Lý Môn Học, Bài Dạy & Xuất Học Liệu Minh Chứng</h2>
         <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <button class="btn-action-sm" style="background:#dcfce7; border-color:#10b981; color:#065f46;" onclick="switchToStudentOnSameDevice()">📱 Vào Chế Độ Học Sinh (Nhập Mã Phòng)</button>
           <button class="btn-action-sm" style="background:#fef3c7; border-color:#f59e0b; color:#92400e;" onclick="exportColorfulPresentationHTML()">🎨 Xuất Slide Học Liệu Màu (.html)</button>
           <button class="btn-action-sm" style="background:#e0e7ff; border-color:#6366f1; color:#1e1b4b;" onclick="printEvidenceColorfulPDF()">🖨️ In / Lưu PDF Minh Chứng</button>
           <button class="btn-action-sm" onclick="exportQuizJSON()">💾 Xuất Đề (.json)</button>
@@ -273,7 +316,7 @@
 
       <div class="flex-between" style="margin-top: 10px;">
         <span style="font-size: 13px; color: #059669; font-weight: 800;">
-          🔊 Giọng đọc Tiếng Việt chuẩn hóa thuật ngữ rõ chữ • 🎨 Xuất Slide & PDF học liệu màu làm minh chứng!
+          📱 Mã QR thế hệ mới siêu nhạy (Bấm vào QR để phóng to toàn màn hình cho cuối lớp quét!)
         </span>
         <button class="btn-launch" onclick="open3DArena()">MỞ SÂN ĐẤU 3D & HIỆN MÃ QR</button>
       </div>
@@ -305,7 +348,7 @@
 
       <div class="center-round-hud">
         <div class="round-badge-top" id="hud-round-title">🌤️ HIỆP 1 / 3 - TRỜI XANH (DẪN 3 CÂU THẮNG HIỆP)</div>
-        <div class="tug-score-live" id="hud-rope-score">Thế trận Hiệp 1: HÒA (0)</div>
+        <div class="tug-score-live" id="hud-rope-score">Mã Phòng: ---- | Thế trận Hiệp 1: HÒA (0)</div>
       </div>
 
       <div class="team-box blue">
@@ -318,14 +361,17 @@
     <div id="labels-container"></div>
     <div id="cheer-container"></div>
 
-    <div class="qr-panel left">
-      <div id="qr-red"></div>
+    <!-- 2 Mã QR Siêu Nét (Click vào để Phóng To giữa màn hình) -->
+    <div class="qr-panel left" onclick="openQRZoomModal('RED')" title="Bấm vào đây để PHÓNG TO Mã QR Đội Đỏ">
+      <div class="qr-box-inner" id="qr-red"></div>
       <div class="qr-caption" style="color: var(--red);">QUÉT VÀO ĐỘI ĐỎ 🔴</div>
+      <div class="qr-zoom-hint">🔍 Bấm để phóng to QR</div>
     </div>
 
-    <div class="qr-panel right">
-      <div id="qr-blue"></div>
+    <div class="qr-panel right" onclick="openQRZoomModal('BLUE')" title="Bấm vào đây để PHÓNG TO Mã QR Đội Xanh">
+      <div class="qr-box-inner" id="qr-blue"></div>
       <div class="qr-caption" style="color: var(--blue);">QUÉT VÀO ĐỘI XANH 🔵</div>
+      <div class="qr-zoom-hint">🔍 Bấm để phóng to QR</div>
     </div>
 
     <!-- BẢNG CÂU HỎI CHUNG PHÓNG TO Ở DƯỚI MÀN HÌNH -->
@@ -375,6 +421,12 @@
     <div id="mobile-lobby" class="lobby-card">
       <div id="conn-badge" style="font-size: 12.5px; color: #38bdf8; font-weight: 800; margin-bottom: 4px;">🔄 Đang kết nối sân đấu 3D...</div>
       <h2 style="margin: 0 0 6px 0; font-size: 20px;">ĐĂNG KÝ TÊN & VÀO ĐỘI</h2>
+
+      <!-- Ô Mã Phòng (Tự động điền khi quét QR hoặc HS có thể tự nhập nếu vào thẳng link web) -->
+      <div style="display:flex; gap:6px; align-items:center; margin-bottom:6px;">
+        <span style="font-size:13px; font-weight:800; color:#94a3b8; white-space:nowrap;">Mã Phòng:</span>
+        <input type="text" id="student-room-input" class="name-input-box" style="margin:0; padding:8px 12px; font-size:15px; border-color:#f59e0b; color:#fef08a;" placeholder="Nhập mã phòng (VD: 12345)" onchange="onManualRoomChange()">
+      </div>
 
       <input type="text" id="student-name-input" class="name-input-box" placeholder="Nhập họ tên của em (VD: Minh Khôi)..." maxlength="22" oninput="onStudentNameTyping()">
       
@@ -639,9 +691,6 @@
 
     /* =========================================================================
        2. HỆ THỐNG GIỌNG ĐỌC TIẾNG VIỆT RÕ CHỮ, MẠCH LẠC 3 LỚP
-          - Chuẩn hóa phiên âm thuật ngữ khoa học sang âm tiếng Việt tự nhiên
-          - Tách câu đọc nối tiếp có nhịp nghỉ rõ ràng
-          - Hỗ trợ cả Giọng bản địa (Microsoft HoaiMy/NamMinh/Google) & Google Cloud Stream
        ========================================================================= */
     let autoVoiceEnabled = true;
     let lastSpokenKey = '';
@@ -650,7 +699,6 @@
     let currentCloudAudio = null;
     let speechQueueTimer = null;
 
-    // Từ điển chuẩn hóa phát âm Tiếng Việt để máy đọc tròn vành rõ chữ nhất
     function normalizeVietnamesePhonetics(text) {
       if (!text) return '';
       return text
@@ -741,7 +789,6 @@
       }
     }
 
-    // Đọc danh sách các câu ngắn nối tiếp nhau với nhịp nghỉ rõ chữ
     function speakSegmentedVietnamese(segmentsArray) {
       stopAllSpeech();
       if (!segmentsArray || !segmentsArray.length) return;
@@ -753,17 +800,14 @@
         speakBtn.innerText = '🔊 ĐANG ĐỌC RÕ...';
       }
 
-      // Kiểm tra xem nên dùng giọng Local vi-VN hay Google Cloud Stream
       let targetLocalVoice = null;
       if (selectedVoiceMode === 'AUTO_BEST' && availableViVoices.length > 0) {
-        // Ưu tiên Microsoft HoaiMy / NamMinh Online (Natural) hoặc Google Tiếng Việt
         targetLocalVoice = availableViVoices.find(v => v.name.includes('Natural') || v.name.includes('Google')) || availableViVoices[0];
       } else if (selectedVoiceMode.startsWith('LOCAL_')) {
         const vIdx = parseInt(selectedVoiceMode.split('_')[1], 10);
         targetLocalVoice = availableViVoices[vIdx] || availableViVoices[0];
       }
 
-      // Nếu có giọng Tiếng Việt bản địa chất lượng cao -> Đọc từng vế câu rõ ràng
       if (targetLocalVoice && selectedVoiceMode !== 'GOOGLE_STREAM') {
         let idx = 0;
         function playNextLocalSegment() {
@@ -777,13 +821,13 @@
           const u = new SpeechSynthesisUtterance(cleanSegments[idx]);
           u.voice = targetLocalVoice;
           u.lang = 'vi-VN';
-          u.rate = 0.96; // Tốc độ 0.96 vừa vặn, tròn vành rõ chữ cho học sinh nghe
+          u.rate = 0.96;
           u.pitch = 1.0;
           u.volume = 1.0;
 
           u.onend = () => {
             idx++;
-            speechQueueTimer = setTimeout(playNextLocalSegment, 220); // Nhịp nghỉ 0.22s giữa câu hỏi và từng đáp án
+            speechQueueTimer = setTimeout(playNextLocalSegment, 220);
           };
           u.onerror = () => {
             idx++;
@@ -793,7 +837,6 @@
         }
         playNextLocalSegment();
       } else {
-        // Dùng Google Translate Vietnamese TTS Stream (Giúp các máy Windows không cài gói tiếng Việt vẫn đọc tiếng Việt chuẩn 100%)
         let idx = 0;
         function playNextCloudSegment() {
           if (idx >= cleanSegments.length) {
@@ -813,7 +856,6 @@
             speechQueueTimer = setTimeout(playNextCloudSegment, 220);
           };
           audio.onerror = () => {
-            // Dự phòng về Web Speech API với cờ lang='vi-VN'
             const u = new SpeechSynthesisUtterance(chunk);
             u.lang = 'vi-VN';
             u.rate = 0.95;
@@ -1019,7 +1061,6 @@
 </html>`;
     }
 
-    // Tải về file Slide Học liệu .HTML hoàn chỉnh màu sắc
     function exportColorfulPresentationHTML() {
       const list = getActiveExportQuizList();
       if (!list.length) return alert("Chưa có câu hỏi để xuất!");
@@ -1031,7 +1072,6 @@
       a.click();
     }
 
-    // Mở cửa sổ In / Lưu PDF đầy đủ màu sắc làm minh chứng
     function printEvidenceColorfulPDF() {
       const list = getActiveExportQuizList();
       if (!list.length) return alert("Chưa có câu hỏi để in!");
@@ -1182,6 +1222,7 @@
     let redPullers3D = [], bluePullers3D = [];
     let targetRopeX = 0;
     let clock = new THREE.Clock();
+    let activeRoomId = '12345';
 
     let matchState = {
       status: 'LOBBY', currentRound: 1, redRoundWins: 0, blueRoundWins: 0,
@@ -1563,10 +1604,14 @@
     let activeClients = [];
     let currentRoomTopic = '';
     let seenMsgIds = new Set();
-    const localBus = new BroadcastChannel('tug_multi_v11');
+    const localBus = new BroadcastChannel('tug_multi_v12');
 
     function connectMultiCloud(roomId, onMessageCallback, onConnectedCallback) {
-      currentRoomTopic = `thptmangthit_keoco3d_${roomId}`;
+      activeClients.forEach(c => { try { c.end(); } catch(e){} });
+      activeClients = [];
+
+      const cleanRoom = String(roomId).replace(/[^a-zA-Z0-9]/g, '');
+      currentRoomTopic = `thptmangthit_kc3d_${cleanRoom}`;
       let connectedOnce = false;
 
       BROKER_URLS.forEach((url) => {
@@ -1611,7 +1656,107 @@
     }
 
     /* =========================================================================
-       8. BẢNG CÂU HỎI CHUNG PHÓNG TO, 4 ĐÁP ÁN 4 MÀU & TỰ ĐỌC AI (HOST)
+       8. TẠO MÃ QR SIÊU NÉT (CORRECT LEVEL L + URL NGẮN GỌN) & PHÓNG TO QR
+       ========================================================================= */
+    let qrRedUrl = '';
+    let qrBlueUrl = '';
+    let currentZoomedUrl = '';
+
+    function getCleanWebBaseURL() {
+      let base = window.location.href.split('?')[0].split('#')[0];
+      // Nếu giáo viên vô tình mở từ ổ cứng file:/// thì tự động trỏ về link GitHub Pages chuẩn
+      if (base.startsWith('file:')) {
+        base = 'https://khaibcmt.github.io/edu/';
+      }
+      return base;
+    }
+
+    function renderQRCodes(roomId) {
+      const base = getCleanWebBaseURL();
+      // Rút gọn tham số tối đa để hạt QR cực to, dễ quét từ xa
+      qrRedUrl = `${base}?r=${roomId}&t=R`;
+      qrBlueUrl = `${base}?r=${roomId}&t=B`;
+
+      const redContainer = document.getElementById('qr-red');
+      const blueContainer = document.getElementById('qr-blue');
+      redContainer.innerHTML = '';
+      blueContainer.innerHTML = '';
+
+      try {
+        new QRCode(redContainer, {
+          text: qrRedUrl,
+          width: 136,
+          height: 136,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.L
+        });
+        new QRCode(blueContainer, {
+          text: qrBlueUrl,
+          width: 136,
+          height: 136,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.L
+        });
+      } catch (err) {
+        // Dự phòng API ảnh QR nếu thư viện bị chặn
+        redContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(qrRedUrl)}" width="136" height="136">`;
+        blueContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(qrBlueUrl)}" width="136" height="136">`;
+      }
+    }
+
+    function openQRZoomModal(team) {
+      const modal = document.getElementById('qr-zoom-modal');
+      const title = document.getElementById('qr-zoom-title');
+      const roomTxt = document.getElementById('qr-zoom-room');
+      const renderBox = document.getElementById('qr-zoom-render');
+      const urlTxt = document.getElementById('qr-zoom-url');
+
+      currentZoomedUrl = (team === 'RED') ? qrRedUrl : qrBlueUrl;
+      title.innerText = (team === 'RED') ? '🔴 QUÉT MÃ VÀO ĐỘI ĐỎ' : '🔵 QUÉT MÃ VÀO ĐỘI XANH';
+      title.style.color = (team === 'RED') ? '#ef4444' : '#0284c7';
+      roomTxt.innerText = `Mã Phòng: ${activeRoomId}`;
+      urlTxt.innerText = currentZoomedUrl;
+
+      renderBox.innerHTML = '';
+      try {
+        new QRCode(renderBox, {
+          text: currentZoomedUrl,
+          width: 310,
+          height: 310,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.L
+        });
+      } catch (e) {
+        renderBox.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=310x310&data=${encodeURIComponent(currentZoomedUrl)}" width="310" height="310">`;
+      }
+
+      modal.style.display = 'flex';
+    }
+
+    function closeQRZoomModal() {
+      document.getElementById('qr-zoom-modal').style.display = 'none';
+    }
+
+    function copyZoomedQRLink() {
+      if (!currentZoomedUrl) return;
+      navigator.clipboard.writeText(currentZoomedUrl).then(() => {
+        alert("✅ Đã sao chép đường dẫn! Thầy có thể gửi vào nhóm Zalo lớp cho học sinh bấm vào chơi ngay.");
+      }).catch(() => {
+        prompt("Sao chép đường dẫn dưới đây:", currentZoomedUrl);
+      });
+    }
+
+    function switchToStudentOnSameDevice() {
+      const code = prompt("Nhập Mã Phòng gồm 5 chữ số trên màn hình máy chiếu (VD: 12345):", activeRoomId);
+      if (!code) return;
+      initMobilePlayer(code.trim(), 'RED', currentSubjectKey);
+    }
+
+    /* =========================================================================
+       9. BẢNG CÂU HỎI CHUNG PHÓNG TO, 4 ĐÁP ÁN 4 MÀU & TỰ ĐỌC AI (HOST)
        ========================================================================= */
     let hostHeartbeatTimer = null;
     let isReviewAnswersMode = false;
@@ -1723,14 +1868,13 @@
       document.getElementById('host-question-board').style.display = 'block';
 
       if (!renderer) init3DStage();
+      activeRoomId = String(Math.floor(10000 + Math.random() * 90000));
       resetArenaObjects();
       renderHostQuestionShowcase(false);
+      renderQRCodes(activeRoomId);
 
-      const roomCode = 'r' + Math.floor(10000 + Math.random() * 90000);
-      renderQRCodes(roomCode);
-
-      connectMultiCloud(roomCode, handleHostIncomingData, () => {
-        document.getElementById('net-status').innerText = `🟢 4G/Wi-Fi OK!`;
+      connectMultiCloud(activeRoomId, handleHostIncomingData, () => {
+        document.getElementById('net-status').innerText = `🟢 Phòng: ${activeRoomId}`;
         broadcastTeamSyncState();
       });
 
@@ -1754,15 +1898,6 @@
         subj: currentSubjectKey,
         quiz: quizList
       });
-    }
-
-    function renderQRCodes(roomId) {
-      const base = window.location.href.split('?')[0];
-      const cacheBuster = Date.now().toString().slice(-5);
-      document.getElementById('qr-red').innerHTML = '';
-      document.getElementById('qr-blue').innerHTML = '';
-      new QRCode(document.getElementById('qr-red'), { text: `${base}?role=player&room=${roomId}&team=RED&subj=${currentSubjectKey}&v=${cacheBuster}`, width: 96, height: 96 });
-      new QRCode(document.getElementById('qr-blue'), { text: `${base}?role=player&room=${roomId}&team=BLUE&subj=${currentSubjectKey}&v=${cacheBuster}`, width: 96, height: 96 });
     }
 
     function registerOrGetPlayer(playerId, preferredTeam, customName, isReadyNow) {
@@ -1989,13 +2124,14 @@
         `${getRoundThemeLabel(matchState.currentRound)} • TỈ SỐ HIỆP: ĐỎ ${matchState.redRoundWins} - ${matchState.blueRoundWins} XANH`;
 
       const s = matchState.ropeScore;
-      let txt = `Điểm kéo Hiệp ${matchState.currentRound}: HÒA (0)`;
-      if (s > 0) txt = `Điểm kéo Hiệp ${matchState.currentRound}: XANH DẪN +${s}/3 CÂU`;
-      if (s < 0) txt = `Điểm kéo Hiệp ${matchState.currentRound}: ĐỎ DẪN +${Math.abs(s)}/3 CÂU`;
+      let txt = `Mã Phòng: ${activeRoomId} | Điểm Hiệp ${matchState.currentRound}: HÒA (0)`;
+      if (s > 0) txt = `Mã Phòng: ${activeRoomId} | XANH DẪN +${s}/3 CÂU`;
+      if (s < 0) txt = `Mã Phòng: ${activeRoomId} | ĐỎ DẪN +${Math.abs(s)}/3 CÂU`;
       document.getElementById('hud-rope-score').innerText = txt;
     }
 
     function startMatch() {
+      closeQRZoomModal();
       commandAllReadyRope();
       matchState.status = 'PLAYING';
       applyRoundAtmosphere(matchState.currentRound);
@@ -2088,7 +2224,7 @@
     }
 
     /* =========================================================================
-       9. LOGIC ĐIỆN THOẠI HỌC SINH (CLIENT)
+       10. LOGIC ĐIỆN THOẠI HỌC SINH (CLIENT)
        ========================================================================= */
     let myPlayerId = 'hs_' + Math.random().toString(36).substr(2, 6);
     let selectedTeam = 'RED';
@@ -2107,7 +2243,13 @@
       document.getElementById('teacher-view').style.display = 'none';
       document.getElementById('mobile-view').style.display = 'flex';
 
-      selectedTeam = teamParam || 'RED';
+      if (teamParam === 'R' || teamParam === 'RED') selectedTeam = 'RED';
+      else if (teamParam === 'B' || teamParam === 'BLUE') selectedTeam = 'BLUE';
+      else selectedTeam = 'RED';
+
+      const cleanRoom = (roomParam || '12345').replace(/^r/i, '');
+      document.getElementById('student-room-input').value = cleanRoom;
+
       const savedName = localStorage.getItem('student_saved_name') || '';
       if (savedName) {
         myCustomName = savedName;
@@ -2117,13 +2259,23 @@
       sharedQuizDeck = getPresetQuizBySubject(subjParam || 'BOTH');
       updateLobbyInfoBanner();
 
-      const roomId = roomParam || 'default_room';
-      connectMultiCloud(roomId, handleMobileIncomingData, () => {
-        document.getElementById('conn-badge').innerText = '🟢 Đã kết nối máy chiếu!';
+      connectMultiCloud(cleanRoom, handleMobileIncomingData, () => {
+        document.getElementById('conn-badge').innerText = `🟢 Đã kết nối Phòng ${cleanRoom}!`;
         sendEnterRequest();
       });
 
       setInterval(() => { if (!hasConfirmedEnter) sendEnterRequest(); }, 1600);
+    }
+
+    function onManualRoomChange() {
+      const newRoom = document.getElementById('student-room-input').value.trim();
+      if (!newRoom) return;
+      hasConfirmedEnter = false;
+      document.getElementById('conn-badge').innerText = `🔄 Đang chuyển sang Phòng ${newRoom}...`;
+      connectMultiCloud(newRoom, handleMobileIncomingData, () => {
+        document.getElementById('conn-badge').innerText = `🟢 Đã kết nối Phòng ${newRoom}!`;
+        sendEnterRequest();
+      });
     }
 
     function onStudentNameTyping() {
@@ -2362,12 +2514,16 @@
       sendCloudMessage({ type: 'CHEER_EMOJI', emoji });
     }
 
+    /* Tự động nhận diện cả tham số rút gọn (?r=...&t=...) lẫn tham số đầy đủ (?role=player&room=...) */
     window.addEventListener('DOMContentLoaded', () => {
       initSubjectBank();
       refreshVoiceDropdown();
       const p = new URLSearchParams(window.location.search);
-      if (p.get('role') === 'player') {
-        initMobilePlayer(p.get('room'), p.get('team'), p.get('subj'));
+      if (p.get('role') === 'player' || p.get('r')) {
+        const roomVal = p.get('r') || p.get('room');
+        const teamVal = p.get('t') || p.get('team');
+        const subjVal = p.get('subj') || 'BOTH';
+        initMobilePlayer(roomVal, teamVal, subjVal);
       }
     });
   </script>
