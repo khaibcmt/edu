@@ -1,20 +1,26 @@
 /* =========================================================================
-   FILE NÂNG CẤP GIAO DIỆN 3D & TÍNH NĂNG CỨU TRỢ ĐỘC LẬP: updat.js
+   FILE NÂNG CẤP TOÀN DIỆN 3 TRÒ CHƠI 3D: updat.js
    Tác giả: Thầy Hồ Tấn Khải – Trường THPT Mang Thít
-   Tính năng:
-   1. Tên trò chơi chữ nổi 3D kim loại vàng + Hiệu ứng ánh sáng quét ngang.
-   2. Hình nền Cực Quang đa sắc chuyển động (Animated Aurora Mesh) bắt mắt.
-   3. Thanh công cụ & toàn bộ nút bấm tạo khối 3D nổi (Tactile 3D Buttons).
-   4. Khắc phục icon ô vuông trên Windows + Đưa thanh câu hỏi xuống cuối trang.
-   5. Nút Cứu Trợ Lượt Vừa Rồi & Hồi Sinh Ngẫu Nhiên 5 HS.
+   Tính năng tích hợp:
+   1. Giao diện 3D Hoàng Gia + Cực Quang + Khắc phục lỗi icon trên Windows.
+   2. Nút Cứu Trợ Lượt Vừa Rồi & Hồi Sinh Ngẫu Nhiên 5 HS (Rung Chuông Vàng).
+   3. TRÒ CHƠI MỚI SỐ 3: "⚡ AI NHANH NHẤT 3D" (Đua tốc độ 20s/câu):
+      - Mỗi câu 20 giây: Đúng & nhanh nhất trọn điểm (1000đ), giảm dần theo mili-giây.
+      - Trả lời sai: 0 điểm | Không trả lời: 0 điểm.
+      - Bảng Vinh Danh Top 10 Thời Gian Thực (Realtime Leaderboard) ngay trên sân 3D.
+      - Khi kết thúc: Vinh danh Top 10 & quy đổi điểm tự động:
+        + Hạng 1 - 3: 10 điểm
+        + Hạng 4 - 6: 9 điểm
+        + Hạng 7 - 10: 8 điểm
+        + Hạng 11 - 15: 7 điểm
    ========================================================================= */
 
-(function initUpdat3DEdition() {
+(function initUpdat3DEditionAndFastestGame() {
+  /* =====================================================================
+     PHẦN 1: CSS GIAO DIỆN 3D & BẢNG VINH DANH "AI NHANH NHẤT"
+     ===================================================================== */
   const styleEl = document.createElement('style');
   styleEl.innerHTML = `
-    /* =====================================================================
-       1. HIỆU ỨNG TÊN TRÒ CHƠI 3D NỔI & THANH TOP BANNER HOÀNG GIA
-       ===================================================================== */
     @keyframes bgAuroraFlow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
@@ -32,6 +38,10 @@
       0%, 100% { filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.55)); }
       50% { filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.95)); }
     }
+    @keyframes timerUrgentPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
 
     #top-author-banner {
       height: 50px !important;
@@ -47,11 +57,10 @@
       animation: logoFloat3D 3.2s ease-in-out infinite !important;
     }
 
-    /* Tên trò chơi chữ nổi 3D nhiều lớp + Ánh kim chạy lấp lánh */
     .brand-title {
-      font-size: 18px !important;
+      font-size: 17.5px !important;
       font-weight: 900 !important;
-      letter-spacing: 0.8px !important;
+      letter-spacing: 0.7px !important;
       text-transform: uppercase !important;
       background: linear-gradient(90deg, #fef08a 0%, #ffffff 25%, #38bdf8 50%, #fbbf24 75%, #fef08a 100%) !important;
       background-size: 200% auto !important;
@@ -65,7 +74,6 @@
               drop-shadow(0px 5px 8px rgba(0,0,0,0.8)) !important;
     }
 
-    /* Huy hiệu Tác giả & Trường dạng viên ngọc 3D */
     .author-badge {
       background: linear-gradient(180deg, #fef08a 0%, #f59e0b 100%) !important;
       color: #0f172a !important;
@@ -75,7 +83,6 @@
       border-radius: 20px !important;
       font-size: 12.5px !important;
       box-shadow: 0 4px 10px rgba(0,0,0,0.4), inset 0 2px 2px rgba(255,255,255,0.8) !important;
-      transition: transform 0.15s !important;
     }
     .school-badge {
       background: linear-gradient(180deg, #34d399 0%, #059669 100%) !important;
@@ -95,47 +102,47 @@
       padding: 4px 12px !important;
       border-radius: 16px !important;
       box-shadow: 0 4px 8px rgba(0,0,0,0.4) !important;
-      transition: all 0.12s !important;
-    }
-    .btn-fullscreen-top:active {
-      transform: translateY(3px) !important;
-      border-bottom-width: 1px !important;
     }
 
-    /* =====================================================================
-       2. HÌNH NỀN ĐA SẮC BẮT MẮT & KHUNG CÀI ĐẶT 3D NỔI
-       ===================================================================== */
     #teacher-view {
       top: 50px !important;
       background: linear-gradient(-45deg, #1e1b4b, #0f172a, #0369a1, #4c1d95, #065f46, #7c2d12) !important;
       background-size: 400% 400% !important;
       animation: bgAuroraFlow 14s ease infinite !important;
-      padding: 18px !important;
+      padding: 16px !important;
     }
 
     .setup-box {
+      max-width: 1180px !important;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.97) 0%, rgba(241, 245, 249, 0.96) 100%) !important;
       border: 3px solid #ffffff !important;
       border-bottom: 8px solid #cbd5e1 !important;
       border-radius: 26px !important;
       box-shadow: 0 22px 55px rgba(0, 0, 0, 0.55), 0 0 30px rgba(56, 189, 248, 0.35), inset 0 2px 5px #ffffff !important;
-      padding: 20px 26px !important;
+      padding: 18px 24px !important;
     }
 
-    /* Tiêu đề trang cài đặt 3D */
     .setup-box h2 {
-      font-size: 21px !important;
+      font-size: 20px !important;
       font-weight: 900 !important;
       background: linear-gradient(90deg, #1e1b4b, #0284c7, #7c3aed) !important;
       -webkit-background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
-      filter: drop-shadow(0 2px 1px rgba(0,0,0,0.12)) !important;
     }
 
-    /* =====================================================================
-       3. CÁC THANH CÔNG CỤ & NÚT BẤM DẠNG PHÍM CƠ 3D (TACTILE 3D BUTTONS)
-       ===================================================================== */
-    /* Khung chọn 2 Chế độ chơi 3D nổi */
+    /* Lưới 3 Chế độ chơi 3D */
+    .gamemode-selector {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 12px !important;
+      margin: 10px 0 !important;
+    }
+    @media (max-width: 900px) {
+      .gamemode-selector {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
     .gm-card {
       border-radius: 18px !important;
       border: 2px solid #cbd5e1 !important;
@@ -143,15 +150,11 @@
       background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%) !important;
       box-shadow: 0 8px 18px rgba(0,0,0,0.08), inset 0 2px 2px #ffffff !important;
       transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-      padding: 14px 18px !important;
+      padding: 12px 15px !important;
     }
     .gm-card:hover {
       transform: translateY(-4px) !important;
       box-shadow: 0 14px 26px rgba(0,0,0,0.14), inset 0 2px 2px #ffffff !important;
-    }
-    .gm-card:active {
-      transform: translateY(2px) !important;
-      border-bottom-width: 3px !important;
     }
     .gm-card.active-gm {
       background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%) !important;
@@ -165,40 +168,34 @@
       border-bottom: 7px solid #b45309 !important;
       box-shadow: 0 10px 25px rgba(245, 158, 11, 0.38), inset 0 2px 3px #ffffff !important;
     }
+    .gm-card.fast-gm.active-gm {
+      background: linear-gradient(180deg, #f3e8ff 0%, #d8b4fe 100%) !important;
+      border: 2.5px solid #9333ea !important;
+      border-bottom: 7px solid #6b21a8 !important;
+      box-shadow: 0 10px 25px rgba(147, 51, 234, 0.38), inset 0 2px 3px #ffffff !important;
+    }
     .gm-icon {
-      font-size: 36px !important;
+      font-size: 34px !important;
       filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2)) !important;
     }
 
-    /* Thanh quản lý 12 môn học 3D */
     .subject-manager {
       background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%) !important;
       border: 2px solid #ffffff !important;
       border-bottom: 5px solid #cbd5e1 !important;
       border-radius: 18px !important;
-      padding: 14px !important;
-      box-shadow: inset 0 2px 4px rgba(255,255,255,0.9), 0 6px 15px rgba(0,0,0,0.06) !important;
+      padding: 12px !important;
     }
 
-    /* Nút 12 Môn THPT dạng viên gạch 3D bóng bẩy */
     .btn-subj {
       border-radius: 12px !important;
       border: 1.5px solid rgba(255,255,255,0.5) !important;
       border-bottom: 5px solid rgba(0, 0, 0, 0.38) !important;
-      padding: 8px 13px !important;
+      padding: 7px 12px !important;
       font-size: 12.5px !important;
       text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
       box-shadow: 0 4px 10px rgba(0,0,0,0.18), inset 0 2px 2px rgba(255,255,255,0.45) !important;
       transition: all 0.14s ease !important;
-    }
-    .btn-subj:hover {
-      transform: translateY(-3px) !important;
-      filter: brightness(1.08) !important;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.25), inset 0 2px 3px rgba(255,255,255,0.6) !important;
-    }
-    .btn-subj:active {
-      transform: translateY(2px) !important;
-      border-bottom-width: 2px !important;
     }
     .btn-subj.active-subj {
       border: 2px solid #ffffff !important;
@@ -207,116 +204,78 @@
       box-shadow: 0 0 0 3px #f59e0b, 0 10px 20px rgba(0,0,0,0.3) !important;
     }
 
-    /* Các nút chức năng nhỏ trên thanh công cụ (3D Push Buttons) */
     .btn-action-sm {
       border-radius: 11px !important;
       border: 1.5px solid #cbd5e1 !important;
       border-bottom: 4.5px solid #94a3b8 !important;
-      padding: 7px 13px !important;
+      padding: 7px 12px !important;
       font-weight: 900 !important;
       box-shadow: 0 4px 8px rgba(0,0,0,0.08), inset 0 2px 1px rgba(255,255,255,0.8) !important;
-      transition: all 0.12s ease !important;
-    }
-    .btn-action-sm:hover {
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.15), inset 0 2px 2px #ffffff !important;
-    }
-    .btn-action-sm:active {
-      transform: translateY(2px) !important;
-      border-bottom-width: 1.5px !important;
     }
 
-    /* Nút lớn Mở Sân Đấu 3D */
     .btn-launch {
       background: linear-gradient(180deg, #38bdf8 0%, #0284c7 45%, #1d4ed8 100%) !important;
       border: 2px solid #bae6fd !important;
       border-bottom: 6px solid #1e3a8a !important;
       border-radius: 16px !important;
-      padding: 13px 30px !important;
-      font-size: 16px !important;
+      padding: 12px 28px !important;
+      font-size: 15.5px !important;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
       box-shadow: 0 10px 24px rgba(2, 132, 199, 0.45), inset 0 2px 3px rgba(255,255,255,0.65) !important;
-      transition: all 0.15s ease !important;
-    }
-    .btn-launch:hover {
-      transform: translateY(-3px) scale(1.02) !important;
-      filter: brightness(1.08) !important;
-      box-shadow: 0 14px 30px rgba(2, 132, 199, 0.6), inset 0 2px 4px rgba(255,255,255,0.8) !important;
-    }
-    .btn-launch:active {
-      transform: translateY(3px) !important;
-      border-bottom-width: 2px !important;
     }
 
-    /* =====================================================================
-       4. THANH CÔNG CỤ SÂN ĐẤU 3D & NÚT ĐIỀU KHIỂN TRẬN ĐẤU 3D
-       ===================================================================== */
-    #host-view {
-      top: 50px !important;
-    }
+    #host-view { top: 50px !important; }
     #host-top-header {
       background: linear-gradient(180deg, #1e293b 0%, #0f172a 60%, #060913 100%) !important;
       border-bottom: 3.5px solid #38bdf8 !important;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.7), inset 0 1px 2px rgba(255,255,255,0.2) !important;
-      padding: 7px 14px !important;
+      padding: 6px 14px !important;
     }
 
     .c-btn {
       border-radius: 14px !important;
       border: 1.5px solid rgba(255,255,255,0.4) !important;
       border-bottom: 4.5px solid rgba(0,0,0,0.5) !important;
-      padding: 5px 13px !important;
-      font-size: 12px !important;
+      padding: 5px 12px !important;
+      font-size: 11.5px !important;
       text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
       box-shadow: 0 4px 10px rgba(0,0,0,0.4), inset 0 2px 2px rgba(255,255,255,0.35) !important;
-      transition: all 0.12s ease !important;
-    }
-    .c-btn:hover {
-      transform: translateY(-2px) !important;
-      filter: brightness(1.1) !important;
-    }
-    .c-btn:active {
-      transform: translateY(2px) !important;
-      border-bottom-width: 1.5px !important;
     }
 
-    /* Hộp điểm số 2 Đội dạng Khối 3D Căng Bóng */
     .team-box.red {
       background: linear-gradient(180deg, #f87171 0%, #ef4444 45%, #b91c1c 100%) !important;
       border: 2px solid #fecaca !important;
       border-bottom: 5px solid #7f1d1d !important;
-      box-shadow: 0 6px 16px rgba(239, 68, 68, 0.45), inset 0 2px 3px rgba(255,255,255,0.5) !important;
     }
     .team-box.blue {
       background: linear-gradient(180deg, #38bdf8 0%, #0284c7 45%, #0369a1 100%) !important;
       border: 2px solid #bae6fd !important;
       border-bottom: 5px solid #0c4a6e !important;
-      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.45), inset 0 2px 3px rgba(255,255,255,0.5) !important;
     }
     .team-box.gold-bell {
       background: linear-gradient(180deg, #fbbf24 0%, #d97706 50%, #92400e 100%) !important;
       border: 2px solid #fef08a !important;
       border-bottom: 5px solid #78350f !important;
-      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.45), inset 0 2px 3px rgba(255,255,255,0.5) !important;
+    }
+    .team-box.purple-fast {
+      background: linear-gradient(180deg, #c084fc 0%, #9333ea 50%, #581c87 100%) !important;
+      border: 2px solid #f3e8ff !important;
+      border-bottom: 5px solid #3b0764 !important;
+      box-shadow: 0 6px 16px rgba(147, 51, 234, 0.45), inset 0 2px 3px rgba(255,255,255,0.5) !important;
     }
     .center-round-hud {
       background: linear-gradient(180deg, #1e1b4b 0%, #090d16 100%) !important;
       border: 2px solid #fde047 !important;
       border-bottom: 5px solid #b45309 !important;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 2px 3px rgba(255,255,255,0.2) !important;
     }
 
-    /* =====================================================================
-       5. KHUNG CÂU HỎI & 4 ĐÁP ÁN 3D + THANH ĐIỀU HƯỚNG Ở ĐÁY MÀN HÌNH
-       ===================================================================== */
     #host-question-board {
       display: flex !important;
       flex-direction: column !important;
       justify-content: space-between !important;
-      padding: 10px 18px 6px 18px !important;
+      padding: 8px 18px 6px 18px !important;
       background: linear-gradient(180deg, #0f172a 0%, #060913 100%) !important;
       border-top: 4px solid #38bdf8 !important;
-      box-shadow: 0 -12px 35px rgba(0,0,0,0.8), inset 0 2px 4px rgba(255,255,255,0.15) !important;
+      position: relative !important;
     }
     #host-question-board .hq-title {
       order: 1 !important;
@@ -325,12 +284,10 @@
       border: 2.5px solid #a5b4fc !important;
       border-bottom: 6px solid #0f0728 !important;
       border-radius: 16px !important;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.25) !important;
     }
     #host-question-board .hq-opts {
       order: 2 !important;
     }
-    /* 4 Ô đáp án tạo khối 3D nổi rực rỡ */
     .hq-opt-item, .btn-ans {
       border-radius: 15px !important;
       border-top: 2px solid rgba(255,255,255,0.65) !important;
@@ -339,8 +296,6 @@
       border-bottom: 6px solid rgba(0,0,0,0.45) !important;
       box-shadow: 0 6px 15px rgba(0,0,0,0.45), inset 0 2px 3px rgba(255,255,255,0.35) !important;
     }
-
-    /* Thanh thông tin câu hỏi cố định ở cuối trang màn hình theo dạng thanh 3D */
     #host-question-board .hq-header {
       order: 3 !important;
       margin-top: 6px !important;
@@ -350,20 +305,197 @@
       border: 1.5px solid #38bdf8 !important;
       border-bottom: 4px solid #0369a1 !important;
       border-radius: 14px !important;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6), inset 0 1px 2px rgba(255,255,255,0.25) !important;
     }
 
-    .hq-nav-btn {
-      border-radius: 9px !important;
-      border: 1.5px solid #94a3b8 !important;
-      border-bottom: 3.5px solid #0f172a !important;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.3) !important;
-      transition: all 0.12s !important;
+    /* =====================================================================
+       THANH ĐẾM NGƯỢC 20 GIÂY & BẢNG VINH DANH TOP 10 THỜI GIAN THỰC
+       ===================================================================== */
+    #fast-timer-bar-wrap {
+      order: 0 !important;
+      width: 100%;
+      height: 28px;
+      background: #090d16;
+      border: 2px solid #475569;
+      border-radius: 14px;
+      margin-bottom: 6px;
+      position: relative;
+      overflow: hidden;
+      display: none;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+      flex-shrink: 0;
     }
-    .hq-nav-btn:active {
-      transform: translateY(2px) !important;
-      border-bottom-width: 1px !important;
+    #fast-timer-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #10b981, #34d399);
+      transition: width 0.1s linear, background 0.3s ease;
     }
+    #fast-timer-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #ffffff;
+      text-shadow: 0 1px 4px #000000;
+      letter-spacing: 0.5px;
+    }
+
+    /* Bảng Vinh Danh Top 10 Realtime trên Sân Khấu 3D */
+    #fast-live-leaderboard {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      width: 310px;
+      max-height: calc(100% - 16px);
+      background: rgba(9, 13, 22, 0.92);
+      backdrop-filter: blur(10px);
+      border: 2.5px solid #f59e0b;
+      border-bottom: 6px solid #92400e;
+      border-radius: 18px;
+      padding: 10px 12px;
+      z-index: 30;
+      display: none;
+      flex-direction: column;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+      overflow: hidden;
+    }
+    .flb-title {
+      font-size: 13.5px;
+      font-weight: 900;
+      color: #fef08a;
+      text-align: center;
+      padding-bottom: 6px;
+      border-bottom: 1.5px dashed #475569;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .flb-list {
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-right: 2px;
+    }
+    .flb-row {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 9px;
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid #334155;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .flb-row.rank-1 {
+      background: linear-gradient(90deg, rgba(234, 179, 8, 0.35), rgba(30, 41, 59, 0.9));
+      border-color: #fde047;
+      color: #fef08a;
+    }
+    .flb-row.rank-2 {
+      background: linear-gradient(90deg, rgba(148, 163, 184, 0.32), rgba(30, 41, 59, 0.9));
+      border-color: #e2e8f0;
+    }
+    .flb-row.rank-3 {
+      background: linear-gradient(90deg, rgba(217, 119, 6, 0.32), rgba(30, 41, 59, 0.9));
+      border-color: #fdba74;
+    }
+    .flb-rank {
+      font-weight: 900;
+      text-align: center;
+      font-size: 12.5px;
+    }
+    .flb-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .flb-pts {
+      font-weight: 900;
+      color: #38bdf8;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* Thanh đếm ngược 20s trên Điện thoại Học sinh */
+    #mobile-fast-timer-wrap {
+      width: 100%;
+      height: 22px;
+      background: #0f172a;
+      border: 1.5px solid #475569;
+      border-radius: 11px;
+      margin: 4px 0;
+      position: relative;
+      overflow: hidden;
+      display: none;
+      flex-shrink: 0;
+    }
+    #mobile-fast-timer-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #10b981, #34d399);
+      transition: width 0.1s linear;
+    }
+    #mobile-fast-timer-txt {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11.5px;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 1px 2px #000;
+    }
+
+    /* Bảng Kết Quả Vinh Danh Top 10 & Hạng 11-15 Khi Kết Thúc Trò Chơi */
+    #fast-final-podium-box {
+      display: none;
+      margin-top: 10px;
+      max-height: 270px;
+      overflow-y: auto;
+      background: #090d16;
+      border: 2px solid #38bdf8;
+      border-radius: 14px;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    .ffp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    .ffp-table th {
+      background: #1e293b;
+      color: #38bdf8;
+      padding: 6px 8px;
+      text-align: left;
+      position: sticky;
+      top: 0;
+    }
+    .ffp-table td {
+      padding: 5px 8px;
+      border-bottom: 1px solid #1e293b;
+      font-weight: 800;
+    }
+    .grade-pill {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 12px;
+    }
+    .grade-10 { background: #fef08a; color: #0f172a; border: 1.5px solid #f59e0b; }
+    .grade-9  { background: #bbf7d0; color: #065f46; border: 1.5px solid #10b981; }
+    .grade-8  { background: #bae6fd; color: #0c4a6e; border: 1.5px solid #0284c7; }
+    .grade-7  { background: #e9d5ff; color: #581c87; border: 1.5px solid #9333ea; }
+    .grade-other { background: #334155; color: #cbd5e1; }
 
     /* Cụm nút Cứu Trợ 3D */
     .rescue-btn-group {
@@ -382,9 +514,6 @@
       font-size: 11.5px !important;
       font-weight: 900 !important;
       cursor: pointer !important;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
-      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.45), inset 0 2px 2px rgba(255,255,255,0.4) !important;
-      transition: all 0.12s !important;
     }
     .btn-rescue-random5 {
       background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%) !important;
@@ -396,20 +525,8 @@
       font-size: 11.5px !important;
       font-weight: 900 !important;
       cursor: pointer !important;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
-      box-shadow: 0 4px 10px rgba(245, 158, 11, 0.45), inset 0 2px 2px rgba(255,255,255,0.4) !important;
-      transition: all 0.12s !important;
-    }
-    .btn-rescue-batch:hover, .btn-rescue-random5:hover {
-      transform: translateY(-2px) !important;
-      filter: brightness(1.08) !important;
-    }
-    .btn-rescue-batch:active, .btn-rescue-random5:active {
-      transform: translateY(2px) !important;
-      border-bottom-width: 1.5px !important;
     }
 
-    /* Banner thông báo Cứu trợ thành công */
     #rescue-Floating-Banner {
       position: fixed;
       top: 105px;
@@ -421,17 +538,23 @@
       color: #fff;
       padding: 12px 28px;
       border-radius: 30px;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 900;
       z-index: 550;
       display: none;
       box-shadow: 0 15px 40px rgba(0,0,0,0.75);
       text-align: center;
     }
+
+    #victory-modal {
+      max-width: 720px !important;
+      width: 95% !important;
+      padding: 16px 22px !important;
+    }
   `;
   document.head.appendChild(styleEl);
 
-  // Tạo Banner thông báo cứu trợ trên màn hình
+  // Banner nổi thông báo sự kiện
   const rescueBanner = document.createElement('div');
   rescueBanner.id = 'rescue-Floating-Banner';
   document.body.appendChild(rescueBanner);
@@ -440,57 +563,1003 @@
     rescueBanner.innerHTML = msg;
     rescueBanner.style.display = 'block';
     if (typeof confetti === 'function') {
-      confetti({ particleCount: 150, spread: 90, origin: { y: 0.45 } });
+      confetti({ particleCount: 140, spread: 85, origin: { y: 0.45 } });
     }
     if (typeof AudioFX !== 'undefined' && AudioFX.bonusLifeChime) {
       AudioFX.bonusLifeChime();
     }
-    setTimeout(() => {
-      rescueBanner.style.display = 'none';
-    }, 4000);
+    setTimeout(() => { rescueBanner.style.display = 'none'; }, 3800);
   }
 
-  // Khắc phục biểu tượng 🪢 ở thẻ Chế độ 1 bị lỗi hiển thị thành ô vuông [] trên Windows
-  function fixTugIconDisplay() {
+  /* =====================================================================
+     PHẦN 2: CÔNG THỨC TÍNH ĐIỂM "AI NHANH NHẤT" & QUY ĐỔI ĐIỂM HỆ 10
+     ===================================================================== */
+  const FASTEST_Q_DURATION_SEC = 20; // Mỗi câu hiển thị đúng 20 giây
+  const FASTEST_MAX_POINTS = 1000;   // Điểm tối đa mỗi câu cho người đúng & nhanh nhất
+
+  // Biến trạng thái bộ đếm 20 giây trên máy Chủ (Host) và Điện thoại (Client)
+  window.fastestHostTimer = null;
+  window.fastestQuestionStartMs = 0;
+  window.fastestRemainingSec = FASTEST_Q_DURATION_SEC;
+  window.fastestCorrectOrderCount = 0; // Đếm thứ tự người trả lời đúng trong câu hiện tại
+  window.fastestQuestionTransitioning = false;
+
+  window.fastestMobileTimer = null;
+  window.fastestMobileStartMs = 0;
+  window.myFastestTotalScore = 0;
+  window.myFastestLastGain = 0;
+  window.myFastestRank = 0;
+
+  // Hàm tính điểm thưởng dựa trên thời gian trả lời (mili-giây) và thứ tự trả lời đúng
+  function calculateFastestPoints(elapsedSeconds, orderIndex) {
+    // Người trả lời đúng đầu tiên trong vòng 1.2 giây đầu được trọn 1000 điểm
+    if (orderIndex === 0 && elapsedSeconds <= 1.2) {
+      return FASTEST_MAX_POINTS;
+    }
+    const clampedSec = Math.max(0, Math.min(FASTEST_Q_DURATION_SEC, elapsedSeconds));
+    // Giảm dần tuyến tính từ 1000 điểm xuống tối thiểu 100 điểm ở giây thứ 20
+    const timeFactor = 1 - 0.85 * (clampedSec / FASTEST_Q_DURATION_SEC);
+    // Trừ nhẹ theo thứ tự nếu nhiều người bấm cùng lúc
+    const orderPenalty = Math.min(150, orderIndex * 15);
+    const rawPts = Math.round(FASTEST_MAX_POINTS * timeFactor) - orderPenalty;
+    return Math.max(100, Math.min(FASTEST_MAX_POINTS, rawPts));
+  }
+
+  // Hàm quy đổi điểm thưởng sang Điểm số (Hệ 10) theo đúng thể lệ của thầy:
+  // Hạng 1, 2, 3 -> 10 điểm
+  // Hạng 4, 5, 6 -> 9 điểm
+  // Hạng 7, 8, 9, 10 -> 8 điểm
+  // Hạng 11 đến 15 -> 7 điểm
+  function getConvertedGradeByRank(rankNumber, totalScore) {
+    if (!totalScore || totalScore <= 0) {
+      return { grade: 0, label: '0 điểm (Chưa có điểm)', css: 'grade-other' };
+    }
+    if (rankNumber >= 1 && rankNumber <= 3) {
+      return { grade: 10, label: '10 điểm', css: 'grade-10' };
+    }
+    if (rankNumber >= 4 && rankNumber <= 6) {
+      return { grade: 9, label: '9 điểm', css: 'grade-9' };
+    }
+    if (rankNumber >= 7 && rankNumber <= 10) {
+      return { grade: 8, label: '8 điểm', css: 'grade-8' };
+    }
+    if (rankNumber >= 11 && rankNumber <= 15) {
+      return { grade: 7, label: '7 điểm', css: 'grade-7' };
+    }
+    return { grade: 6, label: 'Khuyến khích', css: 'grade-other' };
+  }
+
+  // Lấy danh sách toàn bộ thí sinh đã sắp xếp từ cao xuống thấp theo Điểm Tốc Độ
+  function getSortedFastestLeaderboard() {
+    if (typeof matchState === 'undefined') return [];
+    const allPlayers = [...matchState.redPlayers, ...matchState.bluePlayers];
+    return allPlayers.map(p => ({
+      id: p.id,
+      label: p.label,
+      team: p.team,
+      fastScore: p.fastScore || 0,
+      lastDelta: p.lastDelta || 0,
+      lastTimeSec: typeof p.lastTimeSec === 'number' ? p.lastTimeSec : null,
+      correct: p.correct || 0,
+      wrong: p.freeze || 0,
+      totalTimeMs: p.totalTimeMs || 0
+    })).sort((a, b) => {
+      if (b.fastScore !== a.fastScore) return b.fastScore - a.fastScore;
+      if (b.correct !== a.correct) return b.correct - a.correct;
+      return a.totalTimeMs - b.totalTimeMs;
+    });
+  }
+
+  /* =====================================================================
+     PHẦN 3: CHÈN GIAO DIỆN CHỌN TRÒ CHƠI "AI NHANH NHẤT" & BẢNG TOP 10
+     ===================================================================== */
+  function injectFastestGameUI() {
+    // 1. Cập nhật tiêu đề thương hiệu trên cùng
+    const brandTitle = document.querySelector('.brand-title');
+    if (brandTitle) {
+      brandTitle.innerText = 'ĐẤU TRƯỜNG 3D: KÉO CO • RUNG CHUÔNG VÀNG • AI NHANH NHẤT';
+    }
+
+    // 2. Sửa icon Chế độ 1 (Kéo co) và thêm Thẻ Chế độ 3 (Ai Nhanh Nhất)
     const tugCardIcon = document.querySelector('#gm-card-TUG .gm-icon');
-    if (tugCardIcon) {
-      tugCardIcon.innerHTML = '⚔️';
+    if (tugCardIcon) tugCardIcon.innerHTML = '⚔️';
+
+    const gmSelector = document.querySelector('.gamemode-selector');
+    if (gmSelector && !document.getElementById('gm-card-FAST')) {
+      const fastCard = document.createElement('div');
+      fastCard.className = 'gm-card fast-gm';
+      fastCard.id = 'gm-card-FAST';
+      fastCard.onclick = () => window.selectGamePlayType('FAST');
+      fastCard.innerHTML = `
+        <div class="gm-icon">⚡</div>
+        <div class="gm-info">
+          <h3>CHẾ ĐỘ 3: AI NHANH NHẤT 3D (ĐUA TỐC ĐỘ 20 GIÂY)</h3>
+          <p>Mỗi câu <b>20 giây</b>: Đúng & nhanh nhất trọn <b>1.000đ</b>, giảm dần theo giây; Sai/Không trả lời: <b>0đ</b>. Vinh danh <b>Top 10 Realtime</b>. Thưởng điểm: <b>Hạng 1-3 (10đ), 4-6 (9đ), 7-10 (8đ), 11-15 (7đ)</b>!</p>
+        </div>
+      `;
+      gmSelector.appendChild(fastCard);
+    }
+
+    // 3. Chèn Thanh đếm ngược 20s vào khung câu hỏi của Giáo viên
+    const qBoard = document.getElementById('host-question-board');
+    if (qBoard && !document.getElementById('fast-timer-bar-wrap')) {
+      const timerWrap = document.createElement('div');
+      timerWrap.id = 'fast-timer-bar-wrap';
+      timerWrap.innerHTML = `
+        <div id="fast-timer-fill"></div>
+        <div id="fast-timer-text">⏱️ THỜI GIAN CÒN LẠI: 20.0 GIÂY (Đúng & nhanh nhất: +1000 điểm)</div>
+      `;
+      qBoard.insertBefore(timerWrap, qBoard.firstChild);
+    }
+
+    // 4. Chèn Bảng Vinh Danh Top 10 Realtime vào Sân Đấu 3D
+    const arenaVp = document.getElementById('arena-3d-viewport');
+    if (arenaVp && !document.getElementById('fast-live-leaderboard')) {
+      const lb = document.createElement('div');
+      lb.id = 'fast-live-leaderboard';
+      lb.innerHTML = `
+        <div class="flb-title">
+          <span>⚡ VINH DANH TOP 10 REALTIME</span>
+          <span id="flb-sub-count" style="font-size:11px; color:#38bdf8;">0 HS</span>
+        </div>
+        <div class="flb-list" id="flb-list-body">
+          <div style="text-align:center; color:#94a3b8; font-size:12px; padding:12px 0;">
+            Chờ thí sinh ghi điểm tốc độ...
+          </div>
+        </div>
+      `;
+      arenaVp.appendChild(lb);
+    }
+
+    // 5. Chèn Bảng Tổng Kết Điểm Quy Đổi (Top 10 & Hạng 11-15) vào Modal Chiến Thắng
+    const vicModal = document.getElementById('victory-modal');
+    if (vicModal && !document.getElementById('fast-final-podium-box')) {
+      const podiumBox = document.createElement('div');
+      podiumBox.id = 'fast-final-podium-box';
+      const btnRow = vicModal.querySelector('div');
+      if (btnRow) {
+        vicModal.insertBefore(podiumBox, btnRow);
+      } else {
+        vicModal.appendChild(podiumBox);
+      }
+    }
+
+    // 6. Chèn Thanh đếm ngược 20s vào giao diện Điện thoại Học sinh
+    const mobileQuizBox = document.getElementById('active-quiz-container');
+    if (mobileQuizBox && !document.getElementById('mobile-fast-timer-wrap')) {
+      const mTimer = document.createElement('div');
+      mTimer.id = 'mobile-fast-timer-wrap';
+      mTimer.innerHTML = `
+        <div id="mobile-fast-timer-fill"></div>
+        <div id="mobile-fast-timer-txt">⏱️ 20.0s</div>
+      `;
+      mobileQuizBox.insertBefore(mTimer, mobileQuizBox.firstChild);
     }
   }
 
-  // Lưu vết danh sách các học sinh vừa bị loại ở từng lượt câu hỏi
+  /* =====================================================================
+     PHẦN 4: GHI ĐÈ & MỞ RỘNG CÁC HÀM ĐIỀU KHIỂN TRÒ CHƠI CHÍNH
+     ===================================================================== */
+
+  // 4.1. Chọn Chế Độ Chơi (TUG / BELL / FAST)
+  window.selectGamePlayType = function(type) {
+    window.currentGamePlayType = type;
+    const cTug = document.getElementById('gm-card-TUG');
+    const cBell = document.getElementById('gm-card-BELL');
+    const cFast = document.getElementById('gm-card-FAST');
+    if (cTug) cTug.classList.toggle('active-gm', type === 'TUG');
+    if (cBell) cBell.classList.toggle('active-gm', type === 'BELL');
+    if (cFast) cFast.classList.toggle('active-gm', type === 'FAST');
+
+    // Ẩn/Hiện cấu hình chia đội nếu chọn chế độ Cá nhân (BELL hoặc FAST)
+    const teamCfg = document.getElementById('tug-team-config-row');
+    if (teamCfg) {
+      teamCfg.style.opacity = (type === 'TUG') ? '1' : '0.55';
+    }
+  };
+
+  // 4.2. Cập nhật Bảng Vinh Danh Top 10 Realtime trên màn hình Giáo viên
+  window.renderFastestLiveLeaderboard = function() {
+    const lbBox = document.getElementById('fast-live-leaderboard');
+    if (!lbBox || typeof matchState === 'undefined') return;
+
+    if (matchState.gameType !== 'FAST') {
+      lbBox.style.display = 'none';
+      return;
+    }
+
+    lbBox.style.display = 'flex';
+    const ranked = getSortedFastestLeaderboard();
+    const top10 = ranked.slice(0, 10);
+
+    const countEl = document.getElementById('flb-sub-count');
+    if (countEl) countEl.innerText = `${ranked.length} thí sinh`;
+
+    const listBody = document.getElementById('flb-list-body');
+    if (!listBody) return;
+
+    if (top10.length === 0) {
+      listBody.innerHTML = `<div style="text-align:center; color:#94a3b8; font-size:12px; padding:12px 0;">Đang chờ thí sinh vào sân...</div>`;
+      return;
+    }
+
+    listBody.innerHTML = top10.map((p, idx) => {
+      const rank = idx + 1;
+      const medal = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : (rank === 3 ? '🥉' : `#${rank}`));
+      const gradeInfo = getConvertedGradeByRank(rank, p.fastScore);
+      const deltaBadge = p.lastDelta > 0
+        ? `<span style="color:#4ade80; font-size:10.5px;">(+${p.lastDelta}${p.lastTimeSec !== null ? ` • ${p.lastTimeSec.toFixed(1)}s` : ''})</span>`
+        : '';
+      return `
+        <div class="flb-row rank-${rank}">
+          <div class="flb-rank">${medal}</div>
+          <div class="flb-name" title="${p.label}">${p.label} ${deltaBadge}</div>
+          <div class="flb-pts">${p.fastScore}đ <span style="color:#fde047; font-size:10.5px;">[${gradeInfo.grade}đ]</span></div>
+        </div>
+      `;
+    }).join('');
+  };
+
+  // 4.3. Bộ đếm ngược 20 Giây cho từng câu hỏi ở chế độ "AI NHANH NHẤT"
+  window.stopFastestQuestionTimer = function() {
+    if (window.fastestHostTimer) {
+      clearInterval(window.fastestHostTimer);
+      window.fastestHostTimer = null;
+    }
+  };
+
+  window.startFastestQuestionTimer = function() {
+    window.stopFastestQuestionTimer();
+    const barWrap = document.getElementById('fast-timer-bar-wrap');
+    if (typeof matchState === 'undefined' || matchState.gameType !== 'FAST') {
+      if (barWrap) barWrap.style.display = 'none';
+      return;
+    }
+
+    if (barWrap) barWrap.style.display = 'block';
+    window.fastestQuestionStartMs = Date.now();
+    window.fastestRemainingSec = FASTEST_Q_DURATION_SEC;
+    window.fastestCorrectOrderCount = 0;
+    window.fastestQuestionTransitioning = false;
+
+    // Reset điểm cộng tạm thời của câu trước trên bảng hiển thị
+    [...matchState.redPlayers, ...matchState.bluePlayers].forEach(p => {
+      p.lastDelta = 0;
+      p.lastTimeSec = null;
+    });
+    window.renderFastestLiveLeaderboard();
+
+    // Phát tín hiệu đồng bộ mốc bắt đầu 20 giây xuống tất cả máy Học sinh
+    if (typeof sendCloudMessage === 'function') {
+      sendCloudMessage({
+        type: 'FAST_QUESTION_START',
+        globalQIndex: matchState.globalQIndex,
+        durationSec: FASTEST_Q_DURATION_SEC,
+        serverStartTime: window.fastestQuestionStartMs
+      });
+    }
+
+    const fillEl = document.getElementById('fast-timer-fill');
+    const txtEl = document.getElementById('fast-timer-text');
+
+    window.fastestHostTimer = setInterval(() => {
+      if (matchState.status !== 'PLAYING') return;
+
+      const elapsed = (Date.now() - window.fastestQuestionStartMs) / 1000;
+      const rem = Math.max(0, FASTEST_Q_DURATION_SEC - elapsed);
+      window.fastestRemainingSec = rem;
+      const pct = (rem / FASTEST_Q_DURATION_SEC) * 100;
+
+      if (fillEl) {
+        fillEl.style.width = `${pct}%`;
+        if (rem > 10) {
+          fillEl.style.background = 'linear-gradient(90deg, #10b981, #34d399)';
+        } else if (rem > 5) {
+          fillEl.style.background = 'linear-gradient(90deg, #f59e0b, #fbbf24)';
+        } else {
+          fillEl.style.background = 'linear-gradient(90deg, #ef4444, #f87171)';
+        }
+      }
+
+      const currentPotentialPts = calculateFastestPoints(elapsed, window.fastestCorrectOrderCount);
+      if (txtEl) {
+        txtEl.innerText = rem > 0
+          ? `⏱️ THỜI GIAN CÒN LẠI: ${rem.toFixed(1)} GIÂY • Trả lời đúng ngay lúc này nhận: +${currentPotentialPts} điểm`
+          : `⌛ HẾT 20 GIÂY! Không trả lời: 0 điểm • Đang chuyển câu tiếp theo...`;
+      }
+
+      if (rem <= 0 && !window.fastestQuestionTransitioning) {
+        window.fastestQuestionTransitioning = true;
+        window.stopFastestQuestionTimer();
+        handleFastestQuestionTimeoutOrAllDone();
+      }
+    }, 100);
+  };
+
+  function handleFastestQuestionTimeoutOrAllDone() {
+    if (typeof matchState === 'undefined' || matchState.gameType !== 'FAST' || matchState.status !== 'PLAYING') return;
+
+    // Kiểm tra nếu đã hết câu hỏi cuối cùng trong bộ đề -> Kết thúc và Vinh danh Top 10!
+    if (matchState.globalQIndex + 1 >= quizList.length) {
+      setTimeout(() => {
+        if (matchState.status === 'PLAYING') {
+          window.endMatchManual();
+        }
+      }, 1200);
+    } else {
+      // Tự động chuyển sang câu hỏi mới sau 1.5 giây
+      setTimeout(() => {
+        if (matchState.status === 'PLAYING') {
+          matchState.globalQIndex++;
+          matchState.redAnsweredIds = [];
+          matchState.blueAnsweredIds = [];
+          if (typeof update3DLabelsStatusOnly === 'function') update3DLabelsStatusOnly();
+          if (typeof updateHostHUD === 'function') updateHostHUD();
+          if (typeof renderHostQuestionShowcase === 'function') renderHostQuestionShowcase();
+          if (typeof broadcastTeamSyncState === 'function') broadcastTeamSyncState();
+          window.startFastestQuestionTimer();
+        }
+      }, 1500);
+    }
+  }
+
+  // 4.4. Mở rộng Scene 3D & Nhãn 3D cho chế độ "AI NHANH NHẤT"
+  const origUpdate3DScene = window.update3DSceneByGameType;
+  window.update3DSceneByGameType = function() {
+    if (!scene) return;
+    if (matchState.gameType === 'FAST') {
+      if (ropeMesh) ropeMesh.visible = false;
+      if (ribbonMesh) ribbonMesh.visible = false;
+      if (tugLinesGroup) tugLinesGroup.visible = false;
+      if (goldenBellStageGroup) goldenBellStageGroup.visible = true;
+      window.renderFastestLiveLeaderboard();
+    } else {
+      const lb = document.getElementById('fast-live-leaderboard');
+      if (lb) lb.style.display = 'none';
+      const barWrap = document.getElementById('fast-timer-bar-wrap');
+      if (barWrap) barWrap.style.display = 'none';
+      if (typeof origUpdate3DScene === 'function') origUpdate3DScene();
+    }
+  };
+
+  const origFormatPlayerLabel = window.formatPlayerLabelText;
+  window.formatPlayerLabelText = function(p, hasDoneQ) {
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      const score = p.fastScore || 0;
+      const doneIcon = hasDoneQ ? '⚡ ' : '⏳ ';
+      return `${doneIcon}${p.label} (${score}đ)`;
+    }
+    return origFormatPlayerLabel(p, hasDoneQ);
+  };
+
+  const origRebuildAll3D = window.rebuildAll3DCharacters;
+  window.rebuildAll3DCharacters = function() {
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      // Mượn cách bố trí sân khấu của Rung Chuông Vàng để các nhân vật đứng hướng về phía màn hình
+      const savedType = matchState.gameType;
+      matchState.gameType = 'BELL';
+      origRebuildAll3D();
+      matchState.gameType = savedType;
+      update3DLabelsStatusOnly();
+      window.renderFastestLiveLeaderboard();
+    } else {
+      origRebuildAll3D();
+    }
+  };
+
+  // Nâng cấp vòng lặp 3D để các nhân vật ở chế độ FAST nhảy mừng sinh động
+  const origUpdateHostHUD = window.updateHostHUD;
+  window.updateHostHUD = function() {
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      const leftBox = document.getElementById('hud-left-box');
+      const rightBox = document.getElementById('hud-right-box');
+      const allP = [...matchState.redPlayers, ...matchState.bluePlayers];
+      const ranked = getSortedFastestLeaderboard();
+      const top1 = ranked[0];
+
+      if (leftBox) leftBox.className = 'team-box purple-fast';
+      if (rightBox) rightBox.className = 'team-box purple-fast';
+
+      document.getElementById('hud-red-count').innerText = `⚡ THÍ SINH THAM GIA: ${allP.length} HS`;
+      document.getElementById('hud-red-rounds').innerText = `⏱️ 20 giây / câu`;
+      document.getElementById('hud-blue-count').innerText = top1 && top1.fastScore > 0
+        ? `👑 DẪN ĐẦU: ${top1.label} (${top1.fastScore}đ)`
+        : `👑 DẪN ĐẦU: Chưa có điểm`;
+      document.getElementById('hud-blue-rounds').innerText = `🎯 Hạng 1-3: 10đ | 4-6: 9đ | 7-10: 8đ`;
+
+      document.getElementById('hud-round-title').innerText =
+        `⚡ AI NHANH NHẤT 3D • ĐÚNG & NHANH NHẤT ĐƯỢC TRỌN 1.000 ĐIỂM, GIẢM DẦN THEO GIÂY!`;
+      document.getElementById('hud-rope-score').innerText =
+        `Mã Phòng: ${activeRoomId} | Câu ${matchState.globalQIndex + 1}/${quizList.length || 1} • Đã trả lời: ${matchState.redAnsweredIds.length + matchState.blueAnsweredIds.length}/${allP.length} HS`;
+      window.renderFastestLiveLeaderboard();
+    } else {
+      origUpdateHostHUD();
+    }
+  };
+
+  const origRenderQRCodes = window.renderQRCodes;
+  window.renderQRCodes = function(roomId) {
+    origRenderQRCodes(roomId);
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      const base = getCleanWebBaseURL();
+      qrRedUrl = `${base}?r=${roomId}&t=R&gm=F`;
+      qrBlueUrl = `${base}?r=${roomId}&t=B&gm=F`;
+
+      const redContainer = document.getElementById('qr-red');
+      const blueContainer = document.getElementById('qr-blue');
+      if (redContainer && blueContainer) {
+        redContainer.innerHTML = '';
+        blueContainer.innerHTML = '';
+        try {
+          new QRCode(redContainer, { text: qrRedUrl, width: 112, height: 112, colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L });
+          new QRCode(blueContainer, { text: qrBlueUrl, width: 112, height: 112, colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L });
+        } catch(e) {}
+      }
+      document.getElementById('qr-left-caption').innerText = '⚡ QUÉT VÀO AI NHANH NHẤT';
+      document.getElementById('qr-right-caption').innerText = '⚡ QUÉT VÀO AI NHANH NHẤT';
+    }
+  };
+
+  const origGetRoundThemeLabel = window.getRoundThemeLabel;
+  window.getRoundThemeLabel = function(roundNum) {
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      return '⚡ ĐẤU TRƯỜNG AI NHANH NHẤT (20 GIÂY/CÂU)';
+    }
+    return origGetRoundThemeLabel(roundNum);
+  };
+
+  // 4.5. Ghi đè hàm Bắt Đầu, Chuyển Câu & Kết Thúc cho chế độ "AI NHANH NHẤT"
+  const origStartMatch = window.startMatch;
+  window.startMatch = function() {
+    origStartMatch();
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      window.renderFastestLiveLeaderboard();
+      window.startFastestQuestionTimer();
+    }
+  };
+
+  const origForceAdvance = window.forceAdvanceGlobalQuestion;
+  window.forceAdvanceGlobalQuestion = function() {
+    origForceAdvance();
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST' && matchState.status === 'PLAYING') {
+      window.startFastestQuestionTimer();
+    }
+  };
+
+  const origStepHostQ = window.stepHostQuestion;
+  window.stepHostQuestion = function(delta) {
+    origStepHostQ(delta);
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST' && !isReviewAnswersMode && matchState.status === 'PLAYING') {
+      window.startFastestQuestionTimer();
+    }
+  };
+
+  const origBroadcastSync = window.broadcastTeamSyncState;
+  window.broadcastTeamSyncState = function() {
+    origBroadcastSync();
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      const ranked = getSortedFastestLeaderboard();
+      sendCloudMessage({
+        type: 'FAST_LEADERBOARD_SYNC',
+        globalQIndex: matchState.globalQIndex,
+        remainingSec: window.fastestRemainingSec,
+        status: matchState.status,
+        top10: ranked.slice(0, 10),
+        allRanks: ranked.map((r, i) => ({
+          id: r.id,
+          rank: i + 1,
+          fastScore: r.fastScore,
+          grade: getConvertedGradeByRank(i + 1, r.fastScore).grade
+        }))
+      });
+    }
+  };
+
+  /* =====================================================================
+     PHẦN 5: XỬ LÝ DỮ LIỆU TRẢ LỜI CỦA HỌC SINH & TÍNH ĐIỂM TỐC ĐỘ
+     ===================================================================== */
   window.lastEliminatedBatchIds = [];
   window.eliminatedHistoryByQ = {};
 
   const origHandleHostIncoming = window.handleHostIncomingData;
-  if (typeof origHandleHostIncoming === 'function') {
-    window.handleHostIncomingData = function(d) {
-      let prevEliminatedMap = {};
-      if (typeof matchState !== 'undefined') {
-        [...matchState.redPlayers, ...matchState.bluePlayers].forEach(p => {
-          prevEliminatedMap[p.id] = !!p.eliminated;
+  window.handleHostIncomingData = function(d) {
+    if (!d || !d.type) return;
+
+    // XỬ LÝ RIÊNG CHO CHẾ ĐỘ 3: "AI NHANH NHẤT"
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      if (d.type === 'PULL_CORRECT') {
+        const pObj = registerOrGetPlayer(d.playerId, d.team, d.playerName, true);
+        if (matchState.status !== 'PLAYING') return;
+        if (d.qIndex !== matchState.globalQIndex) return;
+
+        // Kiểm tra nếu học sinh đã trả lời câu này rồi thì bỏ qua
+        const alreadyAnswered = matchState.redAnsweredIds.includes(pObj.id) || matchState.blueAnsweredIds.includes(pObj.id);
+        if (alreadyAnswered) return;
+
+        if (pObj.team === 'RED') matchState.redAnsweredIds.push(pObj.id);
+        else matchState.blueAnsweredIds.push(pObj.id);
+
+        // Tính thời gian phản hồi thực tế (ưu tiên thời gian đo trên máy học sinh nếu hợp lệ, kết hợp đồng hồ Host)
+        const hostElapsedSec = Math.max(0.1, (Date.now() - (window.fastestQuestionStartMs || Date.now())) / 1000);
+        const studentElapsedSec = (typeof d.elapsedSec === 'number' && d.elapsedSec >= 0.05 && d.elapsedSec <= 20)
+          ? d.elapsedSec
+          : hostElapsedSec;
+
+        const gainedPts = calculateFastestPoints(studentElapsedSec, window.fastestCorrectOrderCount);
+        window.fastestCorrectOrderCount++;
+
+        pObj.correct = (pObj.correct || 0) + 1;
+        pObj.fastScore = (pObj.fastScore || 0) + gainedPts;
+        pObj.lastDelta = gainedPts;
+        pObj.lastTimeSec = studentElapsedSec;
+        pObj.totalTimeMs = (pObj.totalTimeMs || 0) + Math.round(studentElapsedSec * 1000);
+
+        const qItem = quizList[matchState.globalQIndex % quizList.length];
+        if (qItem) qItem.rightCount = (qItem.rightCount || 0) + 1;
+
+        AudioFX.pullHeave();
+
+        // Sắp xếp lại bảng xếp hạng ngay tức thì và báo điểm về điện thoại học sinh
+        const ranked = getSortedFastestLeaderboard();
+        const myRankIdx = ranked.findIndex(x => x.id === pObj.id) + 1;
+
+        sendCloudMessage({
+          type: 'FAST_ANSWER_RESULT',
+          playerId: pObj.id,
+          qIndex: matchState.globalQIndex,
+          isCorrect: true,
+          gainedPts: gainedPts,
+          elapsedSec: studentElapsedSec,
+          totalScore: pObj.fastScore,
+          rank: myRankIdx,
+          grade: getConvertedGradeByRank(myRankIdx, pObj.fastScore).grade
         });
+
+        update3DLabelsStatusOnly();
+        updateHostHUD();
+        renderHostQuestionShowcase();
+        window.renderFastestLiveLeaderboard();
+        window.broadcastTeamSyncState();
+
+        // Nếu 100% học sinh trong phòng đã trả lời xong câu hiện tại -> Chuyển câu sớm
+        const totalP = matchState.redPlayers.length + matchState.bluePlayers.length;
+        const doneP = matchState.redAnsweredIds.length + matchState.blueAnsweredIds.length;
+        if (totalP > 0 && doneP >= totalP && !window.fastestQuestionTransitioning) {
+          window.fastestQuestionTransitioning = true;
+          window.stopFastestQuestionTimer();
+          handleFastestQuestionTimeoutOrAllDone();
+        }
+        return;
       }
+      else if (d.type === 'FREEZE_WRONG') {
+        const pObj = registerOrGetPlayer(d.playerId, d.team, d.playerName, true);
+        if (matchState.status !== 'PLAYING') return;
+        if (d.qIndex !== matchState.globalQIndex) return;
 
-      origHandleHostIncoming(d);
+        const alreadyAnswered = matchState.redAnsweredIds.includes(pObj.id) || matchState.blueAnsweredIds.includes(pObj.id);
+        if (alreadyAnswered) return;
 
-      if (typeof matchState !== 'undefined' && d && d.type === 'FREEZE_WRONG') {
-        const qKey = matchState.globalQIndex;
-        if (!window.eliminatedHistoryByQ[qKey]) window.eliminatedHistoryByQ[qKey] = [];
+        if (pObj.team === 'RED') matchState.redAnsweredIds.push(pObj.id);
+        else matchState.blueAnsweredIds.push(pObj.id);
 
-        [...matchState.redPlayers, ...matchState.bluePlayers].forEach(p => {
-          if (p.eliminated && !prevEliminatedMap[p.id]) {
-            if (!window.eliminatedHistoryByQ[qKey].includes(p.id)) {
-              window.eliminatedHistoryByQ[qKey].push(p.id);
-            }
-            window.lastEliminatedBatchIds = [...window.eliminatedHistoryByQ[qKey]];
+        // Trả lời sai: 0 điểm
+        pObj.freeze = (pObj.freeze || 0) + 1;
+        pObj.lastDelta = 0;
+        pObj.lastTimeSec = null;
+
+        const qItem = quizList[matchState.globalQIndex % quizList.length];
+        if (qItem) qItem.wrongCount = (qItem.wrongCount || 0) + 1;
+
+        AudioFX.freezeCrack();
+
+        const ranked = getSortedFastestLeaderboard();
+        const myRankIdx = ranked.findIndex(x => x.id === pObj.id) + 1;
+
+        sendCloudMessage({
+          type: 'FAST_ANSWER_RESULT',
+          playerId: pObj.id,
+          qIndex: matchState.globalQIndex,
+          isCorrect: false,
+          gainedPts: 0,
+          totalScore: pObj.fastScore || 0,
+          rank: myRankIdx,
+          grade: getConvertedGradeByRank(myRankIdx, pObj.fastScore || 0).grade
+        });
+
+        update3DLabelsStatusOnly();
+        updateHostHUD();
+        renderHostQuestionShowcase();
+        window.renderFastestLiveLeaderboard();
+        window.broadcastTeamSyncState();
+
+        const totalP = matchState.redPlayers.length + matchState.bluePlayers.length;
+        const doneP = matchState.redAnsweredIds.length + matchState.blueAnsweredIds.length;
+        if (totalP > 0 && doneP >= totalP && !window.fastestQuestionTransitioning) {
+          window.fastestQuestionTransitioning = true;
+          window.stopFastestQuestionTimer();
+          handleFastestQuestionTimeoutOrAllDone();
+        }
+        return;
+      }
+      else if (d.type === 'FREEZE_DONE_NEXT') {
+        return; // Đã xử lý ngay lúc bấm sai
+      }
+    }
+
+    // XỬ LÝ MẶC ĐỊNH CHO KÉO CO & RUNG CHUÔNG VÀNG (+ Lưu vết Cứu trợ)
+    let prevEliminatedMap = {};
+    if (typeof matchState !== 'undefined') {
+      [...matchState.redPlayers, ...matchState.bluePlayers].forEach(p => {
+        prevEliminatedMap[p.id] = !!p.eliminated;
+      });
+    }
+
+    origHandleHostIncoming(d);
+
+    if (typeof matchState !== 'undefined' && d && d.type === 'FREEZE_WRONG') {
+      const qKey = matchState.globalQIndex;
+      if (!window.eliminatedHistoryByQ[qKey]) window.eliminatedHistoryByQ[qKey] = [];
+
+      [...matchState.redPlayers, ...matchState.bluePlayers].forEach(p => {
+        if (p.eliminated && !prevEliminatedMap[p.id]) {
+          if (!window.eliminatedHistoryByQ[qKey].includes(p.id)) {
+            window.eliminatedHistoryByQ[qKey].push(p.id);
           }
-        });
-        updateRescueButtonsBadge();
+          window.lastEliminatedBatchIds = [...window.eliminatedHistoryByQ[qKey]];
+        }
+      });
+      updateRescueButtonsBadge();
+    }
+  };
+
+  /* =====================================================================
+     PHẦN 6: KẾT THÚC TRÒ CHƠI & HIỂN THỊ BẢNG VINH DANH + CHO ĐIỂM HỆ 10
+     ===================================================================== */
+  const origEndMatchManual = window.endMatchManual;
+  window.endMatchManual = function() {
+    window.stopFastestQuestionTimer();
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      const ranked = getSortedFastestLeaderboard();
+      const champName = ranked.length > 0 && ranked[0].fastScore > 0
+        ? `⚡ QUÁN QUÂN TỐC ĐỘ: ${ranked[0].label.toUpperCase()} (${ranked[0].fastScore}Đ)`
+        : 'KẾT THÚC ĐẤU TRƯỜNG AI NHANH NHẤT';
+      finishMatch(champName);
+      return;
+    }
+    origEndMatchManual();
+  };
+
+  const origFinishMatch = window.finishMatch;
+  window.finishMatch = function(winner) {
+    window.stopFastestQuestionTimer();
+    origFinishMatch(winner);
+
+    const podiumBox = document.getElementById('fast-final-podium-box');
+    if (!podiumBox) return;
+
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      const ranked = getSortedFastestLeaderboard();
+      document.getElementById('win-sub-txt').innerHTML =
+        `🌟 <b>BẢNG VINH DANH CHUNG CUỘC & QUY ĐỔI ĐIỂM SỐ:</b> ` +
+        `<span style="color:#fef08a;">Hạng 1–3: <b>10đ</b> • Hạng 4–6: <b>9đ</b> • Hạng 7–10: <b>8đ</b> • Hạng 11–15: <b>7đ</b></span>`;
+
+      const top15 = ranked.slice(0, 15);
+      if (top15.length === 0) {
+        podiumBox.innerHTML = `<div style="text-align:center; padding:14px; color:#94a3b8;">Chưa có thí sinh nào ghi điểm trong trận đấu này.</div>`;
+      } else {
+        const rowsHTML = top15.map((p, idx) => {
+          const r = idx + 1;
+          const medal = r === 1 ? '🥇 Hạng 1' : (r === 2 ? '🥈 Hạng 2' : (r === 3 ? '🥉 Hạng 3' : `Hạng ${r}`));
+          const gInfo = getConvertedGradeByRank(r, p.fastScore);
+          const groupTag = r <= 10 ? '<span style="color:#38bdf8;">[TOP 10]</span>' : '<span style="color:#c084fc;">[Hạng 11-15]</span>';
+          return `
+            <tr>
+              <td><b>${medal}</b> ${groupTag}</td>
+              <td style="color:#fef08a;">${p.label}</td>
+              <td>${p.correct} đúng / ${p.wrong} sai</td>
+              <td style="color:#38bdf8; font-weight:900;">${p.fastScore} điểm</td>
+              <td><span class="grade-pill ${gInfo.css}">${gInfo.label}</span></td>
+            </tr>
+          `;
+        }).join('');
+
+        podiumBox.innerHTML = `
+          <table class="ffp-table">
+            <thead>
+              <tr>
+                <th>Thứ hạng</th>
+                <th>Họ và Tên Thí Sinh</th>
+                <th>Kết quả</th>
+                <th>Tổng điểm tốc độ</th>
+                <th>Điểm quy đổi</th>
+              </tr>
+            </thead>
+            <tbody>${rowsHTML}</tbody>
+          </table>
+        `;
       }
-    };
+      podiumBox.style.display = 'block';
+
+      // Gửi bảng tổng kết điểm về toàn bộ điện thoại học sinh
+      sendCloudMessage({
+        type: 'FAST_FINAL_CEREMONY',
+        winner: winner,
+        rankings: ranked.slice(0, 15).map((p, i) => ({
+          id: p.id,
+          rank: i + 1,
+          label: p.label,
+          fastScore: p.fastScore,
+          grade: getConvertedGradeByRank(i + 1, p.fastScore).grade
+        }))
+      });
+    } else {
+      podiumBox.style.display = 'none';
+    }
+  };
+
+  // Nâng cấp Xuất Bảng Điểm Excel (.CSV) có đầy đủ Thứ hạng & Điểm số (10, 9, 8, 7)
+  const origDownloadCSV = window.downloadCSVReport;
+  window.downloadCSVReport = function() {
+    if (typeof matchState !== 'undefined' && matchState.gameType === 'FAST') {
+      let csv = "Thứ hạng,Họ và Tên Học Sinh,Số câu đúng,Số câu sai,Tổng Điểm Tốc Độ,Điểm Quy Đổi (Hệ 10),Nhóm Vinh Danh\n";
+      const ranked = getSortedFastestLeaderboard();
+      ranked.forEach((p, idx) => {
+        const rank = idx + 1;
+        const gInfo = getConvertedGradeByRank(rank, p.fastScore);
+        const tier = rank <= 3 ? "Top 1-3 (10 điểm)" : (rank <= 6 ? "Top 4-6 (9 điểm)" : (rank <= 10 ? "Top 7-10 (8 điểm)" : (rank <= 15 ? "Hạng 11-15 (7 điểm)" : "Tham gia")));
+        csv += `${rank},"${p.label}",${p.correct},${p.wrong},${p.fastScore},${gInfo.grade},"${tier}"\n`;
+      });
+      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `bang_diem_Ai_Nhanh_Nhat_THPT_Mang_Thit_${Date.now()}.csv`;
+      a.click();
+      return;
+    }
+    origDownloadCSV();
+  };
+
+  /* =====================================================================
+     PHẦN 7: LOGIC ĐIỆN THOẠI HỌC SINH CHO CHẾ ĐỘ "AI NHANH NHẤT"
+     ===================================================================== */
+  function startMobileFastCountdown(durationSec) {
+    if (window.fastestMobileTimer) clearInterval(window.fastestMobileTimer);
+    const wrap = document.getElementById('mobile-fast-timer-wrap');
+    if (clientGameType !== 'FAST') {
+      if (wrap) wrap.style.display = 'none';
+      return;
+    }
+    if (wrap) wrap.style.display = 'block';
+    window.fastestMobileStartMs = Date.now();
+    const totalSec = durationSec || FASTEST_Q_DURATION_SEC;
+    const fill = document.getElementById('mobile-fast-timer-fill');
+    const txt = document.getElementById('mobile-fast-timer-txt');
+
+    window.fastestMobileTimer = setInterval(() => {
+      const elapsed = (Date.now() - window.fastestMobileStartMs) / 1000;
+      const rem = Math.max(0, totalSec - elapsed);
+      const pct = (rem / totalSec) * 100;
+      if (fill) {
+        fill.style.width = `${pct}%`;
+        fill.style.background = rem > 10 ? '#10b981' : (rem > 5 ? '#f59e0b' : '#ef4444');
+      }
+      if (txt) {
+        txt.innerText = rem > 0
+          ? `⏱️ Còn ${rem.toFixed(1)}s • Trả lời càng nhanh điểm càng cao!`
+          : `⌛ Hết 20 giây (0 điểm) • Chờ câu tiếp theo...`;
+      }
+      if (rem <= 0) {
+        clearInterval(window.fastestMobileTimer);
+        // Khóa nút chọn khi hết 20 giây
+        document.querySelectorAll('#m-q-options .btn-ans').forEach(b => {
+          b.disabled = true;
+          b.classList.add('locked-choice');
+        });
+      }
+    }, 100);
   }
 
+  const origInitMobile = window.initMobilePlayer;
+  window.initMobilePlayer = function(roomParam, teamParam, subjParam, gmParam) {
+    if (gmParam === 'F' || gmParam === 'FAST') {
+      window.clientGameType = 'FAST';
+    }
+    origInitMobile(roomParam, teamParam, subjParam, gmParam);
+  };
+
+  const origUpdateLobbyBanner = window.updateLobbyInfoBanner;
+  window.updateLobbyInfoBanner = function() {
+    if (window.clientGameType === 'FAST') {
+      const manualBox = document.getElementById('manual-team-box');
+      if (manualBox) manualBox.style.display = 'none';
+      const info = document.getElementById('assigned-info');
+      if (info) {
+        info.innerHTML = `
+          Chế độ: <b style="color:#fef08a; font-size:16px;">⚡ AI NHANH NHẤT 3D (20 GIÂY/CÂU)</b><br>
+          <span style="font-size:12.5px; color:#a7f3d0;">Đúng & nhanh nhất: <b>1.000đ</b>, giảm dần theo giây • Sai/Hết giờ: <b>0đ</b><br>🏆 Hạng 1-3: <b>10đ</b> | Hạng 4-6: <b>9đ</b> | Hạng 7-10: <b>8đ</b> | Hạng 11-15: <b>7đ</b></span>
+        `;
+      }
+      return;
+    }
+    origUpdateLobbyBanner();
+  };
+
+  const origMoveToReady = window.moveToReadyScreen;
+  window.moveToReadyScreen = function() {
+    origMoveToReady();
+    if (window.clientGameType === 'FAST') {
+      const badge = document.getElementById('m-role-badge');
+      if (badge) {
+        badge.innerText = '⚡ ĐUA TỐC ĐỘ';
+        badge.style.background = '#9333ea';
+      }
+      const stat = document.getElementById('m-rope-stat');
+      if (stat) {
+        stat.innerText = `Tổng: ${window.myFastestTotalScore || 0}đ ${window.myFastestRank ? `(#${window.myFastestRank})` : ''}`;
+      }
+    }
+  };
+
+  const origActivateMobileQuiz = window.activateMobileQuiz;
+  window.activateMobileQuiz = function() {
+    origActivateMobileQuiz();
+    if (window.clientGameType === 'FAST') {
+      // Nếu học sinh đã trả lời câu hiện tại rồi thì hiện trạng thái chờ câu tiếp theo, không cho xem trước câu mới
+      if (lastCompletedQIndex === currentGlobalQIndex) {
+        const banner = document.getElementById('preview-lock-banner');
+        if (banner) {
+          banner.style.display = 'block';
+          banner.innerHTML = `✅ <b>ĐÃ GHI NHẬN CÂU TRẢ LỜI #${currentGlobalQIndex + 1}!</b><br><span>Tổng điểm của em: <b style="color:#4ade80;">${window.myFastestTotalScore} điểm</b> ${window.myFastestRank ? `• Xếp hạng: <b>#${window.myFastestRank}</b>` : ''} — Đang chờ hết 20 giây để mở câu mới...</span>`;
+        }
+      } else {
+        startMobileFastCountdown(FASTEST_Q_DURATION_SEC);
+      }
+    }
+  };
+
+  const origCheckMobileAnswer = window.checkMobileAnswer;
+  window.checkMobileAnswer = function(isCorrect) {
+    if (window.clientGameType === 'FAST') {
+      if (lastCompletedQIndex === currentGlobalQIndex) return;
+      const elapsedSec = Math.max(0.08, (Date.now() - (window.fastestMobileStartMs || Date.now())) / 1000);
+      if (elapsedSec > FASTEST_Q_DURATION_SEC + 0.5) return; // Quá 20 giây
+
+      const name = getCleanStudentName() || 'Học sinh';
+      const answeredQ = currentGlobalQIndex;
+      lastCompletedQIndex = answeredQ;
+
+      // Khóa ngay các phương án sau khi đã chọn 1 lần
+      document.querySelectorAll('#m-q-options .btn-ans').forEach(b => {
+        b.disabled = true;
+        b.classList.add('locked-choice');
+      });
+
+      if (isCorrect) {
+        if (navigator.vibrate) navigator.vibrate(50);
+        sendCloudMessage({
+          type: 'PULL_CORRECT',
+          playerId: myPlayerId,
+          team: selectedTeam,
+          playerName: name,
+          qIndex: answeredQ,
+          elapsedSec: elapsedSec
+        });
+      } else {
+        if (navigator.vibrate) navigator.vibrate([80, 50, 80]);
+        sendCloudMessage({
+          type: 'FREEZE_WRONG',
+          playerId: myPlayerId,
+          team: selectedTeam,
+          playerName: name,
+          qIndex: answeredQ,
+          elapsedSec: elapsedSec
+        });
+      }
+      return;
+    }
+    origCheckMobileAnswer(isCorrect);
+  };
+
+  const origHandleMobileIncoming = window.handleMobileIncomingData;
+  window.handleMobileIncomingData = function(d) {
+    if (d && d.gameType === 'FAST') {
+      window.clientGameType = 'FAST';
+      window.updateLobbyInfoBanner();
+    }
+
+    if (d && d.type === 'FAST_QUESTION_START') {
+      window.clientGameType = 'FAST';
+      currentGlobalQIndex = d.globalQIndex;
+      renderedMobileQIndex = -1;
+      moveToReadyScreen();
+      activateMobileQuiz();
+      startMobileFastCountdown(d.durationSec || FASTEST_Q_DURATION_SEC);
+      return;
+    }
+
+    if (d && d.type === 'FAST_ANSWER_RESULT' && d.playerId === window.myPlayerId) {
+      window.myFastestTotalScore = d.totalScore || 0;
+      window.myFastestLastGain = d.gainedPts || 0;
+      window.myFastestRank = d.rank || 0;
+
+      const stat = document.getElementById('m-rope-stat');
+      if (stat) {
+        stat.innerText = `⚡ ${window.myFastestTotalScore}đ | Hạng #${window.myFastestRank}`;
+      }
+
+      const banner = document.getElementById('preview-lock-banner');
+      if (banner) {
+        banner.style.display = 'block';
+        if (d.isCorrect) {
+          banner.innerHTML = `🎉 <b>CHÍNH XÁC TRONG ${d.elapsedSec.toFixed(2)} GIÂY! (+${d.gainedPts} ĐIỂM)</b><br><span>Tổng điểm: <b style="color:#4ade80;">${d.totalScore}đ</b> • Hạng hiện tại: <b style="color:#fef08a;">#${d.rank}</b> (Tương ứng <b>${d.grade} điểm</b>)</span>`;
+        } else {
+          banner.innerHTML = `❌ <b>TRẢ LỜI SAI! (+0 ĐIỂM)</b><br><span>Tổng điểm: <b>${d.totalScore}đ</b> • Hạng hiện tại: <b>#${d.rank}</b> — Hãy chuẩn bị gỡ điểm ở câu tiếp theo!</span>`;
+        }
+      }
+      return;
+    }
+
+    if (d && d.type === 'FAST_LEADERBOARD_SYNC') {
+      if (d.allRanks && Array.isArray(d.allRanks)) {
+        const me = d.allRanks.find(x => x.id === window.myPlayerId);
+        if (me) {
+          window.myFastestTotalScore = me.fastScore;
+          window.myFastestRank = me.rank;
+          const stat = document.getElementById('m-rope-stat');
+          if (stat) stat.innerText = `⚡ ${me.fastScore}đ | Hạng #${me.rank} (${me.grade}đ)`;
+        }
+      }
+      return;
+    }
+
+    if (d && d.type === 'FAST_FINAL_CEREMONY') {
+      if (window.fastestMobileTimer) clearInterval(window.fastestMobileTimer);
+      const ov = document.getElementById('waiting-host-overlay');
+      const quizCon = document.getElementById('active-quiz-container');
+      if (quizCon) quizCon.style.display = 'none';
+      if (ov) {
+        ov.style.display = 'flex';
+        const me = (d.rankings || []).find(x => x.id === window.myPlayerId);
+        const mySummary = me
+          ? `<div style="background:#0f172a; border:2px solid #fef08a; padding:12px; border-radius:14px; margin:10px 0;">
+               <div style="font-size:18px; color:#fef08a; font-weight:900;">THÀNH TÍCH CỦA EM: HẠNG #${me.rank}</div>
+               <div style="font-size:15px; color:#38bdf8; margin:4px 0;">Tổng điểm tốc độ: <b>${me.fastScore} điểm</b></div>
+               <div style="font-size:20px; color:#4ade80; font-weight:900;">🎯 ĐIỂM ĐƯỢC NHẬN: ${me.grade} ĐIỂM</div>
+             </div>`
+          : `<p style="color:#cbd5e1;">Tổng điểm của em: <b>${window.myFastestTotalScore} điểm</b></p>`;
+
+        ov.innerHTML = `
+          <div style="font-size:46px;">🏆</div>
+          <h2 style="color:#fef08a; margin:4px 0;">${d.winner}</h2>
+          ${mySummary}
+          <p style="font-size:13px; color:#94a3b8;">Hãy nhìn lên màn hình chính để xem Bảng Vinh Danh Top 10 & Hạng 11–15!</p>
+        `;
+      }
+      return;
+    }
+
+    origHandleMobileIncoming(d);
+
+    // Xử lý thông báo khi được Giáo viên Cứu trợ ở chế độ Rung Chuông Vàng
+    if (d && d.type === 'PLAYER_LIVES_SYNC' && d.playerId === window.myPlayerId && d.rescuedNow) {
+      window.myEliminated = false;
+      window.myLives = d.lives || 1;
+      window.myStreak = 0;
+      if (typeof updateMobileLivesHeader === 'function') updateMobileLivesHeader();
+      if (typeof activateMobileQuiz === 'function') activateMobileQuiz();
+
+      const toast = document.getElementById('bonus-life-toast');
+      if (toast) {
+        toast.innerHTML = '🛟 THẦY ĐÃ CỨU TRỢ HỒI SINH EM TRỞ LẠI SÀN ĐẤU! (❤️)';
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 4000);
+      }
+    }
+  };
+
+  /* =====================================================================
+     PHẦN 8: TÍNH NĂNG CỨU TRỢ & HỒI SINH (RUNG CHUÔNG VÀNG)
+     ===================================================================== */
   function revivePlayersByIdList(idList, announcementTitle) {
     if (typeof matchState === 'undefined') return;
     const allP = [...matchState.redPlayers, ...matchState.bluePlayers];
@@ -545,7 +1614,6 @@
     showRescueBanner(`${announcementTitle}<br><span style="font-size:14.5px; color:#fef08a;">Đã hồi sinh (${revivedNames.length} HS): ${revivedNames.join(', ')}</span>`);
   }
 
-  // CHẾ ĐỘ CỨU TRỢ 1: Hồi sinh các thí sinh vừa bị loại ở lượt gần nhất
   window.rescueLastEliminatedBatch = function() {
     if (typeof matchState === 'undefined') return;
     const allP = [...matchState.redPlayers, ...matchState.bluePlayers];
@@ -573,7 +1641,6 @@
     revivePlayersByIdList(finalIds, `🛟 CỨU TRỢ THÀNH CÔNG LƯỢT VỪA RỒI!`);
   };
 
-  // CHẾ ĐỘ CỨU TRỢ 2: Chọn ngẫu nhiên 5 học sinh đã bị loại để hồi sinh
   window.rescueRandomFivePlayers = function() {
     if (typeof matchState === 'undefined') return;
     const allP = [...matchState.redPlayers, ...matchState.bluePlayers];
@@ -594,7 +1661,7 @@
   };
 
   function injectRescueButtonsUI() {
-    fixTugIconDisplay();
+    injectFastestGameUI();
 
     const controlsRow = document.querySelector('.host-controls-row');
     if (controlsRow && !document.getElementById('updat-rescue-box')) {
@@ -619,7 +1686,7 @@
 
     const vicModal = document.getElementById('victory-modal');
     if (vicModal && !document.getElementById('vic-rescue-btn')) {
-      const btnContainer = vicModal.querySelector('div');
+      const btnContainer = vicModal.querySelector('div:last-child');
       if (btnContainer) {
         const rBtn = document.createElement('button');
         rBtn.id = 'vic-rescue-btn';
@@ -638,37 +1705,11 @@
     const allP = [...matchState.redPlayers, ...matchState.bluePlayers];
     const outCount = allP.filter(x => x.eliminated).length;
     const btnLast = document.getElementById('btn-rescue-last');
-    const btnRand = document.getElementById('btn-rescue-rand5');
     if (btnLast) {
       btnLast.innerHTML = outCount > 0
         ? `🛟 Cứu Trợ Lượt Vừa Rồi (${outCount} HS bị loại)`
         : `🛟 Cứu Trợ Lượt Vừa Rồi`;
     }
-    if (btnRand) {
-      btnRand.innerHTML = `🎲 Hồi Sinh Ngẫu Nhiên 5 HS`;
-    }
-  }
-
-  const origHandleMobileIncoming = window.handleMobileIncomingData;
-  if (typeof origHandleMobileIncoming === 'function') {
-    window.handleMobileIncomingData = function(d) {
-      origHandleMobileIncoming(d);
-
-      if (d && d.type === 'PLAYER_LIVES_SYNC' && d.playerId === window.myPlayerId && d.rescuedNow) {
-        window.myEliminated = false;
-        window.myLives = d.lives || 1;
-        window.myStreak = 0;
-        if (typeof updateMobileLivesHeader === 'function') updateMobileLivesHeader();
-        if (typeof activateMobileQuiz === 'function') activateMobileQuiz();
-
-        const toast = document.getElementById('bonus-life-toast');
-        if (toast) {
-          toast.innerHTML = '🛟 THẦY ĐÃ CỨU TRỢ HỒI SINH EM TRỞ LẠI SÀN ĐẤU! (❤️)';
-          toast.style.display = 'block';
-          setTimeout(() => { toast.style.display = 'none'; }, 4000);
-        }
-      }
-    };
   }
 
   if (document.readyState === 'loading') {
