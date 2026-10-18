@@ -57,14 +57,14 @@
       background: #f1f5f9; color: #0f172a; overflow-y: auto; padding: 16px;
       display: flex; flex-direction: column; align-items: center;
     }
-    .setup-box { width: 100%; max-width: 1020px; background: white; padding: 20px 24px; border-radius: 20px; box-shadow: 0 12px 35px rgba(0,0,0,0.08); border: 1px solid #cbd5e1; }
+    .setup-box { width: 100%; max-width: 1060px; background: white; padding: 20px 24px; border-radius: 20px; box-shadow: 0 12px 35px rgba(0,0,0,0.08); border: 1px solid #cbd5e1; }
     .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
     .subject-manager { margin: 10px 0; padding: 12px; background: #f8fafc; border-radius: 14px; border: 2px solid #e2e8f0; }
     .subject-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; align-items: center; }
     .btn-subj { padding: 8px 14px; border-radius: 10px; border: 2px solid transparent; font-weight: 900; font-size: 13px; cursor: pointer; color: white; transition: all 0.15s; display: flex; align-items: center; gap: 6px; }
     .btn-subj.active-subj { border-color: #0f172a; transform: scale(1.04); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-    .btn-action-sm { padding: 7px 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 13px; color: #1e293b; }
-    .btn-action-sm:hover { background: #e2e8f0; }
+    .btn-action-sm { padding: 7px 12px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 12.5px; color: #1e293b; transition: 0.15s; }
+    .btn-action-sm:hover { background: #e2e8f0; transform: translateY(-1px); }
     #editor { min-height: 155px; max-height: 215px; overflow-y: auto; border: 2px solid #cbd5e1; border-radius: 12px; padding: 14px; font-size: 15px; line-height: 1.55; outline: none; background: #fff; margin: 8px 0; }
     #editor u { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; font-weight: 900; color: var(--red); }
     .config-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 14px; margin: 10px 0; }
@@ -79,9 +79,9 @@
     #canvas3d { width: 100%; height: 100%; display: block; }
     .host-controls {
       position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.94); border: 2px solid #334155; backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.95); border: 2px solid #334155; backdrop-filter: blur(10px);
       padding: 5px 12px; border-radius: 40px; display: flex; align-items: center; gap: 5px; z-index: 35;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.45); white-space: nowrap; flex-wrap: wrap; justify-content: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.45); white-space: nowrap; flex-wrap: wrap; justify-content: center; width: 96%; max-width: 1180px;
     }
     .c-btn { padding: 6px 11px; border-radius: 20px; border: none; font-weight: 900; font-size: 11.5px; cursor: pointer; display: flex; align-items: center; gap: 4px; }
     .c-prep { background: var(--purple); color: white; }
@@ -89,8 +89,12 @@
     .c-pause { background: var(--gold); color: #000; }
     .c-end { background: var(--red); color: white; }
     .c-home { background: #475569; color: white; }
+    .voice-select-box {
+      background: #1e293b; color: #fef08a; border: 1.5px solid #ec4899; border-radius: 16px;
+      padding: 4px 8px; font-size: 11.5px; font-weight: 800; outline: none; cursor: pointer; max-width: 170px;
+    }
 
-    .hud-row { position: absolute; top: 50px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: center; pointer-events: none; z-index: 25; }
+    .hud-row { position: absolute; top: 52px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: center; pointer-events: none; z-index: 25; }
     .team-box { padding: 8px 16px; border-radius: 24px; font-size: 14px; font-weight: 900; box-shadow: 0 8px 20px rgba(0,0,0,0.45); pointer-events: auto; display: flex; align-items: center; gap: 8px; }
     .team-box.red { background: linear-gradient(135deg, var(--red), var(--red-dark)); border: 3px solid var(--red-glow); }
     .team-box.blue { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border: 3px solid var(--blue-glow); }
@@ -99,7 +103,7 @@
     .round-badge-top { color: #38bdf8; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
     .tug-score-live { color: #fef08a; font-size: 16px; margin-top: 2px; }
 
-    .qr-panel { position: absolute; top: 108px; padding: 7px; border-radius: 14px; background: rgba(255, 255, 255, 0.96); box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center; color: #0f172a; z-index: 20; transition: all 0.25s; }
+    .qr-panel { position: absolute; top: 110px; padding: 7px; border-radius: 14px; background: rgba(255, 255, 255, 0.96); box-shadow: 0 10px 25px rgba(0,0,0,0.5); text-align: center; color: #0f172a; z-index: 20; transition: all 0.25s; }
     .qr-panel.left { left: 14px; border: 3.5px solid var(--red); }
     .qr-panel.right { right: 14px; border: 3.5px solid var(--blue); }
     .qr-caption { font-weight: 900; font-size: 10.5px; margin-top: 3px; }
@@ -134,7 +138,7 @@
       background: linear-gradient(135deg, #059669, #10b981) !important; border-color: #fef08a !important; border-width: 3.5px !important;
       color: #ffffff !important; transform: scale(1.02); box-shadow: 0 0 25px rgba(16, 185, 129, 0.85) !important;
     }
-    .hq-nav-btn { background: #1e293b; border: 1.5px solid #64748b; color: #fff; border-radius: 8px; padding: 5px 12px; font-size: 12.5px; font-weight: 800; cursor: pointer; }
+    .hq-nav-btn { background: #1e293b; border: 1.5px solid #64748b; color: #fff; border-radius: 8px; padding: 5px 11px; font-size: 12px; font-weight: 800; cursor: pointer; }
     .hq-nav-btn:hover { background: #334155; }
     .hq-stats-bar { margin-top: 10px; padding-top: 8px; border-top: 1px dashed #334155; display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 800; color: #cbd5e1; flex-wrap: wrap; gap: 6px; }
 
@@ -155,7 +159,7 @@
       position: absolute; top: 34%; left: 50%; transform: translate(-50%, -50%);
       background: rgba(15, 23, 42, 0.96); border: 4px solid var(--gold);
       padding: 22px 34px; border-radius: 26px; text-align: center;
-      display: none; z-index: 120; box-shadow: 0 0 60px rgba(245, 158, 11, 0.65); max-width: 560px; width: 92%;
+      display: none; z-index: 120; box-shadow: 0 0 60px rgba(245, 158, 11, 0.65); max-width: 620px; width: 94%;
     }
 
     /* 3. GIAO DIỆN ĐIỆN THOẠI HỌC SINH (CLIENT) */
@@ -213,10 +217,12 @@
   <div id="teacher-view">
     <div class="setup-box">
       <div class="flex-between">
-        <h2 style="margin: 0; font-size: 21px;">🌾 Quản Lý Môn Học, Bài Dạy & Đề Thi Kéo Co</h2>
-        <div style="display: flex; gap: 6px;">
-          <button class="btn-action-sm" onclick="exportQuizJSON()">💾 Xuất File (.json)</button>
-          <button class="btn-action-sm" onclick="document.getElementById('file-import').click()">📂 Nhập File (.json)</button>
+        <h2 style="margin: 0; font-size: 21px;">🌾 Quản Lý Môn Học, Bài Dạy & Xuất Học Liệu Minh Chứng</h2>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <button class="btn-action-sm" style="background:#fef3c7; border-color:#f59e0b; color:#92400e;" onclick="exportColorfulPresentationHTML()">🎨 Xuất Slide Học Liệu Màu (.html)</button>
+          <button class="btn-action-sm" style="background:#e0e7ff; border-color:#6366f1; color:#1e1b4b;" onclick="printEvidenceColorfulPDF()">🖨️ In / Lưu PDF Minh Chứng</button>
+          <button class="btn-action-sm" onclick="exportQuizJSON()">💾 Xuất Đề (.json)</button>
+          <button class="btn-action-sm" onclick="document.getElementById('file-import').click()">📂 Nhập Đề (.json)</button>
           <input type="file" id="file-import" accept=".json" style="display:none;" onchange="importQuizJSON(event)">
         </div>
       </div>
@@ -230,8 +236,9 @@
             <button class="btn-action-sm" id="btn-del-subj" style="background:#fee2e2; border-color:#fca5a5; color:#991b1b; display:none;" onclick="deleteCurrentSubject()">🗑️ Xóa Môn Này</button>
           </div>
           <div style="display: flex; gap: 6px;">
+            <button class="btn-action-sm" onclick="testVietnameseVoiceSample()" style="background:#fce7f3; border-color:#f472b6; color:#9d174d;">🔊 Nghe thử Giọng Đọc Tiếng Việt</button>
             <button class="btn-action-sm" onclick="document.execCommand('underline', false, null)"><u>U</u> Gạch chân đáp án</button>
-            <button class="btn-action-sm" onclick="document.getElementById('editor').innerHTML=''">Xóa trắng ô soạn</button>
+            <button class="btn-action-sm" onclick="document.getElementById('editor').innerHTML=''">Xóa trắng</button>
           </div>
         </div>
       </div>
@@ -266,7 +273,7 @@
 
       <div class="flex-between" style="margin-top: 10px;">
         <span style="font-size: 13px; color: #059669; font-weight: 800;">
-          🔊 Tích hợp Giọng Đọc AI Tiếng Việt tự động đọc câu hỏi • 🏆 Thắng 2/3 Hiệp nhận Cúp Vàng 3D!
+          🔊 Giọng đọc Tiếng Việt chuẩn hóa thuật ngữ rõ chữ • 🎨 Xuất Slide & PDF học liệu màu làm minh chứng!
         </span>
         <button class="btn-launch" onclick="open3DArena()">MỞ SÂN ĐẤU 3D & HIỆN MÃ QR</button>
       </div>
@@ -280,12 +287,14 @@
       <button class="c-btn c-start" id="btn-host-start" onclick="startMatch()">▶ BẮT ĐẦU KÉO</button>
       <button class="c-btn c-pause" id="btn-host-pause" onclick="pauseMatch()" style="display:none;">⏸ TẠM DỪNG</button>
       <button class="c-btn" style="background:#0284c7; color:#fff;" onclick="forceAdvanceGlobalQuestion()">⏭️ QUA CÂU MỚI</button>
-      <button class="c-btn" id="btn-auto-tts" style="background:#ec4899; color:#fff;" onclick="toggleAutoVoiceTTS()" title="Bật/Tắt tự động đọc câu hỏi">🔊 TỰ ĐỌC: BẬT</button>
-      <button class="c-btn" style="background:#d97706; color:#fff;" onclick="cycleSkyThemeManual()" title="Đổi nhanh bầu trời Sáng / Hoàng hôn / Đêm">🌤️ ĐỔI TRỜI</button>
+      <button class="c-btn" id="btn-auto-tts" style="background:#ec4899; color:#fff;" onclick="toggleAutoVoiceTTS()">🔊 TỰ ĐỌC: BẬT</button>
+      <select id="voice-engine-select" class="voice-select-box" onchange="onVoiceEngineChange()" title="Chọn nguồn giọng đọc Tiếng Việt rõ nhất"></select>
+      <button class="c-btn" style="background:#d97706; color:#fff;" onclick="cycleSkyThemeManual()">🌤️ ĐỔI TRỜI</button>
       <button class="c-btn" id="btn-toggle-review" style="background:#059669; color:#fff;" onclick="toggleReviewAnswersMode()">✅ CHỮA BÀI</button>
+      <button class="c-btn" style="background:#6366f1; color:#fff;" onclick="exportColorfulPresentationHTML()" title="Tải bộ câu hỏi hoàn chỉnh màu sắc về máy">📥 TẢI BỘ ĐỀ MÀU</button>
       <button class="c-btn c-end" onclick="endMatchManual()">⏹ KẾT THÚC</button>
       <button class="c-btn c-home" onclick="returnToSetup()">🏠 CÀI ĐẶT</button>
-      <span id="net-status" style="font-size: 11px; color: #a7f3d0; font-weight: 800; padding-left: 4px;">🔄 Đang mở phòng...</span>
+      <span id="net-status" style="font-size: 11px; color: #a7f3d0; font-weight: 800;">🔄 Đang mở...</span>
     </div>
 
     <div class="hud-row">
@@ -324,11 +333,12 @@
       <div class="hq-header">
         <span id="hq-mode-badge">🔥 CÂU HỎI CHUNG CHO CẢ 2 ĐỘI (HIỂN THỊ ĐỒNG BỘ)</span>
         <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
-          <button class="hq-nav-btn" id="hq-speak-btn" style="background:#db2777; border-color:#f472b6;" onclick="speakCurrentHostQuestion(true)">🔊 ĐỌC CÂU HỎI</button>
+          <button class="hq-nav-btn" id="hq-speak-btn" style="background:#db2777; border-color:#f472b6;" onclick="speakCurrentHostQuestion(true)">🔊 ĐỌC RÕ CÂU NÀY</button>
           <button class="hq-nav-btn" onclick="stepHostQuestion(-1)">◀ Câu trước</button>
           <span id="hq-counter" style="color:#fef08a; font-size:14px;">Câu 1/10</span>
           <button class="hq-nav-btn" onclick="stepHostQuestion(1)">Câu tiếp ▶</button>
           <button class="hq-nav-btn" id="hq-reveal-btn" style="background:#059669; border-color:#a7f3d0;" onclick="toggleReviewAnswersMode()">👁️ Hiện Đáp Án Đúng</button>
+          <button class="hq-nav-btn" style="background:#d97706; border-color:#fde047;" onclick="exportColorfulPresentationHTML()">🎨 Tải Slide Màu</button>
         </div>
       </div>
       <div class="hq-title" id="hq-q-text">Đang tải câu hỏi chung...</div>
@@ -348,12 +358,14 @@
     </div>
 
     <div id="victory-modal">
-      <h1 id="win-banner-txt" style="font-size: 34px; color: var(--gold); margin: 0;">🏆 NHÀ VÔ ĐỊCH CHUNG CUỘC!</h1>
-      <p id="win-sub-txt" style="font-size: 16.5px; color: #e2e8f0; margin-top: 8px;">Đã xuất sắc giành chiến thắng 2 hiệp đấu và nhận Cúp Vàng 3D!</p>
-      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 16px;">
-        <button class="c-btn" style="background:#0284c7; color:#fff; padding:10px 18px; font-size:14px;" onclick="openPostGameReview()">📖 CHỮA BÀI TRÊN MÀN HÌNH CHÍNH</button>
-        <button class="c-btn c-start" style="padding:10px 18px; font-size:14px;" onclick="downloadCSVReport()">📊 XUẤT BẢNG ĐIỂM (.CSV)</button>
-        <button class="c-btn c-home" style="padding:10px 18px; font-size:14px;" onclick="returnToSetup()">🔄 CHƠI TRẬN MỚI</button>
+      <h1 id="win-banner-txt" style="font-size: 32px; color: var(--gold); margin: 0;">🏆 NHÀ VÔ ĐỊCH CHUNG CUỘC!</h1>
+      <p id="win-sub-txt" style="font-size: 15.5px; color: #e2e8f0; margin-top: 8px;">Đã xuất sắc giành chiến thắng 2 hiệp đấu và nhận Cúp Vàng 3D!</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px;">
+        <button class="c-btn" style="background:#0284c7; color:#fff; padding:10px 15px; font-size:13.5px;" onclick="openPostGameReview()">📖 CHỮA BÀI TRÊN LỚP</button>
+        <button class="c-btn" style="background:#d97706; color:#fff; padding:10px 15px; font-size:13.5px;" onclick="exportColorfulPresentationHTML()">🎨 TẢI SLIDE HỌC LIỆU MÀU (.HTML)</button>
+        <button class="c-btn" style="background:#6366f1; color:#fff; padding:10px 15px; font-size:13.5px;" onclick="printEvidenceColorfulPDF()">🖨️ IN / LƯU PDF MINH CHỨNG</button>
+        <button class="c-btn c-start" style="padding:10px 15px; font-size:13.5px;" onclick="downloadCSVReport()">📊 XUẤT BẢNG ĐIỂM (.CSV)</button>
+        <button class="c-btn c-home" style="padding:10px 15px; font-size:13.5px;" onclick="returnToSetup()">🔄 TRẬN MỚI</button>
       </div>
     </div>
   </div>
@@ -438,50 +450,50 @@
 <div><u>A</u>. Lục lạp</div><div>B. Ti thể</div><div>C. Không bào</div><div>D. Bộ máy Golgi</div><br>
 <div>Câu 2: Cơ quan thoát hơi nước chủ yếu của cây xanh là cơ quan nào?</div>
 <div>A. Rễ cây</div><div>B. Thân cây</div><div><u>C</u>. Lá cây (qua khí khổng)</div><div>D. Hoa và quả</div><br>
-<div>Câu 3: Mạch gỗ (xylem) ở thực vật có chức năng vận chuyển chủ yếu các chất nào?</div>
-<div><u>A</u>. Nước và các ion khoáng từ rễ lên lá</div><div>B. Các chất hữu cơ tổng hợp từ lá xuống rễ</div><div>C. Khí oxygen và carbon dioxide</div><div>D. Các hormone thực vật từ chồi ngọn xuống</div><br>
+<div>Câu 3: Mạch gỗ ở thực vật có chức năng vận chuyển chủ yếu các chất nào?</div>
+<div><u>A</u>. Nước và các ion khoáng từ rễ lên lá</div><div>B. Các chất hữu cơ tổng hợp từ lá xuống rễ</div><div>C. Khí ô-xi và các-bô-níc</div><div>D. Các hoóc-môn thực vật từ chồi ngọn xuống</div><br>
 <div>Câu 4: Quá trình hô hấp tế bào ở thực vật diễn ra mạnh nhất ở bào quan nào?</div>
-<div>A. Ribosome</div><div><u>B</u>. Ti thể</div><div>C. Lưới nội chất</div><div>D. Nhân tế bào</div><br>
-<div>Câu 5: Hormone thực vật nào sau đây có vai trò kích thích sự kéo dài tế bào và hướng sáng của thân?</div>
-<div><u>A</u>. Auxin</div><div>B. Ethylene</div><div>C. Abscisic acid (ABA)</div><div>D. Florigen</div><br>
+<div>A. Ri-bô-xôm</div><div><u>B</u>. Ti thể</div><div>C. Lưới nội chất</div><div>D. Nhân tế bào</div><br>
+<div>Câu 5: Hoóc-môn thực vật nào sau đây có vai trò kích thích sự kéo dài tế bào và hướng sáng của thân?</div>
+<div><u>A</u>. Au-xin</div><div>B. Ê-ti-len</div><div>C. A-xít áp-xi-xích</div><div>D. Flo-ri-gen</div><br>
 <div>Câu 6: Hình thức sinh sản vô tính nào ở thực vật giúp tạo ra hàng loạt cây con sạch bệnh trong ống nghiệm?</div>
 <div>A. Giâm cành</div><div>B. Chiết cành</div><div>C. Ghép mắt</div><div><u>D</u>. Nuôi cấy mô tế bào thực vật</div><br>
 <div>Câu 7: Ở thực vật có hoa, sau khi thụ tinh kép thì bộ phận nào sẽ phát triển thành hạt?</div>
 <div>A. Bầu nhụy</div><div><u>B</u>. Noãn đã thụ tinh</div><div>C. Đài hoa</div><div>D. Đầu nhụy</div><br>
-<div>Câu 8: Phân tử nào sau đây làm khuôn trực tiếp cho quá trình dịch mã tổng hợp chuỗi polypeptide?</div>
-<div>A. DNA mạch gốc</div><div>B. tRNA</div><div><u>C</u>. mRNA (RNA thông tin)</div><div>D. rRNA</div><br>
+<div>Câu 8: Phân tử nào sau đây làm khuôn trực tiếp cho quá trình dịch mã tổng hợp chuỗi pô-li-pép-tít?</div>
+<div>A. Đê-en-a mạch gốc</div><div>B. A-rờ-en-a vận chuyển</div><div><u>C</u>. A-rờ-en-a thông tin (mRNA)</div><div>D. A-rờ-en-a ri-bô-xôm</div><br>
 <div>Câu 9: Tập hợp các cá thể cùng loài, cùng sống trong một khoảng không gian xác định vào một thời điểm nhất định gọi là gì?</div>
 <div><u>A</u>. Quần thể sinh vật</div><div>B. Quần xã sinh vật</div><div>C. Hệ sinh thái</div><div>D. Sinh quyển</div><br>
-<div>Câu 10: Vi khuẩn Rhizobium sống trong nốt sần rễ cây họ Đậu là biểu hiện của mối quan hệ sinh thái nào?</div>
-<div><u>A</u>. Cộng sinh</div><div>B. Kí sinh</div><div>C. Cạnh tranh</div><div>D. Ức chế - cảm nhiễm</div>`;
+<div>Câu 10: Vi khuẩn cố định đạm sống trong nốt sần rễ cây họ Đậu là biểu hiện của mối quan hệ sinh thái nào?</div>
+<div><u>A</u>. Cộng sinh</div><div>B. Kí sinh</div><div>C. Cạnh tranh</div><div>D. Ức chế cảm nhiễm</div>`;
 
     const DEFAULT_AGRI = `
 <div>Câu 1: Hệ thống tưới nhỏ giọt kết hợp châm phân tự động mang lại lợi ích lớn nhất nào?</div>
 <div>A. Giúp tăng nhanh chiều cao thân cây gấp đôi</div><div>B. Tiêu diệt hoàn toàn sâu đục thân</div><div><u>C</u>. Tiết kiệm nước tưới và tối ưu hóa lượng phân bón hòa tan</div><div>D. Tăng độ mặn cho đất trồng</div><br>
-<div>Câu 2: Để cải tạo đất chua (đất phèn), biện pháp hóa học phổ biến nhất mà nông dân thường áp dụng là gì?</div>
-<div><u>A</u>. Bón vôi nông nghiệp kết hợp rửa mặn, xổ phèn</div><div>B. Bón thật nhiều phân đạm (Urea)</div><div>C. Tưới nước muối loãng lên mặt ruộng</div><div>D. Phủ bạt nilon kín mặt đất quanh năm</div><br>
+<div>Câu 2: Để cải tạo đất chua và đất phèn, biện pháp hóa học phổ biến nhất mà nông dân thường áp dụng là gì?</div>
+<div><u>A</u>. Bón vôi nông nghiệp kết hợp rửa mặn, xổ phèn</div><div>B. Bón thật nhiều phân đạm U-rê</div><div>C. Tưới nước muối loãng lên mặt ruộng</div><div>D. Phủ bạt ni-lông kín mặt đất quanh năm</div><br>
 <div>Câu 3: Nhóm phân bón nào sau đây cung cấp các nguyên tố dinh dưỡng đa lượng thiết yếu nhất cho cây trồng?</div>
-<div>A. Phân Sắt, Đồng, Kẽm</div><div><u>B</u>. Phân Đạm (N), Lân (P), Kali (K)</div><div>C. Phân Bo, Molypden, Clo</div><div>D. Nước vôi trong và tro bếp</div><br>
+<div>A. Phân Sắt, Đồng, Kẽm</div><div><u>B</u>. Phân Đạm, Lân, Ka-li</div><div>C. Phân Bo, Mô-líp-đen, Clo</div><div>D. Nước vôi trong và tro bếp</div><br>
 <div>Câu 4: Sử dụng ong mắt đỏ hoặc bọ rùa để tiêu diệt sâu hại cây trồng là ứng dụng của biện pháp bảo vệ thực vật nào?</div>
 <div>A. Biện pháp hóa học</div><div><u>B</u>. Biện pháp sinh học (sử dụng thiên địch)</div><div>C. Biện pháp cơ giới vật lý</div><div>D. Biện pháp kiểm dịch thực vật</div><br>
 <div>Câu 5: Giá thể xơ dừa trước khi đem trồng cây cần được xử lý ngâm xả nước nhằm mục đích chính là gì?</div>
-<div><u>A</u>. Loại bỏ chất chát (tanin, lignin) gây nghẹt rễ cây</div><div>B. Làm xơ dừa nặng hơn để giữ cây</div><div>C. Tăng lượng muối khoáng trong xơ dừa</div><div>D. Tạo mùi thơm thu hút côn trùng</div><br>
-<div>Câu 6: Chế phẩm nấm đối kháng Trichoderma thường được ủ chung với phân chuồng hoai mục có tác dụng gì?</div>
+<div><u>A</u>. Loại bỏ chất chát ta-nanh gây nghẹt rễ cây</div><div>B. Làm xơ dừa nặng hơn để giữ cây</div><div>C. Tăng lượng muối khoáng trong xơ dừa</div><div>D. Tạo mùi thơm thu hút côn trùng</div><br>
+<div>Câu 6: Chế phẩm nấm đối kháng Tri-cô-đéc-ma thường được ủ chung với phân chuồng hoai mục có tác dụng gì?</div>
 <div>A. Làm cỏ dại mọc nhanh hơn</div><div><u>B</u>. Phân hủy nhanh xác hữu cơ và tiêu diệt nấm bệnh hại rễ</div><div>C. Làm tăng độ chua của đất</div><div>D. Thay thế hoàn toàn ánh sáng mặt trời</div><br>
-<div>Câu 7: Trong kỹ thuật chiết cành cây ăn quả, vì sao phải cạo sạch lớp tượng tầng (lớp nhớt) dưới vỏ cành chiết?</div>
-<div>A. Để cành chiết nhanh khô héo</div><div><u>B</u>. Ngăn mạch rây vận chuyển chất hữu cơ xuống dưới, kích thích mô sẹo ra rễ tại vết cắt</div><div>C. Ngăn nước từ rễ đi lên lá</div><div>D. Giúp bầu đất nhẹ hơn</div><br>
-<div>Câu 8: Công nghệ trồng cây thủy canh (Hydroponics) là phương pháp canh tác như thế nào?</div>
+<div>Câu 7: Trong kỹ thuật chiết cành cây ăn quả, vì sao phải cạo sạch lớp tượng tầng dưới vỏ cành chiết?</div>
+<div>A. Để cành chiết nhanh khô héo</div><div><u>B</u>. Ngăn mạch rây vận chuyển chất hữu cơ xuống dưới, kích thích ra rễ tại vết cắt</div><div>C. Ngăn nước từ rễ đi lên lá</div><div>D. Giúp bầu đất nhẹ hơn</div><br>
+<div>Câu 8: Công nghệ trồng cây thủy canh là phương pháp canh tác như thế nào?</div>
 <div><u>A</u>. Trồng cây trực tiếp vào dung dịch dinh dưỡng khoáng mà không cần đất tự nhiên</div><div>B. Trồng cây hoàn toàn trên cát khô sa mạc</div><div>C. Trồng cây dưới đáy ao hồ ngập nước hoàn toàn</div><div>D. Chỉ phun sương nước lã lên lá cây</div><br>
 <div>Câu 9: Biện pháp bảo quản nông sản rau quả tươi trong kho lạnh có cơ sở khoa học chính là gì?</div>
 <div>A. Làm tăng cường độ quang hợp của quả</div><div><u>B</u>. Ức chế quá trình hô hấp của nông sản và hạn chế vi sinh vật gây thối hỏng</div><div>C. Làm đóng băng cứng hoàn toàn tế bào rau tươi</div><div>D. Giúp rau quả tự tổng hợp thêm đường</div><br>
-<div>Câu 10: Ứng dụng cảm biến IoT trong nông nghiệp thông minh giúp người nông dân thực hiện điều gì tự động?</div>
-<div><u>A</u>. Giám sát độ ẩm đất, nhiệt độ, ánh sáng và tự động bật/tắt hệ thống tưới từ xa qua điện thoại</div><div>B. Biến đổi gen cây trồng ngay ngoài đồng ruộng</div><div>C. Tự động thu hoạch toàn bộ gỗ rừng nguyên sinh</div><div>D. Không cần sử dụng nước và dinh dưỡng cho cây</div>`;
+<div>Câu 10: Ứng dụng cảm biến thông minh trong nông nghiệp công nghệ cao giúp người nông dân thực hiện điều gì tự động?</div>
+<div><u>A</u>. Giám sát độ ẩm đất, nhiệt độ, ánh sáng và tự động bật tắt hệ thống tưới từ xa qua điện thoại</div><div>B. Biến đổi gen cây trồng ngay ngoài đồng ruộng</div><div>C. Tự động thu hoạch toàn bộ gỗ rừng nguyên sinh</div><div>D. Không cần sử dụng nước và dinh dưỡng cho cây</div>`;
 
     let subjectsDB = {};
     let currentSubjectKey = 'BIO';
 
     function initSubjectBank() {
-      const saved = localStorage.getItem('thpt_mangthit_subjects_v5');
+      const saved = localStorage.getItem('thpt_mangthit_subjects_v6');
       if (saved) { try { subjectsDB = JSON.parse(saved); } catch(e) {} }
       if (!subjectsDB['BIO']) subjectsDB['BIO'] = { name: '🧬 Sinh Học (10 câu)', html: DEFAULT_BIO.trim(), color: '#10b981', fixed: true };
       if (!subjectsDB['AGRI']) subjectsDB['AGRI'] = { name: '🚜 Công Nghệ NN (10 câu)', html: DEFAULT_AGRI.trim(), color: '#f59e0b', fixed: true };
@@ -492,7 +504,7 @@
     }
 
     function saveSubjectsToStorage() {
-      localStorage.setItem('thpt_mangthit_subjects_v5', JSON.stringify(subjectsDB));
+      localStorage.setItem('thpt_mangthit_subjects_v6', JSON.stringify(subjectsDB));
     }
 
     function renderSubjectTabs() {
@@ -626,10 +638,209 @@
     }
 
     /* =========================================================================
-       2. GIỌNG ĐỌC AI TIẾNG VIỆT (WEB SPEECH API TTS) & WEB AUDIO FX
+       2. HỆ THỐNG GIỌNG ĐỌC TIẾNG VIỆT RÕ CHỮ, MẠCH LẠC 3 LỚP
+          - Chuẩn hóa phiên âm thuật ngữ khoa học sang âm tiếng Việt tự nhiên
+          - Tách câu đọc nối tiếp có nhịp nghỉ rõ ràng
+          - Hỗ trợ cả Giọng bản địa (Microsoft HoaiMy/NamMinh/Google) & Google Cloud Stream
        ========================================================================= */
     let autoVoiceEnabled = true;
     let lastSpokenKey = '';
+    let availableViVoices = [];
+    let selectedVoiceMode = 'AUTO_BEST';
+    let currentCloudAudio = null;
+    let speechQueueTimer = null;
+
+    // Từ điển chuẩn hóa phát âm Tiếng Việt để máy đọc tròn vành rõ chữ nhất
+    function normalizeVietnamesePhonetics(text) {
+      if (!text) return '';
+      return text
+        .replace(/\bmRNA\b/g, 'a rờ en a thông tin')
+        .replace(/\btRNA\b/g, 'a rờ en a vận chuyển')
+        .replace(/\brRNA\b/g, 'a rờ en a ri bô xôm')
+        .replace(/\bDNA\b/gi, 'đê en a')
+        .replace(/\bRNA\b/gi, 'a rờ en a')
+        .replace(/\bATP\b/gi, 'a tê pê')
+        .replace(/\bABA\b/g, 'a bê a')
+        .replace(/\bIoT\b/gi, 'ai ô ti')
+        .replace(/\bNPK\b/gi, 'en nờ pê ka')
+        .replace(/\bCO2\b/gi, 'cê ô hai')
+        .replace(/\bO2\b/gi, 'ô hai')
+        .replace(/\bH2O\b/gi, 'hát hai ô')
+        .replace(/\bpH\b/g, 'pê hát')
+        .replace(/\bxylem\b/gi, 'mạch gỗ')
+        .replace(/\bphloem\b/gi, 'mạch rây')
+        .replace(/\bGolgi\b/gi, 'Gôn-gi')
+        .replace(/\bRibosome\b/gi, 'Ri-bô-xôm')
+        .replace(/\bAuxin\b/gi, 'Au-xin')
+        .replace(/\bEthylene\b/gi, 'Ê-ti-len')
+        .replace(/\bFlorigen\b/gi, 'Flo-ri-gen')
+        .replace(/\bRhizobium\b/gi, 'Ri-zô-bi-um')
+        .replace(/\bTrichoderma\b/gi, 'Tri-cô-đéc-ma')
+        .replace(/\bHydroponics\b/gi, 'thủy canh')
+        .replace(/\bpolypeptide\b/gi, 'pô-li-pép-tít')
+        .replace(/\s*\/\s*/g, ' hoặc ')
+        .replace(/[()]/g, ', ');
+    }
+
+    function refreshVoiceDropdown() {
+      const sel = document.getElementById('voice-engine-select');
+      if (!sel) return;
+      const voices = ('speechSynthesis' in window) ? window.speechSynthesis.getVoices() : [];
+      availableViVoices = voices.filter(v =>
+        v.lang.toLowerCase().includes('vi') ||
+        v.name.toLowerCase().includes('viet') ||
+        v.name.toLowerCase().includes('hoaimy') ||
+        v.name.toLowerCase().includes('namminh') ||
+        v.name.toLowerCase().includes('an ')
+      );
+
+      sel.innerHTML = '';
+      const optAuto = document.createElement('option');
+      optAuto.value = 'AUTO_BEST';
+      optAuto.innerText = availableViVoices.length > 0
+        ? `🎙️ Tự động (${availableViVoices[0].name.slice(0, 18)})`
+        : `🌐 Giọng Google Tiếng Việt (Cloud)`;
+      sel.appendChild(optAuto);
+
+      availableViVoices.forEach((v, idx) => {
+        const o = document.createElement('option');
+        o.value = `LOCAL_${idx}`;
+        o.innerText = `🗣️ ${v.name}`;
+        sel.appendChild(o);
+      });
+
+      const optCloud = document.createElement('option');
+      optCloud.value = 'GOOGLE_STREAM';
+      optCloud.innerText = `🌐 Google Tiếng Việt Chuẩn (Online)`;
+      sel.appendChild(optCloud);
+
+      sel.value = selectedVoiceMode;
+    }
+
+    function onVoiceEngineChange() {
+      const sel = document.getElementById('voice-engine-select');
+      if (sel) selectedVoiceMode = sel.value;
+      speakCurrentHostQuestion(true);
+    }
+
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = refreshVoiceDropdown;
+      setTimeout(refreshVoiceDropdown, 500);
+    }
+
+    function stopAllSpeech() {
+      if (speechQueueTimer) { clearTimeout(speechQueueTimer); speechQueueTimer = null; }
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      if (currentCloudAudio) {
+        try { currentCloudAudio.pause(); currentCloudAudio = null; } catch(e) {}
+      }
+      const speakBtn = document.getElementById('hq-speak-btn');
+      if (speakBtn) {
+        speakBtn.classList.remove('speaking-active');
+        speakBtn.innerText = '🔊 ĐỌC RÕ CÂU NÀY';
+      }
+    }
+
+    // Đọc danh sách các câu ngắn nối tiếp nhau với nhịp nghỉ rõ chữ
+    function speakSegmentedVietnamese(segmentsArray) {
+      stopAllSpeech();
+      if (!segmentsArray || !segmentsArray.length) return;
+
+      const cleanSegments = segmentsArray.map(s => normalizeVietnamesePhonetics(s)).filter(Boolean);
+      const speakBtn = document.getElementById('hq-speak-btn');
+      if (speakBtn) {
+        speakBtn.classList.add('speaking-active');
+        speakBtn.innerText = '🔊 ĐANG ĐỌC RÕ...';
+      }
+
+      // Kiểm tra xem nên dùng giọng Local vi-VN hay Google Cloud Stream
+      let targetLocalVoice = null;
+      if (selectedVoiceMode === 'AUTO_BEST' && availableViVoices.length > 0) {
+        // Ưu tiên Microsoft HoaiMy / NamMinh Online (Natural) hoặc Google Tiếng Việt
+        targetLocalVoice = availableViVoices.find(v => v.name.includes('Natural') || v.name.includes('Google')) || availableViVoices[0];
+      } else if (selectedVoiceMode.startsWith('LOCAL_')) {
+        const vIdx = parseInt(selectedVoiceMode.split('_')[1], 10);
+        targetLocalVoice = availableViVoices[vIdx] || availableViVoices[0];
+      }
+
+      // Nếu có giọng Tiếng Việt bản địa chất lượng cao -> Đọc từng vế câu rõ ràng
+      if (targetLocalVoice && selectedVoiceMode !== 'GOOGLE_STREAM') {
+        let idx = 0;
+        function playNextLocalSegment() {
+          if (idx >= cleanSegments.length) {
+            if (speakBtn) {
+              speakBtn.classList.remove('speaking-active');
+              speakBtn.innerText = '🔊 ĐỌC RÕ CÂU NÀY';
+            }
+            return;
+          }
+          const u = new SpeechSynthesisUtterance(cleanSegments[idx]);
+          u.voice = targetLocalVoice;
+          u.lang = 'vi-VN';
+          u.rate = 0.96; // Tốc độ 0.96 vừa vặn, tròn vành rõ chữ cho học sinh nghe
+          u.pitch = 1.0;
+          u.volume = 1.0;
+
+          u.onend = () => {
+            idx++;
+            speechQueueTimer = setTimeout(playNextLocalSegment, 220); // Nhịp nghỉ 0.22s giữa câu hỏi và từng đáp án
+          };
+          u.onerror = () => {
+            idx++;
+            speechQueueTimer = setTimeout(playNextLocalSegment, 150);
+          };
+          window.speechSynthesis.speak(u);
+        }
+        playNextLocalSegment();
+      } else {
+        // Dùng Google Translate Vietnamese TTS Stream (Giúp các máy Windows không cài gói tiếng Việt vẫn đọc tiếng Việt chuẩn 100%)
+        let idx = 0;
+        function playNextCloudSegment() {
+          if (idx >= cleanSegments.length) {
+            if (speakBtn) {
+              speakBtn.classList.remove('speaking-active');
+              speakBtn.innerText = '🔊 ĐỌC RÕ CÂU NÀY';
+            }
+            return;
+          }
+          const chunk = cleanSegments[idx].slice(0, 180);
+          const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(chunk)}&tl=vi&client=tw-ob`;
+          const audio = new Audio(url);
+          currentCloudAudio = audio;
+          audio.playbackRate = 1.0;
+          audio.onended = () => {
+            idx++;
+            speechQueueTimer = setTimeout(playNextCloudSegment, 220);
+          };
+          audio.onerror = () => {
+            // Dự phòng về Web Speech API với cờ lang='vi-VN'
+            const u = new SpeechSynthesisUtterance(chunk);
+            u.lang = 'vi-VN';
+            u.rate = 0.95;
+            u.onend = () => {
+              idx++;
+              speechQueueTimer = setTimeout(playNextCloudSegment, 200);
+            };
+            window.speechSynthesis.speak(u);
+          };
+          audio.play().catch(() => {
+            const u = new SpeechSynthesisUtterance(chunk);
+            u.lang = 'vi-VN';
+            u.rate = 0.95;
+            window.speechSynthesis.speak(u);
+          });
+        }
+        playNextCloudSegment();
+      }
+    }
+
+    function testVietnameseVoiceSample() {
+      refreshVoiceDropdown();
+      speakSegmentedVietnamese([
+        "Xin chào thầy Hồ Tấn Khải và các em học sinh trường Trung học phổ thông Mang Thít.",
+        "Hệ thống giọng đọc Tiếng Việt đã sẵn sàng, phát âm rõ chữ và mạch lạc!"
+      ]);
+    }
 
     function toggleAutoVoiceTTS() {
       autoVoiceEnabled = !autoVoiceEnabled;
@@ -641,57 +852,203 @@
       } else {
         btn.innerText = '🔇 TỰ ĐỌC: TẮT';
         btn.style.background = '#64748b';
-        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        stopAllSpeech();
       }
-    }
-
-    function speakVietnameseText(textToRead) {
-      if (!('speechSynthesis' in window)) return;
-      try {
-        window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(textToRead);
-        utter.lang = 'vi-VN';
-        utter.rate = 1.05;
-        utter.pitch = 1.0;
-        const voices = window.speechSynthesis.getVoices();
-        const viVoice = voices.find(v => v.lang.toLowerCase().includes('vi'));
-        if (viVoice) utter.voice = viVoice;
-
-        const speakBtn = document.getElementById('hq-speak-btn');
-        utter.onstart = () => { if (speakBtn) { speakBtn.classList.add('speaking-active'); speakBtn.innerText = '🔊 ĐANG ĐỌC...'; } };
-        utter.onend = () => { if (speakBtn) { speakBtn.classList.remove('speaking-active'); speakBtn.innerText = '🔊 ĐỌC CÂU HỎI'; } };
-        utter.onerror = () => { if (speakBtn) { speakBtn.classList.remove('speaking-active'); speakBtn.innerText = '🔊 ĐỌC CÂU HỎI'; } };
-        window.speechSynthesis.speak(utter);
-      } catch (e) {}
     }
 
     function speakCurrentHostQuestion(forceManual = false) {
       if (!forceManual && !autoVoiceEnabled) return;
       if (!quizList || !quizList.length) return;
+
       const activeIdx = isReviewAnswersMode ? reviewQIdx : matchState.globalQIndex;
       const qObj = quizList[activeIdx % quizList.length];
       const qNum = (activeIdx % quizList.length) + 1;
       const cleanTitle = cleanQuestionTitleText(qObj.q);
+
       const stateKey = `${activeIdx}_${isReviewAnswersMode}`;
       if (!forceManual && lastSpokenKey === stateKey) return;
       lastSpokenKey = stateKey;
 
-      let script = `Câu ${qNum}: ${cleanTitle}. `;
+      const segments = [];
+      segments.push(`Câu hỏi số ${qNum}: ${cleanTitle}`);
+
       if (isReviewAnswersMode) {
         const correctLetter = String.fromCharCode(65 + qObj.correct);
-        script += `Đáp án đúng là ${correctLetter}: ${qObj.opts[qObj.correct]}.`;
+        segments.push(`Đáp án đúng là phương án ${correctLetter}: ${qObj.opts[qObj.correct]}.`);
       } else {
         qObj.opts.forEach((opt, idx) => {
-          script += `Đáp án ${String.fromCharCode(65 + idx)}: ${opt}. `;
+          const letter = String.fromCharCode(65 + idx);
+          segments.push(`Phương án ${letter}: ${opt}.`);
         });
       }
-      speakVietnameseText(script);
+      speakSegmentedVietnamese(segments);
     }
 
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+    /* =========================================================================
+       3. CHẾ ĐỘ XUẤT BỘ CÂU HỎI ĐẦY ĐỦ MÀU SẮC (SLIDE HTML & IN PDF MINH CHỨNG)
+       ========================================================================= */
+    function getActiveExportQuizList() {
+      if (quizList && quizList.length > 0) return quizList;
+      return parseHTMLToQuiz(document.getElementById('editor').innerHTML);
     }
 
+    function buildColorfulEvidenceHTMLDocument(isAutoPrint = false) {
+      const list = getActiveExportQuizList();
+      const subjectTitle = subjectsDB[currentSubjectKey] ? subjectsDB[currentSubjectKey].name : 'Bộ Câu Hỏi Trắc Nghiệm';
+      const nowStr = new Date().toLocaleDateString('vi-VN');
+
+      const cardsHTML = list.map((item, idx) => {
+        const optsHTML = item.opts.map((opt, oIdx) => {
+          const isCorrect = (oIdx === item.correct);
+          const letter = String.fromCharCode(65 + oIdx);
+          return `
+            <div class="exp-opt exp-color-${oIdx % 4} ${isCorrect ? 'exp-correct' : ''}">
+              <span><b>${letter}.</b> ${opt}</span>
+              ${isCorrect ? '<span class="exp-badge-right">✓ ĐÁP ÁN ĐÚNG</span>' : ''}
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="exp-card" id="slide-q-${idx}">
+            <div class="exp-card-header">
+              <span>CÂU HỎI SỐ ${idx + 1} / ${list.length}</span>
+              <span>Thống kê lớp học: ✅ ${item.rightCount || 0} lượt Đúng • 🧊 ${item.wrongCount || 0} lượt Đóng băng</span>
+            </div>
+            <div class="exp-question-box">
+              Câu ${idx + 1}: ${cleanQuestionTitleText(item.q)}
+            </div>
+            <div class="exp-options-grid">
+              ${optsHTML}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Học Liệu & Minh Chứng: ${subjectTitle} - Thầy Hồ Tấn Khải</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; font-family: 'Nunito', sans-serif; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { margin: 0; padding: 24px; background: #0f172a; color: #f8fafc; }
+    .doc-container { max-width: 1020px; margin: 0 auto; }
+    .doc-banner {
+      background: linear-gradient(90deg, #090d16 0%, #1e1b4b 50%, #090d16 100%);
+      border: 3px solid #f59e0b; border-radius: 20px; padding: 20px 28px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .doc-title { font-size: 24px; font-weight: 900; color: #38bdf8; margin: 0 0 6px 0; }
+    .doc-sub { font-size: 15px; font-weight: 800; color: #fef08a; margin: 0; }
+    .control-panel {
+      background: #1e293b; border: 2px solid #475569; border-radius: 14px; padding: 12px 20px;
+      margin-bottom: 24px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    }
+    .ctrl-btn {
+      padding: 10px 18px; border-radius: 10px; border: none; font-weight: 900; font-size: 14px;
+      cursor: pointer; color: #fff; background: #0284c7;
+    }
+    .exp-card {
+      background: #111827; border: 3px solid #38bdf8; border-radius: 22px; padding: 22px 26px;
+      margin-bottom: 26px; page-break-inside: avoid; box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+    .exp-card-header {
+      display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 900;
+      color: #7dd3fc; margin-bottom: 10px; text-transform: uppercase;
+    }
+    .exp-question-box {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      border: 2.5px solid #818cf8; border-radius: 16px; padding: 16px 22px;
+      font-size: 22px; font-weight: 900; color: #fef08a; margin-bottom: 14px; line-height: 1.4;
+    }
+    .exp-options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .exp-opt {
+      padding: 14px 18px; border-radius: 14px; font-size: 18px; font-weight: 900; color: #ffffff;
+      display: flex; justify-content: space-between; align-items: center;
+      border: 2.5px solid rgba(255,255,255,0.35);
+    }
+    .exp-color-0 { background: linear-gradient(135deg, #e11d48, #be123c); border-color: #fda4af; }
+    .exp-color-1 { background: linear-gradient(135deg, #0284c7, #0369a1); border-color: #7dd3fc; }
+    .exp-color-2 { background: linear-gradient(135deg, #d97706, #b45309); border-color: #fde047; }
+    .exp-color-3 { background: linear-gradient(135deg, #7c3aed, #5b21b6); border-color: #c4b5fd; }
+
+    body.show-answers .exp-opt.exp-correct {
+      background: linear-gradient(135deg, #059669, #10b981) !important;
+      border: 3.5px solid #fef08a !important; box-shadow: 0 0 20px rgba(16,185,129,0.7);
+    }
+    body.show-answers .exp-opt:not(.exp-correct) { opacity: 0.55; }
+    .exp-badge-right {
+      display: none; background: #fef08a; color: #065f46; padding: 3px 10px;
+      border-radius: 12px; font-size: 13px; font-weight: 900; white-space: nowrap;
+    }
+    body.show-answers .exp-badge-right { display: inline-block; }
+
+    @media print {
+      body { background: #ffffff; color: #000; padding: 0; }
+      .control-panel { display: none !important; }
+      .exp-card { break-inside: avoid; margin-bottom: 18px; }
+    }
+  </style>
+</head>
+<body class="show-answers">
+  <div class="doc-container">
+    <div class="doc-banner">
+      <div>
+        <h1 class="doc-title">⚔️ HỒ SƠ HỌC LIỆU & MINH CHỨNG: ĐẤU TRƯỜNG KÉO CO 3D</h1>
+        <p class="doc-sub">Chủ đề / Môn học: ${subjectTitle} • Ngày xuất: ${nowStr}</p>
+      </div>
+      <div style="text-align:right;">
+        <div style="background:#fef08a; color:#0f172a; padding:5px 14px; border-radius:20px; font-weight:900; font-size:14px; margin-bottom:4px;">👨‍🏫 Tác giả: Thầy Hồ Tấn Khải</div>
+        <div style="background:#10b981; color:#ffffff; padding:5px 14px; border-radius:20px; font-weight:900; font-size:14px;">🏫 Trường THPT Mang Thít</div>
+      </div>
+    </div>
+
+    <div class="control-panel">
+      <button class="ctrl-btn" style="background:#10b981;" onclick="document.body.classList.toggle('show-answers')">👁️ Bật / Tắt Đáp Án Đúng (Dùng Trình Chiếu Trên Lớp)</button>
+      <button class="ctrl-btn" style="background:#6366f1;" onclick="window.print()">🖨️ In hoặc Lưu thành PDF Minh Chứng</button>
+      <span style="font-size:13.5px; color:#cbd5e1; font-weight:800; margin-left:auto;">Tổng số: ${list.length} câu hỏi chuẩn màu sắc</span>
+    </div>
+
+    ${cardsHTML}
+  </div>
+  ${isAutoPrint ? '<script>window.onload = function(){ setTimeout(function(){ window.print(); }, 500); };<\/script>' : ''}
+</body>
+</html>`;
+    }
+
+    // Tải về file Slide Học liệu .HTML hoàn chỉnh màu sắc
+    function exportColorfulPresentationHTML() {
+      const list = getActiveExportQuizList();
+      if (!list.length) return alert("Chưa có câu hỏi để xuất!");
+      const htmlContent = buildColorfulEvidenceHTMLDocument(false);
+      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `Hoc_Lieu_Trinh_Chieu_Keo_Co_3D_${Date.now()}.html`;
+      a.click();
+    }
+
+    // Mở cửa sổ In / Lưu PDF đầy đủ màu sắc làm minh chứng
+    function printEvidenceColorfulPDF() {
+      const list = getActiveExportQuizList();
+      if (!list.length) return alert("Chưa có câu hỏi để in!");
+      const htmlContent = buildColorfulEvidenceHTMLDocument(true);
+      const printWin = window.open('', '_blank');
+      if (printWin) {
+        printWin.document.open();
+        printWin.document.write(htmlContent);
+        printWin.document.close();
+      } else {
+        exportColorfulPresentationHTML();
+      }
+    }
+
+    /* =========================================================================
+       4. HIỆU ỨNG ÂM THANH TRẬN ĐẤU (WEB AUDIO FX)
+       ========================================================================= */
     const AudioFX = {
       ctx: null,
       init() {
@@ -765,7 +1122,7 @@
     };
 
     /* =========================================================================
-       3. CÀI ĐẶT CHẾ ĐỘ & FILE ĐỀ THI
+       5. CÀI ĐẶT CHẾ ĐỘ & FILE ĐỀ THI (.JSON)
        ========================================================================= */
     let quizList = [];
     let joinMode = 'AUTO_ALL';
@@ -817,7 +1174,7 @@
     }
 
     /* =========================================================================
-       4. SÂN ĐẤU 3D, BẦU TRỜI 3 HIỆP & CÚP VÀNG 3D KHỔNG LỒ
+       6. SÂN ĐẤU 3D, BẦU TRỜI 3 HIỆP & CÚP VÀNG 3D KHỔNG LỒ
        ========================================================================= */
     let scene, camera, renderer, ropeMesh, ribbonMesh;
     let ambientLight, sunLight, grassMesh, sandMesh, starsGroup, stadiumLightsGroup;
@@ -1196,7 +1553,7 @@
     }
 
     /* =========================================================================
-       5. ĐA KẾT NỐI ĐÁM MÂY CỔNG 443 HTTPS (XUYÊN 4G & WI-FI)
+       7. ĐA KẾT NỐI ĐÁM MÂY CỔNG 443 HTTPS (XUYÊN 4G & WI-FI)
        ========================================================================= */
     const BROKER_URLS = [
       'wss://broker.hivemq.com:8884/mqtt',
@@ -1206,7 +1563,7 @@
     let activeClients = [];
     let currentRoomTopic = '';
     let seenMsgIds = new Set();
-    const localBus = new BroadcastChannel('tug_multi_v10');
+    const localBus = new BroadcastChannel('tug_multi_v11');
 
     function connectMultiCloud(roomId, onMessageCallback, onConnectedCallback) {
       currentRoomTopic = `thptmangthit_keoco3d_${roomId}`;
@@ -1254,7 +1611,7 @@
     }
 
     /* =========================================================================
-       6. BẢNG CÂU HỎI CHUNG PHÓNG TO, 4 ĐÁP ÁN 4 MÀU & TỰ ĐỌC AI (HOST)
+       8. BẢNG CÂU HỎI CHUNG PHÓNG TO, 4 ĐÁP ÁN 4 MÀU & TỰ ĐỌC AI (HOST)
        ========================================================================= */
     let hostHeartbeatTimer = null;
     let isReviewAnswersMode = false;
@@ -1359,6 +1716,7 @@
       quizList = shuffleQuestionOrder(parsed);
       isReviewAnswersMode = false;
       lastSpokenKey = '';
+      refreshVoiceDropdown();
 
       document.getElementById('teacher-view').style.display = 'none';
       document.getElementById('host-view').style.display = 'block';
@@ -1372,7 +1730,7 @@
       renderQRCodes(roomCode);
 
       connectMultiCloud(roomCode, handleHostIncomingData, () => {
-        document.getElementById('net-status').innerText = `🟢 Đã thông suốt 4G/Wi-Fi!`;
+        document.getElementById('net-status').innerText = `🟢 4G/Wi-Fi OK!`;
         broadcastTeamSyncState();
       });
 
@@ -1559,7 +1917,7 @@
     }
 
     function handleRoundWin(teamWinner) {
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      stopAllSpeech();
       AudioFX.winFanfare();
       if (teamWinner === 'RED') matchState.redRoundWins++;
       else matchState.blueRoundWins++;
@@ -1652,7 +2010,7 @@
     function pauseMatch() {
       matchState.status = matchState.status === 'PLAYING' ? 'PAUSED' : 'PLAYING';
       document.getElementById('btn-host-pause').innerText = matchState.status === 'PLAYING' ? '⏸ TẠM DỪNG' : '▶ TIẾP TỤC';
-      if (matchState.status === 'PAUSED' && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+      if (matchState.status === 'PAUSED') stopAllSpeech();
       broadcastTeamSyncState();
     }
 
@@ -1672,7 +2030,7 @@
       dropGiantTrophyNow();
 
       if (autoVoiceEnabled) {
-        speakVietnameseText(`Chúc mừng ${winner} đã xuất sắc giành chiến thắng chung cuộc và nhận Cúp Vàng vô địch!`);
+        speakSegmentedVietnamese([`Chúc mừng ${winner} đã xuất sắc giành chiến thắng chung cuộc và nhận Cúp Vàng vô địch!`]);
       }
 
       document.getElementById('win-banner-txt').innerText = `🏆 ${winner} VÔ ĐỊCH CHUNG CUỘC!`;
@@ -1707,7 +2065,7 @@
 
     function returnToSetup() {
       if (hostHeartbeatTimer) clearInterval(hostHeartbeatTimer);
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      stopAllSpeech();
       activeClients.forEach(c => { try { c.end(); } catch(e){} });
       activeClients = [];
       document.getElementById('host-view').style.display = 'none';
@@ -1730,7 +2088,7 @@
     }
 
     /* =========================================================================
-       7. LOGIC ĐIỆN THOẠI HỌC SINH (CLIENT)
+       9. LOGIC ĐIỆN THOẠI HỌC SINH (CLIENT)
        ========================================================================= */
     let myPlayerId = 'hs_' + Math.random().toString(36).substr(2, 6);
     let selectedTeam = 'RED';
@@ -2006,6 +2364,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       initSubjectBank();
+      refreshVoiceDropdown();
       const p = new URLSearchParams(window.location.search);
       if (p.get('role') === 'player') {
         initMobilePlayer(p.get('room'), p.get('team'), p.get('subj'));
