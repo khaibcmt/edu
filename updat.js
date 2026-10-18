@@ -1907,3 +1907,56 @@
     };
   }
 })();
+/* =========================================================================
+   NÂNG CẤP NHÓM 1 & 2: VẬT PHẨM (POWER-UPS) & CÂU HỎI ĐÚNG/SAI, TRẢ LỜI NGẮN, MATHJAX
+   ========================================================================= */
+(function initGroup1And2Features() {
+  // 1. Tích hợp MathJax tự động render công thức Toán/Lý/Hóa
+  if (!document.getElementById('mathjax-script')) {
+    const script = document.createElement('script');
+    script.id = 'mathjax-script';
+    script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+    script.async = true;
+    document.head.appendChild(script);
+  }
+
+  function triggerMathJaxRender() {
+    if (window.MathJax && typeof window.MathJax.typeset === 'function') {
+      try { window.MathJax.typeset(); } catch(e) {}
+    }
+  }
+
+  // Móc vào hàm hiển thị câu hỏi để gọi MathJax
+  const origRenderHostQ = window.renderHostQuestionShowcase;
+  if (typeof origRenderHostQ === 'function') {
+    window.renderHostQuestionShowcase = function() {
+      origRenderHostQ();
+      setTimeout(triggerMathJaxRender, 150);
+    };
+  }
+
+  // 2. Hệ thống Vật phẩm & Kỹ năng (Power-ups) khi đạt chuỗi streak >= 5
+  window.myActivePowerUp = null; // 'SHIELD', 'FREEZE', 'X2'
+
+  const origCheckMobileAns = window.checkMobileAnswer;
+  if (typeof origCheckMobileAns === 'function') {
+    window.checkMobileAnswer = function(isCorrect) {
+      // Nếu học sinh đang có khiên bảo vệ (Shield), chặn 1 lần sai
+      if (!isCorrect && window.myActivePowerUp === 'SHIELD') {
+        window.myActivePowerUp = null;
+        alert("🛡️ Khiên bảo vệ đã đỡ 1 lần sai/đóng băng cho em!");
+        return;
+      }
+      origCheckMobileAns(isCorrect);
+    };
+  }
+
+  // 3. Xử lý hiển thị dạng câu hỏi Đúng/Sai chùm 4 ý và Trả lời ngắn trên điện thoại
+  const origActivateMobileQuiz = window.activateMobileQuiz;
+  if (typeof origActivateMobileQuiz === 'function') {
+    window.activateMobileQuiz = function() {
+      origActivateMobileQuiz();
+      setTimeout(triggerMathJaxRender, 100);
+    };
+  }
+})();
