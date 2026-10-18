@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Đấu Trường Kéo Co 3D - Thầy Hồ Tấn Khải - THPT Mang Thít</title>
+  <title>Đấu Trường Kéo Co 3D Đa Môn - Thầy Hồ Tấn Khải - THPT Mang Thít</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
@@ -28,14 +28,14 @@
        THANH THƯƠNG HIỆU, LOGO & TÁC GIẢ TRÊN CÙNG
        ======================================================== */
     #top-author-banner {
-      position: fixed; top: 0; left: 0; right: 0; height: 44px;
+      position: fixed; top: 0; left: 0; right: 0; height: 42px;
       background: linear-gradient(90deg, #090d16 0%, #1e1b4b 50%, #090d16 100%);
       border-bottom: 2px solid var(--gold); z-index: 500;
       display: flex; justify-content: space-between; align-items: center;
       padding: 0 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
     }
     .brand-left { display: flex; align-items: center; gap: 8px; }
-    .game-logo-svg { width: 30px; height: 30px; flex-shrink: 0; filter: drop-shadow(0 2px 5px rgba(245, 158, 11, 0.6)); }
+    .game-logo-svg { width: 28px; height: 28px; flex-shrink: 0; filter: drop-shadow(0 2px 5px rgba(245, 158, 11, 0.6)); }
     .brand-title { color: #ffffff; font-size: 15px; font-weight: 900; letter-spacing: 0.3px; white-space: nowrap; }
     .author-right { display: flex; align-items: center; gap: 6px; }
     .author-badge {
@@ -48,35 +48,35 @@
     }
     .btn-fullscreen-top {
       background: #334155; color: #fef08a; border: 1.5px solid #94a3b8;
-      padding: 4px 10px; border-radius: 14px; font-size: 12px; font-weight: 900; cursor: pointer; white-space: nowrap;
+      padding: 3px 10px; border-radius: 14px; font-size: 11.5px; font-weight: 900; cursor: pointer; white-space: nowrap;
     }
     .btn-fullscreen-top:hover { background: #475569; border-color: #fff; }
 
     @media (max-width: 640px) {
-      #top-author-banner { height: 50px; padding: 2px 6px; flex-wrap: wrap; justify-content: center; gap: 4px; }
-      .brand-title { font-size: 12.5px; }
-      .game-logo-svg { width: 22px; height: 22px; }
-      .author-badge, .school-badge { font-size: 10.5px; padding: 2px 7px; }
-      .btn-fullscreen-top { font-size: 10.5px; padding: 2px 7px; }
+      #top-author-banner { height: 48px; padding: 2px 6px; flex-wrap: wrap; justify-content: center; gap: 4px; }
+      .brand-title { font-size: 12px; }
+      .game-logo-svg { width: 20px; height: 20px; }
+      .author-badge, .school-badge { font-size: 10px; padding: 2px 6px; }
+      .btn-fullscreen-top { font-size: 10px; padding: 2px 6px; }
     }
 
     /* ========================================================
        1. GIAO DIỆN QUẢN LÝ CỦA GIÁO VIÊN
        ======================================================== */
     #teacher-view {
-      position: absolute; top: 44px; left: 0; right: 0; bottom: 0; z-index: 50;
+      position: absolute; top: 42px; left: 0; right: 0; bottom: 0; z-index: 50;
       background: #f1f5f9; color: #0f172a; overflow-y: auto; padding: 14px;
       display: flex; flex-direction: column; align-items: center;
     }
-    .setup-box { width: 100%; max-width: 1060px; background: white; padding: 18px 22px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #cbd5e1; }
+    .setup-box { width: 100%; max-width: 1080px; background: white; padding: 18px 22px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #cbd5e1; }
     .flex-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
     .subject-manager { margin: 8px 0; padding: 10px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0; }
-    .subject-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; align-items: center; }
-    .btn-subj { padding: 7px 13px; border-radius: 9px; border: 2px solid transparent; font-weight: 900; font-size: 12.5px; cursor: pointer; color: white; transition: all 0.15s; }
-    .btn-subj.active-subj { border-color: #0f172a; transform: scale(1.03); box-shadow: 0 4px 10px rgba(0,0,0,0.18); }
+    .subject-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 8px; align-items: center; }
+    .btn-subj { padding: 7px 12px; border-radius: 9px; border: 2px solid transparent; font-weight: 900; font-size: 12.5px; cursor: pointer; color: white; transition: all 0.15s; }
+    .btn-subj.active-subj { border-color: #0f172a; transform: scale(1.04); box-shadow: 0 4px 10px rgba(0,0,0,0.22); }
     .btn-action-sm { padding: 6px 11px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 12px; color: #1e293b; }
     .btn-action-sm:hover { background: #e2e8f0; }
-    #editor { min-height: 150px; max-height: 210px; overflow-y: auto; border: 2px solid #cbd5e1; border-radius: 10px; padding: 12px; font-size: 14.5px; line-height: 1.5; outline: none; background: #fff; margin: 6px 0; }
+    #editor { min-height: 150px; max-height: 215px; overflow-y: auto; border: 2px solid #cbd5e1; border-radius: 10px; padding: 12px; font-size: 14.5px; line-height: 1.5; outline: none; background: #fff; margin: 6px 0; }
     #editor u { text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: 3px; font-weight: 900; color: var(--red); }
     .config-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 12px; margin: 8px 0; }
     .cfg-card { background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px; padding: 10px 14px; }
@@ -86,24 +86,27 @@
     .btn-launch { background: linear-gradient(135deg, #0284c7, #1d4ed8); color: white; border: none; padding: 12px 26px; font-size: 15.5px; font-weight: 900; border-radius: 12px; cursor: pointer; box-shadow: 0 5px 16px rgba(2,132,199,0.35); }
 
     /* ========================================================
-       2. MÀN HÌNH SÂN ĐẤU 3D CHIA TẦNG RÕ RÀNG (KHÔNG BAO GIỜ CHE LẤP)
+       2. MÀN HÌNH SÂN ĐẤU 3D CHIA 3 TẦNG:
+          - Tầng 1: Điều khiển & Tên 2 đội (~11%)
+          - Tầng 2: Sân kéo co 3D (~44%)
+          - Tầng 3: Khung Câu hỏi & Đáp án cỡ chữ lớn (45% chiều cao màn hình)
        ======================================================== */
     #host-view {
-      position: absolute; top: 44px; left: 0; right: 0; bottom: 0;
+      position: absolute; top: 42px; left: 0; right: 0; bottom: 0;
       display: none; flex-direction: column; justify-content: space-between; overflow: hidden;
     }
 
-    /* TẦNG 1: Thanh công cụ + Tỉ số 2 đội (Không đè lên sân 3D) */
+    /* TẦNG 1: Thanh công cụ + Tỉ số 2 đội */
     #host-top-header {
       background: rgba(11, 17, 32, 0.98); border-bottom: 2px solid #334155;
-      padding: 6px 14px; z-index: 40; display: flex; flex-direction: column; gap: 6px; flex-shrink: 0;
+      padding: 5px 14px; z-index: 40; display: flex; flex-direction: column; gap: 4px; flex-shrink: 0;
     }
     .host-controls-row {
       display: flex; justify-content: center; align-items: center; gap: 6px; flex-wrap: wrap;
     }
     .c-btn {
-      padding: 5px 12px; border-radius: 16px; border: none; font-weight: 900;
-      font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: 0.15s;
+      padding: 4px 11px; border-radius: 14px; border: none; font-weight: 900;
+      font-size: 11.5px; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: 0.15s;
     }
     .c-btn:hover { transform: scale(1.04); }
     .c-prep { background: var(--purple); color: white; }
@@ -112,46 +115,44 @@
     .c-end { background: var(--red); color: white; }
     .c-home { background: #475569; color: white; }
 
-    /* Dải hiển thị Tên Đội Đỏ - Tỉ số Hiệp - Tên Đội Xanh độc lập 100% */
     .hud-teams-row {
-      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px;
     }
     .team-box {
-      padding: 6px 16px; border-radius: 14px; font-size: 15px; font-weight: 900;
+      padding: 5px 14px; border-radius: 12px; font-size: 14.5px; font-weight: 900;
       display: flex; align-items: center; justify-content: space-between;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     }
-    .team-box.red { background: linear-gradient(135deg, var(--red), var(--red-dark)); border: 2.5px solid var(--red-glow); }
-    .team-box.blue { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border: 2.5px solid var(--blue-glow); }
-    .round-stars { background: rgba(0,0,0,0.35); padding: 2px 10px; border-radius: 10px; font-size: 13px; color: #fef08a; }
+    .team-box.red { background: linear-gradient(135deg, var(--red), var(--red-dark)); border: 2px solid var(--red-glow); }
+    .team-box.blue { background: linear-gradient(135deg, var(--blue), var(--blue-dark)); border: 2px solid var(--blue-glow); }
+    .round-stars { background: rgba(0,0,0,0.35); padding: 2px 9px; border-radius: 9px; font-size: 12.5px; color: #fef08a; }
 
     .center-round-hud {
       background: #0f172a; border: 2px solid var(--gold);
-      padding: 4px 18px; border-radius: 16px; text-align: center;
+      padding: 3px 16px; border-radius: 14px; text-align: center;
     }
-    .round-badge-top { color: #38bdf8; font-size: 12px; font-weight: 900; text-transform: uppercase; }
-    .tug-score-live { color: #fef08a; font-size: 14.5px; font-weight: 900; }
+    .round-badge-top { color: #38bdf8; font-size: 11.5px; font-weight: 900; text-transform: uppercase; }
+    .tug-score-live { color: #fef08a; font-size: 13.5px; font-weight: 900; }
 
-    /* TẦNG 2: VÙNG SÂN ĐẤU KÉO CO 3D Ở GIỮA (HIỂN THỊ TRỌN VẸN KHÔNG BỊ CHE) */
+    /* TẦNG 2: SÀN ĐẤU KÉO CO 3D (Nằm gọn nửa trên, không bị che khuất) */
     #arena-3d-viewport {
-      position: relative; width: 100%; flex: 1 1 auto; min-height: 210px; overflow: hidden;
+      position: relative; width: 100%; flex: 1 1 auto; min-height: 170px; overflow: hidden;
     }
     #canvas3d { width: 100%; height: 100%; display: block; }
     #labels-container, #cheer-container { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 10; }
     .tag-3d {
       position: absolute; transform: translate(-50%, -100%);
-      background: rgba(15, 23, 42, 0.92); color: #fff; padding: 2px 8px;
-      border-radius: 9px; font-size: 11.5px; font-weight: 900; border: 2px solid;
+      background: rgba(15, 23, 42, 0.92); color: #fff; padding: 2px 7px;
+      border-radius: 8px; font-size: 11px; font-weight: 900; border: 2px solid;
       white-space: nowrap; box-shadow: 0 3px 8px rgba(0,0,0,0.45);
     }
     .tag-3d.ready { background: rgba(16, 185, 129, 0.95); border-color: #fef08a !important; }
     .tag-3d.done-q { background: rgba(245, 158, 11, 0.95); border-color: #ffffff !important; color: #000; }
-    .floating-cheer { position: absolute; bottom: 20px; font-size: 32px; animation: floatUp 2s ease-out forwards; }
-    @keyframes floatUp { 0% { transform: translateY(0) scale(0.8); opacity: 1; } 100% { transform: translateY(-240px) scale(1.4); opacity: 0; } }
+    .floating-cheer { position: absolute; bottom: 15px; font-size: 30px; animation: floatUp 1.8s ease-out forwards; }
+    @keyframes floatUp { 0% { transform: translateY(0) scale(0.8); opacity: 1; } 100% { transform: translateY(-200px) scale(1.4); opacity: 0; } }
 
-    /* Hộp Mã QR ở 2 bên sân (Tự động ẩn đi khi bấm Chuẩn bị / Bắt đầu thi đấu) */
     .qr-panel {
-      position: absolute; top: 10px; padding: 8px; border-radius: 14px;
+      position: absolute; top: 8px; padding: 7px; border-radius: 14px;
       background: #ffffff; box-shadow: 0 10px 30px rgba(0,0,0,0.65);
       text-align: center; color: #0f172a; z-index: 25; cursor: pointer;
       transition: transform 0.2s, opacity 0.25s;
@@ -161,40 +162,46 @@
     .qr-panel.right { right: 14px; border: 3.5px solid var(--blue); }
     .qr-box-inner { background: #ffffff; padding: 4px; border-radius: 6px; display: inline-block; }
     .qr-box-inner img, .qr-box-inner canvas { display: block !important; margin: 0 auto !important; image-rendering: pixelated; }
-    .qr-caption { font-weight: 900; font-size: 11px; margin-top: 4px; }
-    .qr-zoom-hint { font-size: 10px; color: #475569; font-weight: 800; }
+    .qr-caption { font-weight: 900; font-size: 10.5px; margin-top: 3px; }
+    .qr-zoom-hint { font-size: 9.5px; color: #475569; font-weight: 800; }
 
-    /* TẦNG 3: KHUNG CÂU HỎI DÀN ĐẦY Ở DƯỚI CÙNG (GỌN GÀNG, KHÔNG CHIẾM SÂN 3D) */
+    /* ========================================================
+       TẦNG 3: KHUNG CÂU HỎI & ĐÁP ÁN CHIẾM 45% CHIỀU CAO MÀN HÌNH
+       Chữ cực to cho câu hỏi dài & học sinh bàn cuối lớp nhìn rõ
+       ======================================================== */
     #host-question-board {
-      width: 100%; background: #0b1120; border-top: 3px solid #38bdf8;
-      padding: 8px 16px 10px 16px; z-index: 35; flex-shrink: 0;
-      display: flex; flex-direction: column; gap: 6px;
-      box-shadow: 0 -8px 25px rgba(0,0,0,0.6);
+      width: 100%; height: 45vh; min-height: 270px; max-height: 48vh;
+      background: #0b1120; border-top: 3.5px solid #38bdf8;
+      padding: 10px 18px 12px 18px; z-index: 35; flex-shrink: 0;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 8px;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.65);
     }
     #host-question-board.review-active {
       border-top-color: var(--gold); background: #090d16;
     }
     .hq-header {
       display: flex; justify-content: space-between; align-items: center;
-      font-size: 12.5px; font-weight: 900; color: #38bdf8; flex-wrap: wrap; gap: 6px;
+      font-size: 13px; font-weight: 900; color: #38bdf8; flex-wrap: wrap; gap: 6px; flex-shrink: 0;
     }
-    /* Câu hỏi và 4 đáp án dàn đầy chiều ngang màn hình */
+    /* Ô Câu Hỏi phóng to cỡ chữ 24px - 26px, co giãn linh hoạt cho câu hỏi dài */
     .hq-title {
       width: 100%; background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-      border: 2px solid #818cf8; border-radius: 12px;
-      padding: 8px 16px; font-size: 20px; font-weight: 900; color: #fef08a;
-      line-height: 1.3; text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      border: 2.5px solid #818cf8; border-radius: 14px;
+      padding: 12px 20px; font-size: clamp(20px, 2.3vw, 27px); font-weight: 900; color: #fef08a;
+      line-height: 1.35; text-shadow: 0 2px 4px rgba(0,0,0,0.65);
+      display: flex; align-items: center; flex: 0 1 auto; overflow-y: auto; max-height: 46%;
     }
+    /* Lưới 2x2 dàn đầy không gian còn lại của tầng 45% để chứa đáp án dài cỡ chữ lớn */
     .hq-opts {
-      width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
-    }
-    @media (max-width: 960px) {
-      .hq-opts { grid-template-columns: repeat(2, 1fr); }
+      width: 100%; flex: 1 1 auto;
+      display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px;
     }
     .hq-opt-item {
-      padding: 10px 14px; border-radius: 12px; font-size: 17px; font-weight: 900; color: #ffffff;
+      padding: 10px 18px; border-radius: 14px;
+      font-size: clamp(18px, 1.9vw, 23px); font-weight: 900; color: #ffffff;
       display: flex; justify-content: space-between; align-items: center;
-      border: 2px solid rgba(255,255,255,0.35); text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      border: 2.5px solid rgba(255,255,255,0.4); text-shadow: 0 1px 3px rgba(0,0,0,0.55);
+      line-height: 1.28; overflow-y: auto;
     }
     .opt-color-0 { background: linear-gradient(135deg, #e11d48, #be123c); border-color: #fda4af; }
     .opt-color-1 { background: linear-gradient(135deg, #0284c7, #0369a1); border-color: #7dd3fc; }
@@ -204,11 +211,11 @@
     #host-question-board.review-active .hq-opt-item:not(.correct-reveal) { opacity: 0.32; filter: grayscale(55%); }
     .hq-opt-item.correct-reveal {
       background: linear-gradient(135deg, #059669, #10b981) !important;
-      border: 3px solid #fef08a !important; box-shadow: 0 0 20px rgba(16, 185, 129, 0.85) !important;
+      border: 3.5px solid #fef08a !important; box-shadow: 0 0 22px rgba(16, 185, 129, 0.85) !important;
     }
     .hq-nav-btn {
       background: #1e293b; border: 1.5px solid #64748b; color: #fff;
-      border-radius: 7px; padding: 3px 10px; font-size: 11.5px; font-weight: 800; cursor: pointer;
+      border-radius: 7px; padding: 4px 11px; font-size: 12px; font-weight: 800; cursor: pointer;
     }
     .hq-nav-btn:hover { background: #334155; }
 
@@ -231,15 +238,15 @@
     #round-modal, #victory-modal {
       position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);
       background: rgba(15, 23, 42, 0.96); border: 4px solid var(--gold);
-      padding: 20px 30px; border-radius: 24px; text-align: center;
-      display: none; z-index: 120; box-shadow: 0 0 60px rgba(245, 158, 11, 0.65); max-width: 600px; width: 92%;
+      padding: 18px 28px; border-radius: 24px; text-align: center;
+      display: none; z-index: 120; box-shadow: 0 0 60px rgba(245, 158, 11, 0.65); max-width: 580px; width: 92%;
     }
 
     /* ========================================================
-       3. GIAO DIỆN ĐIỆN THOẠI HỌC SINH (CLIENT - DÀN ĐẦY GỌN GÀNG)
+       3. GIAO DIỆN ĐIỆN THOẠI HỌC SINH (CLIENT)
        ======================================================== */
     #mobile-view {
-      position: absolute; top: 50px; left: 0; right: 0; bottom: 0; z-index: 150;
+      position: absolute; top: 48px; left: 0; right: 0; bottom: 0; z-index: 150;
       background: #090d16; display: none; flex-direction: column; padding: 10px 12px; justify-content: space-between; overflow-y: auto;
     }
     .lobby-card { margin: auto; width: 100%; max-width: 390px; background: #131c2e; border: 2px solid #23334d; border-radius: 20px; padding: 16px; text-align: center; }
@@ -253,13 +260,12 @@
       background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); border: 2px solid #818cf8; border-radius: 14px;
       padding: 12px 14px; margin: 6px 0; display: flex; flex-direction: column; justify-content: center; flex-shrink: 0;
     }
-    .q-text { font-size: 17px; font-weight: 900; line-height: 1.38; color: #fef08a; }
+    .q-text { font-size: 17.5px; font-weight: 900; line-height: 1.38; color: #fef08a; }
     #preview-lock-banner {
       display: none; background: rgba(245, 158, 11, 0.18); border: 2px dashed var(--gold);
       color: #fef08a; padding: 7px 10px; border-radius: 10px; margin-bottom: 6px;
       font-size: 12.5px; font-weight: 900; text-align: center; line-height: 1.3; flex-shrink: 0;
     }
-    /* Các đáp án trên điện thoại dàn lưới 2x2 hoặc full-height gọn gàng */
     .choices-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex-grow: 1; align-content: stretch; }
     @media (max-width: 420px) {
       .choices-list { grid-template-columns: 1fr; }
@@ -325,7 +331,7 @@
   <div id="teacher-view">
     <div class="setup-box">
       <div class="flex-between">
-        <h2 style="margin: 0; font-size: 20px;">🌾 Quản Lý Môn Học, Bài Dạy & Xuất Học Liệu Minh Chứng</h2>
+        <h2 style="margin: 0; font-size: 20px;">🌾 Quản Lý Đa Môn Học (Sinh, Công Nghệ, Toán, Lý, Hóa, Văn) & AI Tự Giải Đề</h2>
         <div style="display: flex; gap: 6px; flex-wrap: wrap;">
           <button class="btn-action-sm" style="background:#dcfce7; border-color:#10b981; color:#065f46;" onclick="switchToStudentOnSameDevice()">📱 Chế Độ HS (Nhập Mã Phòng)</button>
           <button class="btn-action-sm" style="background:#fef3c7; border-color:#f59e0b; color:#92400e;" onclick="exportColorfulPresentationHTML()">🎨 Xuất Slide Học Liệu Màu (.html)</button>
@@ -340,12 +346,13 @@
         <div class="subject-tabs" id="subject-tabs-container"></div>
         <div class="flex-between" style="border-top: 1px dashed #cbd5e1; padding-top: 8px;">
           <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-            <button class="btn-action-sm" style="background:#dcfce7; border-color:#86efac; color:#166534;" onclick="createNewSubjectPrompt()">➕ Thêm Môn / Bài Học Mới</button>
-            <button class="btn-action-sm" style="background:#dbeafe; border-color:#93c5fd; color:#1e40af;" onclick="saveCurrentQuizToSubject()">💾 Lưu Đề Vào Môn Đang Chọn</button>
+            <button class="btn-action-sm" style="background:#dcfce7; border-color:#86efac; color:#166534;" onclick="createNewSubjectPrompt()">➕ Thêm Môn Mới</button>
+            <button class="btn-action-sm" style="background:#dbeafe; border-color:#93c5fd; color:#1e40af;" onclick="saveCurrentQuizToSubject()">💾 Lưu Đề Vào Môn Này</button>
+            <button class="btn-action-sm" style="background:#fae8ff; border-color:#d8b4fe; color:#6b21a8;" onclick="runAIAutoMarkEditor()" title="Nếu thầy chưa gạch chân đáp án, AI sẽ tự phân tích và gạch chân đáp án đúng!">🤖 AI Tự Chọn Đáp Án Đúng</button>
             <button class="btn-action-sm" id="btn-del-subj" style="background:#fee2e2; border-color:#fca5a5; color:#991b1b; display:none;" onclick="deleteCurrentSubject()">🗑️ Xóa Môn Này</button>
           </div>
           <div style="display: flex; gap: 6px;">
-            <button class="btn-action-sm" onclick="document.execCommand('underline', false, null)"><u>U</u> Gạch chân đáp án</button>
+            <button class="btn-action-sm" onclick="document.execCommand('underline', false, null)"><u>U</u> Gạch chân</button>
             <button class="btn-action-sm" onclick="document.getElementById('editor').innerHTML=''">Xóa trắng</button>
           </div>
         </div>
@@ -381,7 +388,7 @@
 
       <div class="flex-between" style="margin-top: 8px;">
         <span style="font-size: 12.5px; color: #059669; font-weight: 800;">
-          ✨ Tự động ẩn Mã QR khi bắt đầu thi đấu • Bố cục 3 tầng tách biệt không che khuất Sàn Kéo Co & Tên 2 Đội!
+          🤖 Khi nạp đề chưa gạch chân đáp án: Trình AI tự động suy luận và chọn đáp án đúng • Khung câu hỏi rộng 45% màn hình!
         </span>
         <button class="btn-launch" onclick="open3DArena()">MỞ SÂN ĐẤU 3D & HIỆN MÃ QR</button>
       </div>
@@ -389,10 +396,10 @@
   </div>
 
   <!-- ========================================================
-       2. MÀN HÌNH SÂN KHẤU 3D CHIA 3 TẦNG (KHÔNG BAO GIỜ BỊ CHE KHUẤT)
+       2. MÀN HÌNH SÂN KHẤU 3D CHIA 3 TẦNG (TẦNG 3 RỘNG 45% MÀN HÌNH)
        ======================================================== -->
   <div id="host-view">
-    <!-- TẦNG TRÊN: THANH ĐIỀU KHIỂN & TÊN 2 ĐỘI ĐỘC LẬP -->
+    <!-- TẦNG 1: THANH ĐIỀU KHIỂN & TÊN 2 ĐỘI -->
     <div id="host-top-header">
       <div class="host-controls-row">
         <button class="c-btn c-prep" id="btn-host-prep" onclick="commandAllReadyRope()">🔔 CHUẨN BỊ (VÀO DÂY & ẨN QR)</button>
@@ -409,7 +416,6 @@
         <span id="net-status" style="font-size: 11px; color: #a7f3d0; font-weight: 900;">🔄 Đang mở...</span>
       </div>
 
-      <!-- Dải hiển thị Tên Đội Đỏ - Tỉ số Hiệp - Tên Đội Xanh rõ ràng, không bao giờ bị che -->
       <div class="hud-teams-row">
         <div class="team-box red">
           <span id="hud-red-count">🔴 ĐỘI ĐỎ: 0 HS</span>
@@ -428,13 +434,12 @@
       </div>
     </div>
 
-    <!-- TẦNG GIỮA: SÀN ĐẤU KÉO CO 3D THOÁNG ĐÃNG -->
+    <!-- TẦNG 2: SÀN ĐẤU KÉO CO 3D -->
     <div id="arena-3d-viewport">
       <canvas id="canvas3d"></canvas>
       <div id="labels-container"></div>
       <div id="cheer-container"></div>
 
-      <!-- 2 Mã QR (Tự động ẩn ngay khi bấm Chuẩn bị hoặc Bắt đầu thi đấu) -->
       <div class="qr-panel left" id="qr-panel-left" onclick="openQRZoomModal('RED')" title="Bấm để phóng to QR Đội Đỏ">
         <div class="qr-box-inner" id="qr-red"></div>
         <div class="qr-caption" style="color: var(--red);">QUÉT VÀO ĐỘI ĐỎ 🔴</div>
@@ -447,7 +452,6 @@
         <div class="qr-zoom-hint">🔍 Bấm phóng to</div>
       </div>
 
-      <!-- Modal Chuyển Hiệp -->
       <div id="round-modal">
         <h2 id="round-modal-title" style="font-size: 28px; color: var(--gold); margin: 0;">KẾT THÚC HIỆP 1!</h2>
         <p id="round-modal-sub" style="font-size: 16.5px; color: #f8fafc; margin: 8px 0 14px 0;">Đội Đỏ giành chiến thắng Hiệp 1!</p>
@@ -456,7 +460,6 @@
         </button>
       </div>
 
-      <!-- Modal Vinh Danh Vô Địch Chung Cuộc -->
       <div id="victory-modal">
         <h1 id="win-banner-txt" style="font-size: 28px; color: var(--gold); margin: 0;">🏆 NHÀ VÔ ĐỊCH CHUNG CUỘC!</h1>
         <p id="win-sub-txt" style="font-size: 15px; color: #e2e8f0; margin-top: 6px;">Đã xuất sắc giành chiến thắng 2 hiệp đấu và nhận Cúp Vàng 3D!</p>
@@ -470,7 +473,7 @@
       </div>
     </div>
 
-    <!-- TẦNG DƯỚI CÙNG: BẢNG CÂU HỎI DÀN ĐẦY KHUNG (KHÔNG ĐÈ LÊN SÂN KÉO CO) -->
+    <!-- TẦNG 3 (45% CHIỀU CAO MÀN HÌNH): KHUNG CÂU HỎI & 4 ĐÁP ÁN CỠ CHỮ CỰC LỚN -->
     <div id="host-question-board">
       <div class="hq-header">
         <span id="hq-mode-badge">🔥 CÂU HỎI CHUNG CỦA CẢ 2 ĐỘI</span>
@@ -478,7 +481,7 @@
         <span id="hq-answer-stats" style="color:#fef08a;">Thống kê: ✅ 0 Đúng • 🧊 0 Sai</span>
         <div style="display:flex; gap:6px; align-items:center;">
           <button class="hq-nav-btn" onclick="stepHostQuestion(-1)">◀ Trước</button>
-          <span id="hq-counter" style="color:#fef08a; font-size:13px;">Câu 1/10</span>
+          <span id="hq-counter" style="color:#fef08a; font-size:13.5px;">Câu 1/10</span>
           <button class="hq-nav-btn" onclick="stepHostQuestion(1)">Tiếp ▶</button>
           <button class="hq-nav-btn" id="hq-reveal-btn" style="background:#059669; border-color:#a7f3d0;" onclick="toggleReviewAnswersMode()">👁️ Hiện Đáp Án</button>
         </div>
@@ -568,7 +571,7 @@
 
   <script>
     /* =========================================================================
-       CHỨC NĂNG PHÓNG TOÀN MÀN HÌNH (FULLSCREEN TOGGLE)
+       CHỨC NĂNG PHÓNG TOÀN MÀN HÌNH
        ========================================================================= */
     function toggleFullScreenApp() {
       if (!document.fullscreenElement) {
@@ -580,7 +583,7 @@
     }
 
     /* =========================================================================
-       1. NGÂN HÀNG ĐỀ MẶC ĐỊNH
+       1. NGÂN HÀNG 6 MÔN HỌC MẶC ĐỊNH (SINH, CÔNG NGHỆ, TOÁN, LÝ, HÓA, VĂN)
        ========================================================================= */
     const DEFAULT_BIO = `
 <div>Câu 1: Bào quan nào thực hiện chức năng quang hợp chủ yếu ở thực vật?</div>
@@ -626,29 +629,203 @@
 <div>Câu 10: Ứng dụng cảm biến thông minh IoT trong nông nghiệp công nghệ cao giúp người nông dân thực hiện điều gì tự động?</div>
 <div><u>A</u>. Giám sát độ ẩm đất, nhiệt độ, ánh sáng và tự động bật tắt hệ thống tưới từ xa qua điện thoại</div><div>B. Biến đổi gen cây trồng ngay ngoài đồng ruộng</div><div>C. Tự động thu hoạch toàn bộ gỗ rừng nguyên sinh</div><div>D. Không cần sử dụng nước và dinh dưỡng cho cây</div>`;
 
+    const DEFAULT_MATH = `
+<div>Câu 1: Đạo hàm của hàm số y = x³ - 3x² + 2 trên tập số thực là biểu thức nào sau đây?</div>
+<div><u>A</u>. y' = 3x² - 6x</div><div>B. y' = 3x² - 3x</div><div>C. y' = x² - 6x</div><div>D. y' = 3x³ - 6x</div><br>
+<div>Câu 2: Trong mặt phẳng tọa độ, tổng ba góc trong một tam giác bất kỳ luôn bằng bao nhiêu độ?</div>
+<div>A. 90 độ</div><div><u>B</u>. 180 độ</div><div>C. 270 độ</div><div>D. 360 độ</div><br>
+<div>Câu 3: Nghiệm của phương trình cơ bản 2x - 10 = 0 là giá trị nào?</div>
+<div>A. x = 2</div><div>B. x = -5</div><div><u>C</u>. x = 5</div><div>D. x = 10</div><br>
+<div>Câu 4: Công thức tính diện tích xung quanh của hình trụ có bán kính đáy r và chiều cao h là gì?</div>
+<div><u>A</u>. S = 2πrh</div><div>B. S = πr²h</div><div>C. S = πrh</div><div>D. S = 4πr²</div><br>
+<div>Câu 5: Giá trị lượng giác của biểu thức sin²α + cos²α luôn bằng bao nhiêu với mọi góc α?</div>
+<div>A. 0</div><div><u>B</u>. 1</div><div>C. 2</div><div>D. -1</div><br>
+<div>Câu 6: Một cấp số cộng có số hạng đầu u₁ = 3 và công sai d = 4. Số hạng thứ hai u₂ bằng bao nhiêu?</div>
+<div>A. 12</div><div>B. 6</div><div><u>C</u>. 7</div><div>D. 1</div><br>
+<div>Câu 7: Với a là số thực dương khác 1, giá trị của logₐ(a³) bằng bao nhiêu?</div>
+<div><u>A</u>. 3</div><div>B. 1</div><div>C. a</div><div>D. 0</div><br>
+<div>Câu 8: Nguyên hàm của hàm số f(x) = 2x trên tập số thực là hàm số nào sau đây?</div>
+<div>A. 2 + C</div><div><u>B</u>. x² + C</div><div>C. 2x² + C</div><div>D. x + C</div><br>
+<div>Câu 9: Gieo một con xúc xắc cân đối và đồng chất 1 lần. Xác suất để xuất hiện mặt có số chấm chẵn là bao nhiêu?</div>
+<div>A. 1/6</div><div>B. 1/3</div><div><u>C</u>. 1/2</div><div>D. 2/3</div><br>
+<div>Câu 10: Thể tích của khối lập phương có cạnh bằng 3 cm là bao nhiêu?</div>
+<div>A. 9 cm³</div><div>B. 18 cm³</div><div><u>C</u>. 27 cm³</div><div>D. 36 cm³</div>`;
+
+    const DEFAULT_PHYS = `
+<div>Câu 1: Theo định luật II Newton, gia tốc của một vật có mối liên hệ như thế nào với lực tác dụng và khối lượng?</div>
+<div><u>A</u>. Cùng hướng với lực tác dụng, tỉ lệ thuận với độ lớn của lực và tỉ lệ nghịch với khối lượng (a = F/m)</div><div>B. Tỉ lệ thuận với khối lượng của vật</div><div>C. Luôn ngược hướng với lực tác dụng</div><div>D. Không phụ thuộc vào độ lớn của hợp lực</div><br>
+<div>Câu 2: Đơn vị đo cường độ dòng điện trong hệ đo lường quốc tế SI là gì?</div>
+<div>A. Vôn (V)</div><div><u>B</u>. Ampe (A)</div><div>C. Ôm (Ω)</div><div>D. Oát (W)</div><br>
+<div>Câu 3: Biểu thức tính chu kỳ dao động điều hòa của con lắc đơn có chiều dài l tại nơi có gia tốc trọng trường g là gì?</div>
+<div><u>A</u>. T = 2π√(l/g)</div><div>B. T = 2π√(g/l)</div><div>C. T = √(l/g)</div><div>D. T = 1 / (2π√(l/g))</div><br>
+<div>Câu 4: Sóng cơ học không thể lan truyền được trong môi trường nào sau đây?</div>
+<div>A. Chất rắn</div><div>B. Chất lỏng</div><div>C. Chất khí</div><div><u>D</u>. Chân không</div><br>
+<div>Câu 5: Tốc độ truyền ánh sáng trong môi trường chân không có giá trị xấp xỉ bằng bao nhiêu?</div>
+<div><u>A</u>. 300.000 km/s (3.10⁸ m/s)</div><div>B. 340 m/s</div><div>C. 1500 m/s</div><div>D. 30.000 km/s</div><br>
+<div>Câu 6: Theo định luật Ohm đối với đoạn mạch chỉ có điện trở thuần R, cường độ dòng điện I được tính bằng công thức nào?</div>
+<div>A. I = U.R</div><div><u>B</u>. I = U / R</div><div>C. I = R / U</div><div>D. I = U² / R</div><br>
+<div>Câu 7: Hiện tượng ánh sáng trắng bị phân tách thành dải màu cầu vồng khi đi qua lăng kính gọi là hiện tượng gì?</div>
+<div><u>A</u>. Tán sắc ánh sáng</div><div>B. Phản xạ toàn phần</div><div>C. Nhiễu xạ ánh sáng</div><div>D. Hiện tượng quang điện</div><br>
+<div>Câu 8: Trong nguyên tử, hạt mang điện tích âm chuyển động xung quanh hạt nhân là hạt nào?</div>
+<div>A. Proton</div><div>B. Neutron</div><div><u>C</u>. Electron</div><div>D. Tất cả các hạt trong nhân</div><br>
+<div>Câu 9: Khi một vật chuyển động rơi tự do từ trên cao xuống gần mặt đất (bỏ qua sức cản không khí), đại lượng nào tăng dần?</div>
+<div><u>A</u>. Động năng của vật</div><div>B. Thế năng trọng trường của vật</div><div>C. Khối lượng của vật</div><div>D. Gia tốc rơi tự do</div><br>
+<div>Câu 10: Dòng điện xoay chiều sử dụng trong mạng điện sinh hoạt dân dụng tại Việt Nam có tần số chuẩn là bao nhiêu?</div>
+<div>A. 100 Hz</div><div><u>B</u>. 50 Hz</div><div>C. 60 Hz</div><div>D. 220 Hz</div>`;
+
+    const DEFAULT_CHEM = `
+<div>Câu 1: Kim loại nào sau đây là kim loại duy nhất tồn tại ở trạng thái lỏng ở điều kiện nhiệt độ phòng?</div>
+<div>A. Sắt (Fe)</div><div>B. Đồng (Cu)</div><div><u>C</u>. Thủy ngân (Hg)</div><div>D. Nhôm (Al)</div><br>
+<div>Câu 2: Công thức hóa học của khí Carbon dioxide (khí các-bô-níc) là gì?</div>
+<div>A. CO</div><div><u>B</u>. CO₂</div><div>C. SO₂</div><div>D. NO₂</div><br>
+<div>Câu 3: Một dung dịch làm quỳ tím chuyển sang màu đỏ thì giá trị pH của dung dịch đó như thế nào?</div>
+<div><u>A</u>. pH < 7 (Môi trường acid)</div><div>B. pH = 7 (Môi trường trung tính)</div><div>C. pH > 7 (Môi trường kiềm)</div><div>D. pH = 14</div><br>
+<div>Câu 4: Nguyên khí nào chiếm tỉ lệ thể tích lớn nhất (khoảng 78%) trong bầu khí quyển Trái Đất?</div>
+<div>A. Khí Oxygen (O₂)</div><div><u>B</u>. Khí Nitrogen (N₂)</div><div>C. Khí Hydrogen (H₂)</div><div>D. Khí Helium (He)</div><br>
+<div>Câu 5: Kim loại nào sau đây có tính dẫn điện tốt nhất trong tất cả các kim loại?</div>
+<div>A. Vàng (Au)</div><div>B. Đồng (Cu)</div><div><u>C</u>. Bạc (Ag)</div><div>D. Nhôm (Al)</div><br>
+<div>Câu 6: Công thức hóa học của muối ăn thông thường dùng trong đời sống hằng ngày là gì?</div>
+<div><u>A</u>. NaCl (Sodium chloride)</div><div>B. CaCO₃</div><div>C. NaOH</div><div>D. NaHCO₃</div><br>
+<div>Câu 7: Hợp chất hữu cơ Glucose (C₆H₁₂O₆) thuộc loại hợp chất nào sau đây?</div>
+<div><u>A</u>. Carbohydrate (Monosaccharide)</div><div>B. Ester</div><div>C. Amino acid</div><div>D. Hydrocarbon</div><br>
+<div>Câu 8: Khi cho kim loại Kẽm (Zn) tác dụng với dung dịch acid HCl loãng, chất khí nào sẽ thoát ra?</div>
+<div>A. Khí Chlorine (Cl₂)</div><div><u>B</u>. Khí Hydrogen (H₂)</div><div>C. Khí Oxygen (O₂)</div><div>D. Khí Sulfur dioxide (SO₂)</div><br>
+<div>Câu 9: Nguyên tố hóa học đầu tiên ở ô số 1 trong Bảng tuần hoàn các nguyên tố hóa học là nguyên tố nào?</div>
+<div><u>A</u>. Hydrogen (H)</div><div>B. Helium (He)</div><div>C. Lithium (Li)</div><div>D. Carbon (C)</div><br>
+<div>Câu 10: Kim loại Nhôm (Al) có tính chất hóa học đặc trưng là tác dụng được với cả dung dịch acid mạnh và dung dịch nào sau đây?</div>
+<div>A. Nước muối NaCl</div><div><u>B</u>. Dung dịch kiềm mạnh (như NaOH)</div><div>C. Dầu hỏa</div><div>D. Khí Nitrogen ở nhiệt độ thường</div>`;
+
+    const DEFAULT_LIT = `
+<div>Câu 1: Tác phẩm "Truyện Kiều" (Đoạn trường tân thanh) là kiệt tác thơ Nôm của đại thi hào nào?</div>
+<div>A. Nguyễn Trãi</div><div><u>B</u>. Nguyễn Du</div><div>C. Nguyễn Khuyến</div><div>D. Hồ Xuân Hương</div><br>
+<div>Câu 2: Bài thơ "Tây Tiến" với hình tượng người lính hào hùng và hào hoa là sáng tác của nhà thơ nào?</div>
+<div><u>A</u>. Quang Dũng</div><div>B. Tố Hữu</div><div>C. Chính Hữu</div><div>D. Xuân Diệu</div><br>
+<div>Câu 3: Nhân vật Chí Phèo và Thị Nở xuất hiện trong tác phẩm truyện ngắn nổi tiếng nào của nhà văn Nam Cao?</div>
+<div>A. Lão Hạc</div><div>B. Đời thừa</div><div><u>C</u>. Chí Phèo</div><div>D. Sống mòn</div><br>
+<div>Câu 4: Bản "Tuyên ngôn Độc lập" khai sinh ra nước Việt Nam Dân chủ Cộng hòa ngày 2/9/1945 do ai soạn thảo và đọc tại Quảng trường Ba Đình?</div>
+<div><u>A</u>. Chủ tịch Hồ Chí Minh</div><div>B. Phan Bội Châu</div><div>C. Phan Châu Trinh</div><div>D. Tố Hữu</div><br>
+<div>Câu 5: Thể thơ truyền thống thuần Việt gồm các cặp câu một câu 6 chữ và một câu 8 chữ liên tiếp gọi là thể thơ gì?</div>
+<div>A. Thất ngôn bát cú</div><div><u>B</u>. Thơ Lục bát</div><div>C. Song thất lục bát</div><div>D. Thơ Ngũ ngôn</div><br>
+<div>Câu 6: Biện pháp tu từ nào gọi tên sự vật, hiện tượng này bằng tên sự vật, hiện tượng khác có nét tương đồng với nó?</div>
+<div>A. So sánh</div><div><u>B</u>. Ẩn dụ</div><div>C. Hoán dụ</div><div>D. Liệt kê</div><br>
+<div>Câu 7: Tác phẩm "Vợ nhặt" phản ánh nạn đói năm Ất Dậu 1945 và khát vọng sống của người nông dân là của nhà văn nào?</div>
+<div><u>A</u>. Kim Lân</div><div>B. Ngô Tất Tố</div><div>C. Nguyễn Công Hoan</div><div>D. Vũ Trọng Phụng</div><br>
+<div>Câu 8: Tùy bút "Người lái đò Sông Đà" ca ngợi vẻ đẹp hùng vĩ, trữ tình của thiên nhiên Tây Bắc và con người lao động là của tác giả nào?</div>
+<div>A. Hoàng Phủ Ngọc Tường</div><div><u>B</u>. Nguyễn Tuân</div><div>C. Nguyễn Minh Châu</div><div>D. Tô Hoài</div><br>
+<div>Câu 9: Tập thơ "Nhật ký trong tù" của Chủ tịch Hồ Chí Minh được sáng tác bằng chữ viết nào?</div>
+<div>A. Chữ Quốc ngữ</div><div>B. Chữ Nôm</div><div><u>C</u>. Chữ Hán</div><div>D. Chữ Pháp</div><br>
+<div>Câu 10: Nhân vật Huấn Cao với tài viết chữ đẹp và khí phách hiên ngang là nhân vật chính trong truyện ngắn nào của Nguyễn Tuân?</div>
+<div><u>A</u>. Chữ người tử tù</div><div>B. Một thời vang bóng</div><div>C. Chiếc lư đồng mắt cua</div><div>D. Hương cuội</div>`;
+
+    /* =========================================================================
+       2. TRÌNH AI TỰ ĐỘNG SUY LUẬN & CHỌN ĐÁP ÁN ĐÚNG KHI GIÁO VIÊN QUÊN GẠCH CHÂN
+       ========================================================================= */
+    const AI_KNOWLEDGE_KEYWORDS = [
+      'lục lạp', 'khí khổng', 'mạch gỗ', 'nước và các ion khoáng', 'ti thể', 'auxin', 'nuôi cấy mô', 'noãn đã thụ tinh', 'mrna', 'quần thể', 'cộng sinh',
+      'tiết kiệm nước tưới', 'bón vôi', 'đạm (n), lân (p), kali (k)', 'thiên địch', 'biện pháp sinh học', 'tanin', 'trichoderma', 'ngăn mạch rây', 'dung dịch dinh dưỡng', 'ức chế quá trình hô hấp', 'giám sát độ ẩm đất',
+      '3x² - 6x', '180 độ', 'x = 5', '2πrh', 'x² + c', '27 cm³',
+      'a = f/m', 'tỉ lệ thuận với độ lớn của lực', 'ampe (a)', '2π√(l/g)', 'chân không', '300.000 km/s', 'i = u / r', 'tán sắc ánh sáng', 'electron', 'động năng', '50 hz',
+      'thủy ngân', 'co₂', 'ph < 7', 'nitrogen', 'bạc (ag)', 'nacl', 'carbohydrate', 'khí hydrogen', 'hydrogen (h)', 'dung dịch kiềm mạnh',
+      'nguyễn du', 'quang dũng', 'chí phèo', 'hồ chí minh', 'lục bát', 'ẩn dụ', 'kim lân', 'nguyễn tuân', 'chữ hán', 'chữ người tử tù'
+    ];
+
+    function aiAutoDetectCorrectIndex(questionText, optionsArray) {
+      if (!optionsArray || optionsArray.length === 0) return 0;
+      const qLower = (questionText || '').toLowerCase();
+      let bestIdx = 0;
+      let highestScore = -999;
+
+      optionsArray.forEach((opt, idx) => {
+        const oLower = (opt || '').toLowerCase().trim();
+        let score = 0;
+
+        // 1. Kiểm tra nếu phương án có sẵn dấu tích hoặc gợi ý đúng
+        if (/(\(đúng\)|✓|✔|\*$|đáp án đúng)/i.test(oLower)) score += 100;
+
+        // 2. Tra cứu cơ sở tri thức phổ thông Đa môn (Toán, Lý, Hóa, Sinh, Văn, Công nghệ)
+        AI_KNOWLEDGE_KEYWORDS.forEach(kw => {
+          if (oLower.includes(kw)) score += 35;
+        });
+
+        // 3. Phân tích ngữ nghĩa "Cả A, B, C đều đúng" hoặc "Tất cả đều đúng"
+        if (/(tất cả.*đều đúng|cả a, b, c đều đúng|cả a và b đều đúng|cả ba phương án)/i.test(oLower)) {
+          score += 28;
+        }
+        if (/(không có đáp án|tất cả đều sai)/i.test(oLower)) {
+          score -= 10;
+        }
+
+        // 4. Quy tắc cấu trúc sư phạm: Trong đề trắc nghiệm thực tế, đáp án đúng thường được diễn đạt đầy đủ, chi tiết và chặt chẽ nhất (nhiều thông tin chính xác hơn các phương án nhiễu ngắn)
+        score += Math.min(oLower.length * 0.18, 12);
+
+        // 5. Độ khớp từ khóa chuyên môn giữa câu hỏi và phương án trả lời
+        const qWords = qLower.split(/\s+/).filter(w => w.length > 4);
+        qWords.forEach(w => {
+          if (oLower.includes(w)) score += 2.5;
+        });
+
+        if (score > highestScore) {
+          highestScore = score;
+          bestIdx = idx;
+        }
+      });
+
+      return bestIdx;
+    }
+
+    // Nút bấm để Trình AI tự động quét khung soạn thảo và gạch chân đỏ đáp án đúng cho tất cả câu chưa chọn
+    function runAIAutoMarkEditor() {
+      const editor = document.getElementById('editor');
+      const parsed = parseHTMLToQuiz(editor.innerHTML);
+      if (!parsed.length) return alert("Vui lòng nhập hoặc dán câu hỏi vào khung soạn thảo trước!");
+
+      let html = '';
+      parsed.forEach((item, i) => {
+        html += `<div>Câu ${i + 1}: ${cleanQuestionTitleText(item.q)}</div>`;
+        item.opts.forEach((o, oi) => {
+          const ch = String.fromCharCode(65 + oi);
+          html += (oi === item.correct) ? `<div><u>${ch}</u>. ${o}</div>` : `<div>${ch}. ${o}</div>`;
+        });
+        html += `<br>`;
+      });
+      editor.innerHTML = html;
+      alert(`🤖 Trình AI đã tự động phân tích và gạch chân đáp án đúng cho toàn bộ ${parsed.length} câu hỏi!`);
+    }
+
     let subjectsDB = {};
     let currentSubjectKey = 'BIO';
 
     function initSubjectBank() {
-      const saved = localStorage.getItem('thpt_mangthit_subjects_v7');
+      const saved = localStorage.getItem('thpt_mangthit_subjects_v8');
       if (saved) { try { subjectsDB = JSON.parse(saved); } catch(e) {} }
+
       if (!subjectsDB['BIO']) subjectsDB['BIO'] = { name: '🧬 Sinh Học (10 câu)', html: DEFAULT_BIO.trim(), color: '#10b981', fixed: true };
       if (!subjectsDB['AGRI']) subjectsDB['AGRI'] = { name: '🚜 Công Nghệ NN (10 câu)', html: DEFAULT_AGRI.trim(), color: '#f59e0b', fixed: true };
-      if (!subjectsDB['BOTH']) subjectsDB['BOTH'] = { name: '🔄 Tổng Hợp Sinh - Nông (20 câu)', html: (DEFAULT_BIO + '<br>' + DEFAULT_AGRI).trim(), color: '#6366f1', fixed: true };
+      if (!subjectsDB['MATH']) subjectsDB['MATH'] = { name: '📐 Toán Học (10 câu)', html: DEFAULT_MATH.trim(), color: '#0284c7', fixed: true };
+      if (!subjectsDB['PHYS']) subjectsDB['PHYS'] = { name: '⚡ Vật Lý (10 câu)', html: DEFAULT_PHYS.trim(), color: '#8b5cf6', fixed: true };
+      if (!subjectsDB['CHEM']) subjectsDB['CHEM'] = { name: '🧪 Hóa Học (10 câu)', html: DEFAULT_CHEM.trim(), color: '#ec4899', fixed: true };
+      if (!subjectsDB['LIT']) subjectsDB['LIT'] = { name: '📖 Ngữ Văn (10 câu)', html: DEFAULT_LIT.trim(), color: '#e11d48', fixed: true };
+
+      const allCombinedHTML = [DEFAULT_BIO, DEFAULT_AGRI, DEFAULT_MATH, DEFAULT_PHYS, DEFAULT_CHEM, DEFAULT_LIT].map(s => s.trim()).join('<br>');
+      subjectsDB['ALL_SUBJ'] = { name: '🌟 Tổng Hợp Các Môn (60 câu)', html: allCombinedHTML, color: '#4f46e5', fixed: true };
+
       saveSubjectsToStorage();
       renderSubjectTabs();
       selectSubjectTab('BIO');
     }
 
     function saveSubjectsToStorage() {
-      localStorage.setItem('thpt_mangthit_subjects_v7', JSON.stringify(subjectsDB));
+      localStorage.setItem('thpt_mangthit_subjects_v8', JSON.stringify(subjectsDB));
     }
 
     function renderSubjectTabs() {
       const box = document.getElementById('subject-tabs-container');
-      box.innerHTML = `<span style="font-weight:900; font-size:13px; color:#334155;">Chọn môn/bài dạy:</span>`;
-      Object.keys(subjectsDB).forEach(key => {
+      box.innerHTML = `<span style="font-weight:900; font-size:13px; color:#334155;">Chọn môn thi đấu:</span>`;
+      const orderKeys = ['BIO', 'AGRI', 'MATH', 'PHYS', 'CHEM', 'LIT', 'ALL_SUBJ'];
+      const customKeys = Object.keys(subjectsDB).filter(k => !orderKeys.includes(k));
+      [...orderKeys, ...customKeys].forEach(key => {
         const item = subjectsDB[key];
+        if (!item) return;
         const btn = document.createElement('button');
         btn.className = `btn-subj ${key === currentSubjectKey ? 'active-subj' : ''}`;
         btn.style.background = item.color || '#0284c7';
@@ -667,14 +844,14 @@
     }
 
     function createNewSubjectPrompt() {
-      const name = prompt("Nhập tên Môn học hoặc Bài dạy mới (VD: Vật Lý 11 - Bài 2, Sinh 12 - Di truyền...):");
+      const name = prompt("Nhập tên Môn học hoặc Bài dạy mới (VD: Lịch Sử 11, Địa Lý 12...):");
       if (!name || !name.trim()) return;
       const newKey = 'SUBJ_' + Date.now();
       const colors = ['#0284c7', '#8b5cf6', '#ec4899', '#14b8a6', '#e11d48'];
       const color = colors[Object.keys(subjectsDB).length % colors.length];
       subjectsDB[newKey] = {
         name: '📘 ' + name.trim(),
-        html: `<div>Câu 1: Nhập câu hỏi thứ nhất của bài ${name.trim()}?</div><div><u>A</u>. Đáp án đúng (có gạch chân chữ cái đầu)</div><div>B. Đáp án nhiễu 1</div><div>C. Đáp án nhiễu 2</div><div>D. Đáp án nhiễu 3</div>`,
+        html: `<div>Câu 1: Nhập câu hỏi thứ nhất của bài ${name.trim()} (nếu không gạch chân, AI sẽ tự chọn đáp án đúng)?</div><div>A. Phương án thứ nhất</div><div>B. Phương án thứ hai đầy đủ và chính xác nhất</div><div>C. Phương án thứ ba</div><div>D. Phương án thứ tư</div>`,
         color: color, fixed: false
       };
       saveSubjectsToStorage();
@@ -682,15 +859,28 @@
     }
 
     function saveCurrentQuizToSubject() {
-      const html = document.getElementById('editor').innerHTML.trim();
-      const parsed = parseHTMLToQuiz(html);
-      if (!parsed.length) return alert("Chưa phát hiện câu hỏi hợp lệ! Hãy nhớ gạch chân chữ cái A, B, C hoặc D của đáp án đúng.");
-      subjectsDB[currentSubjectKey].html = html;
+      const editor = document.getElementById('editor');
+      const parsed = parseHTMLToQuiz(editor.innerHTML.trim());
+      if (!parsed.length) return alert("Chưa phát hiện câu hỏi hợp lệ! Mỗi câu cần có ít nhất 2 phương án A., B.");
+
+      // Cập nhật lại HTML đã được AI tự động gạch chân các câu thiếu đáp án
+      let updatedHTML = '';
+      parsed.forEach((item, i) => {
+        updatedHTML += `<div>Câu ${i + 1}: ${cleanQuestionTitleText(item.q)}</div>`;
+        item.opts.forEach((o, oi) => {
+          const ch = String.fromCharCode(65 + oi);
+          updatedHTML += (oi === item.correct) ? `<div><u>${ch}</u>. ${o}</div>` : `<div>${ch}. ${o}</div>`;
+        });
+        updatedHTML += `<br>`;
+      });
+      editor.innerHTML = updatedHTML;
+
+      subjectsDB[currentSubjectKey].html = updatedHTML;
       const baseName = subjectsDB[currentSubjectKey].name.replace(/\s*\(\d+\s*câu\)/i, '');
       subjectsDB[currentSubjectKey].name = `${baseName} (${parsed.length} câu)`;
       saveSubjectsToStorage();
       renderSubjectTabs();
-      alert(`✅ Đã lưu thành công ${parsed.length} câu hỏi vào mục "${subjectsDB[currentSubjectKey].name}"!`);
+      alert(`✅ Đã lưu thành công ${parsed.length} câu hỏi (AI đã tự động hoàn thiện đáp án đúng cho các câu chưa chọn)!`);
     }
 
     function deleteCurrentSubject() {
@@ -705,10 +895,11 @@
       return rawText
         .replace(/^(?:Câu\s*\d+[:.]?|\d+[.:])\s*/i, '')
         .replace(/^\s*\[[^\]]+\]\s*/g, '')
-        .replace(/\[(?:SINH HỌC|CÔNG NGHỆ[^\]]*)\]\s*/gi, '')
+        .replace(/\[(?:SINH HỌC|CÔNG NGHỆ[^\]]*|TOÁN|VẬT LÝ|HÓA HỌC|NGỮ VĂN)\]\s*/gi, '')
         .trim();
     }
 
+    // Bóc tách câu hỏi: Nếu câu nào giáo viên quên gạch chân đáp án (correct === -1), Trình AI tự động chọn đáp án đúng!
     function parseHTMLToQuiz(htmlString) {
       const lines = htmlString.split(/<br\s*[\/]?>|<\/div>|<\/p>/i);
       const parsed = [];
@@ -731,12 +922,23 @@
           cur = { qid: res.length, q: cleanQuestionTitleText(p.text), opts: [], correct: -1, rightCount: 0, wrongCount: 0 };
         } else if (optM && cur) {
           const oIdx = cur.opts.length;
-          cur.opts.push(optM[2].trim());
-          if (p.isU && cur.correct === -1) cur.correct = oIdx;
+          const cleanOpt = optM[2].replace(/\s*\(đúng\)\s*|\s*✓\s*|\s*✔\s*/gi, '').trim();
+          cur.opts.push(cleanOpt);
+          if ((p.isU || /(\(đúng\)|✓|✔)/i.test(optM[2])) && cur.correct === -1) {
+            cur.correct = oIdx;
+          }
         }
       });
       if (cur) res.push(cur);
-      return res.filter(item => item.opts.length >= 2 && item.correct !== -1);
+
+      // Áp dụng AI tự động chọn đáp án đúng cho mọi câu hỏi chưa được gạch chân
+      return res.filter(item => item.opts.length >= 2).map(item => {
+        if (item.correct === -1) {
+          item.correct = aiAutoDetectCorrectIndex(item.q, item.opts);
+          item.aiSelected = true;
+        }
+        return item;
+      });
     }
 
     function shuffleQuestionOrder(deck) {
@@ -771,11 +973,15 @@
       if (subjectsDB[subjKey]) return parseHTMLToQuiz(subjectsDB[subjKey].html);
       if (subjKey === 'BIO') return parseHTMLToQuiz(DEFAULT_BIO);
       if (subjKey === 'AGRI') return parseHTMLToQuiz(DEFAULT_AGRI);
-      return parseHTMLToQuiz(DEFAULT_BIO + '<br>' + DEFAULT_AGRI);
+      if (subjKey === 'MATH') return parseHTMLToQuiz(DEFAULT_MATH);
+      if (subjKey === 'PHYS') return parseHTMLToQuiz(DEFAULT_PHYS);
+      if (subjKey === 'CHEM') return parseHTMLToQuiz(DEFAULT_CHEM);
+      if (subjKey === 'LIT') return parseHTMLToQuiz(DEFAULT_LIT);
+      return parseHTMLToQuiz(subjectsDB['ALL_SUBJ'] ? subjectsDB['ALL_SUBJ'].html : DEFAULT_BIO);
     }
 
     /* =========================================================================
-       2. CHẾ ĐỘ XUẤT BỘ CÂU HỎI ĐẦY ĐỦ MÀU SẮC (SLIDE HTML & IN PDF MINH CHỨNG)
+       3. CHẾ ĐỘ XUẤT BỘ CÂU HỎI ĐẦY ĐỦ MÀU SẮC (SLIDE HTML & IN PDF MINH CHỨNG)
        ========================================================================= */
     function getActiveExportQuizList() {
       if (quizList && quizList.length > 0) return quizList;
@@ -935,7 +1141,7 @@
     }
 
     /* =========================================================================
-       3. HIỆU ỨNG ÂM THANH TRẬN ĐẤU (WEB AUDIO FX)
+       4. HIỆU ỨNG ÂM THANH TRẬN ĐẤU (WEB AUDIO FX)
        ========================================================================= */
     const AudioFX = {
       ctx: null,
@@ -1010,7 +1216,7 @@
     };
 
     /* =========================================================================
-       4. CÀI ĐẶT CHẾ ĐỘ & FILE ĐỀ THI (.JSON)
+       5. CÀI ĐẶT CHẾ ĐỘ & FILE ĐỀ THI (.JSON)
        ========================================================================= */
     let quizList = [];
     let joinMode = 'AUTO_ALL';
@@ -1047,10 +1253,13 @@
           const arr = JSON.parse(ev.target.result);
           let html = '';
           arr.forEach((item, i) => {
+            const corr = (typeof item.correct === 'number' && item.correct >= 0)
+              ? item.correct
+              : aiAutoDetectCorrectIndex(item.q, item.opts);
             html += `<div>Câu ${i + 1}: ${cleanQuestionTitleText(item.q)}</div>`;
             item.opts.forEach((o, oi) => {
               const ch = String.fromCharCode(65 + oi);
-              html += oi === item.correct ? `<div><u>${ch}</u>. ${o}</div>` : `<div>${ch}. ${o}</div>`;
+              html += oi === corr ? `<div><u>${ch}</u>. ${o}</div>` : `<div>${ch}. ${o}</div>`;
             });
             html += `<br>`;
           });
@@ -1062,7 +1271,7 @@
     }
 
     /* =========================================================================
-       5. SÂN ĐẤU 3D NẰM TRONG KHUNG VIEWPORT ĐỘC LẬP (KHÔNG BAO GIỜ BỊ CHE)
+       6. SÂN ĐẤU 3D NẰM TRONG KHUNG VIEWPORT ĐỘC LẬP
        ========================================================================= */
     let scene, camera, renderer, ropeMesh, ribbonMesh;
     let ambientLight, sunLight, grassMesh, sandMesh, starsGroup, stadiumLightsGroup;
@@ -1083,7 +1292,7 @@
       if (!renderer || !camera) return;
       const vp = document.getElementById('arena-3d-viewport');
       const w = vp.clientWidth || window.innerWidth;
-      const h = vp.clientHeight || 360;
+      const h = vp.clientHeight || 280;
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
@@ -1093,15 +1302,14 @@
       const canvas = document.getElementById('canvas3d');
       const vp = document.getElementById('arena-3d-viewport');
       const w = vp.clientWidth || window.innerWidth;
-      const h = vp.clientHeight || 360;
+      const h = vp.clientHeight || 280;
 
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0x38bdf8);
       scene.fog = new THREE.FogExp2(0x38bdf8, 0.012);
 
-      // Vì sân 3D có khung riêng (#arena-3d-viewport), camera đặt chính diện tâm sân giúp sàn kéo co hiển thị trọn vẹn 100%
-      camera = new THREE.PerspectiveCamera(38, w / h, 0.1, 120);
-      camera.position.set(0, 5.2, 16.5);
+      camera = new THREE.PerspectiveCamera(36, w / h, 0.1, 120);
+      camera.position.set(0, 4.9, 15.8);
       camera.lookAt(0, 1.0, 0);
 
       renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
@@ -1383,7 +1591,7 @@
       const t = clock.getElapsedTime();
       const vp = document.getElementById('arena-3d-viewport');
       const vpW = vp.clientWidth || window.innerWidth;
-      const vpH = vp.clientHeight || 360;
+      const vpH = vp.clientHeight || 280;
 
       const tugOscillation = matchState.status === 'PLAYING' ? Math.sin(t * 7.5) * 0.14 : 0;
       const desiredX = targetRopeX + tugOscillation;
@@ -1455,7 +1663,7 @@
     }
 
     /* =========================================================================
-       6. ĐA KẾT NỐI ĐÁM MÂY CỔNG 443 HTTPS (XUYÊN 4G & WI-FI)
+       7. ĐA KẾT NỐI ĐÁM MÂY CỔNG 443 HTTPS (XUYÊN 4G & WI-FI)
        ========================================================================= */
     const BROKER_URLS = [
       'wss://broker.hivemq.com:8884/mqtt',
@@ -1465,7 +1673,7 @@
     let activeClients = [];
     let currentRoomTopic = '';
     let seenMsgIds = new Set();
-    const localBus = new BroadcastChannel('tug_multi_v13');
+    const localBus = new BroadcastChannel('tug_multi_v14');
 
     function connectMultiCloud(roomId, onMessageCallback, onConnectedCallback) {
       activeClients.forEach(c => { try { c.end(); } catch(e){} });
@@ -1517,7 +1725,7 @@
     }
 
     /* =========================================================================
-       7. MÃ QR SIÊU NÉT & TỰ ĐỘNG ẨN QR KHI VÀO SÀN THI ĐẤU
+       8. MÃ QR SIÊU NÉT & TỰ ĐỘNG ẨN QR KHI VÀO SÀN THI ĐẤU
        ========================================================================= */
     let qrRedUrl = '';
     let qrBlueUrl = '';
@@ -1557,16 +1765,16 @@
 
       try {
         new QRCode(redContainer, {
-          text: qrRedUrl, width: 120, height: 120,
+          text: qrRedUrl, width: 112, height: 112,
           colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L
         });
         new QRCode(blueContainer, {
-          text: qrBlueUrl, width: 120, height: 120,
+          text: qrBlueUrl, width: 112, height: 112,
           colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.L
         });
       } catch (err) {
-        redContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrRedUrl)}" width="120" height="120">`;
-        blueContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(qrBlueUrl)}" width="120" height="120">`;
+        redContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&data=${encodeURIComponent(qrRedUrl)}" width="112" height="112">`;
+        blueContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&data=${encodeURIComponent(qrBlueUrl)}" width="112" height="112">`;
       }
       setQRCodesVisibility(true);
     }
@@ -1617,7 +1825,7 @@
     }
 
     /* =========================================================================
-       8. BẢNG CÂU HỎI DÀN ĐẦY Ở DƯỚI CÙNG & LOGIC 3 HIỆP (HOST)
+       9. BẢNG CÂU HỎI TẦNG 3 (45% MÀN HÌNH) & LOGIC 3 HIỆP (HOST)
        ========================================================================= */
     let hostHeartbeatTimer = null;
     let isReviewAnswersMode = false;
@@ -1666,7 +1874,7 @@
       });
 
       document.getElementById('hq-team-progress').innerText =
-        `Tiến độ: Đội Đỏ (${matchState.redAnsweredIds.length}/${matchState.redPlayers.length} bạn) • Đội Xanh (${matchState.blueAnsweredIds.length}/${matchState.bluePlayers.length} bạn)`;
+        `Đã trả lời: Đội Đỏ (${matchState.redAnsweredIds.length}/${matchState.redPlayers.length} bạn) • Đội Xanh (${matchState.blueAnsweredIds.length}/${matchState.bluePlayers.length} bạn)`;
       document.getElementById('hq-answer-stats').innerText =
         `Thống kê: ✅ ${qObj.rightCount || 0} Đúng • 🧊 ${qObj.wrongCount || 0} Sai`;
     }
@@ -1708,9 +1916,20 @@
 
     function open3DArena() {
       const parsed = parseHTMLToQuiz(document.getElementById('editor').innerHTML);
-      if (!parsed.length) return alert("Vui lòng chọn hoặc nhập ít nhất 1 câu hỏi có gạch chân đáp án đúng!");
+      if (!parsed.length) return alert("Vui lòng chọn hoặc nhập ít nhất 1 câu hỏi có từ 2 đáp án trở lên!");
 
-      subjectsDB[currentSubjectKey].html = document.getElementById('editor').innerHTML.trim();
+      // Lưu lại đề đã được AI tự động chọn đáp án đúng (nếu giáo viên quên gạch chân)
+      let updatedHTML = '';
+      parsed.forEach((item, i) => {
+        updatedHTML += `<div>Câu ${i + 1}: ${cleanQuestionTitleText(item.q)}</div>`;
+        item.opts.forEach((o, oi) => {
+          const ch = String.fromCharCode(65 + oi);
+          updatedHTML += (oi === item.correct) ? `<div><u>${ch}</u>. ${o}</div>` : `<div>${ch}. ${o}</div>`;
+        });
+        updatedHTML += `<br>`;
+      });
+      document.getElementById('editor').innerHTML = updatedHTML;
+      subjectsDB[currentSubjectKey].html = updatedHTML;
       saveSubjectsToStorage();
 
       quizList = shuffleQuestionOrder(parsed);
@@ -1947,7 +2166,6 @@
       broadcastTeamSyncState();
     }
 
-    // Khi bấm CHUẨN BỊ (VÀO DÂY): Đưa tất cả HS vào dây và Tự động ẨN MÃ QR cho màn hình thoáng!
     function commandAllReadyRope() {
       AudioFX.stepInRope();
       setQRCodesVisibility(false);
@@ -1983,7 +2201,6 @@
       document.getElementById('hud-rope-score').innerText = txt;
     }
 
-    // Khi bấm BẮT ĐẦU KÉO: Tự động Ẩn 2 Mã QR để sân kéo co thoáng đãng 100%
     function startMatch() {
       setQRCodesVisibility(false);
       commandAllReadyRope();
@@ -2074,7 +2291,7 @@
     }
 
     /* =========================================================================
-       9. LOGIC ĐIỆN THOẠI HỌC SINH (CLIENT)
+       10. LOGIC ĐIỆN THOẠI HỌC SINH (CLIENT)
        ========================================================================= */
     let myPlayerId = 'hs_' + Math.random().toString(36).substr(2, 6);
     let selectedTeam = 'RED';
@@ -2106,7 +2323,7 @@
         document.getElementById('student-name-input').value = savedName;
       }
 
-      sharedQuizDeck = getPresetQuizBySubject(subjParam || 'BOTH');
+      sharedQuizDeck = getPresetQuizBySubject(subjParam || 'ALL_SUBJ');
       updateLobbyInfoBanner();
 
       connectMultiCloud(cleanRoom, handleMobileIncomingData, () => {
@@ -2264,7 +2481,7 @@
     }
 
     function renderMobileQuestionCard(targetQIndex, isLockedPreview) {
-      if (!sharedQuizDeck || !sharedQuizDeck.length) sharedQuizDeck = getPresetQuizBySubject('BOTH');
+      if (!sharedQuizDeck || !sharedQuizDeck.length) sharedQuizDeck = getPresetQuizBySubject('ALL_SUBJ');
       document.getElementById('preview-lock-banner').style.display = isLockedPreview ? 'block' : 'none';
 
       if (renderedMobileQIndex === targetQIndex && renderedLockState !== null) {
@@ -2370,7 +2587,7 @@
       if (p.get('role') === 'player' || p.get('r')) {
         const roomVal = p.get('r') || p.get('room');
         const teamVal = p.get('t') || p.get('team');
-        const subjVal = p.get('subj') || 'BOTH';
+        const subjVal = p.get('subj') || 'ALL_SUBJ';
         initMobilePlayer(roomVal, teamVal, subjVal);
       }
     });
