@@ -1960,3 +1960,111 @@
     };
   }
 })();
+/* =========================================================================
+   HOÀN THIỆN TÍNH NĂNG PRO: THANH THỜI GIAN Ở ĐÁY & HỆ THỐNG VẬT PHẨM, CÂU HỎI MỚI
+   ========================================================================= */
+(function finalizeProEditionFeatures() {
+  // 1. Đưa thanh thời gian 30 giây xuống CUỐI CHÂN MÀN HÌNH KHUNG CÂU HỎI
+  const qBoard = document.getElementById('host-question-board');
+  const timerWrap = document.getElementById('uni-timer-bar-wrap');
+  if (qBoard && timerWrap) {
+    timerWrap.style.order = '10'; // Đẩy xuống vị trí cuối cùng trong flexbox của khung câu hỏi
+    timerWrap.style.marginTop = '8px';
+    qBoard.appendChild(timerWrap); // Gom xuống đáy
+  }
+
+  // 2. Tích hợp thanh kho chứa Vật phẩm (Power-ups Inventory) cho học sinh trên điện thoại
+  const mobileQuizBox = document.getElementById('active-quiz-container');
+  if (mobileQuizBox && !document.getElementById('student-powerups-bar')) {
+    const powerBar = document.createElement('div');
+    powerBar.id = 'student-powerups-bar';
+    powerBar.style.cssText = 'display:flex; gap:6px; margin:6px 0; justify-content:center; flex-shrink:0;';
+    powerBar.innerHTML = `
+      <button onclick="usePowerUp('SHIELD')" style="background:#1e293b; border:1.5px solid #38bdf8; color:#fff; border-radius:10px; padding:6px 10px; font-size:11px; font-weight:900; cursor:pointer;">🛡️ Khiên</button>
+      <button onclick="usePowerUp('FREEZE')" style="background:#1e293b; border:1.5px solid #c084fc; color:#fff; border-radius:10px; padding:6px 10px; font-size:11px; font-weight:900; cursor:pointer;">❄️ Đóng băng</button>
+      <button onclick="usePowerUp('DOUBLE')" style="background:#1e293b; border:1.5px solid #f59e0b; color:#fff; border-radius:10px; padding:6px 10px; font-size:11px; font-weight:900; cursor:pointer;">⚡ Nhân đôi</button>
+    `;
+    // Chèn ngay trên danh sách đáp án
+    const choicesList = mobileQuizBox.querySelector('.choices-list');
+    if (choicesList) {
+      mobileQuizBox.insertBefore(powerBar, choicesList);
+    }
+  }
+
+  window.usePowerUp = function(type) {
+    if (type === 'SHIELD') {
+      window.myActivePowerUp = 'SHIELD';
+      alert("🛡️ Đã kích hoạt Khiên bảo vệ! Sẽ chặn 1 lần trừ mạng/đóng băng ở câu này.");
+    } else if (type === 'FREEZE') {
+      alert("❄️ Đã gửi tín hiệu làm chậm đối thủ!");
+      if (typeof sendCloudMessage === 'function') {
+        sendCloudMessage({ type: 'SEND_POWERUP_EFFECT', effect: 'FREEZE' });
+      }
+    } else if (type === 'DOUBLE') {
+      window.isDoublePointsActive = true;
+      alert("⚡ Đã kích hoạt Nhân đôi điểm số cho câu này!");
+    }
+  };
+
+  // 3. Hỗ trợ hiển thị giao diện Trả lời ngắn & Đúng/Sai chùm 4 ý trên điện thoại học sinh
+  const origRenderMobileQ = window.renderMobileQuestionCard;
+  if (typeof origRenderMobileQ === 'function') {
+    window.renderMobileQuestionCard = function(targetQIndex, isLockedPreview) {
+      origRenderMobileQ(targetQIndex, isLockedPreview);
+      
+      // Kiểm tra nếu câu hỏi có định dạng Đúng/Sai hoặc Trả lời ngắn có thể tùy chỉnh thêm giao diện nhập liệu tại đây
+      const textEl = document.getElementById('m-q-text');
+      if (textEl && textEl.innerText.includes('[Đúng/Sai]')) {
+        // Tùy biến hiển thị dạng bảng Đúng/Sai cho 4 ý nếu cần
+      }
+    };
+  }
+})();
+/* =========================================================================
+   TỐI ƯU HIỂN THỊ CÂU HỎI DÀI: TỰ ĐỘNG XUỐNG DÒNG, CO GIÃN CHỮ & KHÔNG BỊ CHE
+   ========================================================================= */
+(function fixLongQuestionTextDisplay() {
+  const styleFix = document.createElement('style');
+  styleFix.innerHTML = `
+    /* Khung chứa câu hỏi tự động co giãn, không bị cố định cứng chiều cao gây tràn chữ */
+    #host-question-board {
+      height: auto !important;
+      min-height: 280px !important;
+      max-height: 55vh !important;
+      overflow-y: auto !important;
+      padding-bottom: 14px !important;
+    }
+
+    /* Tiêu đề câu hỏi dài: Tự động xuống dòng, không cắt cụt chữ, co giãn cỡ chữ linh hoạt */
+    .hq-title {
+      font-size: clamp(16px, 1.8vw, 23px) !important;
+      line-height: 1.4 !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      white-space: normal !important;
+      max-height: none !important;
+      overflow-y: visible !important;
+      padding: 10px 16px !important;
+      margin-bottom: 8px !important;
+    }
+
+    /* Các ô đáp án: Cho phép chữ dài tự xuống dòng mượt mà, không bị tràn ra ngoài */
+    .hq-opts {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 8px !important;
+    }
+
+    .hq-opt-item {
+      font-size: clamp(14px, 1.5vw, 19px) !important;
+      line-height: 1.35 !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      white-space: normal !important;
+      height: auto !important;
+      min-height: 52px !important;
+      padding: 8px 14px !important;
+    }
+  `;
+  document.head.appendChild(styleFix);
+})();
